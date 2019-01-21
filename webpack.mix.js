@@ -11,8 +11,36 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css')
-   .styles('resources/assets/customs/admin_custom.css', 'public/css/app.css');
+// mix.js('resources/js/app.js', 'public/js')
+//     .sass('resources/sass/app.scss', 'public/css')
+//     .styles('resources/assets/customs/admin_custom.css', 'public/css/app.css');
 
-mix.copyDirectory('resources/assets', 'public/assets');
+// mix.copyDirectory('resources/client/revolution', 'public/assets/user/revolution');
+mix.copyDirectory('resources/client/fonts', 'public/assets/user/fonts');
+mix.copyDirectory('node_modules/font-awesome/fonts', 'public/assets/user/fonts');
+mix.copyDirectory('node_modules/font-awesome/css/font-awesome.min.css', 'public/assets/user/css/fontawesome.css');
+
+mix.styles([
+    'node_modules/bootstrap/dist/css/bootstrap.min.css',
+    'node_modules/owl.carousel/dist/assets/owl.carousel.css',
+    'node_modules/js-datepicker/dist/datepicker.min.css',
+    'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
+    'resources/client/css/flaticon.css',
+    'resources/client/css/layers.css',
+    'resources/client/css/magnific-popup.css',
+    'resources/client/css/menumaker.css',
+    'resources/client/css/settings.css',
+    'resources/client/css/share-tooltip.css',
+    'resources/client/css/stucture.css',
+    'resources/client/css/style.css',
+], 'public/assets/user/css/page.css');
+
+mix.scripts([
+    'node_modules/jquery/dist/jquery.min.js',
+    'node_modules/bootstrap/dist/js/bootstrap.min.js',
+    'node_modules/ajaxchimp/jquery.ajaxchimp.min.js',
+    'node_modules/magnific-popup/dist/jquery.magnific-popup.min.js',
+    'node_modules/waypoints/lib/jquery.waypoints.min.js',
+    'node_modules/jquery.counterup/jquery.counterup.min.js',
+    'node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
+    ], 'public/assets/user/js/page.js');
