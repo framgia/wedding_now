@@ -10,7 +10,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!--begin::Web font -->
-        <script src="{{ asset(config('custom') . 'ajax_googleapis_webfont.js') }}"></script>
+        <script src="{{ asset(config('asset.custom') . 'ajax_googleapis_webfont.js') }}"></script>
         <script>
             WebFont.load({
                 google: {"families":["Poppins:300,400,500,600,700","Roboto:300,400,500,600,700"]},
@@ -20,9 +20,11 @@
             });
         </script>
         <!--end::Web font -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset(config('asset.custom') . 'admin_custom.css') }}">
         <!--begin::Base Styles -->
-        <link href="{{ asset(config('vendors_base') . 'vendors.bundle.css') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset(config('default_base') . 'style.bundle.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset(config('asset.vendors_base') . 'vendors.bundle.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset(config('asset.default_base') . 'style.bundle.css') }}" rel="stylesheet" type="text/css" />
         <!--end::Base Styles -->
     </head>
     <!-- end::Head -->
@@ -30,14 +32,14 @@
     <body class="m--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
         <!-- begin:: Page -->
         <div class="m-grid m-grid--hor m-grid--root m-page">
-            <div class="m-login m-login--signin m-login--5" id="m_login">
+            <div class="m-login m-login--signin m-login--5 background-url-3" id="m_login">
                 <div class="m-login__wrapper-1 m-portlet-full-height">
                     <div class="m-login__wrapper-1-1">
                         <div class="m-login__contanier">
                             <div class="m-login__content">
                                 <div class="m-login__logo">
                                     <a href="#">
-                                        <img src="{{ asset('assets/app/media/img//logos/logo-2.png') }}">
+                                        <img src="{{ asset(config('asset.app_logo') . 'logo-2.png') }}">
                                     </a>
                                 </div>
                                 <div class="m-login__title">
@@ -170,11 +172,11 @@
         </div>
         <!-- end:: Page -->
         <!--begin::Base Scripts -->
-        <script src="{{ asset(config('vendors_base') . 'vendors.bundle.js') }}" type="text/javascript"></script>
-        <script src="{{ asset(config('default_base') . 'scripts.bundle.js') }}" type="text/javascript"></script>
+        <script src="{{ asset(config('asset.vendors_base') . 'vendors.bundle.js') }}" type="text/javascript"></script>
+        <script src="{{ asset(config('asset.default_base') . 'scripts.bundle.js') }}" type="text/javascript"></script>
         <!--end::Base Scripts -->
         <!--begin::Page Snippets -->
-        <script src="{{ asset(config('login') . 'login.js') }}" type="text/javascript"></script>
+        <script src="{{ asset(config('asset.login') . 'login.js') }}" type="text/javascript"></script>
         <!--end::Page Snippets -->
     </body>
     <!-- end::Body -->
