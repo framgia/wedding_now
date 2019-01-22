@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -50,12 +51,13 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'gender' => 'required',
+            'birthday' => 'required',
+            'phone' => ['required', 'digits_between:9,11', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
             'user_name' => ['required', 'string', 'min:6', 'unique:users'],
-            'birthday' => ['required'],
-            'gender' => ['required'],
-            'phone' => ['required', 'number', 'min:8', 'max:12', 'unique:users'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'password_confirmation' => 'same:password',
         ]);
     }
 
@@ -67,8 +69,9 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
+            'gender' => $data['gender'],
             'user_name' => $data['user_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -76,5 +79,9 @@ class RegisterController extends Controller
             'gender' => $data['gender'],
             'phone' => $data['phone'],
         ]);
+
+        $user->roles()->attach(config('define.role.client'));
+
+        return $user;
     }
 }

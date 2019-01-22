@@ -1,73 +1,220 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
+<!DOCTYPE html>
+<html lang="en" >
+    <!-- begin::Head -->
+    <head>
+        <meta charset="utf-8" />
+        <title>
+            {{ config('app.name') }}
+        </title>
+        <meta name="description" content="Latest updates and statistic charts">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!--begin::Web font -->
+        <script src="{{ asset(config('asset.custom') . 'ajax_googleapis_webfont.js') }}"></script>
+        <script>
+            WebFont.load({
+                google: {"families":["Poppins:300,400,500,600,700","Roboto:300,400,500,600,700"]},
+                active: function() {
+                    sessionStorage.fonts = true;
+                }
+            });
+        </script>
+        <!--end::Web font -->
+        <link rel="stylesheet" type="text/css" href="{{ asset(config('asset.custom') . 'admin_custom.css') }}">
+        <!--begin::Base Styles -->
+        <link href="{{ asset(config('asset.vendors_base') . 'vendors.bundle.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset(config('asset.default_base') . 'style.bundle.css') }}" rel="stylesheet" type="text/css" />
+        <!--end::Base Styles -->
+    </head>
+    <!-- end::Head -->
+    <!-- end::Body -->
+    <body class="m--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
+        <!-- begin:: Page -->
+        <div class="m-grid m-grid--hor m-grid--root m-page">
+            <div class="m-login m-login--signin m-login--5 background-url-3" id="m_login">
+                <div class="m-login__wrapper-1 m-portlet-full-height">
+                    <div class="m-login__wrapper-1-1">
+                        <div class="m-login__contanier">
+                            <div class="m-login__content">
+                                <div class="m-login__logo">
+                                    <a href="#">
+                                        <img src="{{ asset(config('asset.app_logo') . 'logo-2.png') }}">
+                                    </a>
+                                </div>
+                                <div class="m-login__title">
+                                    <h3>
+                                        {{ __('get_free_account') }}
+                                    </h3>
+                                </div>
+                                <div class="m-login__desc">
+                                    {{ __('login_desc') }}
+                                </div>
+                                <div class="m-login__form-action">
+                                    {!! Form::button(__('get_an_account'), ['id' => 'm_login_signup', 'class' => 'btn btn-outline-focus m-btn--pill']) !!}
                                 </div>
                             </div>
                         </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
+                        <div class="m-login__border">
+                            <div></div>
                         </div>
-                    </form>
+                    </div>
+                </div>
+                <div class="m-login__wrapper-2 m-portlet-full-height">
+                    <div class="m-login__contanier">
+                        <div class="m-login__signin">
+                            <div class="m-login__head">
+                                <h3 class="m-login__title">
+                                    {{ __('login_to_your_account') }}
+                                </h3>
+                            </div>
+                            {!! Form::open(['route' => 'admin.login', 'method' => 'POST', 'class' => 'm-login__form m-form']) !!}
+                                @if (count($errors) > 0)
+                                    @foreach ($errors->all() as $error)
+                                        <div class="m-alert m-alert--outline alert alert-danger alert-dismissible animated fadeIn" role="alert">
+                                            {!! Form::button('', ['class' => 'close', 'data-dismiss' => 'alert', 'aria-label' => 'Close']) !!}
+                                            <span>{{ $error }}</span>
+                                        </div>
+                                    @endforeach
+                                @endif
+                                @if (session('status'))
+                                    <div class="m-alert m-alert--outline alert alert-success alert-dismissible animated fadeIn" role="alert">
+                                        {!! Form::submit('', ['class' => 'close', 'data-dismiss' => 'alert', 'aria-label' => 'Close']) !!}
+                                        {{ session('status') }}
+                                    </div>
+                                @endif
+                                @if (session('resent'))
+                                    <div class="m-alert m-alert--outline alert alert-success alert-dismissible animated fadeIn" role="alert">
+                                        {!! Form::button('', ['class' => 'close', 'data-dismiss' => 'alert', 'aria-label' => 'Close']) !!}
+                                        {{ __('A fresh verification link has been sent to your email address.') }}
+                                    </div>
+                                @endif
+                                <div class="form-group m-form__group">
+                                    {!! Form::text('user_name', '', ['required', 'class' => 'form-control m-input', 'placeholder' => __('username'), 'autocomplete' => 'off']) !!}
+                                </div>
+                                <div class="form-group m-form__group">
+                                    {!! Form::password('password', ['class' => 'form-control m-input m-login__form-input--last', 'placeholder' => __('password'), 'required']) !!}
+                                </div>
+                                <div class="row m-login__form-sub">
+                                    <div class="col m--align-left">
+                                        <label class="m-checkbox m-checkbox--focus">
+                                            {!! Form::checkbox('remember') !!}
+                                            {{ __('remember_me') }}
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                    <div class="col m--align-right">
+                                        <a href="javascript:;" id="m_login_forget_password" class="m-link">
+                                            {{ __('forget_password') }}
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="m-login__form-action">
+                                    {!! Form::submit(__('sign_in'), ['class' => 'btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air']) !!}
+                                </div>
+                            {!! Form::close() !!}
+                        </div>
+                        <div class="m-login__signup">
+                            <div class="m-login__head">
+                                <h3 class="m-login__title">
+                                    {{ __('sign_up') }}
+                                </h3>
+                                <div class="m-login__desc">
+                                    {{ __('create_your_account') }}
+                                </div>
+                            </div>
+                            {!! Form::open(['class' => 'm-login__form m-form', 'method' => 'POST', 'route' => 'register']) !!}
+                                @foreach ($errors->all() as $error)
+                                    {{ $error }}
+                                @endforeach
+                                <div class="form-group m-form__group">
+                                    {!! Form::text('name', '', ['required', 'class' => 'form-control m-input', 'placeholder' => __('fullname')]) !!}
+                                </div>
+                                <div class="form-group m-form__group">
+                                    {!! Form::date('birthday', '', ['required', 'class' => 'form-control m-input']) !!}
+                                </div>
+                                <div class="form-group m-form__group">
+                                    {!! Form::number('phone', '', ['required', 'class' => 'form-control m-input', 'placeholder' => 'phone']) !!}
+                                </div>
+                                <br>
+                                <div class="m-form__group form-group">
+                                    <div class="m-radio-inline">
+                                        <label class="m-radio m-radio--state-success">
+                                            {!! Form::radio('gender', 'male', 'checked', []) !!}
+                                            {{ __('male') }}
+                                            <span></span>
+                                        </label>
+                                        <label class="m-radio m-radio--state-brand">
+                                            {!! Form::radio('gender', 'female', '', []) !!}
+                                            {{ __('female') }}
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="form-group m-form__group">
+                                    {!! Form::email('email', '', ['required', 'class' => 'form-control m-input', 'placeholder' => __('email'), 'autocomplete' => 'off']) !!}
+                                </div>
+                                <div class="form-group m-form__group">
+                                    {!! Form::text('user_name', '', ['required', 'class' => 'form-control m-input', 'placeholder' => __('user_name'), 'autocomplete' => 'off']) !!}
+                                </div>
+                                <div class="form-group m-form__group">
+                                    {!! Form::password('password', ['required', 'class' => 'form-control m-input', 'placeholder' => __('password')]) !!}
+                                </div>
+                                <div class="form-group m-form__group">
+                                    {!! Form::password('password_confirmation', ['required', 'class' => 'form-control m-input m-login__form-input--last', 'placeholder' => __('password_confirmation')]) !!}
+                                </div>
+                                <div class="m-login__form-sub">
+                                    <label class="m-checkbox m-checkbox--focus">
+                                        {!! Form::checkbox('agree') !!}
+                                        {{ __('i_agree') }}
+                                        <a href="#" class="m-link m-link--focus">
+                                            {{ __('terms_and_conditions') }}
+                                        </a>
+                                        .
+                                        <span></span>
+                                    </label>
+                                    <span class="m-form__help"></span>
+                                </div>
+                                <div class="m-login__form-action">
+                                    {!! Form::submit(__('sign_up'), ['class' => 'btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air']) !!}
+                                    {!! Form::button(__('cancel'), ['id' => 'm_login_signup_cancel', 'class' => 'btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air']) !!}
+                                </div>
+                            {!! Form::close() !!}
+                        </div>
+                        <div class="m-login__forget-password">
+                            <div class="m-login__head">
+                                <h3 class="m-login__title">
+                                    {{ __('forgotten_password') }}
+                                </h3>
+                                <div class="m-login__desc">
+                                    {{ __('enter_your_email_to_reset_your_password') }}
+                                </div>
+                            </div>
+                            {!! Form::open(['required', 'class' => 'm-login__form m-form', 'route' => 'password.email', 'method' => 'POST']) !!}
+                                <div class="form-group m-form__group">
+                                    {!! Form::email('email', '', ['required', 'class' => 'form-control m-input', 'autocomplete' => 'off', 'placeholder' => __('email')]) !!}
+                                    @if ($errors->has('email'))
+                                        <div id="fullname-error" class="form-control-feedback">{{ __('required') }}</div>
+                                    @endif
+                                </div>
+                                <div class="m-login__form-action">
+                                    {!! Form::submit(__('sign_up'), ['class' => 'btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air']) !!}
+                                    {!! Form::button(__('cancel'), ['id' => 'm_login_forget_password_cancel', 'class' => 'btn btn-outline-focus m-btn m-btn--pill m-btn--custom']) !!}
+                                </div>
+                            {!! Form::close() !!}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-@endsection
+        <!-- end:: Page -->
+        <!--begin::Base Scripts -->
+        <script src="{{ asset(config('asset.vendors_base') . 'vendors.bundle.js') }}" type="text/javascript"></script>
+        <script src="{{ asset(config('asset.default_base') . 'scripts.bundle.js') }}" type="text/javascript"></script>
+        <!--end::Base Scripts -->
+        <!--begin::Page Snippets -->
+        <script src="{{ asset(config('asset.login') . 'login.js') }}" type="text/javascript"></script>
+        <!--end::Page Snippets -->
+    </body>
+    <!-- end::Body -->
+</html>
