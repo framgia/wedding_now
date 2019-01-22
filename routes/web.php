@@ -19,10 +19,7 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('admin-index', function() {
-    return view('admin.index');
-});
+Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('login', function() {
-    return view('admin.login');
-});
+Route::get('admin-index', 'AdminController@index')->name('admin.index');
+Route::get('admin-login', 'AdminController@adminLogin')->name('admin.login');

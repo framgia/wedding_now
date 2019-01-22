@@ -22,6 +22,7 @@
     <!--end::Web font -->
     <!--begin::Base Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset(config('asset.custom') . 'admin_custom.css') }}">
     <!--begin::Page Vendors -->
     <!--end::Page Vendors -->
     <link href="{{ asset(config('asset.vendors_base') . 'vendors.bundle.css') }}" rel="stylesheet" type="text/css"/>
