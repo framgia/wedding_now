@@ -68,22 +68,41 @@ class UpdateMigration extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tasks');
+        Schema::table('users', function (Blueprint $table) {
+            $table->integer('gender')->change();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('introduction');
+            $table->dropColumn(['name', 'user_name']);
+        });
 
-        Schema::dropIfExists('new_tag');
+        Schema::table('news', function (Blueprint $table) {
+            $table->dropColumn('slug');
+        });
 
-        Schema::dropIfExists('news');
+        Schema::table('categories', function (Blueprint $table) {
+            $table->dropColumn('slug');
+        });
 
-        Schema::dropIfExists('users');
+        Schema::table('items', function (Blueprint $table) {
+            $table->dropColumn('slug');
+        });
 
-        Schema::dropIfExists('items');
+        Schema::table('schedule_weddings', function (Blueprint $table) {
+            $table->dropColumn('slug');
+            $table->renameColumn('marriage_day', 'marring_day');
+        });
 
-        Schema::dropIfExists('categories');
+        Schema::table('cities', function (Blueprint $table) {
+            $table->dropColumn('slug');
+        });
 
-        Schema::dropIfExists('locations');
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->dropColumn('note');
+        });
 
-        Schema::dropIfExists('cities');
-
-        Schema::dropIfExists('schedule_weddings');
+        Schema::table('locations', function (Blueprint $table) {
+            $table->dropColumn('district_id');
+        });
     }
 }
