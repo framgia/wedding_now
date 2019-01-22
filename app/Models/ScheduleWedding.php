@@ -21,7 +21,7 @@ class ScheduleWedding extends Model
 
     public function scheduleMetas()
     {
-        return $this->hasMany(Schedulemeta::class);
+        return $this->hasMany(ScheduleMeta::class);
     }
 
     public function location()
