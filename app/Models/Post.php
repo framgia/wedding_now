@@ -23,7 +23,7 @@ class Post extends Model
 
     public function scheduleWedding()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(ScheduleWedding::class);
     }
 
     public function medias()

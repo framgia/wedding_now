@@ -14,7 +14,7 @@ class Media extends Model
         'mediaable_type',
     ];
 
-    public function target()
+    public function mediaable()
     {
         return $this->morphTo();
     }

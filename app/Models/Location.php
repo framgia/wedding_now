@@ -12,10 +12,16 @@ class Location extends Model
         'address',
         'locationable_id',
         'locationable_type',
+        'district_id',
     ];
 
-    public function target()
+    public function locationable()
     {
         return $this->morphTo();
+    }
+
+    public function district()
+    {
+        return $this->belongsTo(District::class);
     }
 }

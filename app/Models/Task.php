@@ -13,6 +13,7 @@ class Task extends Model
         'priority',
         'category_id',
         'item_user_id',
+        'note',
     ];
 
     public function location()

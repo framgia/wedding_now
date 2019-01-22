@@ -42,7 +42,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function posts()
     {
-        return $this->hasMany(News::class);
+        return $this->hasMany(Post::class);
     }
 
     public function roles()
@@ -52,12 +52,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function location()
     {
-        return $this->morphTo(Location::class);
+        return $this->morphMany(Location::class);
     }
 
     public function items()
     {
-        return $this->belongsToMany(Item::class)->wherePivot('price');
+        return $this->belongsToMany(Item::class)->withPivot('price');
     }
 
     public function medias()
