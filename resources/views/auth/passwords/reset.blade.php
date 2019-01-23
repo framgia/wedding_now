@@ -1,65 +1,81 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}">
-                        @csrf
-
-                        <input type="hidden" name="token" value="{{ $token }}">
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ $email ?? old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
+<!DOCTYPE html>
+<html lang="en" >
+    <!-- begin::Head -->
+    <head>
+        <meta charset="utf-8" />
+        <title>
+            {{ config('app.name') }}
+        </title>
+        <meta name="description" content="Latest updates and statistic charts">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!--begin::Web font -->
+        <script src="{{ asset(config('asset.custom') . 'ajax_googleapis_webfont.js') }}"></script>
+        <script>
+            WebFont.load({
+                google: {"families":["Poppins:300,400,500,600,700","Roboto:300,400,500,600,700"]},
+                active: function() {
+                    sessionStorage.fonts = true;
+                }
+            });
+        </script>
+        <!--end::Web font -->
+        <link rel="stylesheet" type="text/css" href="{{ asset(config('asset.custom') . 'admin_custom.css') }}">
+        <!--begin::Base Styles -->
+        <link href="{{ asset(config('asset.vendors_base') . 'vendors.bundle.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset(config('asset.default_base') . 'style.bundle.css') }}" rel="stylesheet" type="text/css" />
+        <!--end::Base Styles -->
+    </head>
+    <!-- end::Head -->
+    <!-- end::Body -->
+    <body class="m--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
+        <!-- begin:: Page -->
+        <div class="m-grid m-grid--hor m-grid--root m-page">
+            <div class="m-login m-login--signin m-login--5 background-url-3" id="m_login">
+                <div class="m-login__wrapper-2 m-portlet-full-height">
+                    <div class="m-login__contanier">
+                        <div class="m-login__signin">
+                            <div class="m-login__head">
+                                <h3 class="m-login__title">
+                                    {{ __('reset_password') }}
+                                </h3>
+                            </div>
+                            {!! Form::open(['route' => 'password.update', 'method' => 'POST', 'class' => 'm-login__form m-form']) !!}
+                                @if (count($errors) > 0)
+                                    @foreach ($errors->all() as $error)
+                                        <div class="m-alert m-alert--outline alert alert-danger alert-dismissible animated fadeIn" role="alert">
+                                            {!! Form::button('', ['class' => 'close', 'data-dismiss' => 'alert', 'aria-label' => 'Close']) !!}
+                                            <span>{{ $error }}</span>
+                                        </div>
+                                    @endforeach
                                 @endif
-                            </div>
+                                <div class="form-group m-form__group">
+                                    {!! Form::email('email', '', ['required', 'class' => 'form-control m-input', 'placeholder' => __('email'), 'autocomplete' => 'off']) !!}
+                                </div>
+                                <div class="form-group m-form__group">
+                                    {!! Form::password('password', ['class' => 'form-control m-input m-login__form-input--last', 'placeholder' => __('password'), 'required']) !!}
+                                </div>
+                                <hr>
+                                <div class="form-group m-form__group">
+                                    {!! Form::password('password_confirmation', ['class' => 'form-control m-input m-login__form-input--last', 'placeholder' => __('password_confirmation'), 'required']) !!}
+                                </div>
+                                <div class="m-login__form-action">
+                                    {!! Form::submit(__('reset_password'), ['class' => 'btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air']) !!}
+                                </div>
+                            {!! Form::close() !!}
                         </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Reset Password') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-@endsection
+        <!-- end:: Page -->
+        <!--begin::Base Scripts -->
+        <script src="{{ asset(config('asset.vendors_base') . 'vendors.bundle.js') }}" type="text/javascript"></script>
+        <script src="{{ asset(config('asset.default_base') . 'scripts.bundle.js') }}" type="text/javascript"></script>
+        <!--end::Base Scripts -->
+        <!--begin::Page Snippets -->
+        <script src="{{ asset(config('asset.login') . 'login.js') }}" type="text/javascript"></script>
+        <!--end::Page Snippets -->
+    </body>
+    <!-- end::Body -->
+</html>

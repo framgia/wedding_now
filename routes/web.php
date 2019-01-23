@@ -19,7 +19,9 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('admin-login', 'AdminController@getAdminLogin')->name('admin.login');
+Route::post('admin-login', 'AdminController@postAdminLogin')->name('admin.login');
 
-Route::get('admin-index', 'AdminController@index')->name('admin.index');
-Route::get('admin-login', 'AdminController@adminLogin')->name('admin.login');
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
+    Route::get('index', 'AdminController@index')->name('admin.index');
+});
