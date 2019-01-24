@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Models\User;
+use App\Http\Requests\AdminRequest;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -18,6 +19,16 @@ class AdminController extends Controller
         return view('admin.index');
     }
 
+    public function profile()
+    {
+        return view('admin.profile');
+    }
+
+    public function update(AdminRequest $request)
+    {
+        //
+    }
+
     public function getAdminLogin()
     {
         if (Auth::check())
@@ -29,6 +40,9 @@ class AdminController extends Controller
     public function postAdminLogin(Request $request)
     {
         if (Auth::attempt($request->only('user_name', 'password'))) {
+
+            $user = Auth::user();
+
             if (in_array(config('define.role.admin'), $user->roles->pluck('id')->toArray()))
                 return redirect()->route('admin.index');
             else
