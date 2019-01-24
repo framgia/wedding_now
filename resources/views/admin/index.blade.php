@@ -50,78 +50,29 @@
                 <div class="m-subheader ">
                     <div class="d-flex align-items-center">
                         <div class="mr-auto">
-                            <h3 class="m-subheader__title ">
-                                @yield('subheader')
-                            </h3>
+                            <h3 class="m-subheader__title ">{{ __('Dashboard') }}</h3>
                         </div>
                         <div>
-                            <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" m-dropdown-toggle="hover" aria-expanded="true">
-                                <a href="#" class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--outline-2x m-btn--air m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
-                                    <i class="la la-plus m--hide"></i>
-                                    <i class="la la-ellipsis-h"></i>
+                            <span class="m-subheader__daterange" id="m_dashboard_daterangepicker">
+                                <span class="m-subheader__daterange-label">
+                                    <span class="m-subheader__daterange-title"></span>
+                                    <span class="m-subheader__daterange-date m--font-brand"></span>
+                                </span>
+                                <a href="#" class="btn btn-sm btn-brand m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill">
+                                    <i class="la la-angle-down"></i>
                                 </a>
-                                <div class="m-dropdown__wrapper">
-                                    <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
-                                    <div class="m-dropdown__inner">
-                                        <div class="m-dropdown__body">
-                                            <div class="m-dropdown__content">
-                                                <ul class="m-nav">
-                                                    <li class="m-nav__section m-nav__section--first m--hide">
-                                                        <span class="m-nav__section-text">
-                                                            {{ __('quick_actions') }}
-                                                        </span>
-                                                    </li>
-                                                    <li class="m-nav__item">
-                                                        <a href="" class="m-nav__link">
-                                                            <i class="m-nav__link-icon flaticon-share"></i>
-                                                            <span class="m-nav__link-text">
-                                                                {{ __('activity') }}
-                                                            </span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="m-nav__item">
-                                                        <a href="" class="m-nav__link">
-                                                            <i class="m-nav__link-icon flaticon-chat-1"></i>
-                                                            <span class="m-nav__link-text">
-                                                                {{ __('messages') }}
-                                                            </span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="m-nav__item">
-                                                        <a href="" class="m-nav__link">
-                                                            <i class="m-nav__link-icon flaticon-info"></i>
-                                                            <span class="m-nav__link-text">
-                                                                {{ __('faq') }}
-                                                            </span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="m-nav__item">
-                                                        <a href="" class="m-nav__link">
-                                                            <i class="m-nav__link-icon flaticon-lifebuoy"></i>
-                                                            <span class="m-nav__link-text">
-                                                                {{ __('support') }}
-                                                            </span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="m-nav__separator m-nav__separator--fit"></li>
-                                                    <li class="m-nav__item">
-                                                        <a href="#" class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm">
-                                                            {{ __('submit') }}
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            </span>
                         </div>
                     </div>
                 </div>
+                <!-- END: Subheader -->
                 <div class="m-content">
+                    <!--Begin::Section-->
                     <div class="row">
-                        @yield('content')
+                        <div class="col-xl-4">
+                        </div>
                     </div>
+                    <!--End::Section-->
                 </div>
             </div>
         </div>
@@ -148,11 +99,7 @@
     <!--end::Base Scripts -->
     <!--begin::Page Snippets -->
     <script src="{{ asset(config('asset.app_js') . 'dashboard.js') }}" type="text/javascript"></script>
-    <script src="{{ asset(config('asset.components_base') . 'sweetalert2.js') }}" type="text/javascript"></script>
-    <script src="{{ asset(config('asset.components_base') . 'toastr.js') }}" type="text/javascript"></script>
     <!--end::Page Snippets -->
-
-    @yield('js')
 </body>
 <!-- end::Body -->
 </html>

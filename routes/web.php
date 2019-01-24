@@ -24,6 +24,4 @@ Route::post('admin-login', 'AdminController@postAdminLogin')->name('admin.login'
 
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('index', 'AdminController@index')->name('admin.index');
-
-    Route::get('profile', 'AdminController@profile')->name('admin.profile');
 });

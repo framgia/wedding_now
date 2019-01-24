@@ -6,7 +6,7 @@
                 <div class="m-stack m-stack--ver m-stack--general">
                     <div class="m-stack__item m-stack__item--middle m-brand__logo">
                         <a href="#" class="m-brand__logo-wrapper">
-                            <img src="{{ asset(config('asset.logo') . 'logo_default_dark.png') }}"/>
+                            <img src="{{ asset('assets/demo/default/media/img/logo/logo_default_dark.png') }}"/>
                         </a>
                     </div>
                     <div class="m-stack__item m-stack__item--middle m-brand__tools">
@@ -591,7 +591,7 @@
                             <li class="m-nav__item m-topbar__user-profile m-topbar__user-profile--img m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light" m-dropdown-toggle="click">
                                 <a href="#" class="m-nav__link m-dropdown__toggle">
                                     <span class="m-topbar__userpic">
-                                        <img src="{{ asset(config('asset.user') . 'user4.jpg') }}" class="m--img-rounded m--marginless m--img-centered"/>
+                                        <img src="{{ asset('assets/app/media/img/users/user4.jpg') }}" class="m--img-rounded m--marginless m--img-centered"/>
                                     </span>
                                     <span class="m-topbar__username m--hide">
                                         Nick
@@ -603,14 +603,14 @@
                                         <div class="m-dropdown__header m--align-center background-url-card-user">
                                             <div class="m-card-user m-card-user--skin-dark">
                                                 <div class="m-card-user__pic">
-                                                    <img src="{{ asset(config('asset.user') . ($user->medias->name ? $user->medias->name : 'user4.jpg') ) }}" class="m--img-rounded m--marginless"/>
+                                                    <img src="{{ asset('assets/app/media/img/users/user4.jpg') }}" class="m--img-rounded m--marginless"/>
                                                 </div>
                                                 <div class="m-card-user__details">
                                                     <span class="m-card-user__name m--font-weight-500">
-                                                        {{ $user->name }}
+                                                        Mark Andre
                                                     </span>
                                                     <a href="" class="m-card-user__email m--font-weight-300 m-link">
-                                                        {{ $user->email }}
+                                                        mark.andre@gmail.com
                                                     </a>
                                                 </div>
                                             </div>
@@ -624,7 +624,7 @@
                                                         </span>
                                                     </li>
                                                     <li class="m-nav__item">
-                                                        <a href="{{ route('admin.profile') }}" class="m-nav__link">
+                                                        <a href="#" class="m-nav__link">
                                                             <i class="m-nav__link-icon flaticon-profile-1"></i>
                                                             <span class="m-nav__link-title">
                                                                 <span class="m-nav__link-wrap">
@@ -700,4 +700,3 @@
         </div>
     </div>
 </header>
-
