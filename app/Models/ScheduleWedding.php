@@ -21,17 +21,17 @@ class ScheduleWedding extends Model
 
     public function scheduleMetas()
     {
-        return $this->hasMany(Schedulemeta::class);
+        return $this->hasMany(ScheduleMeta::class);
     }
 
     public function location()
     {
-        return $this->morphTo(Location::class);
+        return $this->morphOne(Location::class, 'localtionable');
     }
 
     public function medias()
     {
-        return $this->morphToMany(Media::class);
+        return $this->morphMany(Media::class, 'mediaable');
     }
 
     public function posts()
