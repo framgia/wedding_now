@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'components_base' => 'assets/demo/default/custom/components/base/',
     'logo' => 'assets/demo/default/media/img/logo/',
     'app_logo' => 'assets/app/media/img/logos/',
     'user' => 'assets/app/media/img/users/',
