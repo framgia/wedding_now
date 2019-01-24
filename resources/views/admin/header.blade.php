@@ -603,7 +603,7 @@
                                         <div class="m-dropdown__header m--align-center background-url-card-user">
                                             <div class="m-card-user m-card-user--skin-dark">
                                                 <div class="m-card-user__pic">
-                                                    <img src="{{ asset(config('asset.user') . ($user->medias->name ? $user->medias->name : 'user4.jpg') ) }}" class="m--img-rounded m--marginless"/>
+                                                    <img src="{{ asset(config('asset.user') . ($user->medias ? $user->medias->name : 'user4.jpg') ) }}" class="m--img-rounded m--marginless"/>
                                                 </div>
                                                 <div class="m-card-user__details">
                                                     <span class="m-card-user__name m--font-weight-500">

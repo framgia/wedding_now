@@ -13,7 +13,7 @@
                     <div class="m-card-profile__pic">
                         {!! Form::file('avatar_file', ['class' => 'd-none', 'id' => 'avatar_file']) !!}
                         <div class="m-card-profile__pic-wrapper">
-                            <img src="{{ asset(config('asset.user') . ($user->medias->name ? $user->medias->name : 'user4.jpg') ) }}" id="user_avatar"/>
+                            <img src="{{ asset(config('asset.user') . ($user->medias ? $user->medias->name : 'user4.jpg') ) }}" id="user_avatar"/>
                         </div>
                     </div>
                     <div class="m-card-profile__details">
