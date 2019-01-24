@@ -25,6 +25,6 @@ class Item extends Model
 
     public function medias()
     {
-        return $this->morphToMany(Media::class);
+        return $this->morphMany(Media::class, 'mediaable');
     }
 }

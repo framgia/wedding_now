@@ -52,7 +52,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function location()
     {
-        return $this->morphMany(Location::class);
+        return $this->morphMany(Location::class, 'locationable');
     }
 
     public function items()
@@ -62,6 +62,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function medias()
     {
-        return $this->morphToMany(Media::class);
+        return $this->morphOne(Media::class, 'mediaable');
     }
 }
