@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Schedulemeta extends Model
+class ScheduleMeta extends Model
 {
-    protected $table = 'schedulemeta';
+    protected $table = 'schedule_metas';
 
     protected $fillable = [
         'schedule_wedding_id',

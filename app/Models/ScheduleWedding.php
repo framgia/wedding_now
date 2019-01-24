@@ -10,7 +10,7 @@ class ScheduleWedding extends Model
 
     protected $fillable = [
         'name',
-        'marring_day',
+        'marriage_day',
         'user_id',
         'type',
         'schedule_wedding_id',
@@ -19,17 +19,7 @@ class ScheduleWedding extends Model
         'slug',
     ];
 
-    public function news()
-    {
-        return $this->hasMany(News::class);
-    }
-
-    public function tags()
-    {
-        return $this->belongsToMany(Tag::class);
-    }
-
-    public function schedulemetas()
+    public function scheduleMetas()
     {
         return $this->hasMany(Schedulemeta::class);
     }
@@ -42,5 +32,10 @@ class ScheduleWedding extends Model
     public function medias()
     {
         return $this->morphToMany(Media::class);
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
     }
 }
