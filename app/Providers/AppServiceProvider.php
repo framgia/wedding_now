@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         view()->composer(['admin.header', 'admin.profile'], function ($view) {
-            $user = Auth::user()->load('medias');
+            $user = Auth::user()->load('media');
             $view->with('user', $user);
         });
     }

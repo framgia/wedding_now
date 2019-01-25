@@ -50,7 +50,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Role::class);
     }
 
-    public function location()
+    public function locations()
     {
         return $this->morphMany(Location::class, 'locationable');
     }
@@ -60,7 +60,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Item::class)->withPivot('price');
     }
 
-    public function medias()
+    public function media()
     {
         return $this->morphOne(Media::class, 'mediaable');
     }

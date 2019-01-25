@@ -33,7 +33,7 @@ class AdminRequest extends FormRequest
             'avatar_file' => 'mimes:jpeg,jpg,png|nullable',
             'phone' => 'required|digits_between:9,11|unique:users,phone,' . $id,
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
-            'password' => 'min:6|confirmed|nullable',
+            'password' => 'min:6|max:255|confirmed|nullable',
             'password_confirmation' => 'same:password',
         ];
     }
