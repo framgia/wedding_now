@@ -13,7 +13,7 @@
                     </div>
                     <div class="m-card-profile__pic">
                         <div class="m-card-profile__pic-wrapper">
-                            <img src="{{ asset(config('asset.user') . ($user->medias ? $user->medias->name : config('asset.user_default')) ) }}" id="user_avatar"/>
+                            <img src="{{ asset(config('asset.user') . ($user->media ? $user->media->name : config('asset.user_default')) ) }}" id="user_avatar"/>
                         </div>
                     </div>
                     <div class="m-card-profile__details">
@@ -252,12 +252,12 @@
                                 <div class="col-7">
                                     <div class="m-radio-inline">
                                         <label class="m-radio m-radio--state-success">
-                                            {!! Form::radio('gender', 'Male', ($user->gender == 'Male' ? 'checked' : '')) !!}
+                                            {!! Form::radio('gender', 'Male', ($user->gender == 'Male' ? true : false)) !!}
                                             {{ __('male') }}
                                             <span></span>
                                         </label>
                                         <label class="m-radio m-radio--state-brand">
-                                            {!! Form::radio('gender1', 'Female', ($user->gender == 'Female' ? 'checked' : '')) !!}
+                                            {!! Form::radio('gender', 'Female', ($user->gender == 'Female' ? true : false)) !!}
                                             {{ __('female') }}
                                             <span></span>
                                         </label>

@@ -51,29 +51,22 @@ class AdminController extends Controller
             'password' => ($request->password ? Hash::make($request->password) : $user->password),
         ];
 
-        try {
-            $this->userModel->update($user->id, $data);
+        $this->userModel->update($user->id, $data);
 
-            if ($file) {
-                $user->medias()->updateOrCreate(
-                    [
-                        'id' => ($user->medias ? $user->medias->id : null)
-                    ],
-                    [
-                        'name' => $this->userModel->saveFile(
-                            ($user->medias ? $user->medias->name : null),
-                            $file,
-                            config('asset.user')
-                        )
-                    ]
-                );
-            }
+        // $user->location->isNotEmpty()
 
-            return ['message' => __('success.update')];
-            // return response(200);
-        } catch (Exception $e) {
-            return ['fail', __('fail')];
+        if ($file) {
+            $user->media()->updateOrCreate(
+                [
+                    'id' => ($user->media ? $user->media->id : null)
+                ],
+                [
+                    'name' => $this->userModel->saveFile(($user->media ? $user->media->name : null), $file, config('asset.user'))
+                ]
+            );
         }
+
+        return ['message' => __('success.update')];
     }
 
     public function getAdminLogin()
