@@ -17,6 +17,10 @@ const mix = require('laravel-mix');
 
 mix.copyDirectory('resources/client/revolution', 'public/assets/user/revolution');
 mix.copyDirectory('resources/client/js', 'public/assets/user/js');
+mix.styles('resources/assets/customs/admin_custom.css', 'public/css/app.css');
+
+mix.copyDirectory('resources/assets', 'public/assets');
+// mix.copyDirectory('resources/client/revolution', 'public/assets/user/revolution');
 mix.copyDirectory('resources/client/fonts', 'public/assets/user/fonts');
 mix.copyDirectory('node_modules/font-awesome/fonts', 'public/assets/user/fonts');
 mix.copyDirectory('node_modules/font-awesome/css/font-awesome.min.css', 'public/assets/user/css/fontawesome.css');

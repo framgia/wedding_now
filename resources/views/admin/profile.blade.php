@@ -3,6 +3,7 @@
 @section('subheader', __('my_profile'))
 
 @section('content')
+<div class="row">
     <div class="col-xl-3 col-lg-4">
         <div class="m-portlet m-portlet--full-height  ">
             <div class="m-portlet__body">
@@ -11,9 +12,8 @@
                         Your Profile
                     </div>
                     <div class="m-card-profile__pic">
-                        {!! Form::file('avatar_file', ['class' => 'd-none', 'id' => 'avatar_file']) !!}
                         <div class="m-card-profile__pic-wrapper">
-                            <img src="{{ asset(config('asset.user') . ($user->medias->name ? $user->medias->name : 'user4.jpg') ) }}" id="user_avatar"/>
+                            <img src="{{ asset(config('asset.user') . ($user->medias ? $user->medias->name : config('asset.user_default')) ) }}" id="user_avatar"/>
                         </div>
                     </div>
                     <div class="m-card-profile__details">
@@ -91,59 +91,6 @@
                     </li>
                 </ul>
                 <div class="m-portlet__body-separator"></div>
-                <div class="m-widget1 m-widget1--paddingless">
-                    <div class="m-widget1__item">
-                        <div class="row m-row--no-padding align-items-center">
-                            <div class="col">
-                                <h3 class="m-widget1__title">
-                                    {{ __('member_profit') }}
-                                </h3>
-                                <span class="m-widget1__desc">
-                                    {{ __('awerage_weekly_profit') }}
-                                </span>
-                            </div>
-                            <div class="col m--align-right">
-                                <span class="m-widget1__number m--font-brand">
-                                    +$17,800
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="m-widget1__item">
-                        <div class="row m-row--no-padding align-items-center">
-                            <div class="col">
-                                <h3 class="m-widget1__title">
-                                    {{ __('orders') }}
-                                </h3>
-                                <span class="m-widget1__desc">
-                                    {{ __('weekly_customer_orders') }}
-                                </span>
-                            </div>
-                            <div class="col m--align-right">
-                                <span class="m-widget1__number m--font-danger">
-                                    +1,800
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="m-widget1__item">
-                        <div class="row m-row--no-padding align-items-center">
-                            <div class="col">
-                                <h3 class="m-widget1__title">
-                                    {{ __('issue_reports') }}
-                                </h3>
-                                <span class="m-widget1__desc">
-                                    {{ __('system_bugs_and_issues') }}
-                                </span>
-                            </div>
-                            <div class="col m--align-right">
-                                <span class="m-widget1__number m--font-success">
-                                    -27,49%
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -251,13 +198,30 @@
             </div>
             <div class="tab-content">
                 <div class="tab-pane active" id="m_user_profile_tab_1">
-                    {!! Form::open(['class' => 'm-form m-form--fit m-form--label-align-right', 'method' => 'POST']) !!}
+                    {!! Form::open(['id' => 'update_profile', 'class' => 'm-form m-form--fit m-form--label-align-right', 'route' => 'admin.update', 'files' => true]) !!}
+                        @method('PUT')
+                        {!! Form::file('avatar_file', ['class' => 'd-none', 'id' => 'avatar_file']) !!}
                         <div class="m-portlet__body">
-                            <div class="form-group m-form__group m--margin-top-10 m--hide">
-                                <div class="alert m-alert m-alert--default" role="alert">
-                                    The example form below demonstrates common HTML form elements that receive updated styles from Bootstrap with additional classes.
-                                </div>
-                            </div>
+                            @if ($errors->any())
+                                @foreach ($errors->all() as $error)
+                                    <div class="m-alert m-alert--outline alert alert-warning alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                                        <strong>
+                                            {{ __('warning') }}
+                                        </strong>
+                                        {{ $error }}
+                                    </div>
+                                @endforeach
+                            @endif
+                            @if (session('message'))
+                                <div class="m-alert m-alert--outline alert alert-success alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                                        <strong>
+                                            {{ __('success') }}
+                                        </strong>
+                                        {{ session('message') }}
+                                    </div>
+                            @endif
                             <div class="form-group m-form__group row">
                                 <div class="col-10 ml-auto">
                                     <h3 class="m-form__section">
@@ -266,21 +230,21 @@
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
-                                {!! Form::label('name', __('full_name'), ['class' => 'col-2 col-form-label']) !!}
+                                {!! Form::label('name', __('name'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::text('name', $user->name, ['required', 'class' => 'form-control m-input', 'placeholder' => __('full_name')]) !!}
+                                    {!! Form::text('name', $user->name, ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('name')]) !!}
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
                                 {!! Form::label('birthday', __('birthday'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::date('birthday', $user->birthday, ['required', 'class' => 'form-control m-input']) !!}
+                                    {!! Form::date('birthday', $user->birthday, ['required', 'class' => 'form-control m-input m-input--solid']) !!}
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
                                 {!! Form::label('email', __('email'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::date('email', $user->email, ['required', 'class' => 'form-control m-input', 'placeholder' => __('email')]) !!}
+                                    {!! Form::email('email', $user->email, ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('email')]) !!}
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
@@ -288,12 +252,12 @@
                                 <div class="col-7">
                                     <div class="m-radio-inline">
                                         <label class="m-radio m-radio--state-success">
-                                            {!! Form::radio('gender', 'male', ($user->gender == 'Male' ? 'checked' : '')) !!}
+                                            {!! Form::radio('gender', 'Male', ($user->gender == 'Male' ? 'checked' : '')) !!}
                                             {{ __('male') }}
                                             <span></span>
                                         </label>
                                         <label class="m-radio m-radio--state-brand">
-                                            {!! Form::radio('gender', 'female', ($user->gender == 'Female' ? 'checked' : '')) !!}
+                                            {!! Form::radio('gender1', 'Female', ($user->gender == 'Female' ? 'checked' : '')) !!}
                                             {{ __('female') }}
                                             <span></span>
                                         </label>
@@ -303,7 +267,7 @@
                             <div class="form-group m-form__group row">
                                 {!! Form::label('phone', __('phone'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::number('phone', $user->phone, ['required', 'class' => 'form-control m-input', 'placeholder' => __('phone')]) !!}
+                                    {!! Form::number('phone', $user->phone, ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('phone')]) !!}
                                 </div>
                             </div>
                             <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
@@ -317,45 +281,71 @@
                             <div class="form-group m-form__group row">
                                 {!! Form::label('city', __('city'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::text('city', '', ['class' => 'form-control m-input', 'placeholder' => __('city')]) !!}
+                                    {!! Form::text('city', '', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('city')]) !!}
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
                                 {!! Form::label('district', __('district'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::text('district', '', ['class' => 'form-control m-input', 'placeholder' => __('district')]) !!}
+                                    {!! Form::text('district', '', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('district')]) !!}
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
                                 {!! Form::label('address', __('address'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::text('address', '', ['class' => 'form-control m-input', 'placeholder' => __('address')]) !!}
+                                    {!! Form::text('address', '', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('address')]) !!}
                                 </div>
                             </div>
                             <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
                             <div class="form-group m-form__group row">
                                 <div class="col-10 ml-auto">
                                     <h3 class="m-form__section">
-                                        3. {{ __('social_links') }}
+                                        3. {{ __('account') }}
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                {!! Form::label('user_name', __('user_name'), ['class' => 'col-2 col-form-label']) !!}
+                                <div class="col-7">
+                                    {!! Form::text('user_name', $user->user_name, ['class' => 'form-control m-input m-input--solid', 'disabled', 'placeholder' => __('user_name')]) !!}
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                {!! Form::label('password', __('password'), ['class' => 'col-2 col-form-label']) !!}
+                                <div class="col-7">
+                                    {!! Form::password('password', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('password')]) !!}
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                {!! Form::label('password_confirmation', __('password_confirmation'), ['class' => 'col-2 col-form-label']) !!}
+                                <div class="col-7">
+                                    {!! Form::password('password_confirmation', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('password_confirmation')]) !!}
+                                </div>
+                            </div>
+                            <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
+                            <div class="form-group m-form__group row">
+                                <div class="col-10 ml-auto">
+                                    <h3 class="m-form__section">
+                                        4. {{ __('social_links') }}
                                     </h3>
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
                                 {!! Form::label('facebook', __('facebook'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::text('facebook', '', ['class' => 'form-control m-input', 'placeholder' => __('facebook')]) !!}
+                                    {!! Form::text('facebook', '', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('facebook')]) !!}
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
                                 {!! Form::label('twister', __('twister'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::text('twister', '', ['class' => 'form-control m-input', 'placeholder' => __('twister')]) !!}
+                                    {!! Form::text('twister', '', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('twister')]) !!}
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
                                 {!! Form::label('instagram', __('instagram'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::text('instagram', '', ['class' => 'form-control m-input', 'placeholder' => __('instagram')]) !!}
+                                    {!! Form::text('instagram', '', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('instagram')]) !!}
                                 </div>
                             </div>
                         </div>
@@ -378,30 +368,64 @@
             </div>
         </div>
     </div>
+</div>
 @endsection
 
 @section('js')
 <script type="text/javascript">
-    $('#user_avatar').click(function() {
-        $('#avatar_file').click();
-    });
-
-    $('#avatar_file').change(function(e) {
-        if (this.files && this.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('#user_avatar').attr('src', e.target.result);
+    jQuery(document).ready(function($) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
             }
-            reader.readAsDataURL(this.files[0]);
+        });
 
-            toastr.success("{{ __('success') }}");
+        $('#user_avatar').click(function() {
+            $('#avatar_file').click();
+        });
+
+        $('#avatar_file').change(function(e) {
+            e.preventDefault();
+
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#user_avatar').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+
+                submitForm();
+            }
+        });
+
+        $('#save').click(function(event) {
+            event.preventDefault();
+
+            submitForm();
+        });
+
+        function submitForm() {
+            $.ajax({
+                url: '{{ route('admin.update') }}',
+                type: 'POST',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: new FormData($('form#update_profile')[0]),
+            })
+            .done(function(data) {
+                $('.m-card-profile__name').text($('#name').val());
+                $('.m-card-profile__email').text($('#email').val());
+
+                toastr.success(data.message);
+            })
+            .fail(function(data) {
+                var getError = $.parseJSON(data.responseText);
+                $.each(getError.errors, function (key, value) {
+                    toastr.error(value);
+                });
+            });
         }
-    });
-
-    $('#save').click(function(event) {
-        event.preventDefault();
-
-        toastr.success("{{ __('success') }}");
     });
 </script>
 @endsection
