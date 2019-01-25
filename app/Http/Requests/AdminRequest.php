@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AdminRequest extends FormRequest
@@ -13,7 +14,7 @@ class AdminRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,14 +24,16 @@ class AdminRequest extends FormRequest
      */
     public function rules()
     {
+        $id = Auth::id();
+
         return [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => 'required|string|max:255',
             'gender' => 'required',
             'birthday' => 'required',
-            'phone' => ['required', 'digits_between:9,11', 'unique:users'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'user_name' => ['required', 'string', 'min:6', 'unique:users'],
-            'password' => ['string', 'min:6', 'confirmed', 'nullable'],
+            'avatar_file' => 'mimes:jpeg,jpg,png|nullable',
+            'phone' => 'required|digits_between:9,11|unique:users,phone,' . $id,
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+            'password' => 'min:6|confirmed|nullable',
             'password_confirmation' => 'same:password',
         ];
     }
@@ -44,14 +47,13 @@ class AdminRequest extends FormRequest
             'gender.required' => __('validation.required'),
             'birthday.required' => __('validation.required'),
             'phone.required' => __('validation.required'),
-            'phone.digits_between' => __('validation.digits_between.phone'),
+            'phone.digits_between' => __('validation.digits_between'),
             'phone.unique' => __('validation.unique'),
             'email.required' => __('validation.required'),
             'email.string' => __('validation.string'),
             'email.email' => __('validation.email'),
             'email.max' => __('validation.max.numeric'),
             'email.unique' => __('validation.unique'),
-            'password.unique' => __('validation.string'),
             'password.min' => __('validation.min.string'),
             'password.confirmed' => __('validation.confirmed'),
             'password_confirmation.same' => __('validation.same'),

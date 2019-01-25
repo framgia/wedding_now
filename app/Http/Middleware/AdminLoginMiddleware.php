@@ -17,7 +17,7 @@ class AdminLoginMiddleware
     public function handle($request, Closure $next)
     {
         if (Auth::check()) {
-            $user = Auth::user();
+            $user = Auth::user()->load('roles');
 
             if (in_array(config('define.role.admin'), $user->roles->pluck('id')->toArray())) {
                 return $next($request);
