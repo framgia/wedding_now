@@ -14,6 +14,9 @@ class Task extends Model
         'category_id',
         'item_user_id',
         'note',
+        'time_occurs',
+        'time_frame_id',
+        'schedule_wedding_id',
     ];
 
     public function location()
@@ -29,5 +32,15 @@ class Task extends Model
     public function itemUser()
     {
         return $this->belongsTo(ItemUser::class);
+    }
+
+    public function timeFrame()
+    {
+        return $this->belongsTo(TimeFrame::class);
+    }
+
+    public function scheduleWedding()
+    {
+        return $this->belongsTo(ScheduleWedding::class);
     }
 }

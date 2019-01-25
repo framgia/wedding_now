@@ -2,7 +2,9 @@
 
 namespace App\Repositories\ScheduleWedding;
 
-interface ScheduleWeddingRepositoryInterface
+use App\Repositories\RepositoryInterface;
+
+interface ScheduleWeddingRepositoryInterface extends RepositoryInterface
 {
     //
 }

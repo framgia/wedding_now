@@ -2,9 +2,6 @@
 
 namespace App\Repositories;
 
-use Exception;
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * Interface BaseRepositoryInterface
  *
@@ -21,4 +18,8 @@ interface RepositoryInterface
     public function destroy($id);
 
     public function saveFile($currentFile, $newFile, $path);
+
+    public function create($data);
+
+    public function slug($str);
 }
