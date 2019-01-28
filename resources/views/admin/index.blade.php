@@ -67,16 +67,16 @@
                                         <div class="m-dropdown__body">
                                             <div class="m-dropdown__content">
                                                 <ul class="m-nav">
-                                                    <li class="m-nav__section m-nav__section--first m--hide">
+                                                    <li class="m-nav__section m-nav__section--first">
                                                         <span class="m-nav__section-text">
-                                                            {{ __('quick_actions') }}
+                                                            {{ __('admin.quick_actions') }}
                                                         </span>
                                                     </li>
                                                     <li class="m-nav__item">
                                                         <a href="" class="m-nav__link">
                                                             <i class="m-nav__link-icon flaticon-share"></i>
                                                             <span class="m-nav__link-text">
-                                                                {{ __('activity') }}
+                                                                {{ __('admin.activity') }}
                                                             </span>
                                                         </a>
                                                     </li>
@@ -84,7 +84,7 @@
                                                         <a href="" class="m-nav__link">
                                                             <i class="m-nav__link-icon flaticon-chat-1"></i>
                                                             <span class="m-nav__link-text">
-                                                                {{ __('messages') }}
+                                                                {{ __('admin.messages') }}
                                                             </span>
                                                         </a>
                                                     </li>
@@ -92,7 +92,7 @@
                                                         <a href="" class="m-nav__link">
                                                             <i class="m-nav__link-icon flaticon-info"></i>
                                                             <span class="m-nav__link-text">
-                                                                {{ __('faq') }}
+                                                                {{ __('admin.faq') }}
                                                             </span>
                                                         </a>
                                                     </li>
@@ -100,14 +100,14 @@
                                                         <a href="" class="m-nav__link">
                                                             <i class="m-nav__link-icon flaticon-lifebuoy"></i>
                                                             <span class="m-nav__link-text">
-                                                                {{ __('support') }}
+                                                                {{ __('admin.support') }}
                                                             </span>
                                                         </a>
                                                     </li>
                                                     <li class="m-nav__separator m-nav__separator--fit"></li>
                                                     <li class="m-nav__item">
                                                         <a href="#" class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm">
-                                                            {{ __('submit') }}
+                                                            {{ __('admin.submit') }}
                                                         </a>
                                                     </li>
                                                 </ul>

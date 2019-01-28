@@ -45,7 +45,7 @@
                         <li class="m-menu__item m-menu__item--submenu m-menu__item--rel" m-menu-submenu-toggle="click" m-menu-link-redirect="1" aria-haspopup="true">
                             <a href="javascript:;" class="m-menu__link m-menu__toggle">
                                 <i class="m-menu__link-icon flaticon-add"></i>
-                                <span class="m-menu__link-text">{{ __('actions') }}</span>
+                                <span class="m-menu__link-text">{{ __('admin.action') }}</span>
                                 <i class="m-menu__hor-arrow la la-angle-down"></i>
                                 <i class="m-menu__ver-arrow la la-angle-right"></i>
                             </a>
@@ -56,7 +56,7 @@
                                         <a href="#" class="m-menu__link">
                                             <i class="m-menu__link-icon flaticon-file"></i>
                                             <span class="m-menu__link-text">
-                                                {{ __('create_new_post') }}
+                                                {{ __('admin.create.post') }}
                                             </span>
                                         </a>
                                     </li>
@@ -66,7 +66,7 @@
                                             <span class="m-menu__link-title">
                                                 <span class="m-menu__link-wrap">
                                                     <span class="m-menu__link-text">
-                                                        {{ __('generate_reports') }}
+                                                        {{ __('admin.report.generate') }}
                                                     </span>
                                                     <span class="m-menu__link-badge">
                                                         <span class="m-badge m-badge--success">
@@ -81,7 +81,7 @@
                                         <a href="javascript:;" class="m-menu__link m-menu__toggle">
                                             <i class="m-menu__link-icon flaticon-business"></i>
                                             <span class="m-menu__link-text">
-                                                {{ __('manage_orders') }}
+                                                {{ __('admin.order.manage') }}
                                             </span>
                                             <i class="m-menu__hor-arrow la la-angle-right"></i>
                                             <i class="m-menu__ver-arrow la la-angle-right"></i>
@@ -92,42 +92,42 @@
                                                 <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
                                                     <a href="#" class="m-menu__link">
                                                         <span class="m-menu__link-text">
-                                                            {{ __('latest_orders') }}
+                                                            {{ __('admin.order.lastest') }}
                                                         </span>
                                                     </a>
                                                 </li>
                                                 <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
                                                     <a href="#" class="m-menu__link">
                                                         <span class="m-menu__link-text">
-                                                            {{ __('pending_orders') }}
+                                                            {{ __('admin.order.pending') }}
                                                         </span>
                                                     </a>
                                                 </li>
                                                 <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
                                                     <a href="#" class="m-menu__link">
                                                         <span class="m-menu__link-text">
-                                                            {{ __('processed_orders') }}
+                                                            {{ __('admin.order.processed') }}
                                                         </span>
                                                     </a>
                                                 </li>
                                                 <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
                                                     <a href="#" class="m-menu__link">
                                                         <span class="m-menu__link-text">
-                                                            {{ __('delivery_reports') }}
+                                                            {{ __('admin.report.delivery') }}
                                                         </span>
                                                     </a>
                                                 </li>
                                                 <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
                                                     <a href="#" class="m-menu__link">
                                                         <span class="m-menu__link-text">
-                                                            {{ __('payments') }}
+                                                            {{ __('admin.payments') }}
                                                         </span>
                                                     </a>
                                                 </li>
                                                 <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
                                                     <a href="#" class="m-menu__link">
                                                         <span class="m-menu__link-text">
-                                                            {{ __('customers') }}
+                                                            {{ __('admin.customer.customers') }}
                                                         </span>
                                                     </a>
                                                 </li>
@@ -138,7 +138,7 @@
                                         <a href="#" class="m-menu__link m-menu__toggle">
                                             <i class="m-menu__link-icon flaticon-chat-1"></i>
                                             <span class="m-menu__link-text">
-                                                {{ __('customer_feedbacks') }}
+                                                {{ __('admin.customer.feedback') }}
                                             </span>
                                             <i class="m-menu__hor-arrow la la-angle-right"></i>
                                             <i class="m-menu__ver-arrow la la-angle-right"></i>
@@ -149,35 +149,35 @@
                                                 <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
                                                     <a href="#" class="m-menu__link">
                                                         <span class="m-menu__link-text">
-                                                            {{ __('customer_feedbacks') }}
+                                                            {{ __('admin.customer.feedback') }}
                                                         </span>
                                                     </a>
                                                 </li>
                                                 <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
                                                     <a href="#" class="m-menu__link">
                                                         <span class="m-menu__link-text">
-                                                            {{ __('supplier_feedbacks') }}
+                                                            {{ __('admin.customer.supplier_feedbacks') }}
                                                         </span>
                                                     </a>
                                                 </li>
                                                 <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
                                                     <a href="#" class="m-menu__link">
                                                         <span class="m-menu__link-text">
-                                                            {{ __('reviewed_feedbacks') }}
+                                                            {{ __('admin.customer.reviewed_feedbacks') }}
                                                         </span>
                                                     </a>
                                                 </li>
                                                 <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
                                                     <a href="#" class="m-menu__link">
                                                         <span class="m-menu__link-text">
-                                                            {{ __('resolved_feedbacks') }}
+                                                            {{ __('admin.customer.resolved_feedbacks') }}
                                                         </span>
                                                     </a>
                                                 </li>
                                                 <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
                                                     <a href="#" class="m-menu__link">
                                                         <span class="m-menu__link-text">
-                                                            {{ __('feedback_reports') }}
+                                                            {{ __('admin.customer.feedback_reports') }}
                                                         </span>
                                                     </a>
                                                 </li>
@@ -188,7 +188,7 @@
                                         <a href="#" class="m-menu__link">
                                             <i class="m-menu__link-icon flaticon-users"></i>
                                             <span class="m-menu__link-text">
-                                                {{ __('register_member') }}
+                                                {{ __('admin.register.member') }}
                                             </span>
                                         </a>
                                     </li>
@@ -199,7 +199,7 @@
                             <a href="javascript:;" class="m-menu__link m-menu__toggle">
                                 <i class="m-menu__link-icon flaticon-line-graph"></i>
                                 <span class="m-menu__link-text">
-                                    {{ __('reports') }}
+                                    {{ __('admin.report.reports') }}
                                 </span>
                                 <i class="m-menu__hor-arrow la la-angle-down"></i>
                                 <i class="m-menu__ver-arrow la la-angle-right"></i>
@@ -208,196 +208,88 @@
                                 <span class="m-menu__arrow m-menu__arrow--adjust"></span>
                                 <div class="m-menu__subnav">
                                     <ul class="m-menu__content">
-                                        @for ($i = 0; $i < 4; $i++)
                                         <li class="m-menu__item">
                                             <h3 class="m-menu__heading m-menu__toggle">
                                             <span class="m-menu__link-text">
-                                                {{ __('finance_reports') }}
+                                                {{ __('admin.report.finance') }}
                                             </span>
                                             <i class="m-menu__ver-arrow la la-angle-right"></i>
                                             </h3>
                                             <ul class="m-menu__inner">
                                                 <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
                                                     <a href="#" class="m-menu__link">
-                                                        <i class="m-menu__link-icon flaticon-map"></i>
+                                                        <i class="m-menu__link-bullet m-menu__link-bullet--line">
+                                                        <span></span>
+                                                        </i>
                                                         <span class="m-menu__link-text">
-                                                            {{ __('annual_reports') }}
+                                                            1
                                                         </span>
                                                     </a>
                                                 </li>
                                             </ul>
                                         </li>
-                                        @endfor
+                                        <li class="m-menu__item">
+                                            <h3 class="m-menu__heading m-menu__toggle">
+                                            <span class="m-menu__link-text">
+                                                {{ __('admin.report.project') }}
+                                            </span>
+                                            <i class="m-menu__ver-arrow la la-angle-right"></i>
+                                            </h3>
+                                            <ul class="m-menu__inner">
+                                                <li class="m-menu__item "  m-menu-link-redirect="1" aria-haspopup="true">
+                                                    <a  href="header/actions.html" class="m-menu__link ">
+                                                        <i class="m-menu__link-bullet m-menu__link-bullet--line">
+                                                        <span></span>
+                                                        </i>
+                                                        <span class="m-menu__link-text">
+                                                            1
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="m-menu__item">
+                                            <h3 class="m-menu__heading m-menu__toggle">
+                                            <span class="m-menu__link-text">
+                                                {{ __('admin.report.hr') }}
+                                            </span>
+                                            <i class="m-menu__ver-arrow la la-angle-right"></i>
+                                            </h3>
+                                            <ul class="m-menu__inner">
+                                                <li class="m-menu__item "  m-menu-link-redirect="1" aria-haspopup="true">
+                                                    <a  href="header/actions.html" class="m-menu__link ">
+                                                        <i class="m-menu__link-bullet m-menu__link-bullet--line">
+                                                        <span></span>
+                                                        </i>
+                                                        <span class="m-menu__link-text">
+                                                            1
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="m-menu__item">
+                                            <h3 class="m-menu__heading m-menu__toggle">
+                                            <span class="m-menu__link-text">
+                                                {{ __('admin.report.app') }}
+                                            </span>
+                                            <i class="m-menu__ver-arrow la la-angle-right"></i>
+                                            </h3>
+                                            <ul class="m-menu__inner">
+                                                <li class="m-menu__item "  m-menu-link-redirect="1" aria-haspopup="true">
+                                                    <a  href="header/actions.html" class="m-menu__link ">
+                                                        <i class="m-menu__link-bullet m-menu__link-bullet--line">
+                                                        <span></span>
+                                                        </i>
+                                                        <span class="m-menu__link-text">
+                                                            1
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="m-menu__item m-menu__item--submenu m-menu__item--rel" m-menu-submenu-toggle="click" m-menu-link-redirect="1" aria-haspopup="true">
-                            <a href="javascript:;" class="m-menu__link m-menu__toggle">
-                                <i class="m-menu__link-icon flaticon-paper-plane"></i>
-                                <span class="m-menu__link-title">
-                                    <span class="m-menu__link-wrap">
-                                        <span class="m-menu__link-text">
-                                            {{ __('apps') }}
-                                        </span>
-                                        <span class="m-menu__link-badge">
-                                            <span class="m-badge m-badge--brand m-badge--wide">
-                                                {{ __('new') }}
-                                            </span>
-                                        </span>
-                                    </span>
-                                </span>
-                                <i class="m-menu__hor-arrow la la-angle-down"></i>
-                                <i class="m-menu__ver-arrow la la-angle-right"></i>
-                            </a>
-                            <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left">
-                                <span class="m-menu__arrow m-menu__arrow--adjust"></span>
-                                <ul class="m-menu__subnav">
-                                    <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
-                                        <a href="#" class="m-menu__link">
-                                            <i class="m-menu__link-icon flaticon-business"></i>
-                                            <span class="m-menu__link-text">
-                                                {{ __('ecommerce') }}
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="m-menu__item m-menu__item--submenu" m-menu-submenu-toggle="hover" m-menu-link-redirect="1" aria-haspopup="true">
-                                        <a href="#" class="m-menu__link m-menu__toggle">
-                                            <i class="m-menu__link-icon flaticon-computer"></i>
-                                            <span class="m-menu__link-text">
-                                                {{ __('audience') }}
-                                            </span>
-                                            <i class="m-menu__hor-arrow la la-angle-right"></i>
-                                            <i class="m-menu__ver-arrow la la-angle-right"></i>
-                                        </a>
-                                        <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--right">
-                                            <span class="m-menu__arrow"></span>
-                                            <ul class="m-menu__subnav">
-                                                <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
-                                                    <a href="#" class="m-menu__link">
-                                                        <i class="m-menu__link-icon flaticon-users"></i>
-                                                        <span class="m-menu__link-text">
-                                                            {{ __('active_users') }}
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                                <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
-                                                    <a href="#" class="m-menu__link">
-                                                        <i class="m-menu__link-icon flaticon-interface-1"></i>
-                                                        <span class="m-menu__link-text">
-                                                            {{ __('user_explorer') }}
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                                <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
-                                                    <a href="#" class="m-menu__link">
-                                                        <i class="m-menu__link-icon flaticon-lifebuoy"></i>
-                                                        <span class="m-menu__link-text">
-                                                            {{ __('users_flows') }}
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                                <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
-                                                    <a href="#" class="m-menu__link">
-                                                        <i class="m-menu__link-icon flaticon-graphic-1"></i>
-                                                        <span class="m-menu__link-text">
-                                                            {{ __('market_segments') }}
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                                <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
-                                                    <a href="#" class="m-menu__link">
-                                                        <i class="m-menu__link-icon flaticon-graphic"></i>
-                                                        <span class="m-menu__link-text">
-                                                            {{ __('user_reports') }}
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
-                                        <a href="#" class="m-menu__link">
-                                            <i class="m-menu__link-icon flaticon-map"></i>
-                                            <span class="m-menu__link-text">
-                                                {{ __('marketing') }}
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
-                                        <a href="#" class="m-menu__link">
-                                            <i class="m-menu__link-icon flaticon-graphic-2"></i>
-                                            <span class="m-menu__link-title">
-                                                <span class="m-menu__link-wrap">
-                                                    <span class="m-menu__link-text">
-                                                        {{ __('campaigns') }}
-                                                    </span>
-                                                    <span class="m-menu__link-badge">
-                                                        <span class="m-badge m-badge--success">
-                                                            3
-                                                        </span>
-                                                    </span>
-                                                </span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="m-menu__item m-menu__item--submenu" m-menu-submenu-toggle="hover" m-menu-link-redirect="1" aria-haspopup="true">
-                                        <a href="javascript:;" class="m-menu__link m-menu__toggle">
-                                            <i class="m-menu__link-icon flaticon-infinity"></i>
-                                            <span class="m-menu__link-text">
-                                                {{ __('cloud_manager') }}
-                                            </span>
-                                            <i class="m-menu__hor-arrow la la-angle-right"></i>
-                                            <i class="m-menu__ver-arrow la la-angle-right"></i>
-                                        </a>
-                                        <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left">
-                                            <span class="m-menu__arrow"></span>
-                                            <ul class="m-menu__subnav">
-                                                <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
-                                                    <a href="#" class="m-menu__link">
-                                                        <i class="m-menu__link-icon flaticon-add"></i>
-                                                        <span class="m-menu__link-title">
-                                                            <span class="m-menu__link-wrap">
-                                                                <span class="m-menu__link-text">
-                                                                    {{ __('file_upload') }}
-                                                                </span>
-                                                                <span class="m-menu__link-badge">
-                                                                    <span class="m-badge m-badge--danger">
-                                                                        3
-                                                                    </span>
-                                                                </span>
-                                                            </span>
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                                <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
-                                                    <a href="#" class="m-menu__link">
-                                                        <i class="m-menu__link-icon flaticon-signs-1"></i>
-                                                        <span class="m-menu__link-text">
-                                                            {{ __('file_attributes') }}
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                                <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
-                                                    <a href="#" class="m-menu__link">
-                                                        <i class="m-menu__link-icon flaticon-folder"></i>
-                                                        <span class="m-menu__link-text">
-                                                            {{ __('folders') }}
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                                <li class="m-menu__item" m-menu-link-redirect="1" aria-haspopup="true">
-                                                    <a href="#" class="m-menu__link">
-                                                        <i class="m-menu__link-icon flaticon-cogwheel-2"></i>
-                                                        <span class="m-menu__link-text">
-                                                            {{ __('system_settings') }}
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ul>
                             </div>
                         </li>
                     </ul>
@@ -422,7 +314,7 @@
                                             <form class="m-list-search__form">
                                                 <div class="m-list-search__form-wrapper">
                                                     <span class="m-list-search__form-input-wrapper">
-                                                        <input id="m_quicksearch_input" autocomplete="off" type="text" name="q" class="m-list-search__form-input" value="" placeholder="{{ __('search') }}">
+                                                        <input id="m_quicksearch_input" autocomplete="off" type="text" name="q" class="m-list-search__form-input" value="" placeholder="{{ __('admin.search') }}">
                                                     </span>
                                                     <span class="m-list-search__form-icon-close" id="m_quicksearch_close">
                                                         <i class="la la-remove"></i>
@@ -450,10 +342,10 @@
                                     <div class="m-dropdown__inner">
                                         <div class="m-dropdown__header m--align-center background-url-noti">
                                             <span class="m-dropdown__header-title">
-                                                9 {{ __('new') }}
+                                                9 {{ __('admin.news.new') }}
                                             </span>
                                             <span class="m-dropdown__header-subtitle">
-                                                {{ __('user_notifications') }}
+                                                {{ __('admin.notifications.user') }}
                                             </span>
                                         </div>
                                         <div class="m-dropdown__body">
@@ -461,17 +353,17 @@
                                                 <ul class="nav nav-tabs m-tabs m-tabs-line m-tabs-line--brand" role="tablist">
                                                     <li class="nav-item m-tabs__item">
                                                         <a class="nav-link m-tabs__link active" data-toggle="tab" href="#topbar_notifications_notifications" role="tab">
-                                                            {{ __('alerts') }}
+                                                            {{ __('admin.news.alerts') }}
                                                         </a>
                                                     </li>
                                                     <li class="nav-item m-tabs__item">
                                                         <a class="nav-link m-tabs__link" data-toggle="tab" href="#topbar_notifications_events" role="tab">
-                                                            {{ __('events') }}
+                                                            {{ __('admin.news.events') }}
                                                         </a>
                                                     </li>
                                                     <li class="nav-item m-tabs__item">
                                                         <a class="nav-link m-tabs__link" data-toggle="tab" href="#topbar_notifications_logs" role="tab">
-                                                            {{ __('logs') }}
+                                                            {{ __('admin.news.logs') }}
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -480,17 +372,15 @@
                                                         <div class="m-scrollable" data-scrollable="true" data-max-height="250" data-mobile-max-height="200">
                                                             <div class="m-list-timeline m-list-timeline--skin-light">
                                                                 <div class="m-list-timeline__items">
-                                                                    @for ($i = 0; $i < 4; $i++)
                                                                     <div class="m-list-timeline__item">
                                                                         <span class="m-list-timeline__badge -m-list-timeline__badge--state-success"></span>
                                                                         <span class="m-list-timeline__text">
-                                                                            12 {{ __('new_users_registered') }}
+                                                                            12 {{ __('admin.news.users_registered') }}
                                                                         </span>
                                                                         <span class="m-list-timeline__time">
-                                                                            {{ __('just_now') }}
+                                                                            {{ __('admin.just_now') }}
                                                                         </span>
                                                                     </div>
-                                                                    @endfor
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -499,17 +389,15 @@
                                                         <div class="m-scrollable" data-scrollable="true" data-max-height="250" data-mobile-max-height="200">
                                                             <div class="m-list-timeline m-list-timeline--skin-light">
                                                                 <div class="m-list-timeline__items">
-                                                                    @for ($i = 0; $i < 4; $i++)
                                                                     <div class="m-list-timeline__item">
                                                                         <span class="m-list-timeline__badge m-list-timeline__badge--state1-success"></span>
                                                                         <a href="" class="m-list-timeline__text">
-                                                                            {{ __('new_order_received') }}
+                                                                            {{ __('admin.news.order_received') }}
                                                                         </a>
                                                                         <span class="m-list-timeline__time">
-                                                                            {{ __('just_now') }}
+                                                                            {{ __('admin.just_now') }}
                                                                         </span>
                                                                     </div>
-                                                                    @endfor
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -518,9 +406,9 @@
                                                         <div class="m-stack m-stack--ver m-stack--general min-height-180">
                                                             <div class="m-stack__item m-stack__item--center m-stack__item--middle">
                                                                 <span class="">
-                                                                    {{ __('all_caught_up') }}
+                                                                    {{ __('admin.news.all_caught_up') }}
                                                                     <br>
-                                                                    {{ __('no_new_logs') }}
+                                                                    {{ __('admin.news.no_new_logs') }}
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -543,10 +431,10 @@
                                     <div class="m-dropdown__inner">
                                         <div class="m-dropdown__header m--align-center background-url-quick-actions">
                                             <span class="m-dropdown__header-title">
-                                                {{ __('quick_actions') }}
+                                                {{ __('admin.quick_actions') }}
                                             </span>
                                             <span class="m-dropdown__header-subtitle">
-                                                {{ __('shortcuts') }}
+                                                {{ __('admin.shortcuts') }}
                                             </span>
                                         </div>
                                         <div class="m-dropdown__body m-dropdown__body--paddingless">
@@ -557,13 +445,13 @@
                                                             <a href="#" class="m-nav-grid__item">
                                                                 <i class="m-nav-grid__icon flaticon-file"></i>
                                                                 <span class="m-nav-grid__text">
-                                                                    {{ __('generate_report') }}
+                                                                    {{ __('admin.report.generate') }}
                                                                 </span>
                                                             </a>
                                                             <a href="#" class="m-nav-grid__item">
                                                                 <i class="m-nav-grid__icon flaticon-time"></i>
                                                                 <span class="m-nav-grid__text">
-                                                                    {{ __('add_new_event') }}
+                                                                    {{ __('admin.add_new_event') }}
                                                                 </span>
                                                             </a>
                                                         </div>
@@ -571,13 +459,13 @@
                                                             <a href="#" class="m-nav-grid__item">
                                                                 <i class="m-nav-grid__icon flaticon-folder"></i>
                                                                 <span class="m-nav-grid__text">
-                                                                    {{ __('create_new_task') }}
+                                                                    {{ __('admin.create_new_task') }}
                                                                 </span>
                                                             </a>
                                                             <a href="#" class="m-nav-grid__item">
                                                                 <i class="m-nav-grid__icon flaticon-clipboard"></i>
                                                                 <span class="m-nav-grid__text">
-                                                                    {{ __('completed_tasks') }}
+                                                                    {{ __('admin.completed_tasks') }}
                                                                 </span>
                                                             </a>
                                                         </div>
@@ -618,18 +506,13 @@
                                         <div class="m-dropdown__body">
                                             <div class="m-dropdown__content">
                                                 <ul class="m-nav m-nav--skin-light">
-                                                    <li class="m-nav__section m--hide">
-                                                        <span class="m-nav__section-text">
-                                                            {{ __('section') }}
-                                                        </span>
-                                                    </li>
                                                     <li class="m-nav__item">
                                                         <a href="{{ route('admin.profile') }}" class="m-nav__link">
                                                             <i class="m-nav__link-icon flaticon-profile-1"></i>
                                                             <span class="m-nav__link-title">
                                                                 <span class="m-nav__link-wrap">
                                                                     <span class="m-nav__link-text">
-                                                                        {{ __('my_profile') }}
+                                                                        {{ __('admin.my_profile') }}
                                                                     </span>
                                                                     <span class="m-nav__link-badge">
                                                                         <span class="m-badge m-badge--success">
@@ -644,7 +527,7 @@
                                                         <a href="#" class="m-nav__link">
                                                             <i class="m-nav__link-icon flaticon-share"></i>
                                                             <span class="m-nav__link-text">
-                                                                {{ __('activity') }}
+                                                                {{ __('admin.activity') }}
                                                             </span>
                                                         </a>
                                                     </li>
@@ -652,7 +535,7 @@
                                                         <a href="#" class="m-nav__link">
                                                             <i class="m-nav__link-icon flaticon-chat-1"></i>
                                                             <span class="m-nav__link-text">
-                                                                {{ __('messages') }}
+                                                                {{ __('admin.messages') }}
                                                             </span>
                                                         </a>
                                                     </li>
@@ -661,7 +544,7 @@
                                                         <a href="#" class="m-nav__link">
                                                             <i class="m-nav__link-icon flaticon-info"></i>
                                                             <span class="m-nav__link-text">
-                                                                {{ __('faq') }}
+                                                                {{ __('admin.faq') }}
                                                             </span>
                                                         </a>
                                                     </li>
@@ -669,14 +552,14 @@
                                                         <a href="#" class="m-nav__link">
                                                             <i class="m-nav__link-icon flaticon-lifebuoy"></i>
                                                             <span class="m-nav__link-text">
-                                                                {{ __('support') }}
+                                                                {{ __('admin.support') }}
                                                             </span>
                                                         </a>
                                                     </li>
                                                     <li class="m-nav__separator m-nav__separator--fit"></li>
                                                     <li class="m-nav__item">
                                                         <a href="{{ route('admin.login') }}" class="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
-                                                            {{ __('logout') }}
+                                                            {{ __('admin.logout') }}
                                                         </a>
                                                     </li>
                                                 </ul>
