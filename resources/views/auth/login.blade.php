@@ -41,16 +41,8 @@
                                         <img src="{{ asset(config('asset.app_logo') . 'logo-2.png') }}">
                                     </a>
                                 </div>
-                                <div class="m-login__title">
-                                    <h3>
-                                        {{ __('get_free_account') }}
-                                    </h3>
-                                </div>
                                 <div class="m-login__desc">
-                                    {{ __('login_desc') }}
-                                </div>
-                                <div class="m-login__form-action">
-                                    {!! Form::button(__('get_an_account'), ['id' => 'm_login_signup', 'class' => 'btn btn-outline-focus m-btn--pill']) !!}
+                                    {{ __('admin.login_desc') }}
                                 </div>
                             </div>
                         </div>
@@ -64,7 +56,7 @@
                         <div class="m-login__signin">
                             <div class="m-login__head">
                                 <h3 class="m-login__title">
-                                    {{ __('login_to_your_account') }}
+                                    {{ __('admin.login') }}
                                 </h3>
                             </div>
                             {!! Form::open(['route' => 'admin.login', 'method' => 'POST', 'class' => 'm-login__form m-form']) !!}
@@ -89,117 +81,49 @@
                                     </div>
                                 @endif
                                 <div class="form-group m-form__group">
-                                    {!! Form::text('user_name', '', ['required', 'class' => 'form-control m-input', 'placeholder' => __('username'), 'autocomplete' => 'off']) !!}
+                                    {!! Form::text('user_name', '', ['required', 'class' => 'form-control m-input', 'placeholder' => __('admin.user_name'), 'autocomplete' => 'off']) !!}
                                 </div>
                                 <div class="form-group m-form__group">
-                                    {!! Form::password('password', ['class' => 'form-control m-input m-login__form-input--last', 'placeholder' => __('password'), 'required']) !!}
+                                    {!! Form::password('password', ['class' => 'form-control m-input m-login__form-input--last', 'placeholder' => __('admin.password'), 'required']) !!}
                                 </div>
                                 <div class="row m-login__form-sub">
                                     <div class="col m--align-left">
                                         <label class="m-checkbox m-checkbox--focus">
                                             {!! Form::checkbox('remember') !!}
-                                            {{ __('remember_me') }}
+                                            {{ __('admin.remember_me') }}
                                             <span></span>
                                         </label>
                                     </div>
                                     <div class="col m--align-right">
                                         <a href="javascript:;" id="m_login_forget_password" class="m-link">
-                                            {{ __('forget_password') }}
+                                            {{ __('admin.forget_password') }}
                                         </a>
                                     </div>
                                 </div>
                                 <div class="m-login__form-action">
-                                    {!! Form::submit(__('sign_in'), ['class' => 'btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air']) !!}
-                                </div>
-                            {!! Form::close() !!}
-                        </div>
-                        <div class="m-login__signup">
-                            <div class="m-login__head">
-                                <h3 class="m-login__title">
-                                    {{ __('sign_up') }}
-                                </h3>
-                                <div class="m-login__desc">
-                                    {{ __('create_your_account') }}
-                                </div>
-                            </div>
-                            {!! Form::open(['class' => 'm-login__form m-form', 'method' => 'POST', 'route' => 'register']) !!}
-                                @foreach ($errors->all() as $error)
-                                    {{ $error }}
-                                @endforeach
-                                <div class="form-group m-form__group">
-                                    {!! Form::text('name', '', ['required', 'class' => 'form-control m-input', 'placeholder' => __('fullname')]) !!}
-                                </div>
-                                <div class="form-group m-form__group">
-                                    {!! Form::date('birthday', '', ['required', 'class' => 'form-control m-input']) !!}
-                                </div>
-                                <div class="form-group m-form__group">
-                                    {!! Form::number('phone', '', ['required', 'class' => 'form-control m-input', 'placeholder' => 'phone']) !!}
-                                </div>
-                                <br>
-                                <div class="m-form__group form-group">
-                                    <div class="m-radio-inline">
-                                        <label class="m-radio m-radio--state-success">
-                                            {!! Form::radio('gender', 'male', 'checked', []) !!}
-                                            {{ __('male') }}
-                                            <span></span>
-                                        </label>
-                                        <label class="m-radio m-radio--state-brand">
-                                            {!! Form::radio('gender', 'female', '', []) !!}
-                                            {{ __('female') }}
-                                            <span></span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="form-group m-form__group">
-                                    {!! Form::email('email', '', ['required', 'class' => 'form-control m-input', 'placeholder' => __('email'), 'autocomplete' => 'off']) !!}
-                                </div>
-                                <div class="form-group m-form__group">
-                                    {!! Form::text('user_name', '', ['required', 'class' => 'form-control m-input', 'placeholder' => __('user_name'), 'autocomplete' => 'off']) !!}
-                                </div>
-                                <div class="form-group m-form__group">
-                                    {!! Form::password('password', ['required', 'class' => 'form-control m-input', 'placeholder' => __('password')]) !!}
-                                </div>
-                                <div class="form-group m-form__group">
-                                    {!! Form::password('password_confirmation', ['required', 'class' => 'form-control m-input m-login__form-input--last', 'placeholder' => __('password_confirmation')]) !!}
-                                </div>
-                                <div class="m-login__form-sub">
-                                    <label class="m-checkbox m-checkbox--focus">
-                                        {!! Form::checkbox('agree') !!}
-                                        {{ __('i_agree') }}
-                                        <a href="#" class="m-link m-link--focus">
-                                            {{ __('terms_and_conditions') }}
-                                        </a>
-                                        .
-                                        <span></span>
-                                    </label>
-                                    <span class="m-form__help"></span>
-                                </div>
-                                <div class="m-login__form-action">
-                                    {!! Form::submit(__('sign_up'), ['class' => 'btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air']) !!}
-                                    {!! Form::button(__('cancel'), ['id' => 'm_login_signup_cancel', 'class' => 'btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air']) !!}
+                                    {!! Form::submit(__('admin.login'), ['class' => 'btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air']) !!}
                                 </div>
                             {!! Form::close() !!}
                         </div>
                         <div class="m-login__forget-password">
                             <div class="m-login__head">
                                 <h3 class="m-login__title">
-                                    {{ __('forgotten_password') }}
+                                    {{ __('admin.forgotten_password') }}
                                 </h3>
                                 <div class="m-login__desc">
-                                    {{ __('enter_your_email_to_reset_your_password') }}
+                                    {{ __('admin.enter_your_email_to_reset_your_password') }}
                                 </div>
                             </div>
                             {!! Form::open(['required', 'class' => 'm-login__form m-form', 'route' => 'password.email', 'method' => 'POST']) !!}
                                 <div class="form-group m-form__group">
-                                    {!! Form::email('email', '', ['required', 'class' => 'form-control m-input', 'autocomplete' => 'off', 'placeholder' => __('email')]) !!}
+                                    {!! Form::email('email', '', ['required', 'class' => 'form-control m-input', 'autocomplete' => 'off', 'placeholder' => __('admin.email')]) !!}
                                     @if ($errors->has('email'))
                                         <div id="fullname-error" class="form-control-feedback">{{ __('required') }}</div>
                                     @endif
                                 </div>
                                 <div class="m-login__form-action">
-                                    {!! Form::submit(__('sign_up'), ['class' => 'btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air']) !!}
-                                    {!! Form::button(__('cancel'), ['id' => 'm_login_forget_password_cancel', 'class' => 'btn btn-outline-focus m-btn m-btn--pill m-btn--custom']) !!}
+                                    {!! Form::submit(__('admin.submit'), ['class' => 'btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air']) !!}
+                                    {!! Form::button(__('admin.cancel'), ['id' => 'm_login_forget_password_cancel', 'class' => 'btn btn-outline-focus m-btn m-btn--pill m-btn--custom']) !!}
                                 </div>
                             {!! Form::close() !!}
                         </div>

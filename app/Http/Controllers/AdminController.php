@@ -66,7 +66,7 @@ class AdminController extends Controller
             );
         }
 
-        return ['message' => __('success.update')];
+        return ['message' => __('admin.success')];
     }
 
     public function getAdminLogin()
@@ -89,6 +89,6 @@ class AdminController extends Controller
                 Auth::logout();
         }
 
-        return back()->withErrors(['message' => __('fail_login')]);
+        return back()->withErrors(['message' => __('admin.fail_login')]);
     }
 }

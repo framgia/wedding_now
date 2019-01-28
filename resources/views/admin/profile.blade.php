@@ -1,6 +1,6 @@
 @extends('admin.index')
 
-@section('subheader', __('my_profile'))
+@section('subheader', __('admin.my_profile'))
 
 @section('content')
 <div class="row">
@@ -8,9 +8,6 @@
         <div class="m-portlet m-portlet--full-height  ">
             <div class="m-portlet__body">
                 <div class="m-card-profile">
-                    <div class="m-card-profile__title m--hide">
-                        Your Profile
-                    </div>
                     <div class="m-card-profile__pic">
                         <div class="m-card-profile__pic-wrapper">
                             <img src="{{ asset(config('asset.user') . ($user->media ? $user->media->name : config('asset.user_default')) ) }}" id="user_avatar"/>
@@ -27,9 +24,9 @@
                 </div>
                 <ul class="m-nav m-nav--hover-bg m-portlet-fit--sides">
                     <li class="m-nav__separator m-nav__separator--fit"></li>
-                    <li class="m-nav__section m--hide">
+                    <li class="m-nav__section">
                         <span class="m-nav__section-text">
-                            Section
+                            {{ __('admin.section') }}
                         </span>
                     </li>
                     <li class="m-nav__item">
@@ -38,7 +35,7 @@
                             <span class="m-nav__link-title">
                                 <span class="m-nav__link-wrap">
                                     <span class="m-nav__link-text">
-                                        {{ __('my_rofile') }}
+                                        {{ __('admin.my_profile') }}
                                     </span>
                                     <span class="m-nav__link-badge">
                                         <span class="m-badge m-badge--success">
@@ -53,7 +50,7 @@
                         <a href="#" class="m-nav__link">
                             <i class="m-nav__link-icon flaticon-share"></i>
                             <span class="m-nav__link-text">
-                                {{ __('activity') }}
+                                {{ __('admin.activity') }}
                             </span>
                         </a>
                     </li>
@@ -61,7 +58,7 @@
                         <a href="#" class="m-nav__link">
                             <i class="m-nav__link-icon flaticon-chat-1"></i>
                             <span class="m-nav__link-text">
-                                {{ __('messages') }}
+                                {{ __('admin.messages') }}
                             </span>
                         </a>
                     </li>
@@ -69,7 +66,7 @@
                         <a href="#" class="m-nav__link">
                             <i class="m-nav__link-icon flaticon-graphic-2"></i>
                             <span class="m-nav__link-text">
-                                {{ __('sales') }}
+                                {{ __('admin.sales') }}
                             </span>
                         </a>
                     </li>
@@ -77,7 +74,7 @@
                         <a href="#" class="m-nav__link">
                             <i class="m-nav__link-icon flaticon-time-3"></i>
                             <span class="m-nav__link-text">
-                                {{ __('events') }}
+                                {{ __('admin.events') }}
                             </span>
                         </a>
                     </li>
@@ -85,7 +82,7 @@
                         <a href="#" class="m-nav__link">
                             <i class="m-nav__link-icon flaticon-lifebuoy"></i>
                             <span class="m-nav__link-text">
-                                {{ __('support') }}
+                                {{ __('admin.support') }}
                             </span>
                         </a>
                     </li>
@@ -101,18 +98,18 @@
                     <ul class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary" role="tablist">
                         <li class="nav-item m-tabs__item">
                             <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_user_profile_tab_1" role="tab">
-                                <i class="flaticon-share m--hide"></i>
-                                {{ __('update_profile') }}
+                                <i class="flaticon-share "></i>
+                                {{ __('admin.update_profile') }}
                             </a>
                         </li>
                         <li class="nav-item m-tabs__item">
                             <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_2" role="tab">
-                                {{ __('messages') }}
+                                {{ __('admin.messages') }}
                             </a>
                         </li>
                         <li class="nav-item m-tabs__item">
                             <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_3" role="tab">
-                                {{ __('settings') }}
+                                {{ __('admin.settings') }}
                             </a>
                         </li>
                     </ul>
@@ -132,14 +129,14 @@
                                                 <ul class="m-nav">
                                                     <li class="m-nav__section m-nav__section--first">
                                                         <span class="m-nav__section-text">
-                                                            {{ __('quick_actions') }}
+                                                            {{ __('admin.quick_actions') }}
                                                         </span>
                                                     </li>
                                                     <li class="m-nav__item">
                                                         <a href="" class="m-nav__link">
                                                             <i class="m-nav__link-icon flaticon-share"></i>
                                                             <span class="m-nav__link-text">
-                                                                {{ __('create_post') }}
+                                                                {{ __('admin.create.post') }}
                                                             </span>
                                                         </a>
                                                     </li>
@@ -147,7 +144,7 @@
                                                         <a href="" class="m-nav__link">
                                                             <i class="m-nav__link-icon flaticon-chat-1"></i>
                                                             <span class="m-nav__link-text">
-                                                                {{ __('send_messages') }}
+                                                                {{ __('admin.send_messages') }}
                                                             </span>
                                                         </a>
                                                     </li>
@@ -155,20 +152,20 @@
                                                         <a href="" class="m-nav__link">
                                                             <i class="m-nav__link-icon flaticon-multimedia-2"></i>
                                                             <span class="m-nav__link-text">
-                                                                {{ __('upload_file') }}
+                                                                {{ __('admin.upload_file') }}
                                                             </span>
                                                         </a>
                                                     </li>
                                                     <li class="m-nav__section">
                                                         <span class="m-nav__section-text">
-                                                            {{ __('useful_links') }}
+                                                            {{ __('admin.useful_links') }}
                                                         </span>
                                                     </li>
                                                     <li class="m-nav__item">
                                                         <a href="" class="m-nav__link">
                                                             <i class="m-nav__link-icon flaticon-info"></i>
                                                             <span class="m-nav__link-text">
-                                                                {{ __('faq') }}
+                                                                {{ __('admin.faq') }}
                                                             </span>
                                                         </a>
                                                     </li>
@@ -176,14 +173,14 @@
                                                         <a href="" class="m-nav__link">
                                                             <i class="m-nav__link-icon flaticon-lifebuoy"></i>
                                                             <span class="m-nav__link-text">
-                                                                {{ __('support') }}
+                                                                {{ __('admin.support') }}
                                                             </span>
                                                         </a>
                                                     </li>
-                                                    <li class="m-nav__separator m-nav__separator--fit m--hide"></li>
-                                                    <li class="m-nav__item m--hide">
+                                                    <li class="m-nav__separator m-nav__separator--fit"></li>
+                                                    <li class="m-nav__item">
                                                         <a href="#" class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm">
-                                                            {{ __('submit') }}
+                                                            {{ __('admin.submit') }}
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -207,7 +204,7 @@
                                     <div class="m-alert m-alert--outline alert alert-warning alert-dismissible fade show" role="alert">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
                                         <strong>
-                                            {{ __('warning') }}
+                                            {{ __('admin.warning') }}
                                         </strong>
                                         {{ $error }}
                                     </div>
@@ -217,7 +214,7 @@
                                 <div class="m-alert m-alert--outline alert alert-success alert-dismissible fade show" role="alert">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
                                         <strong>
-                                            {{ __('success') }}
+                                            {{ __('admin.success') }}
                                         </strong>
                                         {{ session('message') }}
                                     </div>
@@ -225,75 +222,75 @@
                             <div class="form-group m-form__group row">
                                 <div class="col-10 ml-auto">
                                     <h3 class="m-form__section">
-                                        1. {{ __('personal_details') }}
+                                        1. {{ __('admin.personal_details') }}
                                     </h3>
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
-                                {!! Form::label('name', __('name'), ['class' => 'col-2 col-form-label']) !!}
+                                {!! Form::label('name', __('admin.name'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::text('name', $user->name, ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('name')]) !!}
+                                    {!! Form::text('name', $user->name, ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('admin.name')]) !!}
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
-                                {!! Form::label('birthday', __('birthday'), ['class' => 'col-2 col-form-label']) !!}
+                                {!! Form::label('birthday', __('admin.birthday'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
                                     {!! Form::date('birthday', $user->birthday, ['required', 'class' => 'form-control m-input m-input--solid']) !!}
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
-                                {!! Form::label('email', __('email'), ['class' => 'col-2 col-form-label']) !!}
+                                {!! Form::label('email', __('admin.email'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::email('email', $user->email, ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('email')]) !!}
+                                    {!! Form::email('email', $user->email, ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('admin.email')]) !!}
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
-                                {!! Form::label('gender', __('gender'), ['class' => 'col-2 col-form-label']) !!}
+                                {!! Form::label('gender', __('admin.gender'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
                                     <div class="m-radio-inline">
                                         <label class="m-radio m-radio--state-success">
                                             {!! Form::radio('gender', 'Male', ($user->gender == 'Male' ? true : false)) !!}
-                                            {{ __('male') }}
+                                            {{ __('admin.male') }}
                                             <span></span>
                                         </label>
                                         <label class="m-radio m-radio--state-brand">
                                             {!! Form::radio('gender', 'Female', ($user->gender == 'Female' ? true : false)) !!}
-                                            {{ __('female') }}
+                                            {{ __('admin.female') }}
                                             <span></span>
                                         </label>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
-                                {!! Form::label('phone', __('phone'), ['class' => 'col-2 col-form-label']) !!}
+                                {!! Form::label('phone', __('admin.phone'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::number('phone', $user->phone, ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('phone')]) !!}
+                                    {!! Form::number('phone', $user->phone, ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('admin.phone')]) !!}
                                 </div>
                             </div>
                             <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
                             <div class="form-group m-form__group row">
                                 <div class="col-10 ml-auto">
                                     <h3 class="m-form__section">
-                                        2. {{ __('address') }}
+                                        2. {{ __('admin.address') }}
                                     </h3>
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
-                                {!! Form::label('city', __('city'), ['class' => 'col-2 col-form-label']) !!}
+                                {!! Form::label('city', __('admin.city'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::text('city', '', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('city')]) !!}
+                                    {!! Form::text('city', '', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('admin.city')]) !!}
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
-                                {!! Form::label('district', __('district'), ['class' => 'col-2 col-form-label']) !!}
+                                {!! Form::label('district', __('admin.district'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::text('district', '', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('district')]) !!}
+                                    {!! Form::text('district', '', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('admin.district')]) !!}
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
-                                {!! Form::label('address', __('address'), ['class' => 'col-2 col-form-label']) !!}
+                                {!! Form::label('address', __('admin.address'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::text('address', '', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('address')]) !!}
+                                    {!! Form::text('address', '', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('admin.address')]) !!}
                                 </div>
                             </div>
                             <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
@@ -305,28 +302,28 @@
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
-                                {!! Form::label('user_name', __('user_name'), ['class' => 'col-2 col-form-label']) !!}
+                                {!! Form::label('user_name', __('admin.user_name'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::text('user_name', $user->user_name, ['class' => 'form-control m-input m-input--solid', 'disabled', 'placeholder' => __('user_name')]) !!}
+                                    {!! Form::text('user_name', $user->user_name, ['class' => 'form-control m-input m-input--solid', 'disabled', 'placeholder' => __('admin.user_name')]) !!}
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
-                                {!! Form::label('password', __('password'), ['class' => 'col-2 col-form-label']) !!}
+                                {!! Form::label('password', __('admin.password'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::password('password', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('password')]) !!}
+                                    {!! Form::password('password', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('admin.password')]) !!}
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
-                                {!! Form::label('password_confirmation', __('password_confirmation'), ['class' => 'col-2 col-form-label']) !!}
+                                {!! Form::label('password_confirmation', __('admin.password_confirmation'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::password('password_confirmation', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('password_confirmation')]) !!}
+                                    {!! Form::password('password_confirmation', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('admin.password_confirmation')]) !!}
                                 </div>
                             </div>
                             <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
                             <div class="form-group m-form__group row">
                                 <div class="col-10 ml-auto">
                                     <h3 class="m-form__section">
-                                        4. {{ __('social_links') }}
+                                        4. {{ __('admin.social_links') }}
                                     </h3>
                                 </div>
                             </div>
@@ -354,9 +351,9 @@
                                 <div class="row">
                                     <div class="col-2"></div>
                                     <div class="col-7">
-                                        {!! Form::submit(__('save_changes'), ['id' => 'save', 'class' => 'btn btn-accent m-btn m-btn--air m-btn--custom']) !!}
+                                        {!! Form::submit(__('admin.update'), ['id' => 'save', 'class' => 'btn btn-accent m-btn m-btn--air m-btn--custom']) !!}
                                         &nbsp;&nbsp;
-                                        {!! Form::reset(__('reset'), ['class' => 'btn btn-secondary m-btn m-btn--air m-btn--custom']) !!}
+                                        {!! Form::reset(__('admin.reset'), ['class' => 'btn btn-secondary m-btn m-btn--air m-btn--custom']) !!}
                                     </div>
                                 </div>
                             </div>
