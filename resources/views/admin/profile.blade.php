@@ -10,7 +10,7 @@
                 <div class="m-card-profile">
                     <div class="m-card-profile__pic">
                         <div class="m-card-profile__pic-wrapper">
-                            <img src="{{ asset(config('asset.user') . ($user->media ? $user->media->name : config('asset.user_default')) ) }}" id="user_avatar"/>
+                            <img src="{{ asset(config('asset.user.avatar') . ($user->media ? $user->media->name : config('asset.user_default')) ) }}" id="user_avatar"/>
                         </div>
                     </div>
                     <div class="m-card-profile__details">
@@ -249,12 +249,12 @@
                                 <div class="col-7">
                                     <div class="m-radio-inline">
                                         <label class="m-radio m-radio--state-success">
-                                            {!! Form::radio('gender', 'Male', ($user->gender == 'Male' ? true : false)) !!}
+                                            {!! Form::radio('gender', 'male', ($user->gender == 'male' ? true : false)) !!}
                                             {{ __('admin.male') }}
                                             <span></span>
                                         </label>
                                         <label class="m-radio m-radio--state-brand">
-                                            {!! Form::radio('gender', 'Female', ($user->gender == 'Female' ? true : false)) !!}
+                                            {!! Form::radio('gender', 'female', ($user->gender == 'female' ? true : false)) !!}
                                             {{ __('admin.female') }}
                                             <span></span>
                                         </label>
@@ -297,7 +297,7 @@
                             <div class="form-group m-form__group row">
                                 <div class="col-10 ml-auto">
                                     <h3 class="m-form__section">
-                                        3. {{ __('account') }}
+                                        3. {{ __('admin.account') }}
                                     </h3>
                                 </div>
                             </div>
@@ -317,32 +317,6 @@
                                 {!! Form::label('password_confirmation', __('admin.password_confirmation'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
                                     {!! Form::password('password_confirmation', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('admin.password_confirmation')]) !!}
-                                </div>
-                            </div>
-                            <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
-                            <div class="form-group m-form__group row">
-                                <div class="col-10 ml-auto">
-                                    <h3 class="m-form__section">
-                                        4. {{ __('admin.social_links') }}
-                                    </h3>
-                                </div>
-                            </div>
-                            <div class="form-group m-form__group row">
-                                {!! Form::label('facebook', __('facebook'), ['class' => 'col-2 col-form-label']) !!}
-                                <div class="col-7">
-                                    {!! Form::text('facebook', '', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('facebook')]) !!}
-                                </div>
-                            </div>
-                            <div class="form-group m-form__group row">
-                                {!! Form::label('twister', __('twister'), ['class' => 'col-2 col-form-label']) !!}
-                                <div class="col-7">
-                                    {!! Form::text('twister', '', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('twister')]) !!}
-                                </div>
-                            </div>
-                            <div class="form-group m-form__group row">
-                                {!! Form::label('instagram', __('instagram'), ['class' => 'col-2 col-form-label']) !!}
-                                <div class="col-7">
-                                    {!! Form::text('instagram', '', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('instagram')]) !!}
                                 </div>
                             </div>
                         </div>

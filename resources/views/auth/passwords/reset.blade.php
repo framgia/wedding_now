@@ -37,10 +37,13 @@
                         <div class="m-login__signin">
                             <div class="m-login__head">
                                 <h3 class="m-login__title">
-                                    {{ __('reset_password') }}
+                                    {{ __('admin.reset_pasword') }}
                                 </h3>
                             </div>
-                            {!! Form::open(['route' => 'password.update', 'method' => 'POST', 'class' => 'm-login__form m-form']) !!}
+                            {!! Form::open(['method' => 'POST', 'route' => 'password.update', 'class' => 'm-login__form m-form']) !!}
+                                @csrf
+                                <input type="hidden" name="token" value="{{ $token }}">
+
                                 @if (count($errors) > 0)
                                     @foreach ($errors->all() as $error)
                                         <div class="m-alert m-alert--outline alert alert-danger alert-dismissible animated fadeIn" role="alert">
@@ -57,10 +60,10 @@
                                 </div>
                                 <hr>
                                 <div class="form-group m-form__group">
-                                    {!! Form::password('password_confirmation', ['class' => 'form-control m-input m-login__form-input--last', 'placeholder' => __('password_confirmation'), 'required']) !!}
+                                    {!! Form::password('password_confirmation', ['class' => 'form-control m-input m-login__form-input--last', 'placeholder' => __('admin.password_confirmation'), 'required']) !!}
                                 </div>
                                 <div class="m-login__form-action">
-                                    {!! Form::submit(__('reset_password'), ['class' => 'btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air']) !!}
+                                    {!! Form::submit(__('admin.submit'), ['class' => 'btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air']) !!}
                                 </div>
                             {!! Form::close() !!}
                         </div>

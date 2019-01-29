@@ -41,8 +41,16 @@
                                         <img src="{{ asset(config('asset.app_logo') . 'logo-2.png') }}">
                                     </a>
                                 </div>
+                                <div class="m-login__title">
+                                    <h3>
+                                        {{ __('admin.get_free_account') }}
+                                    </h3>
+                                </div>
                                 <div class="m-login__desc">
                                     {{ __('admin.login_desc') }}
+                                </div>
+                                <div class="m-login__form-action">
+                                    {!! Form::button(__('admin.get_an_account'), ['id' => 'm_login_signup', 'class' => 'btn btn-outline-focus m-btn--pill']) !!}
                                 </div>
                             </div>
                         </div>
@@ -59,7 +67,7 @@
                                     {{ __('admin.login') }}
                                 </h3>
                             </div>
-                            {!! Form::open(['route' => 'admin.login', 'method' => 'POST', 'class' => 'm-login__form m-form']) !!}
+                            {!! Form::open(['route' => 'login', 'method' => 'POST', 'class' => 'm-login__form m-form']) !!}
                                 @if (count($errors) > 0)
                                     @foreach ($errors->all() as $error)
                                         <div class="m-alert m-alert--outline alert alert-danger alert-dismissible animated fadeIn" role="alert">
@@ -70,7 +78,7 @@
                                 @endif
                                 @if (session('status'))
                                     <div class="m-alert m-alert--outline alert alert-success alert-dismissible animated fadeIn" role="alert">
-                                        {!! Form::submit('', ['class' => 'close', 'data-dismiss' => 'alert', 'aria-label' => 'Close']) !!}
+                                        {!! Form::button('', ['class' => 'close', 'data-dismiss' => 'alert', 'aria-label' => 'Close', 'type' => 'button']) !!}
                                         {{ session('status') }}
                                     </div>
                                 @endif
@@ -105,6 +113,82 @@
                                 </div>
                             {!! Form::close() !!}
                         </div>
+                        <div class="m-login__signup">
+                            <div class="m-login__head">
+                                <h3 class="m-login__title">
+                                    {{ __('admin.sign_up') }}
+                                </h3>
+                                <div class="m-login__desc">
+                                    {{ __('admin.create_your_account') }}
+                                </div>
+                            </div>
+                            {!! Form::open(['class' => 'm-login__form m-form', 'method' => 'POST', 'route' => 'register']) !!}
+                                @if (count($errors) > 0)
+                                    @foreach ($errors->all() as $error)
+                                        <div class="m-alert m-alert--outline alert alert-danger alert-dismissible animated fadeIn" role="alert">
+                                            {!! Form::button('', ['class' => 'close', 'data-dismiss' => 'alert', 'aria-label' => 'Close']) !!}
+                                            <span>{{ $error }}</span>
+                                        </div>
+                                    @endforeach
+                                @endif
+                                <div class="form-group m-form__group">
+                                    {!! Form::text('name', '', ['required', 'class' => 'form-control m-input', 'placeholder' => __('admin.name')]) !!}
+                                </div>
+                                <div class="form-group m-form__group">
+                                    {!! Form::date('birthday', '', ['required', 'class' => 'form-control m-input']) !!}
+                                </div>
+                                <div class="form-group m-form__group">
+                                    {!! Form::number('phone', '', ['required', 'class' => 'form-control m-input', 'placeholder' => 'phone']) !!}
+                                </div>
+                                <br>
+                                <div class="m-form__group form-group">
+                                    <div class="m-radio-inline">
+                                        <label class="m-radio m-radio--state-success">
+                                            {!! Form::radio('gender', 'male', 'checked', []) !!}
+                                            {{ __('admin.male') }}
+                                            <span></span>
+                                        </label>
+                                        <label class="m-radio m-radio--state-brand">
+                                            {!! Form::radio('gender', 'female', '', []) !!}
+                                            {{ __('admin.female') }}
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="form-group m-form__group">
+                                    {!! Form::email('email', '', ['required', 'class' => 'form-control m-input', 'placeholder' => __('admin.email'), 'autocomplete' => 'off']) !!}
+                                </div>
+                                <div class="form-group m-form__group">
+                                    {!! Form::text('user_name', '', ['required', 'class' => 'form-control m-input', 'placeholder' => __('admin.user_name'), 'autocomplete' => 'off']) !!}
+                                </div>
+                                <div class="form-group m-form__group">
+                                    {!! Form::password('password', ['required', 'class' => 'form-control m-input', 'placeholder' => __('admin.password')]) !!}
+                                </div>
+                                <div class="form-group m-form__group">
+                                    {!! Form::password('password_confirmation', ['required', 'class' => 'form-control m-input m-login__form-input--last', 'placeholder' => __('admin.password_confirmation')]) !!}
+                                </div>
+                                <div class="form-group m-form__group">
+                                    {!! Form::select('role', $roles, ['required', 'class' => 'form-control m-input m-login__form-input--last']) !!}
+                                </div>
+                                <div class="m-login__form-sub">
+                                    <label class="m-checkbox m-checkbox--focus">
+                                        {!! Form::checkbox('agree') !!}
+                                        {{ __('admin.i_agree') }}
+                                        <a href="#" class="m-link m-link--focus">
+                                            {{ __('admin.terms_and_conditions') }}
+                                        </a>
+                                        .
+                                        <span></span>
+                                    </label>
+                                    <span class="m-form__help"></span>
+                                </div>
+                                <div class="m-login__form-action">
+                                    {!! Form::submit(__('admin.submit'), ['class' => 'btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air']) !!}
+                                    {!! Form::button(__('admin.cancel'), ['id' => 'm_login_signup_cancel', 'class' => 'btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air']) !!}
+                                </div>
+                            {!! Form::close() !!}
+                        </div>
                         <div class="m-login__forget-password">
                             <div class="m-login__head">
                                 <h3 class="m-login__title">
@@ -118,7 +202,7 @@
                                 <div class="form-group m-form__group">
                                     {!! Form::email('email', '', ['required', 'class' => 'form-control m-input', 'autocomplete' => 'off', 'placeholder' => __('admin.email')]) !!}
                                     @if ($errors->has('email'))
-                                        <div id="fullname-error" class="form-control-feedback">{{ __('required') }}</div>
+                                        <div id="fullname-error" class="form-control-feedback">{{ __('admin.required') }}</div>
                                     @endif
                                 </div>
                                 <div class="m-login__form-action">

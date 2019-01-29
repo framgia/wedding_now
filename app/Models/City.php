@@ -14,7 +14,7 @@ class City extends Model
         'slug',
     ];
 
-    public function counties()
+    public function districts()
     {
         return $this->hasMany(District::class);
     }

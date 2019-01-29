@@ -41,10 +41,10 @@
                                     </a>
                                 </div>
                                 <div class="m-login__desc">
-                                    {{ __('login_desc') }}
+                                    {{ __('admin.login_desc') }}
                                 </div>
                                 <div class="m-login__form-action">
-                                    <a class="btn btn-outline-focus m-btn--pill" href="{{ route('admin.login') }}">{{ __('login') }}</a>
+                                    <a class="btn btn-outline-focus m-btn--pill" href="{{ route('login') }}">{{ __('login') }}</a>
                                 </div>
                             </div>
                         </div>
