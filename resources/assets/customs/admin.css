@@ -1,0 +1,31 @@
+.width-th-span {
+    width: 110px;
+}
+
+.tr-left-0 {
+    left: 0px;
+}
+
+.span-width-50px {
+    width: 50px;
+}
+
+.m-datatable.m-datatable--default>.m-datatable__table>.m-datatable__body .m-datatable__row>.m-datatable__cell>span.span-action-table {
+    overflow: visible;
+    position: relative;
+    width: 110px;
+}
+
+.table-list {
+    display: block;
+    min-height: 300px;
+    overflow-x: auto;
+}
+
+.input-width-97-left-3 {
+    width: 97%;
+    margin-left: 3%;
+}
+.m-datatable.m-datatable--default>.m-datatable__table {
+    overflow: initial;
+}
