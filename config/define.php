@@ -7,4 +7,9 @@ return [
         'client' => 3,
     ],
     'api_location' => 'https://thongtindoanhnghiep.co',
+    'type' => [
+        'admin' => 'administrator',
+        'vendor' => 'vendor',
+        'client' => 'client',
+    ]
 ];

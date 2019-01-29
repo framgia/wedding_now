@@ -18,6 +18,7 @@ const mix = require('laravel-mix');
 mix.copyDirectory('resources/client/revolution', 'public/assets/user/revolution');
 mix.copyDirectory('resources/client/js', 'public/assets/user/js');
 mix.styles('resources/assets/customs/admin_custom.css', 'public/css/app.css');
+mix.copyDirectory('resources/assets/customs/admin.css', 'public/css/admin/admin.css');
 
 mix.copyDirectory('resources/assets', 'public/assets');
 // mix.copyDirectory('resources/client/revolution', 'public/assets/user/revolution');

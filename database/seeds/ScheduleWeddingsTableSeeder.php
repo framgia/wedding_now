@@ -20,7 +20,7 @@ class ScheduleWeddingsTableSeeder extends Seeder
                 'marriage_day' => '2018/12/12',
                 'slug' => 'wedding-what-?',
                 'user_id' => 1,
-                'type' => 'admin',
+                'type' => 'administrator',
                 'schedule_wedding_id' => 1,
                 'budget' => 1000000,
                 'note' => 'Nothing',
