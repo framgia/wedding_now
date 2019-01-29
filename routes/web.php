@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Auth::routes(['verify' => true]);
@@ -26,4 +26,5 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('index', 'AdminController@index')->name('admin.index');
     Route::get('profile', 'AdminController@profile')->name('admin.profile');
     Route::put('update', 'AdminController@update')->name('admin.update');
+    Route::get('list-schedule-default', 'Admin\ScheduleController@index')->name('admin.list-schedule-default');
 });

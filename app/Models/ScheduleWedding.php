@@ -38,4 +38,9 @@ class ScheduleWedding extends Model
     {
         return $this->hasMany(Post::class);
     }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
 }

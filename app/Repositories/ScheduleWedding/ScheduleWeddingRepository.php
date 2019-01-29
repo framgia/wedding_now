@@ -2,12 +2,12 @@
 
 namespace App\Repositories\ScheduleWedding;
 
-use App\Models\ScheduleWedding;
+use App\Repositories\BaseRepository;
 
-class ScheduleWeddingRepository implements ScheduleWeddingRepositoryInterface
+class ScheduleWeddingRepository extends BaseRepository implements ScheduleWeddingRepositoryInterface
 {
-    public function model()
+    public function deleteTasks($data = [])
     {
-        return new ScheduleWedding;
+        $this->model->destroy($data);
     }
 }
