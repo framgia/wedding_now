@@ -22,8 +22,15 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('admin-login', 'AdminController@getAdminLogin')->name('admin.login');
 Route::post('admin-login', 'AdminController@postAdminLogin')->name('admin.login');
 
+Route::group(['namespace' => 'User'], function () {
+    Route::group(['middleware' => 'auth'], function () {
+        Route::get('to-do-list', 'UserController@toDo');
+        Route::get('my-profile', 'UserController@myProfile');
+    });
+});
+
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
-    Route::get('index', 'AdminController@index')->name('admin.index');
+    Route::get('/', 'AdminController@index')->name('admin.index');
     Route::get('profile', 'AdminController@profile')->name('admin.profile');
     Route::put('update', 'AdminController@update')->name('admin.update');
     Route::get('list-schedule-default', 'Admin\ScheduleController@index')->name('admin.list-schedule-default');

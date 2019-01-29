@@ -21,5 +21,16 @@ return [
         'logo' => 'img/logos/',
         'misc' => 'img/misc/',
         'user' => 'img/users/',
+    ],
+
+    'users' => [
+        'revolution_css' => 'assets/user/revolution/css/',
+        'css' => 'assets/user/css/',
+        'revolution_js' => 'assets/user/revolution/js/',
+        'extensions_js' => 'assets/user/revolution/js/extensions/',
+        'js' => 'assets/user/js/',
+        'images' => [
+            'index' => 'storage/wedding/',
+        ],
     ]
 ];
