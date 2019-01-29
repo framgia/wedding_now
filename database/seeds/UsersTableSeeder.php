@@ -25,7 +25,23 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('123456'),
                 'gender' => 'Male',
                 'phone' => '0123456789',
-            ]
+            ], [
+                'name' => 'Nguyen Van B',
+                'user_name' => 'ann1',
+                'birthday' => Carbon::create('1994', '12', '23'),
+                'email' => 'vendor@gmail.com',
+                'password' => bcrypt('123456'),
+                'gender' => 'Male',
+                'phone' => '012345676',
+            ], [
+                'name' => 'Nguyen Van C',
+                'user_name' => 'ann2',
+                'birthday' => Carbon::create('1994', '12', '23'),
+                'email' => 'client@gmail.com',
+                'password' => bcrypt('123456'),
+                'gender' => 'Male',
+                'phone' => '012345686',
+            ],
         ];
 
         for ($i = 0; $i < 10; $i++) {
