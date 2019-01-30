@@ -1,0 +1,68 @@
+<?php
+return [
+    'title' => [
+        'profile' => 'My Profile',
+        'home' => 'Wedding Now',
+    ],
+
+    'page' => [
+        'profile' => 'Profile',
+        'home' => 'Home',
+    ],
+
+    'index' => [
+        'call_out' => 'Are you trying our planning tools ?',
+        'btn-start' => 'Start Planning Today',
+        'why_choose' => 'Why Choose Wedd',
+        'list' => 'list',
+        'demo_text' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercit.',
+        'experience' => '20 Year Experience',
+        'text_experience' => 'Sed ut perspiciatis unde omnis iste na voluptatem accusantium doloremque laudantium',
+        'supplier' => '1500+ Wedding Suppliers',
+        'text_supplier' => 'Sed ut perspiciatis unde omnis iste na voluptatem accusantium doloremque laudantium',
+        'weddingse' => '100 Real Weddingse',
+        'perfect' => 'Perfect Checklist',
+    ],
+
+    'profile' => [
+        'dashboard' => 'Dashboard',
+        'profile' => 'Profile',
+        'to_do' => 'To Do List',
+        'budget' => 'My Budget',
+        'wishlist' => 'My Wishlist',
+        'real_wedding' => 'Real Wedding',
+        'upload_photo' => 'Upload Profile Photo',
+        'btn_upload' => 'Upload Profile Image',
+        'couple_profile' => 'Couple Profile',
+        'user_name' => 'User Name',
+        'name' => 'Name',
+        'birthday' => 'Birthday',
+        'email' => 'Email',
+        'gender' => 'Gender',
+        'male' => 'Male',
+        'female' => 'Female',
+        'address' => 'Address',
+        'city' => 'City',
+        'district' => 'District',
+        'btn_update' => 'Update Profile',
+        'change_password' => 'Change Password',
+        'old_password' => 'Old Password',
+        'new_password' => 'New Password',
+        'confirm_password' => 'Confirm Password',
+        'btn_change' => 'Change Password',
+        'phone' => 'Phone',
+    ],
+
+    'register' => [
+        'name' => 'Register',
+        'username' => 'USERNAME',
+        'email' => 'EMAIL',
+        'password' => 'PASSWORD',
+        'password_confirm' => 'PASSWORD CONFIRM',
+        'button_register' => 'Register Now',
+        'term' => 'I agree to all',
+        'condition' => 'terms & Conditions',
+        'account_already' => 'Already have an account?',
+        'sign_in' => 'Sign In',
+    ],
+];
