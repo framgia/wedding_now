@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Auth;
 
+use App\Models\City;
 use App\Models\Media;
 use App\Models\User;
+use App\Models\Role;
 use App\Http\Requests\AdminRequest;
 use App\Repositories\User\UserRepository;
 
@@ -61,7 +63,7 @@ class AdminController extends Controller
                     'id' => ($user->media ? $user->media->id : null)
                 ],
                 [
-                    'name' => $this->userModel->saveFile(($user->media ? $user->media->name : null), $file, config('asset.user'))
+                    'name' => $this->userModel->saveFile(($user->media ? $user->media->name : null), $file, config('asset.user.avatar'))
                 ]
             );
         }
@@ -74,7 +76,9 @@ class AdminController extends Controller
         if (Auth::check())
             Auth::logout();
 
-        return view('auth.login');
+        $roles = Role::where('id', '<>', config('define.role.admin'))->get()->pluck('name', 'id');
+
+        return view('auth.login', compact('roles'));
     }
 
     public function postAdminLogin(Request $request)
@@ -86,7 +90,7 @@ class AdminController extends Controller
             if (in_array(config('define.role.admin'), $user->roles->pluck('id')->toArray()))
                 return redirect()->route('admin.index');
             else
-                Auth::logout();
+                return '/';
         }
 
         return back()->withErrors(['message' => __('admin.fail_login')]);

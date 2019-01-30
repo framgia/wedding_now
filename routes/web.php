@@ -19,8 +19,10 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('admin-login', 'AdminController@getAdminLogin')->name('admin.login');
-Route::post('admin-login', 'AdminController@postAdminLogin')->name('admin.login');
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
+
+Route::get('login', 'AdminController@getAdminLogin')->name('login');
+Route::post('login', 'AdminController@postAdminLogin')->name('login');
 
 Route::group(['namespace' => 'User'], function () {
     Route::group(['middleware' => 'auth'], function () {

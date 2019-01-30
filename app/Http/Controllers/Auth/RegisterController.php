@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/email/verify';
 
     /**
      * Create a new controller instance.
@@ -80,7 +80,7 @@ class RegisterController extends Controller
             'phone' => $data['phone'],
         ]);
 
-        $user->roles()->attach(config('define.role.client'));
+        $user->roles()->attach($data['role']);
 
         return $user;
     }

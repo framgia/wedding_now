@@ -22,8 +22,10 @@ class AdminLoginMiddleware
             if (in_array(config('define.role.admin'), $user->roles->pluck('id')->toArray())) {
                 return $next($request);
             }
+
+            return redirect('/');
         }
 
-        return back()->withErrors(['message' => __('fail_login')]);
+        return redirect('login')->withErrors(['message' => __('admin.fail_login')]);
     }
 }
