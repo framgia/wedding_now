@@ -10,7 +10,7 @@
                 <div class="m-card-profile">
                     <div class="m-card-profile__pic">
                         <div class="m-card-profile__pic-wrapper">
-                            <img src="{{ asset(config('asset.user.avatar') . ($user->media ? $user->media->name : config('asset.user_default')) ) }}" id="user_avatar"/>
+                            <img src="{{ asset(config('asset.users.avatar') . ($user->media ? $user->media->name : config('asset.user_default')) ) }}" id="user_avatar"/>
                         </div>
                     </div>
                     <div class="m-card-profile__details">
