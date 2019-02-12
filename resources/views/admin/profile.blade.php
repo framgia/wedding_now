@@ -5,7 +5,7 @@
 @section('content')
 <div class="row">
     <div class="col-xl-3 col-lg-4">
-        <div class="m-portlet m-portlet--full-height  ">
+        <div class="m-portlet m-portlet--full-height">
             <div class="m-portlet__body">
                 <div class="m-card-profile">
                     <div class="m-card-profile__pic">
@@ -114,111 +114,14 @@
                         </li>
                     </ul>
                 </div>
-                <div class="m-portlet__head-tools">
-                    <ul class="m-portlet__nav">
-                        <li class="m-portlet__nav-item m-portlet__nav-item--last">
-                            <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" m-dropdown-toggle="hover" aria-expanded="true">
-                                <a href="#" class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
-                                    <i class="la la-gear"></i>
-                                </a>
-                                <div class="m-dropdown__wrapper">
-                                    <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
-                                    <div class="m-dropdown__inner">
-                                        <div class="m-dropdown__body">
-                                            <div class="m-dropdown__content">
-                                                <ul class="m-nav">
-                                                    <li class="m-nav__section m-nav__section--first">
-                                                        <span class="m-nav__section-text">
-                                                            {{ __('admin.quick_actions') }}
-                                                        </span>
-                                                    </li>
-                                                    <li class="m-nav__item">
-                                                        <a href="" class="m-nav__link">
-                                                            <i class="m-nav__link-icon flaticon-share"></i>
-                                                            <span class="m-nav__link-text">
-                                                                {{ __('admin.create.post') }}
-                                                            </span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="m-nav__item">
-                                                        <a href="" class="m-nav__link">
-                                                            <i class="m-nav__link-icon flaticon-chat-1"></i>
-                                                            <span class="m-nav__link-text">
-                                                                {{ __('admin.send_messages') }}
-                                                            </span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="m-nav__item">
-                                                        <a href="" class="m-nav__link">
-                                                            <i class="m-nav__link-icon flaticon-multimedia-2"></i>
-                                                            <span class="m-nav__link-text">
-                                                                {{ __('admin.upload_file') }}
-                                                            </span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="m-nav__section">
-                                                        <span class="m-nav__section-text">
-                                                            {{ __('admin.useful_links') }}
-                                                        </span>
-                                                    </li>
-                                                    <li class="m-nav__item">
-                                                        <a href="" class="m-nav__link">
-                                                            <i class="m-nav__link-icon flaticon-info"></i>
-                                                            <span class="m-nav__link-text">
-                                                                {{ __('admin.faq') }}
-                                                            </span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="m-nav__item">
-                                                        <a href="" class="m-nav__link">
-                                                            <i class="m-nav__link-icon flaticon-lifebuoy"></i>
-                                                            <span class="m-nav__link-text">
-                                                                {{ __('admin.support') }}
-                                                            </span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="m-nav__separator m-nav__separator--fit"></li>
-                                                    <li class="m-nav__item">
-                                                        <a href="#" class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm">
-                                                            {{ __('admin.submit') }}
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                @include('admin.head_tools')
             </div>
             <div class="tab-content">
                 <div class="tab-pane active" id="m_user_profile_tab_1">
-                    {!! Form::open(['id' => 'update_profile', 'class' => 'm-form m-form--fit m-form--label-align-right', 'route' => 'admin.update', 'files' => true]) !!}
+                    {!! Form::open(['id' => 'update_profile', 'class' => 'm-form m-form--fit m-form--label-align-right', 'route' => 'user.update', 'files' => true]) !!}
                         @method('PUT')
                         {!! Form::file('avatar_file', ['class' => 'd-none', 'id' => 'avatar_file']) !!}
                         <div class="m-portlet__body">
-                            @if ($errors->any())
-                                @foreach ($errors->all() as $error)
-                                    <div class="m-alert m-alert--outline alert alert-warning alert-dismissible fade show" role="alert">
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
-                                        <strong>
-                                            {{ __('admin.warning') }}
-                                        </strong>
-                                        {{ $error }}
-                                    </div>
-                                @endforeach
-                            @endif
-                            @if (session('message'))
-                                <div class="m-alert m-alert--outline alert alert-success alert-dismissible fade show" role="alert">
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
-                                        <strong>
-                                            {{ __('admin.success') }}
-                                        </strong>
-                                        {{ session('message') }}
-                                    </div>
-                            @endif
                             <div class="form-group m-form__group row">
                                 <div class="col-10 ml-auto">
                                     <h3 class="m-form__section">
@@ -229,7 +132,7 @@
                             <div class="form-group m-form__group row">
                                 {!! Form::label('name', __('admin.name'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::text('name', $user->name, ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('admin.name')]) !!}
+                                    {!! Form::text('name', $user->name, ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('validation.custom.enter.name')]) !!}
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
@@ -241,7 +144,7 @@
                             <div class="form-group m-form__group row">
                                 {!! Form::label('email', __('admin.email'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::email('email', $user->email, ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('admin.email')]) !!}
+                                    {!! Form::email('email', $user->email, ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('validation.custom.enter.email')]) !!}
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
@@ -264,7 +167,7 @@
                             <div class="form-group m-form__group row">
                                 {!! Form::label('phone', __('admin.phone'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::number('phone', $user->phone, ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('admin.phone')]) !!}
+                                    {!! Form::number('phone', $user->phone, ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('validation.custom.enter.phone')]) !!}
                                 </div>
                             </div>
                             <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
@@ -278,26 +181,42 @@
                             <div class="form-group m-form__group row">
                                 {!! Form::label('city', __('admin.city'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::text('city', '', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('admin.city')]) !!}
+                                    {!! Form::select(
+                                        'city',
+                                        $city,
+                                        $user->locations[0]->district->city->id,
+                                        [
+                                            'placeholder' => __('validation.custom.select.city'),
+                                            'class' => 'form-control m-input m-input--solid'
+                                        ])
+                                    !!}
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
                                 {!! Form::label('district', __('admin.district'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::text('district', '', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('admin.district')]) !!}
+                                    {!! Form::select(
+                                        'district',
+                                        $district,
+                                        $user->locations[0]->district->id,
+                                        [
+                                            'placeholder' => __('validation.custom.select.district'),
+                                            'class' => 'form-control m-input m-input--solid'
+                                        ])
+                                    !!}
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
                                 {!! Form::label('address', __('admin.address'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::text('address', '', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('admin.address')]) !!}
+                                    {!! Form::text('address', $user->locations ? $user->locations[0]->address : null, ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('validation.custom.enter.address')]) !!}
                                 </div>
                             </div>
                             <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
                             <div class="form-group m-form__group row">
                                 <div class="col-10 ml-auto">
                                     <h3 class="m-form__section">
-                                        3. {{ __('admin.account') }}
+                                        4. {{ __('admin.account') }}
                                     </h3>
                                 </div>
                             </div>
@@ -310,13 +229,13 @@
                             <div class="form-group m-form__group row">
                                 {!! Form::label('password', __('admin.password'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::password('password', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('admin.password')]) !!}
+                                    {!! Form::password('password', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('validation.custom.enter.password')]) !!}
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
                                 {!! Form::label('password_confirmation', __('admin.password_confirmation'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::password('password_confirmation', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('admin.password_confirmation')]) !!}
+                                    {!! Form::password('password_confirmation', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('validation.custom.enter.password_confirmation')]) !!}
                                 </div>
                             </div>
                         </div>
@@ -343,13 +262,15 @@
 @endsection
 
 @section('js')
-<script type="text/javascript">
+<script defer type="text/javascript">
     jQuery(document).ready(function($) {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
             }
         });
+
+        toastr.options = { "preventDuplicates": true };
 
         $('#user_avatar').click(function() {
             $('#avatar_file').click();
@@ -369,6 +290,36 @@
             }
         });
 
+        var $el = $('#district');
+
+        $('#city').on('change', function(event) {
+            event.preventDefault();
+
+            var city = $(this).val();
+
+            $.ajax({
+                url: route('get.districts', city),
+                type: 'GET',
+            })
+            .done(function(data) {
+                $el.empty();
+                console.log(Lang.get('validation.custom.select.district'));
+                $el.append(
+                    $('<option></option>')
+                    .attr('value', '').text( Lang.get('validation.custom.select.district') )
+                );
+                $.each(data, function(key, value) {
+                    $el.append(
+                        $('<option></option>')
+                        .attr('value', key).text( value )
+                    );
+                });
+            })
+            .fail(function(message) {
+                toastr.error(message);
+            });
+        });
+
         $('#save').click(function(event) {
             event.preventDefault();
 
@@ -377,7 +328,7 @@
 
         function submitForm() {
             $.ajax({
-                url: '{{ route('admin.update') }}',
+                url: '{{ route('user.update') }}',
                 type: 'POST',
                 cache: false,
                 contentType: false,
@@ -385,8 +336,8 @@
                 data: new FormData($('form#update_profile')[0]),
             })
             .done(function(data) {
-                $('.m-card-profile__name').text($('#name').val());
-                $('.m-card-profile__email').text($('#email').val());
+                $('.m-card-profile__name').text( $('#name').val() );
+                $('.m-card-profile__email').text( $('#email').val() );
 
                 toastr.success(data.message);
             })

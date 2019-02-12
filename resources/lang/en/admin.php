@@ -81,6 +81,7 @@ return [
     'personal_details' => 'Personal details',
     'create' => [
         'post' => 'Create new Post',
+        'user' => 'New User',
     ],
     'report' => [
         'reports' => 'Reports',

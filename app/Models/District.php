@@ -8,7 +8,7 @@ class District extends Model
 {
     protected $table = 'districts';
 
-    protected $filable = [
+    protected $fillable = [
         'name',
         'city_id',
     ];

@@ -13,6 +13,7 @@ return [
      */
     'messages' => [
         'admin',
+        'validation',
     ],
 
     /*
