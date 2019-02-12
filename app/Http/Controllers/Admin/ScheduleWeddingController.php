@@ -12,7 +12,6 @@ use App\Repositories\Category\CategoryRepository;
 use App\Repositories\ScheduleWedding\ScheduleWeddingRepository;
 use App\Repositories\Task\TaskRepository;
 use App\Repositories\TimeFrame\TimeFrameRepository;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -77,17 +76,13 @@ class ScheduleWeddingController extends Controller
 
         $arrTasks = $request->arr_tasks;
 
-        try {
+        DB::transaction(function () use ($arrTasks, $inforSchedule) {
             $scheduleWedding = $this->scheduleWedding->create($inforSchedule);
             foreach ($arrTasks as $task) {
                 Arr::set($task, 'schedule_wedding_id', $scheduleWedding->id);
                 $this->task->create($task);
             }
-        } catch (Exception $exception) {
-            return response()->json([
-                'message' => $exception,
-            ], 500);
-        }
+        });
 
         return response()->json([
             'message' => trans('success'),
@@ -167,7 +162,7 @@ class ScheduleWeddingController extends Controller
         });
 
         return response()->json([
-            'message' => 'success',
+            'message' => trans('admin.success'),
         ]);
     }
 
@@ -179,7 +174,7 @@ class ScheduleWeddingController extends Controller
      */
     public function destroy($id)
     {
-        $tasks = Task::where('schedule_wedding_id', $id)->get();
+        $tasks = $this->task->getTasksBySchedule($id);
 
         DB::transaction(function () use ($tasks, $id) {
             foreach ($tasks as $task) {
@@ -189,7 +184,7 @@ class ScheduleWeddingController extends Controller
         });
 
         return response()->json([
-            'message' => 'success',
+            'message' => trans('admin.success'),
         ]);
     }
 
