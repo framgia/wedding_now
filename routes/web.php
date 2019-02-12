@@ -35,7 +35,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/', 'AdminController@index')->name('admin.index');
     Route::get('profile', 'AdminController@profile')->name('admin.profile');
     Route::put('update', 'AdminController@update')->name('admin.update');
-    Route::get('list-schedule-default', 'Admin\ScheduleController@index')->name('admin.list-schedule-default');
 
     Route::get('list-schedule-default', 'Admin\ScheduleWeddingController@index')->name('admin.list-schedule-default');
 
