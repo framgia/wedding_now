@@ -29,3 +29,12 @@
 .m-datatable.m-datatable--default>.m-datatable__table {
     overflow: initial;
 }
+
+.task-delete-schedule {
+    margin-top: 19px;
+    margin-left: 56px;
+}
+
+.task-note {
+    height: 100px;
+}

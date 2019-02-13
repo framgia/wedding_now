@@ -11,5 +11,10 @@ return [
         'admin' => 'administrator',
         'vendor' => 'vendor',
         'client' => 'client',
-    ]
+    ],
+    'type_schedule' => [
+        'default' => 'default',
+        'custom' => 'custom',
+        'combo' => 'combo',
+    ],
 ];

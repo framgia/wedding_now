@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\SchedulaDefaultRequest;
 use App\Models\Category;
 use App\Models\Item;
 use App\Models\ScheduleWedding;
@@ -181,6 +182,62 @@ class ScheduleWeddingController extends Controller
                 $this->task->destroy($task->id);
             }
             $this->scheduleWedding->destroy($id);
+        });
+
+        return response()->json([
+            'message' => trans('admin.success'),
+        ]);
+    }
+
+    public function scheduleDefaultIndex()
+    {
+        $timeFrames = $this->timeFrame->getDataPluck();
+        $categories = $this->category->getDataPluck();
+        $items = Item::with('users')->get();
+        $scheduleDefault = $this->scheduleWedding->getScheduleWeddingDefault();
+
+        return view('admin.edit_default_schdule', compact('scheduleDefault', 'timeFrames', 'categories', 'items'));
+    }
+
+
+    public function scheduleDefaultUpdate(SchedulaDefaultRequest $request, $id)
+    {
+        $infoSchedule = $request->info_schedule;
+        Arr::set($infoSchedule, 'user_id', Auth::id());
+        Arr::set($infoSchedule, 'type', config('define.type_schedule.default'));
+        Arr::set($infoSchedule, 'slug', str_slug($infoSchedule['name']));
+        $arrTasks = $request->arr_tasks;
+        $idDeletedTasks = $request->id_deleted_tasks;
+
+        DB::transaction(function () use ($id, $infoSchedule, $arrTasks, $idDeletedTasks) {
+            $this->scheduleWedding->update($id, [
+                'name' => $infoSchedule['name'],
+                'budget' => $infoSchedule['budget'],
+                'note' => $infoSchedule['note'],
+                'slug' => $infoSchedule['slug'],
+                'type' => $infoSchedule['type'],
+                'user_id' => $infoSchedule['user_id'],
+            ]);
+            if ($arrTasks != '') {
+                foreach ($arrTasks as $task) {
+                    $this->task->updateOrCreate([
+                        'id' => $task['id'],
+                    ], [
+                        'name' => $task['name'],
+                        'category_id' => $task['category_id'],
+                        'item_user_id' => $task['item_user_id'],
+                        'time_frame_id' => $task['time_frame_id'],
+                        'schedule_wedding_id' => $id,
+                        'priority' => $task['priority'],
+                        'note' => $task['note'],
+                    ]);
+                }
+            }
+            if ($idDeletedTasks != '') {
+                foreach ($idDeletedTasks as $id => $value) {
+                    $this->task->destroy($value);
+                }
+            }
         });
 
         return response()->json([

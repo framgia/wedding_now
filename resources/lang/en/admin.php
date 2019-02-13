@@ -14,7 +14,10 @@ return [
     */
     'success' => 'Success !',
     'error' => 'Error!',
-    'account' => 'Account',
+    'account' => [
+        'list' => 'List',
+        'account' => 'Account'
+    ],
     'update' => 'Update',
     'submit' => 'Submit',
     'cancel' => 'Cancel',
@@ -146,4 +149,14 @@ return [
         'task' => 'Task',
     ],
     'confirm_delete' => 'Delete ?',
+    'manage' => [
+        'account' => 'Accounts',
+    ],
+    'user' => [
+        'list' => 'List accounts',
+    ],
+    'schedule' => [
+        'schedule' => 'Schedule Wedding',
+        'default' => 'Schedule Default',
+    ],
 ];
