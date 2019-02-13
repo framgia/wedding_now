@@ -131,6 +131,18 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'select' => [
+            'city' => '-- Please select city --',
+            'district' => '-- Please select district --',
+        ],
+        'enter' => [
+            'name' => 'Please enter name',
+            'email' => 'Please enter email',
+            'phone' => 'Please enter phone',
+            'address' => 'Please enter address',
+            'password' => 'Please enter password',
+            'password_confirmation' => 'Please enter password confirmation',
+        ],
     ],
 
     /*

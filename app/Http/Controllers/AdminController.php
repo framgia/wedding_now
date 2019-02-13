@@ -4,16 +4,13 @@ namespace App\Http\Controllers;
 
 use Auth;
 
-use App\Models\City;
-use App\Models\Media;
 use App\Models\User;
 use App\Models\Role;
-use App\Http\Requests\AdminRequest;
 use App\Repositories\User\UserRepository;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -32,43 +29,6 @@ class AdminController extends Controller
     public function index()
     {
         return view('admin.index');
-    }
-
-    public function profile()
-    {
-        return view('admin.profile');
-    }
-
-    public function update(AdminRequest $request)
-    {
-        $user = Auth::user();
-        $file = $request->file('avatar_file');
-
-        $data = [
-            'name' => $request->name,
-            'birthday' => $request->birthday,
-            'email' => $request->email,
-            'gender' => $request->gender,
-            'phone' => $request->phone,
-            'password' => ($request->password ? Hash::make($request->password) : $user->password),
-        ];
-
-        $this->userModel->update($user->id, $data);
-
-        // $user->location->isNotEmpty()
-
-        if ($file) {
-            $user->media()->updateOrCreate(
-                [
-                    'id' => ($user->media ? $user->media->id : null)
-                ],
-                [
-                    'name' => $this->userModel->saveFile(($user->media ? $user->media->name : null), $file, config('asset.user.avatar'))
-                ]
-            );
-        }
-
-        return ['message' => __('admin.success')];
     }
 
     public function getAdminLogin()
