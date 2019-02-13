@@ -2,6 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <title>@yield('title')</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta name="description" content="Weddlist" />
@@ -14,6 +15,7 @@
     @include('layouts.section.style')
     @routes
     {{ Html::script('messages.js') }}
+    @yield('css')
 </head>
 <!--body start-->
 <body>

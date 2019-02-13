@@ -16,7 +16,6 @@ class ScheduleWeddingsTableSeeder extends Seeder
 
         $schedule_weddings[] = [
             'name' => 'Schedule Wedding Default',
-            'marriage_day' => '2018/12/12',
             'slug' => 'schedule-wedding-default',
             'user_id' => 1,
             'type' => 'default',

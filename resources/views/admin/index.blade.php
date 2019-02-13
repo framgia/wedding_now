@@ -128,7 +128,7 @@
 <script src="{{ asset(config('asset.app_js') . 'dashboard.js') }}" type="text/javascript"></script>
 <script src="{{ asset(config('asset.components_base') . 'sweetalert2.js') }}" type="text/javascript"></script>
 <script src="{{ asset(config('asset.components_base') . 'toastr.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/app.js') }}" async defer></script>
+<script src="{{ asset('js/app_admin.js') }}" async defer></script>
 @yield('js')
 </body>
 </html>

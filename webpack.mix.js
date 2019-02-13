@@ -1,4 +1,7 @@
 const mix = require('laravel-mix');
+const WebpackShellPlugin = require('webpack-shell-plugin');
+
+// Add shell command plugin configured to create JavaScript language file
 
 /*
  |--------------------------------------------------------------------------
@@ -10,6 +13,15 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
+ /**
+    Mix language js
+ **/
+mix.webpackConfig({
+    plugins:
+    [
+        new WebpackShellPlugin({onBuildStart:['php artisan lang:js'], onBuildEnd:[]})
+    ]
+});
 
 // mix.js('resources/js/app.js', 'public/js')
 //     .sass('resources/sass/app.scss', 'public/css')
@@ -41,6 +53,7 @@ mix.styles([
     'resources/client/css/style.css',
     'resources/client/css/custom.css',
     'node_modules/toastr/build/toastr.min.css',
+    'resources/client/css/to-do-list.css',
 ], 'public/assets/user/css/page.css');
 
 mix.scripts([
@@ -54,6 +67,7 @@ mix.scripts([
     'node_modules/toastr/build/toastr.min.js',
     ], 'public/assets/user/js/page.js');
 
+//mix js admin
 mix.scripts([
     'resources/assets/customs/admin.js',
-    ], 'public/js/app.js');
+    ], 'public/js/app_admin.js');

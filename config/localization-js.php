@@ -14,6 +14,7 @@ return [
     'messages' => [
         'admin',
         'validation',
+        'page',
     ],
 
     /*
