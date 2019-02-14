@@ -6,6 +6,8 @@
         <title>
             {{ config('app.name') }}
         </title>
+        @routes
+        {{ Html::script('messages.js') }}
         <meta name="description" content="Latest updates and statistic charts">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -24,6 +26,7 @@
         <!--begin::Base Styles -->
         <link href="{{ asset(config('asset.vendors_base') . 'vendors.bundle.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset(config('asset.default_base') . 'style.bundle.css') }}" rel="stylesheet" type="text/css" />
+
         <!--end::Base Styles -->
     </head>
     <!-- end::Head -->
@@ -138,7 +141,7 @@
                                     {!! Form::date('birthday', '', ['required', 'class' => 'form-control m-input']) !!}
                                 </div>
                                 <div class="form-group m-form__group">
-                                    {!! Form::number('phone', '', ['required', 'class' => 'form-control m-input', 'placeholder' => 'phone']) !!}
+                                    {!! Form::number('phone', '', ['class' => 'form-control m-input', 'placeholder' => __('admin.phone')]) !!}
                                 </div>
                                 <br>
                                 <div class="m-form__group form-group">
@@ -169,11 +172,20 @@
                                     {!! Form::password('password_confirmation', ['required', 'class' => 'form-control m-input m-login__form-input--last', 'placeholder' => __('admin.password_confirmation')]) !!}
                                 </div>
                                 <div class="form-group m-form__group">
-                                    {!! Form::select('role', $roles, ['required', 'class' => 'form-control m-input m-login__form-input--last']) !!}
+                                    {!! Form::select('role', $roles, null, ['required', 'placeholder' => __('validation.custom.select.role')]) !!}
+                                </div>
+                                <div class="form-group m-form__group">
+                                    {!! Form::select('city', $city, $city[1], ['id' => 'city', 'required', 'placeholder' => __('validation.custom.select.city')]) !!}
+                                </div>
+                                <div class="form-group m-form__group">
+                                    {!! Form::select('district', ['' => __('validation.custom.select.district')], null,['id' => 'district', 'required']) !!}
+                                </div>
+                                <div class="form-group m-form__group">
+                                    {!! Form::text('address', '', ['required', 'class' => 'form-control m-input', 'placeholder' => __('admin.address')]) !!}
                                 </div>
                                 <div class="m-login__form-sub">
                                     <label class="m-checkbox m-checkbox--focus">
-                                        {!! Form::checkbox('agree') !!}
+                                        {!! Form::checkbox('iAgree', 'agree', false, ['id' => 'btnAgree']) !!}
                                         {{ __('admin.i_agree') }}
                                         <a href="#" class="m-link m-link--focus">
                                             {{ __('admin.terms_and_conditions') }}
@@ -184,7 +196,7 @@
                                     <span class="m-form__help"></span>
                                 </div>
                                 <div class="m-login__form-action">
-                                    {!! Form::submit(__('admin.submit'), ['class' => 'btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air']) !!}
+                                    {!! Form::submit(__('admin.submit'), ['disabled' => '', 'class' => 'btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air', 'id' => 'btnRegister']) !!}
                                     {!! Form::button(__('admin.cancel'), ['id' => 'm_login_signup_cancel', 'class' => 'btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air']) !!}
                                 </div>
                             {!! Form::close() !!}
@@ -223,6 +235,45 @@
         <!--begin::Page Snippets -->
         <script src="{{ asset(config('asset.login') . 'login.js') }}" type="text/javascript"></script>
         <!--end::Page Snippets -->
+
+        <script type="text/javascript">
+            jQuery(document).ready(function($) {
+                var $el = $('#district');
+
+                $('#city').on('change', function(event) {
+                    event.preventDefault();
+
+                    var city = $(this).val();
+
+                    $.ajax({
+                        url: route('get.districts', city),
+                        type: 'GET',
+                    })
+                    .done(function(data) {
+                        $el.empty();
+                        $el.append(
+                            $('<option></option>')
+                            .attr('value', '').text( Lang.get('validation.custom.select.district') )
+                        );
+                        $.each(data, function(key, value) {
+                            $el.append(
+                                $('<option></option>')
+                                .attr('value', key).text(value)
+                            );
+                        });
+                    })
+                    .fail(function(message) {
+                        toastr.error(message);
+                    });
+                });
+
+                $('#btnAgree').click(function(event) {
+                    $('#btnRegister').prop('disabled', function(index, value) {
+                        return !value;
+                    });
+                });
+            });
+        </script>
     </body>
     <!-- end::Body -->
 </html>

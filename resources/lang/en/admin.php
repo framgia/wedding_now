@@ -68,7 +68,7 @@ return [
     'user_name' => 'Username',
     'social_links' => 'Social links',
     'password' => 'Password',
-    'password_confirmation' => 'Confirmation',
+    'password_confirmation' => 'Password Confirmation',
     'update_profile' => 'Update profile',
     'quick_actions' => 'Quick actions',
     'add_new_event' => 'Add new event',

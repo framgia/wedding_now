@@ -6,6 +6,8 @@ use Auth;
 
 use App\Models\User;
 use App\Models\Role;
+use App\Models\City;
+use App\Models\District;
 use App\Repositories\User\UserRepository;
 
 use Illuminate\Http\Request;
@@ -31,14 +33,20 @@ class AdminController extends Controller
         return view('admin.index');
     }
 
+    public function getDistrictsById($id)
+    {
+        return District::where('city_id', $id)->pluck('name', 'id');
+    }
+
     public function getAdminLogin()
     {
         if (Auth::check())
             Auth::logout();
 
         $roles = Role::where('id', '<>', config('define.role.admin'))->get()->pluck('name', 'id');
+        $city = City::pluck('name', 'id');
 
-        return view('auth.login', compact('roles'));
+        return view('auth.login', compact('roles', 'city'));
     }
 
     public function postAdminLogin(Request $request)

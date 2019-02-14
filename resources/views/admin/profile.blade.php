@@ -303,7 +303,6 @@
             })
             .done(function(data) {
                 $el.empty();
-                console.log(Lang.get('validation.custom.select.district'));
                 $el.append(
                     $('<option></option>')
                     .attr('value', '').text( Lang.get('validation.custom.select.district') )
