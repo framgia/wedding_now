@@ -184,7 +184,7 @@
                                     {!! Form::select(
                                         'city',
                                         $city,
-                                        $user->locations[0]->district->city->id,
+                                        count($user->locations) > 0 ? $user->locations[0]->district->city->id : null,
                                         [
                                             'placeholder' => __('validation.custom.select.city'),
                                             'class' => 'form-control m-input m-input--solid'
@@ -198,7 +198,7 @@
                                     {!! Form::select(
                                         'district',
                                         $district,
-                                        $user->locations[0]->district->id,
+                                        count($user->locations) > 0 ? $user->locations[0]->district->id : null,
                                         [
                                             'placeholder' => __('validation.custom.select.district'),
                                             'class' => 'form-control m-input m-input--solid'
@@ -209,7 +209,7 @@
                             <div class="form-group m-form__group row">
                                 {!! Form::label('address', __('admin.address'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::text('address', $user->locations ? $user->locations[0]->address : null, ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('validation.custom.enter.address')]) !!}
+                                    {!! Form::text('address', count($user->locations) > 0 ? $user->locations[0]->address : null, ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('validation.custom.enter.address')]) !!}
                                 </div>
                             </div>
                             <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>

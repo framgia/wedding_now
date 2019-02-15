@@ -507,7 +507,7 @@
                                             <div class="m-dropdown__content">
                                                 <ul class="m-nav m-nav--skin-light">
                                                     <li class="m-nav__item">
-                                                        <a href="{{ route('user.profile') }}" class="m-nav__link">
+                                                        <a href="{{ route('user.profile', Auth::user()->user_name) }}" class="m-nav__link">
                                                             <i class="m-nav__link-icon flaticon-profile-1"></i>
                                                             <span class="m-nav__link-title">
                                                                 <span class="m-nav__link-wrap">

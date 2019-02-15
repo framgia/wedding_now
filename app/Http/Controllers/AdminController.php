@@ -58,7 +58,7 @@ class AdminController extends Controller
             if (in_array(config('define.role.admin'), $user->roles->pluck('id')->toArray()))
                 return redirect()->route('admin.index');
             else
-                return '/';
+                return redirect('/');
         }
 
         return back()->withErrors(['message' => __('admin.fail_login')]);

@@ -46,17 +46,17 @@ class UserController extends Controller
         return District::get()->pluck('name', 'id');
     }
 
-    public function myProfile()
+    public function userProfile($username)
     {
-        $user = Auth::user()->load('locations.district.city');
+        $user = User::where('user_name', $username)->with('locations.district.city')->firstOrFail();
         $city = $this->getCities();
-        $district = $this->getDistrictsById($user->locations[0]->district->city->id);
+        $district = $this->getDistrictsById(count($user->locations) > 0 ? $user->locations[0]->district->city->id : '');
 
         if ($user->roles[0]->id == config('define.role.admin')) {
             return view('admin.profile', compact('city', 'district', 'user'));
         }
 
-        return view('user.couple-profile');
+        return view('user.couple-profile', compact('city', 'district', 'user'));
     }
 
     public function update(AdminRequest $request)
