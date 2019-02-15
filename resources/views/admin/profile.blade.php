@@ -216,7 +216,7 @@
                             <div class="form-group m-form__group row">
                                 <div class="col-10 ml-auto">
                                     <h3 class="m-form__section">
-                                        4. {{ __('admin.account') }}
+                                        4. {{ __('admin.account.account') }}
                                     </h3>
                                 </div>
                             </div>

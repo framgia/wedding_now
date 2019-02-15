@@ -50,3 +50,7 @@ mix.scripts([
     'node_modules/jquery.counterup/jquery.counterup.min.js',
     'node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
     ], 'public/assets/user/js/page.js');
+
+mix.scripts([
+    'resources/assets/customs/admin.js',
+    ], 'public/js/app.js');
