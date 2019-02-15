@@ -10,7 +10,7 @@
                         <li><a href="help.html">Help</a></li>
                         <li><a href="pricing-plan.html">Pricing</a></li>
                         @auth
-                            <li><a href="#">{{ Auth::user()->name }}</a></li>
+                            <li><a href="{{ route('user.profile', Auth::user()->user_name) }}">{{ Auth::user()->name }}</a></li>
                             <li><a href="{{ route('logout') }}">{{ __('admin.logout') }}</a></li>
                         @endauth
                         @guest

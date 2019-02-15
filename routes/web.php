@@ -11,26 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 
-Route::get('get-districts/{id}', 'User\UserController@getDistrictsById')->name('get.districts');
-
-Route::get('login', 'AdminController@getAdminLogin')->name('login');
+Route::get('login', 'AdminController@getAdminLogin')->middleware('guest')->name('login');
 
 Route::post('login', 'AdminController@postAdminLogin')->name('login');
 
 Route::group(['namespace' => 'User'], function () {
+    Route::get('get-districts/{id}', 'UserController@getDistrictsById')->name('get.districts');
     Route::group(['middleware' => 'auth'], function () {
         Route::get('to-do-list', 'UserController@toDo');
-        Route::get('my-profile', 'UserController@myProfile')->name('user.profile');
+        Route::get('profile/{username}', 'UserController@userProfile')->name('user.profile');
         Route::put('update', 'UserController@update')->name('user.update');
     });
 });
@@ -51,22 +46,21 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 
     Route::get('create-schedule-default', 'Admin\ScheduleWeddingController@create')->name('admin.create-schedule-default');
 
-        Route::get('schedule-default', 'ScheduleWeddingController@scheduleDefaultIndex')
-            ->name('admin.schedule-default.index');
+    Route::get('schedule-default', 'ScheduleWeddingController@scheduleDefaultIndex')
+        ->name('admin.schedule-default.index');
 
-        Route::put('schedule-default/{id}', 'ScheduleWeddingController@scheduleDefaultUpdate')
-            ->name('admin.schedule-default.update');
+    Route::put('schedule-default/{id}', 'ScheduleWeddingController@scheduleDefaultUpdate')
+        ->name('admin.schedule-default.update');
 
-        Route::get('task-in-schedule', 'ScheduleWeddingController@getTasks')
-            ->name('admin.task-in-schedule');
+    Route::get('task-in-schedule', 'ScheduleWeddingController@getTasks')
+        ->name('admin.task-in-schedule');
 
-        Route::get('categories-pluck', 'ScheduleWeddingController@getCategoryPluck')
-            ->name('admin.categories-pluck');
+    Route::get('categories-pluck', 'ScheduleWeddingController@getCategoryPluck')
+        ->name('admin.categories-pluck');
 
-        Route::get('item-with-vendor-pluck-by-category', 'ScheduleWeddingController@getItemWithVendorPluckByIdCategory')
-            ->name('admin.item-with-vendor-pluck-by-category');
+    Route::get('item-with-vendor-pluck-by-category', 'ScheduleWeddingController@getItemWithVendorPluckByIdCategory')
+        ->name('admin.item-with-vendor-pluck-by-category');
 
-        Route::get('time-frame-pluck', 'ScheduleWeddingController@getTimeFramePluck')
-            ->name('admin.time-frame-pluck');
-    });
+    Route::get('time-frame-pluck', 'ScheduleWeddingController@getTimeFramePluck')
+        ->name('admin.time-frame-pluck');
 });

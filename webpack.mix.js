@@ -39,6 +39,8 @@ mix.styles([
     'resources/client/css/share-tooltip.css',
     'resources/client/css/stucture.css',
     'resources/client/css/style.css',
+    'resources/client/css/custom.css',
+    'node_modules/toastr/build/toastr.min.css',
 ], 'public/assets/user/css/page.css');
 
 mix.scripts([
@@ -49,6 +51,7 @@ mix.scripts([
     'node_modules/waypoints/lib/jquery.waypoints.min.js',
     'node_modules/jquery.counterup/jquery.counterup.min.js',
     'node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
+    'node_modules/toastr/build/toastr.min.js',
     ], 'public/assets/user/js/page.js');
 
 mix.scripts([

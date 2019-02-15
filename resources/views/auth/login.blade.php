@@ -92,7 +92,7 @@
                                     </div>
                                 @endif
                                 <div class="form-group m-form__group">
-                                    {!! Form::text('user_name', '', ['required', 'class' => 'form-control m-input', 'placeholder' => __('admin.user_name'), 'autocomplete' => 'off']) !!}
+                                    {!! Form::text('user_name', old('user_name'), ['required', 'class' => 'form-control m-input', 'placeholder' => __('admin.user_name'), 'autocomplete' => 'on']) !!}
                                 </div>
                                 <div class="form-group m-form__group">
                                     {!! Form::password('password', ['class' => 'form-control m-input m-login__form-input--last', 'placeholder' => __('admin.password'), 'required']) !!}

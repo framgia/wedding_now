@@ -8,9 +8,12 @@
     <meta name="keywords" content="wedding, wedding vendor, wedding vendor directory, HTML template, html theme, wedding html template, wedding html theme, weddlist, weddlist html, weddlist html template">
     <meta name="author" content="udayraj" />
     <meta name="MobileOptimized" content="320" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="images/favicon.ico" rel="icon" type="image/x-icon"/> <!-- favicon -->
 
     @include('layouts.section.style')
+    @routes
+    {{ Html::script('messages.js') }}
 </head>
 <!--body start-->
 <body>
