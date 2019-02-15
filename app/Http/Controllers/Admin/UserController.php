@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Role;
+use App\Models\City;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\CreateUserRequest;
+
 use App\Repositories\User\UserRepository;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -23,7 +30,10 @@ class UserController extends Controller
 
     public function index()
     {
-        return view('admin.user');
+        $roles = Role::pluck('name', 'id');
+        $city = City::pluck('name', 'id');
+
+        return view('admin.user', compact('roles', 'city'));
     }
 
     public function getList()
@@ -47,9 +57,30 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
-        //
+        $user = User::create([
+            'name' => $request->name,
+            'gender' => $request->gender,
+            'user_name' => $request->user_name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'birthday' => $request->birthday,
+            'city' => $request->city,
+            'district' => $request->district,
+            'address' => $request->address,
+            'gender' => $request->gender,
+            'phone' => $request->phone,
+        ]);
+
+        $user->roles()->attach($request->role);
+
+        $user->locations()->create([
+            'district_id' => $request->district,
+            'address' => $request->address,
+        ]);
+
+        return __('admin.success');
     }
 
     /**
@@ -60,7 +91,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = $this->user->findById($id)->load('roles', 'locations.district.city');
+        // $roles = Role::pluck('name', 'id');
+        // $city = City::pluck('name', 'id');
+
+        return $user;
     }
 
     /**

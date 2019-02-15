@@ -53,6 +53,10 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'gender' => 'required',
             'birthday' => 'required',
+            'city' => 'required',
+            'district' => 'required',
+            'address' => 'required',
+            'role' => 'required|not_in:' . config('define.role.admin'),
             'phone' => ['required', 'digits_between:9,11', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'user_name' => ['required', 'string', 'min:6', 'unique:users'],
@@ -76,11 +80,19 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'birthday' => $data['birthday'],
+            'city' => $data['city'],
+            'district' => $data['district'],
+            'address' => $data['address'],
             'gender' => $data['gender'],
             'phone' => $data['phone'],
         ]);
 
         $user->roles()->attach($data['role']);
+
+        $user->locations()->create([
+            'district_id' => $data['district'],
+            'address' => $data['address'],
+        ]);
 
         return $user;
     }

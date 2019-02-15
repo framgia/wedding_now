@@ -134,9 +134,11 @@ return [
         'select' => [
             'city' => '-- Please select city --',
             'district' => '-- Please select district --',
+            'role' => '-- Please select role --',
         ],
         'enter' => [
             'name' => 'Please enter name',
+            'username' => 'Please enter user name',
             'email' => 'Please enter email',
             'phone' => 'Please enter phone',
             'address' => 'Please enter address',

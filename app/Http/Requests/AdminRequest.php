@@ -37,6 +37,7 @@ class AdminRequest extends FormRequest
             'phone' => 'required|digits_between:9,11|unique:users,phone,' . $id,
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
             'password' => 'min:6|max:255|nullable',
+            'user_name' => 'min:6|max:255|required',
             'password_confirmation' => 'same:password',
         ];
     }
@@ -61,7 +62,6 @@ class AdminRequest extends FormRequest
             'email.max' => __('validation.max.numeric'),
             'email.unique' => __('validation.unique'),
             'password.min' => __('validation.min.string'),
-            'password.confirmed' => __('validation.confirmed'),
             'password_confirmation.same' => __('validation.same'),
         ];
     }

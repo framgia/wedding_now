@@ -42,6 +42,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
         Route::get('user', 'UserController@index')->name('admin.user.index');
         Route::get('user-list', 'UserController@getList')->name('admin.user.list');
         Route::get('user-create', 'UserController@gcreate')->name('admin.user.create');
+        Route::post('user-create', 'UserController@store')->name('admin.user.create');
+    });
+
+    Route::get('list-schedule-default', 'Admin\ScheduleController@index')->name('admin.list-schedule-default');
+
+    Route::get('list-schedule-default', 'Admin\ScheduleWeddingController@index')->name('admin.list-schedule-default');
+
+    Route::get('create-schedule-default', 'Admin\ScheduleWeddingController@create')->name('admin.create-schedule-default');
 
         Route::get('schedule-default', 'ScheduleWeddingController@scheduleDefaultIndex')
             ->name('admin.schedule-default.index');
