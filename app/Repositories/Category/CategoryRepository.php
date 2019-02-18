@@ -13,4 +13,15 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
 
         return $categories;
     }
+
+    public function getCategoriesWithCountTasks($scheduleId)
+    {
+        $result = Category::withCount(['tasks' => function ($query) use ($scheduleId) {
+            $query->where('schedule_wedding_id', $scheduleId);
+        }])->with(['tasks' => function ($query) use ($scheduleId) {
+            $query->where('schedule_wedding_id', $scheduleId);
+        }])->get();
+
+        return $result;
+    }
 }

@@ -140,7 +140,7 @@ return [
     'default_schedule' => 'Default Schedule',
     'action_create' => 'Create',
     'choose_category' => 'Choose Category',
-    'choose_item' => 'Choose Items',
+    'choose_item' => 'Choose Item',
     'choose_time_frame' => 'Choose Time Frame',
     'high' => 'High',
     'low' => 'Low',
@@ -159,4 +159,4 @@ return [
         'schedule' => 'Schedule Wedding',
         'default' => 'Schedule Default',
     ],
-];
+]; 

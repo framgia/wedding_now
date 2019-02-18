@@ -14,7 +14,7 @@ class ScheduleWeddingRepository extends BaseRepository implements ScheduleWeddin
 
     public function getScheduleWeddingDefault()
     {
-    	$scheduleWedding = ScheduleWedding::with([
+        $scheduleWedding = ScheduleWedding::with([
             'tasks.category' => function ($query) {
                 $query->get();
             },
@@ -24,5 +24,23 @@ class ScheduleWeddingRepository extends BaseRepository implements ScheduleWeddin
         ])->withCount('tasks')->where('type', '=', config('define.type_schedule.default'))->first();
 
         return $scheduleWedding;
+    }
+
+    public function getScheduleClient($userId, $scheduleId)
+    {
+        if ($userId != null) {
+            $schedules = ScheduleWedding::where([
+                ['schedule_wedding_id', '!=', null],
+                ['user_id', '=', $userId],
+            ])->get();
+
+            return $schedules;
+        }
+        $schedule = ScheduleWedding::where([
+            ['schedule_wedding_id', '!=', null],
+            ['id', '=', $scheduleId],
+        ])->first();
+
+        return $schedule;
     }
 }

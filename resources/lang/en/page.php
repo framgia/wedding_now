@@ -9,6 +9,11 @@ return [
     'page' => [
         'profile' => 'Profile',
         'home' => 'Home',
+        'dashboard' => 'Dashboard',
+        'to_do_list' => 'To Do List',
+        'my_budget' => 'My Budget',
+        'my_wishlist' => 'My Wishlist',
+        'real_wedding' => 'Real Wedding',
     ],
 
     'index' => [
@@ -66,4 +71,47 @@ return [
         'account_already' => 'Already have an account?',
         'sign_in' => 'Sign In',
     ],
+    'question' => [
+        'choose_type_schedule' => 'Which do you want to make your schedule ?',
+    ],
+    'type_chedule' => [
+        'default' => 'Choose Default',
+        'combo' => 'Choose Combo',
+        'custom' => 'Make You Style',
+    ],
+    'choose' => 'Choose',
+    'marrige_day' => 'Marrige Day: ',
+    'task' => [
+        'list' => 'Task List',
+        'number' => 'Task #',
+        'new' => 'New Task',
+    ],
+    'placeholder' => [
+        'title' => 'Enter title',
+        'time_frame' => 'Choose Time Frame',
+        'category' => 'Choose Category',
+        'item' => 'Choose Item',
+        'note' => 'Writing some things',
+        'priority' => 'Choose Priority',
+    ],
+    'priority' => [
+        'high' => 'High',
+        'low' => 'Low',
+    ],
+    'action' => [
+        'cancel' => 'Cancel',
+        'create' => 'Create',
+        'update' => 'Update',
+        'save' => 'Save',
+        'back' => 'Back',
+    ],
+    'filter' => [
+        'by_category' => ' By Category',
+        'all' => 'All',
+    ],
+    'image' => [
+        'custom' => 'Image Custom',
+        'default' => 'Image Default',
+        'combo' => 'Image Combo',
+    ]
 ];

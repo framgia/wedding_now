@@ -17,4 +17,13 @@ return [
         'custom' => 'custom',
         'combo' => 'combo',
     ],
+    'wedding' => [
+        'of' => 'Wedding Of ',
+        'slug' => 'wedding-of-',
+    ],
+    'image' => [
+        'default' => 'storage/wedding/news-update-1.jpg',
+        'custom' => 'storage/wedding/news-update-2.jpg',
+        'combo' => 'storage/wedding/news-update-3.jpg',
+    ],
 ];

@@ -26,11 +26,6 @@ class UserController extends Controller
         $this->userModel = new UserRepository($user);
     }
 
-    public function toDo()
-    {
-        return view('user.to-do-list');
-    }
-
     public function getCities()
     {
         return City::pluck('name', 'id');
