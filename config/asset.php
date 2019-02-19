@@ -32,5 +32,6 @@ return [
             'index' => 'storage/wedding/',
         ],
         'avatar' => 'assets/app/media/img/users/',
-    ]
+    ],
+    'schedule' => 'storage/wedding/schedule/',
 ];

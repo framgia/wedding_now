@@ -54,6 +54,7 @@ mix.styles([
     'resources/client/css/custom.css',
     'node_modules/toastr/build/toastr.min.css',
     'resources/client/css/to-do-list.css',
+    'resources/client/css/schedule-info.css',
 ], 'public/assets/user/css/page.css');
 
 mix.scripts([
