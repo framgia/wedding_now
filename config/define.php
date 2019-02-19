@@ -27,4 +27,5 @@ return [
         'combo' => 'storage/wedding/news-update-3.jpg',
     ],
     'main_schedule' => 'storage/wedding/main-schedule.jpg',
+    'ring_img' => 'storage/wedding/icon_ring.png',
 ];

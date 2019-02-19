@@ -35,4 +35,5 @@ return [
         'avatar' => 'storage/avatar/',
     ],
     'schedule' => 'storage/wedding/schedule/',
+    'schedule_avatar' => 'storage/avatar/',
 ];

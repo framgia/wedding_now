@@ -52,9 +52,12 @@ Route::group(['namespace' => 'User'], function () {
         Route::post('upload-image-schedule', 'ScheduleController@changePicture')->name('client.schedule-upload-image');
 
         Route::post('update-schedule', 'ScheduleController@updateSchedule')->name('client.schedule-update');
+
         Route::get('suggestions', 'ScheduleController@suggestions')->name('user.suggest');
         Route::post('schedule', 'ScheduleController@store')->name('schedule.store');
         Route::get('schedule/{slug}', 'ScheduleController@show')->name('schedule.show');
+
+        Route::get('search-venue/{keyword}', 'LocationController@getDistrict')->name('client.get-district');
     });
 });
 
