@@ -37,7 +37,6 @@ class AdminRequest extends FormRequest
             'phone' => 'required|digits_between:9,11|unique:users,phone,' . $id,
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
             'password' => 'min:6|max:255|nullable',
-            'user_name' => 'min:6|max:255|required',
             'password_confirmation' => 'same:password',
         ];
     }

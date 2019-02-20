@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Entrust;
+
 use App\Models\User;
 use App\Models\Role;
 use App\Models\City;
@@ -33,7 +35,7 @@ class UserController extends Controller
         $roles = Role::pluck('name', 'id');
         $city = City::pluck('name', 'id');
 
-        return view('admin.user', compact('roles', 'city'));
+        return view('admin.user.user', compact('roles', 'city'));
     }
 
     public function getList()
@@ -59,6 +61,10 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
+        if (!Entrust::can('user-create')) {
+            return __('admin.fail');
+        }
+
         $user = User::create([
             'name' => $request->name,
             'gender' => $request->gender,
