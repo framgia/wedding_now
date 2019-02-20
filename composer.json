@@ -15,7 +15,8 @@
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.2.0",
         "mariuzzo/laravel-js-localization": "^1.4",
-        "tightenco/ziggy": "^0.6.9"
+        "tightenco/ziggy": "^0.6.9",
+        "zizaco/entrust": "dev-master"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",

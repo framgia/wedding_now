@@ -43,6 +43,16 @@
                                 <span class="m-menu__link-text">{{ __('admin.account.list') }}</span>
                             </a>
                         </li>
+                        @permission('role-list')
+                        <li class="m-menu__item " aria-haspopup="true" >
+                            <a href="{{ route('role.index') }}" class="m-menu__link ">
+                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                <span></span>
+                                </i>
+                                <span class="m-menu__link-text">{{ __('page.title.role_list') }}</span>
+                            </a>
+                        </li>
+                        @endpermission
                     </ul>
                 </div>
             </li>

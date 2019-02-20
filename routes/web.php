@@ -53,6 +53,20 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
         Route::get('user-create', 'UserController@gcreate')->name('admin.user.create');
         Route::post('user-create', 'UserController@store')->name('admin.user.create');
 
+        Route::group(['prefix' => 'role', 'middleware' => ['role:admin']], function() {
+            Route::resource('role', 'RoleController')->except([
+                'create', 'edit', 'destroy'
+            ]);;
+            Route::get('role-delete/{id}', 'RoleController@destroy')->name('role.destroy');
+            Route::get('role-list', 'RoleController@getRole')->name('role.getRole');
+        });
+
+        Route::get('list-schedule-default', 'ScheduleController@index')->name('admin.list-schedule-default');
+
+        Route::get('list-schedule-default', 'ScheduleWeddingController@index')->name('admin.list-schedule-default');
+
+        Route::get('create-schedule-default', 'ScheduleWeddingController@create')->name('admin.create-schedule-default');
+
         Route::get('schedule-default', 'ScheduleWeddingController@scheduleDefaultIndex')
         ->name('admin.schedule-default.index');
 
@@ -70,5 +84,5 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 
         Route::get('time-frame-pluck', 'ScheduleWeddingController@getTimeFramePluck')
             ->name('admin.time-frame-pluck');
-    });    
+    });
 });

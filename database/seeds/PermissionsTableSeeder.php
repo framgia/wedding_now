@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Permission;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -12,38 +13,41 @@ class PermissionsTableSeeder extends Seeder
      */
     public function run()
     {
-        $actions = [
-            'view',
-            'create',
-            'edit',
-            'delete',
+        $model = [
+            'role',
+            'user',
+            'item',
+            'schedule',
         ];
+        $permission = [];
 
-        $models = [
-            'roles',
-            'users',
-            'admins',
-            'vendors',
-            'categories',
-            'schedule_weddings',
-            'cities',
-            'districts',
-            'items',
-            'tags',
-            'posts',
-        ];
-
-        $permissions = [];
-
-        foreach ($actions as $action) {
-            foreach ($models as $model) {
-                $permissions[] = [
-                    'slug' => $action . '-' . $model,
-                    'description' => ucfirst($action) . ' ' . $model,
-                ];
-            }
+        foreach ($model as $m) {
+            $permission[] = [
+                [
+                    'name' => $m . '-create',
+                    'display_name' => 'Create ' . ucfirst($m),
+                    'description' => 'Create New ' . ucfirst($m),
+                ],
+                [
+                    'name' => $m . '-list',
+                    'display_name' => 'View List ' . ucfirst($m),
+                    'description' => 'View List ' . ucfirst($m),
+                ],
+                [
+                    'name' => $m . '-update',
+                    'display_name' => 'Update ' . ucfirst($m),
+                    'description' => 'Update '. ucfirst($m),
+                ],
+                [
+                    'name' => $m . '-delete',
+                    'display_name' => 'Delete ' . ucfirst($m),
+                    'description' => 'Delete ' . ucfirst($m)
+                ],
+            ];
         }
 
-        DB::table('permissions')->insert($permissions);
+        foreach ($permission as $value) {
+            Permission::insert($value);
+        }
     }
 }
