@@ -78,6 +78,7 @@ return [
     'just_now' => 'Just now',
     'type_here' => 'Type here ...',
     'name' => 'Name',
+    'display_name' => 'Display name',
     'send_messages' => 'Send messages',
     'upload_file' => 'Upload file',
     'useful_links' => 'Useful links',
@@ -85,6 +86,7 @@ return [
     'create' => [
         'post' => 'Create new Post',
         'user' => 'New User',
+        'role' => 'New Role',
     ],
     'report' => [
         'reports' => 'Reports',

@@ -2,6 +2,7 @@
 return [
     'title' => [
         'profile' => 'My Profile',
+        'role_list' => 'Role List',
         'user_list' => 'User List',
         'home' => 'Wedding Now',
     ],

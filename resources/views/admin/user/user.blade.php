@@ -32,6 +32,7 @@
                         </div>
                     </div>
                 </div>
+                @permission('user-create')
                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                     <a href="#" data-toggle="modal" data-target="#m_modal" class="btn btn-accent m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill">
                         <span>
@@ -43,6 +44,7 @@
                     </a>
                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                 </div>
+                @endpermission
             </div>
         </div>
         <!--end: Search Form -->
@@ -222,7 +224,7 @@ jQuery(document).ready(function() {
 
                             var badge = '';
                             e.roles.forEach(function(element) {
-                                badge += '<span class="m-badge ' + a[element.id].class + ' m-badge--wide">' + element.name + '</span>';
+                                badge += '<span class="m-badge ' + a[element.id].class + ' m-badge--wide">' + element.display_name + '</span>';
                             });
 
                             return badge;
