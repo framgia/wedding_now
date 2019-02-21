@@ -167,6 +167,8 @@ return [
          */
         Barryvdh\Debugbar\ServiceProvider::class,
         Tightenco\Ziggy\ZiggyServiceProvider::class,
+        Zizaco\Entrust\EntrustServiceProvider::class,
+        Mariuzzo\LaravelJsLocalization\LaravelJsLocalizationServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -178,9 +180,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-
-        Mariuzzo\LaravelJsLocalization\LaravelJsLocalizationServiceProvider::class,
-
     ],
 
     /*
@@ -231,6 +230,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Form' => Collective\Html\FormFacade::class,
+        'Entrust' => Zizaco\Entrust\EntrustFacade::class,
     ],
 
 ];

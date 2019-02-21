@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Zizaco\Entrust\EntrustPermission;
 
-class Permission extends Model
+class Permission extends EntrustPermission
 {
     protected $table = 'permissions';
 
@@ -15,6 +15,7 @@ class Permission extends Model
 
     public function roles()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Role::class)->withPivot(['role_id', 'permission_id']);
     }
+
 }

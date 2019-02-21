@@ -48,7 +48,7 @@ class UserController extends Controller
         $district = $this->getDistrictsById(count($user->locations) > 0 ? $user->locations[0]->district->city->id : '');
 
         if ($user->roles[0]->id == config('define.role.admin')) {
-            return view('admin.profile', compact('city', 'district', 'user'));
+            return view('admin.user.profile', compact('city', 'district', 'user'));
         }
 
         return view('user.couple-profile', compact('city', 'district', 'user'));
