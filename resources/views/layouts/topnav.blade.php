@@ -7,8 +7,11 @@
             <div class="col-sm-6">
                 <div class="top-detail text-right">
                     <ul>
-                        <li><a href="help.html">Help</a></li>
-                        <li><a href="pricing-plan.html">Pricing</a></li>
+                        @if(isAdmin())
+                            <li>
+                                <a href="{{ route('admin.index') }}">{{ __('page.profile.dashboard') }}</a>
+                            </li>
+                        @endif
                         @auth
                             <li><a href="{{ route('user.profile', Auth::user()->user_name) }}">{{ Auth::user()->name }}</a></li>
                             <li><a href="{{ route('logout') }}">{{ __('admin.logout') }}</a></li>

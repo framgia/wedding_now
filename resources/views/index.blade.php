@@ -17,10 +17,6 @@
     @include('layouts.section.wedding_location')
     <!-- end wedding location -->
 
-    <!-- wedding gallery -->
-    @include('layouts.section.wedding_gallery')
-    <!-- end wedding gallery -->
-
     <!-- feature wedding -->
     @include('layouts.section.feature_wedding')
     <!-- end feature wedding -->
