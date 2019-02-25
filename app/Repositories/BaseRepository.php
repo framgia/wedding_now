@@ -20,9 +20,10 @@ class BaseRepository implements RepositoryInterface
 
     public function getData($with = [], $data = [], $dataSelect = ['*'], $attribute = ['id', 'desc'])
     {
-        return $this->model()
+        return $this->model
             ->select($dataSelect)
             ->with($with)
+            ->where($data)
             ->orderBy($attribute[0], $attribute[1])
             ->get();
     }

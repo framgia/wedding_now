@@ -55,6 +55,7 @@ mix.styles([
     'node_modules/toastr/build/toastr.min.css',
     'resources/client/css/to-do-list.css',
     'resources/client/css/schedule-info.css',
+    'resources/client/css/suggest-page.css',
 ], 'public/assets/user/css/page.css');
 
 mix.scripts([
