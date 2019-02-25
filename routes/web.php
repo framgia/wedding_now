@@ -24,7 +24,7 @@ Route::post('login', 'AdminController@postAdminLogin')->name('login');
 Route::group(['namespace' => 'User'], function () {
     Route::get('get-districts/{id}', 'UserController@getDistrictsById')->name('get.districts');
     Route::group(['middleware' => 'auth'], function () {
-        Route::get('to-do-list', 'ScheduleController@toDo');
+        Route::get('to-do-list', 'ScheduleController@toDo')->name('client.to-do-list');
         Route::get('profile/{username}', 'UserController@userProfile')->name('user.profile');
         Route::put('update', 'UserController@update')->name('user.update');
 
@@ -41,6 +41,16 @@ Route::group(['namespace' => 'User'], function () {
         Route::post('choose-type-schedule', 'ScheduleController@chooseTypeSchedule')->name('client.choose-type-schedule');
 
         Route::put('update-task', 'ScheduleController@updateTask')->name('client.update-task');
+
+        Route::get('category-filter', 'ScheduleController@getCategoryFilter')->name('client.get-filter-category');
+
+        Route::get('schedule-info', 'ScheduleController@scheduleInfoView')->name('client.schedule');
+
+        Route::get('get-schedule-info', 'ScheduleController@getScheduleInfo')->name('client.get-schedule-info');
+
+        Route::post('upload-image-schedule', 'ScheduleController@changePicture')->name('client.schedule-upload-image');
+
+        Route::post('update-schedule', 'ScheduleController@updateSchedule')->name('client.schedule-update');
     });
 });
 

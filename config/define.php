@@ -26,4 +26,5 @@ return [
         'custom' => 'storage/wedding/news-update-2.jpg',
         'combo' => 'storage/wedding/news-update-3.jpg',
     ],
+    'main_schedule' => 'storage/wedding/main-schedule.jpg',
 ];

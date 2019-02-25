@@ -180,6 +180,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+
+        Mariuzzo\LaravelJsLocalization\LaravelJsLocalizationServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
     ],
 
     /*
@@ -231,6 +234,7 @@ return [
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Form' => Collective\Html\FormFacade::class,
         'Entrust' => Zizaco\Entrust\EntrustFacade::class,
+        'Image' =>  Intervention\Image\ImageServiceProvider::class,
     ],
 
 ];

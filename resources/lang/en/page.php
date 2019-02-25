@@ -94,6 +94,9 @@ return [
         'item' => 'Choose Item',
         'note' => 'Writing some things',
         'priority' => 'Choose Priority',
+        'your_name' => 'Enter Your Name',
+        'partner_name' => 'Enter Partner Name',
+        'venue' => 'Enter Venue'
     ],
     'priority' => [
         'high' => 'High',
@@ -105,6 +108,7 @@ return [
         'update' => 'Update',
         'save' => 'Save',
         'back' => 'Back',
+        'edit' => 'Edit'
     ],
     'filter' => [
         'by_category' => ' By Category',
@@ -114,5 +118,18 @@ return [
         'custom' => 'Image Custom',
         'default' => 'Image Default',
         'combo' => 'Image Combo',
+    ],
+    'undefine' => 'Undefine',
+    'my_wedding' => 'My Wedding',
+    'change_photo' => 'Change Photo',
+    'i_am' => 'I Am',
+    'partner_name' => 'Partner\'s Name',
+    'partner_identity' => 'My Partner Is',
+    'groom' => 'Groom',
+    'bride' => 'Bride',
+    'wedding_date' => 'Wedding Date',
+    'venue' => 'Venue',
+    'message' => [
+        'fail' => 'Something wrong, please try again',
     ]
 ];
