@@ -124,7 +124,7 @@ class ScheduleController extends Controller
         ]);
 
         return response()->json([
-            'message' => trans('admin.success'),
+            'message' => trans('base.success'),
         ]);
     }
 
@@ -133,7 +133,7 @@ class ScheduleController extends Controller
         $this->task->destroy($id);
 
         return response()->json([
-            'message' => trans('admin.success'),
+            'message' => trans('base.success'),
         ]);
     }
 
@@ -224,7 +224,7 @@ class ScheduleController extends Controller
         Session::forget('schedule_id');
         Session::put('schedule_id', $schedule->id);
 
-        return redirect('to-do-list')->with('success', trans('admin.success'));
+        return redirect('to-do-list')->with('success', trans('base.success'));
     }
 
 }

@@ -30,6 +30,7 @@ mix.webpackConfig({
 mix.copyDirectory('resources/client/revolution', 'public/assets/user/revolution');
 mix.copyDirectory('resources/client/js', 'public/assets/user/js');
 mix.styles('resources/assets/customs/admin_custom.css', 'public/css/app.css');
+mix.styles('resources/assets/customs/css/login.css', 'public/css/login.css');
 mix.copyDirectory('resources/assets/customs/admin.css', 'public/css/admin/admin.css');
 
 mix.copyDirectory('resources/assets', 'public/assets');
@@ -73,3 +74,7 @@ mix.scripts([
 mix.scripts([
     'resources/assets/customs/admin.js',
     ], 'public/js/app_admin.js');
+
+mix.scripts('resources/assets/customs/js/admin/role/index.js', 'public/js/admin/role/index.js');
+mix.scripts('resources/assets/customs/js/admin/user/profile.js', 'public/js/admin/user/profile.js');
+mix.scripts('resources/assets/customs/js/admin/user/user.js', 'public/js/admin/user/user.js');

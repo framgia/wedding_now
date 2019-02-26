@@ -26,7 +26,7 @@
         <!--begin::Base Styles -->
         <link href="{{ asset(config('asset.vendors_base') . 'vendors.bundle.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset(config('asset.default_base') . 'style.bundle.css') }}" rel="stylesheet" type="text/css" />
-
+        <link href="{{ asset('css/login.css') }}" rel="stylesheet" type="text/css" />
         <!--end::Base Styles -->
     </head>
     <!-- end::Head -->
@@ -169,16 +169,16 @@
                                     {!! Form::password('password', ['required', 'class' => 'form-control m-input', 'placeholder' => __('base.password')]) !!}
                                 </div>
                                 <div class="form-group m-form__group">
-                                    {!! Form::password('password_confirmation', ['required', 'class' => 'form-control m-input m-login__form-input--last', 'placeholder' => __('base.password_confirmation')]) !!}
+                                    {!! Form::password('password_confirmation', ['required', 'class' => 'form-control m-input', 'placeholder' => __('base.password_confirmation')]) !!}
                                 </div>
                                 <div class="form-group m-form__group">
-                                    {!! Form::select('role', $roles, null, ['required', 'placeholder' => __('validation.custom.select.role')]) !!}
+                                    {!! Form::select('role', $roles, null, ['required', 'class' => 'form-control m-input', 'placeholder' => __('validation.custom.select.role')]) !!}
                                 </div>
                                 <div class="form-group m-form__group">
-                                    {!! Form::select('city', $city, $city[1], ['id' => 'city', 'required', 'placeholder' => __('validation.custom.select.city')]) !!}
+                                    {!! Form::select('city', $city, $city[1], ['id' => 'city', 'required', 'class' => 'form-control', 'placeholder' => __('validation.custom.select.city')]) !!}
                                 </div>
                                 <div class="form-group m-form__group">
-                                    {!! Form::select('district', ['' => __('validation.custom.select.district')], null,['id' => 'district', 'required']) !!}
+                                    {!! Form::select('district', ['' => __('validation.custom.select.district')], null, ['id' => 'district', 'required', 'class' => 'form-control m-input']) !!}
                                 </div>
                                 <div class="form-group m-form__group">
                                     {!! Form::text('address', '', ['required', 'class' => 'form-control m-input', 'placeholder' => __('base.address')]) !!}

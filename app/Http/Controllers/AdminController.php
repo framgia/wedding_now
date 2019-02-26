@@ -61,6 +61,6 @@ class AdminController extends Controller
                 return redirect('/');
         }
 
-        return back()->withErrors(['message' => __('admin.fail_login')]);
+        return back()->withErrors(['message' => __('base.fail_login')]);
     }
 }

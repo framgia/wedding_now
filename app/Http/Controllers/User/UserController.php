@@ -94,6 +94,6 @@ class UserController extends Controller
             }
         });
 
-        return ['message' => __('admin.success')];
+        return ['message' => __('base.success')];
     }
 }
