@@ -64,6 +64,7 @@
 .dash-ul-li-img {
     height: 120px;
     border-radius: 60px;
+    width: 120px;
 }
 
 .dash-couple-name {
@@ -311,4 +312,63 @@
 
 .d-none {
     display: none !important;
+}
+
+.search-venue {
+    border: 1px solid #dadada;
+    width: 130%;
+    height: 130px;
+    position: absolute;
+    z-index: 10;
+    background-color: white;
+    border-radius: 3px;
+    top: 430px;
+    display: none;
+}
+
+.search-venue:after {
+    content: " ";
+    position: absolute;
+    left: 25px;
+    top: -15px;
+    border: 1px #dadada solid;
+    border-top: none;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    border-bottom: 15px solid lightgray;
+}
+
+.box-search {
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 110px;
+    margin: 10px;
+}
+
+.list-venue {
+    width: 97%;
+    margin: auto;
+}
+
+.list-venue li {
+    height: 33px;
+    border-bottom: 1px solid #dadada;
+    padding: 6px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.list-venue li p {
+    font-family: monospace;
+    font-weight: 500;
+    font-size: 14px;
+    color: #93929A;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.list-venue li:hover p{
+    font-size: 15px;
+    color: #66656F;
 }

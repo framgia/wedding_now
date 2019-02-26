@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    {{ __('To Do List') }}
+    {{ __('Schedule Info') }}
 @endsection
 
 @section('page-name')
@@ -35,9 +35,9 @@
                         <div class="dash-couple">
                             <ul class="dash-ul-list">
                                 <li class="dash-ul-li z-index-5">
-                                    <img src="{{ asset(config('asset.users.avatar') . 'user_default.png') }}" class="dash-ul-li-img dash-ul-li-img-left">
+                                    <img src="{{ asset(config('asset.users.avatar') . 'user_default.png') }}" class="dash-ul-li-img dash-ul-li-img-left" data-path="{{ config('asset.schedule_avatar') }}">
                                 </li>
-                                <li  class="dash-ul-li dash-left-20">
+                                <li class="dash-ul-li dash-left-20">
                                     <img src="{{ asset(config('asset.users.avatar') . 'user_default.png') }}" class="dash-ul-li-img dash-ul-li-img-right">
                                 </li>
                             </ul>
@@ -96,11 +96,11 @@
                 </div>
                 <div class="modal-body">
                     <div class="img-model">
-                        {!! Form::open(['id' => 'scheduleInfo']) !!}
+                        {!! Form::open(['id' => 'scheduleInfo', 'file' => true]) !!}
                             <ul class="dash-ul-list width-100">
                                 <li class="dash-ul-li model-ul-li couple-left">
-                                    <img src="{{ asset(config('asset.users.avatar') . 'user_default.png') }}" class="dash-ul-li-img avatar-left">
-                                    <input type="file" class="avatar-left-input d-none" name="my_avatar">
+                                    <img src="{{ asset(config('define.default_avatar')) }}" class="dash-ul-li-img avatar-left" data-path="{{ config('asset.schedule_avatar') }}">
+                                    {!! Form::file('my_avatar', ['class' => 'avatar-left-input d-none']) !!}
                                     <div class="info-couple">
                                         <span class="title-couple">{{ __('page.i_am') }}</span>
                                         <div class="title-coupe-input">
@@ -110,7 +110,7 @@
                                         <div class="gender-left">
                                             <span class="gender-left-span gender-left-span-left rdoGenderLeft" data-value="groom">{{ __('page.groom') }}</span>
                                             <span class="gender-left-span gender-left-span-right rdoGenderLeft" data-value="bride">{{ __('page.bride') }}</span>
-                                            {!! Form::hidden('my_gender', null, ['class' => 'gender_left_value']) !!}
+                                            {!! Form::hidden('my_identity', null, ['class' => 'gender_left_value']) !!}
                                         </div>
                                     </div>
                                     <div class="info-couple">
@@ -121,11 +121,11 @@
                                     </div>
                                 </li>
                                 <li class="dash-ul-li model-ul-li-20">
-                                    <img src="storage/wedding/icon_ring.png" class="icon-ring">
+                                    <img src="{{ config('define.ring_img') }}" class="icon-ring">
                                 </li>
                                 <li class="dash-ul-li model-ul-li couple-right">
-                                    <img src="{{ asset(config('asset.users.avatar') . 'user_default.png') }}" class="dash-ul-li-img avatar-right">
-                                    <input type="file" class="avatar-right-input d-none" name="partner_avatar">
+                                    <img src="{{ asset(config('define.default_avatar')) }}" class="dash-ul-li-img avatar-right" data-path="{{ config('asset.schedule_avatar') }}">
+                                    {!! Form::file('partner_avatar', ['class' => 'avatar-right-input d-none']) !!}
                                     <div class="info-couple">
                                         <span class="title-couple">{{ __('page.partner_name') }}</span>
                                         <div class="title-coupe-input">
@@ -135,13 +135,20 @@
                                         <div class="gender-left">
                                             <span class="gender-left-span gender-left-span-left rdoGenderRight" data-value="groom">{{ __('page.groom') }}</span>
                                             <span class="gender-left-span gender-left-span-right rdoGenderRight" data-value="bride">{{ __('page.bride') }}</span>
-                                            {!! Form::hidden('partner_gender', null, ['class' => 'gender_right_value']) !!}
+                                            {!! Form::hidden('partner_identity', null, ['class' => 'gender_right_value']) !!}
                                         </div>
                                     </div>
                                     <div class="info-couple">
                                         <span class="title-couple">{{ __('page.venue') }}</span>
                                         <div class="title-coupe-input">
                                             {!! Form::text('venue', null, ['id' => 'txtVenue', 'class' => 'input-couple', 'placeholder' => __('page.placeholder.venue')]) !!}
+                                            {!! Form::hidden('district', null, ['id' => 'district']) !!}
+                                        </div>
+                                        <div class="search-venue">
+                                            <div class="box-search">
+                                                <ul class="list-venue">
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </li>
@@ -154,7 +161,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 @endsection
 
@@ -200,9 +206,8 @@
                 return object;
             }
 
-            function presentScheduleInfoPage(object)
-            {
-                let my_name = null;
+            function presentScheduleInfoPage(object) {
+                let my_name = object.user.name;
 
                 let my_avatar = null;
 
@@ -223,9 +228,15 @@
                     partner_avatar = object.schedule_metas_pluck[5].value;
                 }
 
-                $('.dash-ul-li-img-left').attr('src', my_avatar);
+                let base_path = $('.dash-ul-li-img-left').attr('data-path');
 
-                $('.dash-ul-li-img-right').attr('src', partner_avatar);
+                if (my_avatar != null) {
+                    $('.dash-ul-li-img-left').attr('src', base_path + my_avatar);
+                }
+
+                if (partner_avatar != null) {
+                    $('.dash-ul-li-img-right').attr('src', base_path + partner_avatar);
+                }
 
                 $('.dash-couple-name-span1').text(my_name);
 
@@ -243,7 +254,7 @@
 
             function presentScheduleInfoModal(object) {
 
-                let my_name = null;
+                let my_name = object.user.name;
 
                 let my_avatar = null;
 
@@ -251,9 +262,11 @@
 
                 let partner_avatar = null;
 
-                let my_identity = null;
+                let my_identity = object.user.gender === 'male' ? 'groom' : 'female';
 
                 let partner_identity = null;
+
+                let address = object.location != null ? object.location.address : null;
 
                 $('#dateWedding').val(object.marriage_day);
 
@@ -270,6 +283,18 @@
                     partner_identity = object.schedule_metas_pluck[4].value;
 
                     partner_avatar = object.schedule_metas_pluck[5].value;
+
+                    let path = $('.avatar-left').attr('data-path');
+
+                    if(my_avatar != null) {
+                     
+                        $('.avatar-left').attr('src', path + my_avatar);
+                    }
+
+                    if(partner_avatar != null) {
+                    
+                        $('.avatar-right').attr('src', path + partner_avatar);
+                    }
                 }
 
                 $('#txtNameLeft').val(my_name);
@@ -280,27 +305,27 @@
 
                     $('.rdoGenderLeft:eq(0)').addClass('gender-left-active');
 
-                    $('.gender_left_value').val('male');
+                    $('.gender_left_value').val('groom');
                 } else {
 
                     $('.rdoGenderLeft:eq(1)').addClass('gender-left-active');
 
-                    $('.gender_left_value').val('female');
+                    $('.gender_left_value').val('bride');
                 }
 
                 if (partner_identity == 'groom') {
 
                     $('.rdoGenderRight:eq(0)').addClass('gender-left-active');
 
-                    $('.gender_right_value').val('male');
+                    $('.gender_right_value').val('groom');
                 } else {
 
                     $('.rdoGenderRight:eq(1)').addClass('gender-left-active');
 
-                    $('.gender_right_value').val('female');
+                    $('.gender_right_value').val('bride');
                 }
 
-                $('#txtVenue').val(object.location.address);
+                $('#txtVenue').val(address);
             }
 
             $('.dash-btn-change-photo').click(function(event) {
@@ -370,7 +395,12 @@
                     data: new FormData($('form#scheduleInfo')[0]),
                 })
                 .done(function(res) {
-                   console.log(res);
+
+                   toastr.success(res.message);
+
+                   $('#myModal').modal('hide');
+
+                   presentScheduleInfoPage(getScheduleInfo());
                 })
                 .fail(function(xhr, status, error) {
 
@@ -392,11 +422,92 @@
                $('.avatar-left-input').click();
             });
 
-            $('.avatar-right').click(function(event) {
+            $('.avatar-left-input').change(function () {
 
+                if (this.files && this.files[0]) {
+
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+
+                        $('.avatar-left').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+
+            $('.avatar-right').click(function(event) {
+                
                event.preventDefault();
 
                $('.avatar-right-input').click();
+            });
+
+            $('.avatar-right-input').change(function () {
+
+                if (this.files && this.files[0]) {
+
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+
+                        $('.avatar-right').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+
+            $('#txtVenue').keyup(function(event) {
+
+                event.preventDefault();
+
+                let keyword = $(this).val();
+
+                if(keyword != '') {
+                    $.ajax({
+                        async: false,
+                        url: route('client.get-district', { keyword: keyword }),
+                        type: 'GET',
+                    })
+                    .done(function(res) {
+
+                        let html = '';
+
+                        res.forEach(function (element) {
+
+                            let li = '<li><p data-id=' + element.id + '>' + element.name + ', ' + element.city.name + '</p></li>';
+                            html += li;
+                        });
+
+                        $('.list-venue').html(html);
+
+                        if (res.length) {
+
+                            $('.search-venue').show();
+                        }
+                    })
+                    .fail(function() {
+                        
+                        $('.search-venue').hide();
+                    }) 
+
+                    $('.list-venue p').click(function(event) {
+
+                        event.preventDefault();
+
+                        $('#txtVenue').val($(this).text());
+
+                        $('.search-venue').hide();
+
+                        $('#district').val($(this).attr('data-id'));
+                    })
+                }
+                else {
+
+                    $('.search-venue').hide();
+                }
             });
         });
     </script>
