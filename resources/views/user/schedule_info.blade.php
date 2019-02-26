@@ -142,6 +142,7 @@
                                         <span class="title-couple">{{ __('page.venue') }}</span>
                                         <div class="title-coupe-input">
                                             {!! Form::text('venue', null, ['id' => 'txtVenue', 'class' => 'input-couple', 'placeholder' => __('page.placeholder.venue')]) !!}
+                                            <i class="fa fa-spinner fa-pulse fa-3x fa-fw  spin-custom d-none"></i>
                                             {!! Form::hidden('district', null, ['id' => 'district']) !!}
                                         </div>
                                         <div class="search-venue">
@@ -470,6 +471,9 @@
                         async: false,
                         url: route('client.get-district', { keyword: keyword }),
                         type: 'GET',
+                        beforeSend: function() {
+                            $('.spin-custom').removeClass('d-none');
+                        }   
                     })
                     .done(function(res) {
 
@@ -483,10 +487,17 @@
 
                         $('.list-venue').html(html);
 
-                        if (res.length) {
+                        if (res.length != 0) {
 
                             $('.search-venue').show();
+                        } else {
+
+                            $('.search-venue').hide();
                         }
+
+                        setTimeout(function() {
+                            $('.spin-custom').addClass('d-none');
+                        }, 300);
                     })
                     .fail(function() {
                         

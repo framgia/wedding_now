@@ -66,4 +66,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->morphOne(Media::class, 'mediaable');
     }
+
+    public function scheduleWeddings()
+    {
+        return $this->hasMany(ScheduleWedding::class);
+    }
 }
