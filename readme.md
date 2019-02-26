@@ -1,5 +1,5 @@
-## Package Laravel
+<b>## Package Laravel</b>
 
-https://github.com/Zizaco/entrust
-https://github.com/rmariuzzo/Lang.js/
-https://github.com/Intervention/image
+<p>https://github.com/Zizaco/entrust</p>
+<p>https://github.com/rmariuzzo/Lang.js/</p>
+<p>https://github.com/Intervention/image</p>

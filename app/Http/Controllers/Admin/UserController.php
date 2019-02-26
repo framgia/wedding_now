@@ -62,7 +62,7 @@ class UserController extends Controller
     public function store(CreateUserRequest $request)
     {
         if (!Entrust::can('user-create')) {
-            return __('admin.fail');
+            return __('base.error');
         }
 
         $user = User::create([
@@ -86,7 +86,7 @@ class UserController extends Controller
             'address' => $request->address,
         ]);
 
-        return __('admin.success');
+        return __('base.success');
     }
 
     /**

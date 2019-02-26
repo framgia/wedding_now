@@ -68,7 +68,7 @@ class RoleController extends Controller
 
         $role->attachPermission($permission);
 
-        return __('admin.success');
+        return __('base.success');
     }
 
     /**
@@ -106,7 +106,7 @@ class RoleController extends Controller
         $role->perms()->detach($role->permissions);
         $role->attachPermission($permission);
 
-        return __('admin.success');
+        return __('base.success');
     }
 
     /**
@@ -123,9 +123,9 @@ class RoleController extends Controller
             $role->delete();
             $role->users()->sync([]);
 
-            return __('admin.success');
+            return __('base.success');
         } catch (Exception $e) {
-            return __('admin.fail');
+            return __('base.error');
         }
     }
 }

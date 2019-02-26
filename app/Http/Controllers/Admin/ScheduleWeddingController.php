@@ -163,7 +163,7 @@ class ScheduleWeddingController extends Controller
         });
 
         return response()->json([
-            'message' => trans('admin.success'),
+            'message' => trans('base.success'),
         ]);
     }
 
@@ -185,7 +185,7 @@ class ScheduleWeddingController extends Controller
         });
 
         return response()->json([
-            'message' => trans('admin.success'),
+            'message' => trans('base.success'),
         ]);
     }
 
@@ -241,7 +241,7 @@ class ScheduleWeddingController extends Controller
         });
 
         return response()->json([
-            'message' => trans('admin.success'),
+            'message' => trans('base.success'),
         ]);
     }
 

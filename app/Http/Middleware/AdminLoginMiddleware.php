@@ -26,6 +26,6 @@ class AdminLoginMiddleware
             return redirect('/');
         }
 
-        return redirect('login')->withErrors(['message' => __('admin.fail_login')]);
+        return redirect('login')->withErrors(['message' => __('base.fail_login')]);
     }
 }
