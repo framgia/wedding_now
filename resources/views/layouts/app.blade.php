@@ -10,7 +10,7 @@
     <meta name="author" content="udayraj" />
     <meta name="MobileOptimized" content="320" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link href="images/favicon.ico" rel="icon" type="image/x-icon"/> <!-- favicon -->
+    <link href="{{ asset(config('asset.users.images.index') . 'favicon.ico') }}" rel="icon" type="image/x-icon"/> <!-- favicon -->
 
     @include('layouts.section.style')
     @routes

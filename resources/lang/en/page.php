@@ -5,6 +5,8 @@ return [
         'role_list' => 'Role List',
         'user_list' => 'User List',
         'home' => 'Wedding Now',
+        'planning_package' => 'Planning Package',
+        'planning_suggestions' => 'Suggestions for you',
     ],
 
     'page' => [
@@ -15,6 +17,8 @@ return [
         'my_budget' => 'My Budget',
         'my_wishlist' => 'My Wishlist',
         'real_wedding' => 'Real Wedding',
+        'planning_package' => 'Planning Package',
+        'planning_suggestions' => 'Suggestions for you',
     ],
 
     'index' => [
@@ -29,6 +33,15 @@ return [
         'text_supplier' => 'Sed ut perspiciatis unde omnis iste na voluptatem accusantium doloremque laudantium',
         'weddingse' => '100 Real Weddingse',
         'perfect' => 'Perfect Checklist',
+        'planning' => 'Start Planning Your Wedding',
+        'choose_planning' => 'Please choose one of the plannings we have provided below',
+        'planning_default' => 'Planning default',
+        'planning_package' => 'Package planning ',
+        'planning_suggest' => 'Suggestions for you',
+        'view_details' => 'View Details',
+        'detail_planning_default' => 'Create your planning by default',
+        'detail_planning_package' => 'Create your planning by package',
+        'detail_planning_suggest' => 'Suggestions for you based on budget',
     ],
 
     'profile' => [
@@ -96,7 +109,8 @@ return [
         'priority' => 'Choose Priority',
         'your_name' => 'Enter Your Name',
         'partner_name' => 'Enter Partner Name',
-        'venue' => 'Enter Venue'
+        'venue' => 'Enter Venue',
+        'category' => 'Enter new category name',
     ],
     'priority' => [
         'high' => 'High',
@@ -119,6 +133,7 @@ return [
         'default' => 'Image Default',
         'combo' => 'Image Combo',
     ],
+
     'undefine' => 'Undefine',
     'my_wedding' => 'My Wedding',
     'change_photo' => 'Change Photo',
@@ -131,5 +146,16 @@ return [
     'venue' => 'Venue',
     'message' => [
         'fail' => 'Something wrong, please try again',
-    ]
+    ],
+    'suggest' => [
+        'new_category' => 'New category',
+        'budget' => 'Budget',
+        'estimated' => 'Estimated cost',
+        'remove' => 'Remove',
+        'note' => 'Note',
+        'save' => 'Save',
+        'schedule_of' => 'Schedule Wedding Of ',
+        'schedule_name' => 'Schedule name',
+        'edit_title' => 'Click here to edit title',
+    ],
 ];

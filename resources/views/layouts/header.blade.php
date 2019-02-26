@@ -3,7 +3,9 @@
         <div class="row">
             <div class="col-md-2 col-sm-3">
                 <div class="wedding-logo">
-                    <a href="index.html"><img src="storage/wedding/logo.png" class="img-responsive" alt="logo"></a>
+                    <a href="/">
+                        <img src="{{ asset(config('asset.users.images.logo') . 'logo.png') }}" class="img-responsive" alt="logo">
+                    </a>
                 </div>
             </div>
             <div class="col-md-10 col-sm-9">
