@@ -17,6 +17,8 @@ class Task extends Model
         'time_occurs',
         'time_frame_id',
         'schedule_wedding_id',
+        'price',
+        'percent',
     ];
 
     public function location()

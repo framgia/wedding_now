@@ -23,6 +23,7 @@ Route::post('login', 'AdminController@postAdminLogin')->name('login');
 
 Route::group(['namespace' => 'User'], function () {
     Route::get('get-districts/{id}', 'UserController@getDistrictsById')->name('get.districts');
+    Route::get('planning-package', 'ScheduleController@planningPackage')->name('planning-package');
     Route::group(['middleware' => 'auth'], function () {
         Route::get('to-do-list', 'ScheduleController@toDo')->name('client.to-do-list');
         Route::get('profile/{username}', 'UserController@userProfile')->name('user.profile');
@@ -51,6 +52,9 @@ Route::group(['namespace' => 'User'], function () {
         Route::post('upload-image-schedule', 'ScheduleController@changePicture')->name('client.schedule-upload-image');
 
         Route::post('update-schedule', 'ScheduleController@updateSchedule')->name('client.schedule-update');
+        Route::get('suggestions', 'ScheduleController@suggestions')->name('user.suggest');
+        Route::post('schedule', 'ScheduleController@store')->name('schedule.store');
+        Route::get('schedule/{slug}', 'ScheduleController@show')->name('schedule.show');
     });
 });
 

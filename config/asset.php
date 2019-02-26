@@ -30,6 +30,7 @@ return [
         'js' => 'assets/user/js/',
         'images' => [
             'index' => 'storage/wedding/',
+            'logo' => 'storage/wedding/'
         ],
         'avatar' => 'assets/app/media/img/users/',
     ],

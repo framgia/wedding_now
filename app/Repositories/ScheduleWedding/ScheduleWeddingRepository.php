@@ -4,6 +4,7 @@ namespace App\Repositories\ScheduleWedding;
 
 use App\Models\ScheduleWedding;
 use App\Repositories\BaseRepository;
+use Auth;
 
 class ScheduleWeddingRepository extends BaseRepository implements ScheduleWeddingRepositoryInterface
 {
@@ -42,5 +43,14 @@ class ScheduleWeddingRepository extends BaseRepository implements ScheduleWeddin
         ])->first();
 
         return $schedule;
+    }
+
+    public function store($data)
+    {
+        $data['user_id'] = Auth::id();
+        $data['type'] = config('define.type_schedule.custom');
+        $data['slug'] = str_slug($data['name']);
+
+        return $this->model->create($data);
     }
 }

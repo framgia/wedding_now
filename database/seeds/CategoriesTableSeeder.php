@@ -14,24 +14,39 @@ class CategoriesTableSeeder extends Seeder
     {
         $categories = [
             [
-                'name' => 'Dress and Attire',
-                'slug' => 'dress-and-attire',
+                'name' => 'Địa điểm',
+                'slug' => 'dia-diem',
             ], [
-                'name' => 'Ceremony Music',
-                'slug' => 'ceremony-music',
+                'name' => 'Phục vụ',
+                'slug' => 'phuc-vu',
             ], [
-                'name' => 'Catering',
-                'slug' => 'catering',
+                'name' => 'Nhiếp ảnh',
+                'slug' => 'nhiep-anh',
             ], [
-                'name' => 'Cake',
-                'slug' => 'cake',
+                'name' => 'Hoa',
+                'slug' => 'hoa',
             ], [
-                'name' => 'Beauty and Health',
-                'slug' => 'beauty-and-health',
+                'name' => 'Bánh',
+                'slug' => 'banh',
+            ],[
+                'name' => 'Trang phục',
+                'slug' => 'trang-phuc',
             ], [
-                'name' => 'Favors and Gifts',
-                'slug' => 'favors-and-gifts',
-            ],
+                'name' => 'DJ',
+                'slug' => 'dj',
+            ], [
+                'name' => 'Quay phim',
+                'slug' => 'quay-phim',
+            ], [
+                'name' => 'Nhạc',
+                'slug' => 'nhac',
+            ], [
+                'name' => 'Trang điểm',
+                'slug' => 'trang-diem',
+            ], [
+                'name' => 'Khác',
+                'slug' => 'khac',
+            ]
         ];
 
         DB::table('categories')->insert($categories);

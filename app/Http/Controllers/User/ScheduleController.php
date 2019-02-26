@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\Client\ScheduleRequest;
 
 class ScheduleController extends Controller
 {
@@ -188,4 +189,42 @@ class ScheduleController extends Controller
             });
         }
     }
+
+    public function planningPackage()
+    {
+        // return view('user.planning-package');
+    }
+
+    public function suggestions()
+    {
+        $scheduleWedding = $this->scheduleWedding->getData(['tasks.timeFrame'], ['user_id' => Auth::id(), 'type' => 'client']);
+
+        if (count($scheduleWedding) == 0) {
+            $scheduleWedding = $this->scheduleWedding->getData(['tasks.timeFrame'], ['type' => 'suggest'])->first();
+        }
+
+        return view('user.planning-suggest', compact('scheduleWedding'));
+    }
+
+    public function store(ScheduleRequest $request)
+    {
+        $schedule = $this->scheduleWedding->store($request->all());
+        foreach ($request->task_name as $key => $taskName) {
+            $data = [
+                'name' => $taskName,
+                'priority' => 1,
+                'category_id' => $request->category[$key],
+                'time_frame_id' => 1,
+                'schedule_wedding_id' => $schedule->id,
+                'price' => (int)($request->price[$key]),
+                'note' => $request->task_note[$key]
+            ];
+            $this->task->create($data);
+        };
+        Session::forget('schedule_id');
+        Session::put('schedule_id', $schedule->id);
+
+        return redirect('to-do-list')->with('success', trans('admin.success'));
+    }
+
 }
