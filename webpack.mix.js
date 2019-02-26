@@ -78,3 +78,4 @@ mix.scripts([
 mix.scripts('resources/assets/customs/js/admin/role/index.js', 'public/js/admin/role/index.js');
 mix.scripts('resources/assets/customs/js/admin/user/profile.js', 'public/js/admin/user/profile.js');
 mix.scripts('resources/assets/customs/js/admin/user/user.js', 'public/js/admin/user/user.js');
+mix.scripts('resources/assets/customs/js/login.js', 'public/js/login.js');
