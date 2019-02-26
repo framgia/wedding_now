@@ -13,14 +13,14 @@
                                 <ul class="m-nav">
                                     <li class="m-nav__section m-nav__section--first">
                                         <span class="m-nav__section-text">
-                                            {{ __('admin.quick_actions') }}
+                                            {{ __('base.quick_actions') }}
                                         </span>
                                     </li>
                                     <li class="m-nav__item">
                                         <a href="" class="m-nav__link">
                                             <i class="m-nav__link-icon flaticon-share"></i>
                                             <span class="m-nav__link-text">
-                                                {{ __('admin.create.post') }}
+                                                {{ __('base.create') . ' ' . __('base.post') }}
                                             </span>
                                         </a>
                                     </li>
@@ -28,7 +28,7 @@
                                         <a href="" class="m-nav__link">
                                             <i class="m-nav__link-icon flaticon-chat-1"></i>
                                             <span class="m-nav__link-text">
-                                                {{ __('admin.send_messages') }}
+                                                {{ __('base.send_messages') }}
                                             </span>
                                         </a>
                                     </li>
@@ -36,7 +36,7 @@
                                         <a href="" class="m-nav__link">
                                             <i class="m-nav__link-icon flaticon-multimedia-2"></i>
                                             <span class="m-nav__link-text">
-                                                {{ __('admin.upload_file') }}
+                                                {{ __('base.upload_file') }}
                                             </span>
                                         </a>
                                     </li>
@@ -49,7 +49,7 @@
                                         <a href="" class="m-nav__link">
                                             <i class="m-nav__link-icon flaticon-info"></i>
                                             <span class="m-nav__link-text">
-                                                {{ __('admin.faq') }}
+                                                {{ __('base.faq') }}
                                             </span>
                                         </a>
                                     </li>
@@ -57,7 +57,7 @@
                                         <a href="" class="m-nav__link">
                                             <i class="m-nav__link-icon flaticon-lifebuoy"></i>
                                             <span class="m-nav__link-text">
-                                                {{ __('admin.support') }}
+                                                {{ __('base.support') }}
                                             </span>
                                         </a>
                                     </li>

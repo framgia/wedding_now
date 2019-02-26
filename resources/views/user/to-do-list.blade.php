@@ -124,7 +124,7 @@
                 .fail(function() {
                     toastr.error( Lang.get('page.message.fail') );
                 })
-            } 
+            }
 
             function loadToDoList(category_id) {
                 $.ajax({
@@ -286,7 +286,7 @@
                 })
                 .done(function(res) {
 
-                    let html = '<option hidden value="">' + Lang.get('admin.choose_item') + '</option>';
+                    let html = '<option hidden value="">' + Lang.get('base.choose') + ' ' + Lang.get('base.item') + '</option>';
 
                     res.forEach(function(element, index) {
 

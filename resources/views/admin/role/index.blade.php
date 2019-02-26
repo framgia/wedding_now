@@ -22,7 +22,7 @@
                     <div class="form-group m-form__group row align-items-center">
                         <div class="col-md-4">
                             <div class="m-input-icon m-input-icon--left">
-                                <input type="text" class="form-control m-input m-input--solid" placeholder="{{ __('admin.search') }}" id="generalSearch">
+                                <input type="text" class="form-control m-input m-input--solid" placeholder="{{ __('base.placeholder.search') }}" id="generalSearch">
                                 <span class="m-input-icon__icon m-input-icon__icon--left">
                                     <span>
                                         <i class="la la-search"></i>
@@ -37,7 +37,7 @@
                         <span>
                             <i class="la la-plus"></i>
                             <span>
-                                {{ __('admin.create.role') }}
+                                {{ __('base.create') . ' ' . __('base.role') }}
                             </span>
                         </span>
                     </a>
@@ -59,7 +59,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
-                    {{ __('admin.create.user') }}
+                    {{ __('base.create') . ' ' . __('base.user') }}
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">
@@ -74,16 +74,16 @@
                 <div class="m-portlet__body">
                     <div class="form-group m-form__group row">
                         <div class="col-lg-4">
-                            {!! Form::label('name', __('admin.name')) !!}
-                            {!! Form::text('name', '', ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('admin.name') . ' ...']) !!}
+                            {!! Form::label('name', __('base.name')) !!}
+                            {!! Form::text('name', '', ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('base.name') . ' ...']) !!}
                         </div>
                         <div class="col-lg-4">
-                            {!! Form::label('display_name', __('admin.display_name')) !!}
-                            {!! Form::text('display_name', '', ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('admin.display_name') . ' ...']) !!}
+                            {!! Form::label('display_name', __('base.display_name')) !!}
+                            {!! Form::text('display_name', '', ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('base.display_name') . ' ...']) !!}
                         </div>
                         <div class="col-lg-4">
-                            {!! Form::label('description', __('admin.description')) !!}
-                            {!! Form::text('description', '', ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('admin.description') . ' ...']) !!}
+                            {!! Form::label('description', __('base.description')) !!}
+                            {!! Form::text('description', '', ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('base.description') . ' ...']) !!}
                         </div>
                     </div>
                 </div>
@@ -104,8 +104,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                {!! Form::button(__('admin.cancel'), ['class' => 'btn btn-secondary', 'data-dismiss' => 'modal']) !!}
-                {!! Form::button(__('admin.submit'), ['class' => 'btn btn-primary', 'id' => 'btnSubmit']) !!}
+                {!! Form::button(__('base.cancel'), ['class' => 'btn btn-secondary', 'data-dismiss' => 'modal']) !!}
+                {!! Form::button(__('base.submit'), ['class' => 'btn btn-primary', 'id' => 'btnSubmit']) !!}
             </div>
             {!! Form::close() !!}
         </div>
@@ -154,10 +154,10 @@ jQuery(document).ready(function() {
                     {
                         field:'Actions', title:'Actions', sortable:!1, overflow:'visible', template:function(e, a, i) {
                             return `
-                                <a href="#" data-toggle="modal" data-target="#m_modal" class="showEditRole m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="${Lang.get('admin.view')}">
+                                <a href="#" data-toggle="modal" data-target="#m_modal" class="showEditRole m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="${Lang.get('base.view')}">
                                     <i class="la la-edit"></i>
                                 </a>
-                                <a class="btnDeleteRole m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill" title="${Lang.get('admin.delete')}">
+                                <a class="btnDeleteRole m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill" title="${Lang.get('base.delete')}">
                                     <i class="la la-remove"></i>
                                 </a>
                             `;

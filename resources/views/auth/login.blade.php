@@ -46,14 +46,14 @@
                                 </div>
                                 <div class="m-login__title">
                                     <h3>
-                                        {{ __('admin.get_free_account') }}
+                                        {{ __('base.get_free_account') }}
                                     </h3>
                                 </div>
                                 <div class="m-login__desc">
-                                    {{ __('admin.login_desc') }}
+                                    {{ __('base.login_desc') }}
                                 </div>
                                 <div class="m-login__form-action">
-                                    {!! Form::button(__('admin.get_an_account'), ['id' => 'm_login_signup', 'class' => 'btn btn-outline-focus m-btn--pill']) !!}
+                                    {!! Form::button(__('base.get_an_account'), ['id' => 'm_login_signup', 'class' => 'btn btn-outline-focus m-btn--pill']) !!}
                                 </div>
                             </div>
                         </div>
@@ -67,7 +67,7 @@
                         <div class="m-login__signin">
                             <div class="m-login__head">
                                 <h3 class="m-login__title">
-                                    {{ __('admin.login') }}
+                                    {{ __('base.login') }}
                                 </h3>
                             </div>
                             {!! Form::open(['route' => 'login', 'method' => 'POST', 'class' => 'm-login__form m-form']) !!}
@@ -92,37 +92,37 @@
                                     </div>
                                 @endif
                                 <div class="form-group m-form__group">
-                                    {!! Form::text('user_name', old('user_name'), ['required', 'class' => 'form-control m-input', 'placeholder' => __('admin.user_name'), 'autocomplete' => 'on']) !!}
+                                    {!! Form::text('user_name', old('user_name'), ['required', 'class' => 'form-control m-input', 'placeholder' => __('base.user_name'), 'autocomplete' => 'on']) !!}
                                 </div>
                                 <div class="form-group m-form__group">
-                                    {!! Form::password('password', ['class' => 'form-control m-input m-login__form-input--last', 'placeholder' => __('admin.password'), 'required']) !!}
+                                    {!! Form::password('password', ['class' => 'form-control m-input m-login__form-input--last', 'placeholder' => __('base.password'), 'required']) !!}
                                 </div>
                                 <div class="row m-login__form-sub">
                                     <div class="col m--align-left">
                                         <label class="m-checkbox m-checkbox--focus">
                                             {!! Form::checkbox('remember') !!}
-                                            {{ __('admin.remember_me') }}
+                                            {{ __('base.remember_me') }}
                                             <span></span>
                                         </label>
                                     </div>
                                     <div class="col m--align-right">
                                         <a href="javascript:;" id="m_login_forget_password" class="m-link">
-                                            {{ __('admin.forget_password') }}
+                                            {{ __('base.forget_password') }}
                                         </a>
                                     </div>
                                 </div>
                                 <div class="m-login__form-action">
-                                    {!! Form::submit(__('admin.login'), ['class' => 'btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air']) !!}
+                                    {!! Form::submit(__('base.login'), ['class' => 'btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air']) !!}
                                 </div>
                             {!! Form::close() !!}
                         </div>
                         <div class="m-login__signup">
                             <div class="m-login__head">
                                 <h3 class="m-login__title">
-                                    {{ __('admin.sign_up') }}
+                                    {{ __('base.sign_up') }}
                                 </h3>
                                 <div class="m-login__desc">
-                                    {{ __('admin.create_your_account') }}
+                                    {{ __('base.create_your_account') }}
                                 </div>
                             </div>
                             {!! Form::open(['class' => 'm-login__form m-form', 'method' => 'POST', 'route' => 'register']) !!}
@@ -135,41 +135,41 @@
                                     @endforeach
                                 @endif
                                 <div class="form-group m-form__group">
-                                    {!! Form::text('name', '', ['required', 'class' => 'form-control m-input', 'placeholder' => __('admin.name')]) !!}
+                                    {!! Form::text('name', '', ['required', 'class' => 'form-control m-input', 'placeholder' => __('base.name')]) !!}
                                 </div>
                                 <div class="form-group m-form__group">
                                     {!! Form::date('birthday', '', ['required', 'class' => 'form-control m-input']) !!}
                                 </div>
                                 <div class="form-group m-form__group">
-                                    {!! Form::number('phone', '', ['class' => 'form-control m-input', 'placeholder' => __('admin.phone')]) !!}
+                                    {!! Form::number('phone', '', ['required', 'class' => 'form-control m-input', 'placeholder' => __('base.phone')]) !!}
                                 </div>
                                 <br>
                                 <div class="m-form__group form-group">
                                     <div class="m-radio-inline">
                                         <label class="m-radio m-radio--state-success">
                                             {!! Form::radio('gender', 'male', 'checked', []) !!}
-                                            {{ __('admin.male') }}
+                                            {{ __('base.male') }}
                                             <span></span>
                                         </label>
                                         <label class="m-radio m-radio--state-brand">
                                             {!! Form::radio('gender', 'female', '', []) !!}
-                                            {{ __('admin.female') }}
+                                            {{ __('base.female') }}
                                             <span></span>
                                         </label>
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="form-group m-form__group">
-                                    {!! Form::email('email', '', ['required', 'class' => 'form-control m-input', 'placeholder' => __('admin.email'), 'autocomplete' => 'off']) !!}
+                                    {!! Form::email('email', '', ['required', 'class' => 'form-control m-input', 'placeholder' => __('base.email'), 'autocomplete' => 'off']) !!}
                                 </div>
                                 <div class="form-group m-form__group">
-                                    {!! Form::text('user_name', '', ['required', 'class' => 'form-control m-input', 'placeholder' => __('admin.user_name'), 'autocomplete' => 'off']) !!}
+                                    {!! Form::text('user_name', '', ['required', 'class' => 'form-control m-input', 'placeholder' => __('base.user_name'), 'autocomplete' => 'off']) !!}
                                 </div>
                                 <div class="form-group m-form__group">
-                                    {!! Form::password('password', ['required', 'class' => 'form-control m-input', 'placeholder' => __('admin.password')]) !!}
+                                    {!! Form::password('password', ['required', 'class' => 'form-control m-input', 'placeholder' => __('base.password')]) !!}
                                 </div>
                                 <div class="form-group m-form__group">
-                                    {!! Form::password('password_confirmation', ['required', 'class' => 'form-control m-input m-login__form-input--last', 'placeholder' => __('admin.password_confirmation')]) !!}
+                                    {!! Form::password('password_confirmation', ['required', 'class' => 'form-control m-input m-login__form-input--last', 'placeholder' => __('base.password_confirmation')]) !!}
                                 </div>
                                 <div class="form-group m-form__group">
                                     {!! Form::select('role', $roles, null, ['required', 'placeholder' => __('validation.custom.select.role')]) !!}
@@ -181,14 +181,14 @@
                                     {!! Form::select('district', ['' => __('validation.custom.select.district')], null,['id' => 'district', 'required']) !!}
                                 </div>
                                 <div class="form-group m-form__group">
-                                    {!! Form::text('address', '', ['required', 'class' => 'form-control m-input', 'placeholder' => __('admin.address')]) !!}
+                                    {!! Form::text('address', '', ['required', 'class' => 'form-control m-input', 'placeholder' => __('base.address')]) !!}
                                 </div>
                                 <div class="m-login__form-sub">
                                     <label class="m-checkbox m-checkbox--focus">
                                         {!! Form::checkbox('iAgree', 'agree', false, ['id' => 'btnAgree']) !!}
-                                        {{ __('admin.i_agree') }}
+                                        {{ __('base.i_agree') }}
                                         <a href="#" class="m-link m-link--focus">
-                                            {{ __('admin.terms_and_conditions') }}
+                                            {{ __('base.terms_and_conditions') }}
                                         </a>
                                         .
                                         <span></span>
@@ -196,30 +196,30 @@
                                     <span class="m-form__help"></span>
                                 </div>
                                 <div class="m-login__form-action">
-                                    {!! Form::submit(__('admin.submit'), ['disabled' => '', 'class' => 'btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air', 'id' => 'btnRegister']) !!}
-                                    {!! Form::button(__('admin.cancel'), ['id' => 'm_login_signup_cancel', 'class' => 'btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air']) !!}
+                                    {!! Form::submit(__('base.submit'), ['disabled' => '', 'class' => 'btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air', 'id' => 'btnRegister']) !!}
+                                    {!! Form::button(__('base.cancel'), ['id' => 'm_login_signup_cancel', 'class' => 'btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air']) !!}
                                 </div>
                             {!! Form::close() !!}
                         </div>
                         <div class="m-login__forget-password">
                             <div class="m-login__head">
                                 <h3 class="m-login__title">
-                                    {{ __('admin.forgotten_password') }}
+                                    {{ __('base.forgotten_password') }}
                                 </h3>
                                 <div class="m-login__desc">
-                                    {{ __('admin.enter_your_email_to_reset_your_password') }}
+                                    {{ __('base.enter_your_email_to_reset_your_password') }}
                                 </div>
                             </div>
                             {!! Form::open(['required', 'class' => 'm-login__form m-form', 'route' => 'password.email', 'method' => 'POST']) !!}
                                 <div class="form-group m-form__group">
-                                    {!! Form::email('email', '', ['required', 'class' => 'form-control m-input', 'autocomplete' => 'off', 'placeholder' => __('admin.email')]) !!}
+                                    {!! Form::email('email', '', ['required', 'class' => 'form-control m-input', 'autocomplete' => 'off', 'placeholder' => __('base.email')]) !!}
                                     @if ($errors->has('email'))
                                         <div id="fullname-error" class="form-control-feedback">{{ __('admin.required') }}</div>
                                     @endif
                                 </div>
                                 <div class="m-login__form-action">
-                                    {!! Form::submit(__('admin.submit'), ['class' => 'btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air']) !!}
-                                    {!! Form::button(__('admin.cancel'), ['id' => 'm_login_forget_password_cancel', 'class' => 'btn btn-outline-focus m-btn m-btn--pill m-btn--custom']) !!}
+                                    {!! Form::submit(__('base.submit'), ['class' => 'btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air']) !!}
+                                    {!! Form::button(__('base.cancel'), ['id' => 'm_login_forget_password_cancel', 'class' => 'btn btn-outline-focus m-btn m-btn--pill m-btn--custom']) !!}
                                 </div>
                             {!! Form::close() !!}
                         </div>
@@ -236,15 +236,11 @@
         <script src="{{ asset(config('asset.login') . 'login.js') }}" type="text/javascript"></script>
         <!--end::Page Snippets -->
 
-        <script type="text/javascript">
+        <script defer type="text/javascript">
             jQuery(document).ready(function($) {
                 var $el = $('#district');
 
-                $('#city').on('change', function(event) {
-                    event.preventDefault();
-
-                    var city = $(this).val();
-
+                function getCity(city) {
                     $.ajax({
                         url: route('get.districts', city),
                         type: 'GET',
@@ -265,7 +261,23 @@
                     .fail(function(message) {
                         toastr.error(message);
                     });
+                }
+
+                if ($('#city').val() != 0) {
+                    var city = $('#city').val();
+
+                    getCity(city);
+                }
+
+                $('#city').on('change', function(event) {
+                    event.preventDefault();
+
+                    var city = $(this).val();
+
+                    getCity(city);
                 });
+
+                $('#btnAgree').prop('checked', false);
 
                 $('#btnAgree').click(function(event) {
                     $('#btnRegister').prop('disabled', function(index, value) {

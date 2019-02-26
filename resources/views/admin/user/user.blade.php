@@ -22,7 +22,7 @@
                     <div class="form-group m-form__group row align-items-center">
                         <div class="col-md-4">
                             <div class="m-input-icon m-input-icon--left">
-                                <input type="text" class="form-control m-input m-input--solid" placeholder="{{ __('admin.search') }}" id="generalSearch">
+                                <input type="text" class="form-control m-input m-input--solid" placeholder="{{ __('base.placeholder.search') }}" id="generalSearch">
                                 <span class="m-input-icon__icon m-input-icon__icon--left">
                                     <span>
                                         <i class="la la-search"></i>
@@ -38,7 +38,7 @@
                         <span>
                             <i class="la la-plus"></i>
                             <span>
-                                {{ __('admin.create.user') }}
+                                {{ __('base.create') . ' ' . __('base.user') }}
                             </span>
                         </span>
                     </a>
@@ -61,7 +61,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
-                    {{ __('admin.create.user') }}
+                    {{ __('base.create') . ' ' . __('base.user') }}
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">
@@ -74,21 +74,21 @@
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row">
                             <div class="col-lg-4">
-                                {!! Form::label('name', __('admin.name')) !!}
-                                {!! Form::text('name', '', ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('admin.name') . ' ...']) !!}
+                                {!! Form::label('name', __('base.name')) !!}
+                                {!! Form::text('name', '', ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('base.name') . ' ...']) !!}
                             </div>
                             <div class="col-lg-4">
-                                {!! Form::label('email', __('admin.email')) !!}
-                                {!! Form::email('email', '', ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('admin.email') . ' ...']) !!}
+                                {!! Form::label('email', __('base.email')) !!}
+                                {!! Form::email('email', '', ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('base.email') . ' ...']) !!}
                             </div>
                             <div class="col-lg-4">
-                                {!! Form::label('phone', __('admin.phone')) !!}
-                                {!! Form::number('phone', '', ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('admin.phone') . ' ...']) !!}
+                                {!! Form::label('phone', __('base.phone')) !!}
+                                {!! Form::number('phone', '', ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('base.phone') . ' ...']) !!}
                             </div>
                         </div>
                         <div class="form-group m-form__group row">
                             <div class="col-lg-4">
-                                {!! Form::label('city', __('admin.city')) !!}
+                                {!! Form::label('city', __('base.city')) !!}
                                 <div class="m-input-icon m-input-icon--right">
                                     {!! Form::select(
                                         'city',
@@ -103,36 +103,36 @@
                                 </div>
                             </div>
                             <div class="col-lg-4">
-                                {!! Form::label('district', __('admin.district')) !!}
+                                {!! Form::label('district', __('base.district')) !!}
                                 <div class="m-input-icon m-input-icon--right">
                                     {!! Form::select('district', [], null,['id' => 'district', 'required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('validation.custom.select.district')]) !!}
                                 </div>
                             </div>
                             <div class="col-lg-4">
-                                {!! Form::label('address', __('admin.address')) !!}
+                                {!! Form::label('address', __('base.address')) !!}
                                 <div class="m-input-icon m-input-icon--right">
-                                    {!! Form::text('address', '', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('admin.address') . ' ...']) !!}
+                                    {!! Form::text('address', '', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('base.address') . ' ...']) !!}
                                 </div>
                             </div>
                         </div>
                         <div class="form-group m-form__group row">
                             <div class="col-lg-4">
-                                <label>{{ __('admin.gender') }}:</label>
+                                <label>{{ __('base.gender') }}:</label>
                                 <div class="m-radio-inline">
                                     <label class="m-radio m-radio--solid">
                                         {!! Form::radio('gender', 'male', 'checked') !!}
-                                        {{ __('admin.male') }}
+                                        {{ __('base.male') }}
                                         <span></span>
                                     </label>
                                     <label class="m-radio m-radio--solid">
                                         {!! Form::radio('gender', 'female', 'checked') !!}
-                                        {{ __('admin.female') }}
+                                        {{ __('base.female') }}
                                         <span></span>
                                     </label>
                                 </div>
                             </div>
                             <div class="col-lg-4">
-                                <label>{{ __('admin.birthday') }}:</label>
+                                <label>{{ __('base.birthday') }}:</label>
                                     {!! Form::date('birthday', '', ['required', 'class' => 'form-control m-input m-input--solid']) !!}
                             </div>
                             <div class="col-lg-4">
@@ -153,24 +153,24 @@
                         </div>
                         <div class="form-group m-form__group row">
                             <div class="col-lg-4">
-                                {!! Form::label('user_name', __('admin.user_name')) !!}
-                                {!! Form::text('user_name', '', ['class' => 'form-control m-input m-input--solid', 'required', 'placeholder' => __('admin.user_name') . ' ...']) !!}
+                                {!! Form::label('user_name', __('base.user_name')) !!}
+                                {!! Form::text('user_name', '', ['class' => 'form-control m-input m-input--solid', 'required', 'placeholder' => __('base.user_name') . ' ...']) !!}
                             </div>
                             <div class="col-lg-4">
-                                {!! Form::label('password', __('admin.password')) !!}
-                                {!! Form::password('password', ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('admin.password') . ' ...']) !!}
+                                {!! Form::label('password', __('base.password')) !!}
+                                {!! Form::password('password', ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('base.password') . ' ...']) !!}
                             </div>
                             <div class="col-lg-4">
-                                {!! Form::label('password_confirmation', __('admin.password_confirmation')) !!}
-                                {!! Form::password('password_confirmation', ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('admin.password_confirmation') . ' ...']) !!}
+                                {!! Form::label('password_confirmation', __('base.password_confirmation')) !!}
+                                {!! Form::password('password_confirmation', ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('base.password_confirmation') . ' ...']) !!}
                             </div>
                         </div>
                     </div>
                 {!! Form::close() !!}
             </div>
             <div class="modal-footer">
-                {!! Form::button(__('admin.cancel'), ['class' => 'btn btn-secondary', 'data-dismiss' => 'modal']) !!}
-                {!! Form::button(__('admin.submit'), ['class' => 'btn btn-primary', 'id' => 'btnSubmit']) !!}
+                {!! Form::button(__('base.cancel'), ['class' => 'btn btn-secondary', 'data-dismiss' => 'modal']) !!}
+                {!! Form::button(__('base.submit'), ['class' => 'btn btn-primary', 'id' => 'btnSubmit']) !!}
             </div>
         </div>
     </div>

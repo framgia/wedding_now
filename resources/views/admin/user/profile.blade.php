@@ -1,6 +1,6 @@
 @extends('admin.index')
 
-@section('subheader', __('admin.my_profile'))
+@section('subheader', __('base.my_profile'))
 
 @section('content')
 <div class="row">
@@ -26,7 +26,7 @@
                     <li class="m-nav__separator m-nav__separator--fit"></li>
                     <li class="m-nav__section">
                         <span class="m-nav__section-text">
-                            {{ __('admin.section') }}
+                            {{ __('base.section') }}
                         </span>
                     </li>
                     <li class="m-nav__item">
@@ -35,7 +35,7 @@
                             <span class="m-nav__link-title">
                                 <span class="m-nav__link-wrap">
                                     <span class="m-nav__link-text">
-                                        {{ __('admin.my_profile') }}
+                                        {{ __('base.my_profile') }}
                                     </span>
                                     <span class="m-nav__link-badge">
                                         <span class="m-badge m-badge--success">
@@ -50,7 +50,7 @@
                         <a href="#" class="m-nav__link">
                             <i class="m-nav__link-icon flaticon-share"></i>
                             <span class="m-nav__link-text">
-                                {{ __('admin.activity') }}
+                                {{ __('base.activity') }}
                             </span>
                         </a>
                     </li>
@@ -58,7 +58,7 @@
                         <a href="#" class="m-nav__link">
                             <i class="m-nav__link-icon flaticon-chat-1"></i>
                             <span class="m-nav__link-text">
-                                {{ __('admin.messages') }}
+                                {{ __('base.messages') }}
                             </span>
                         </a>
                     </li>
@@ -82,7 +82,7 @@
                         <a href="#" class="m-nav__link">
                             <i class="m-nav__link-icon flaticon-lifebuoy"></i>
                             <span class="m-nav__link-text">
-                                {{ __('admin.support') }}
+                                {{ __('base.support') }}
                             </span>
                         </a>
                     </li>
@@ -99,17 +99,17 @@
                         <li class="nav-item m-tabs__item">
                             <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_user_profile_tab_1" role="tab">
                                 <i class="flaticon-share "></i>
-                                {{ __('admin.update_profile') }}
+                                {{ __('base.update_profile') }}
                             </a>
                         </li>
                         <li class="nav-item m-tabs__item">
                             <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_2" role="tab">
-                                {{ __('admin.messages') }}
+                                {{ __('base.messages') }}
                             </a>
                         </li>
                         <li class="nav-item m-tabs__item">
                             <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_3" role="tab">
-                                {{ __('admin.settings') }}
+                                {{ __('base.settings') }}
                             </a>
                         </li>
                     </ul>
@@ -130,42 +130,42 @@
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
-                                {!! Form::label('name', __('admin.name'), ['class' => 'col-2 col-form-label']) !!}
+                                {!! Form::label('name', __('base.name'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
                                     {!! Form::text('name', $user->name, ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('validation.custom.enter.name')]) !!}
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
-                                {!! Form::label('birthday', __('admin.birthday'), ['class' => 'col-2 col-form-label']) !!}
+                                {!! Form::label('birthday', __('base.birthday'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
                                     {!! Form::date('birthday', $user->birthday, ['required', 'class' => 'form-control m-input m-input--solid']) !!}
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
-                                {!! Form::label('email', __('admin.email'), ['class' => 'col-2 col-form-label']) !!}
+                                {!! Form::label('email', __('base.email'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
                                     {!! Form::email('email', $user->email, ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('validation.custom.enter.email')]) !!}
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
-                                {!! Form::label('gender', __('admin.gender'), ['class' => 'col-2 col-form-label']) !!}
+                                {!! Form::label('gender', __('base.gender'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
                                     <div class="m-radio-inline">
                                         <label class="m-radio m-radio--state-success">
                                             {!! Form::radio('gender', 'male', ($user->gender == 'male' ? true : false)) !!}
-                                            {{ __('admin.male') }}
+                                            {{ __('base.male') }}
                                             <span></span>
                                         </label>
                                         <label class="m-radio m-radio--state-brand">
                                             {!! Form::radio('gender', 'female', ($user->gender == 'female' ? true : false)) !!}
-                                            {{ __('admin.female') }}
+                                            {{ __('base.female') }}
                                             <span></span>
                                         </label>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
-                                {!! Form::label('phone', __('admin.phone'), ['class' => 'col-2 col-form-label']) !!}
+                                {!! Form::label('phone', __('base.phone'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
                                     {!! Form::number('phone', $user->phone, ['required', 'class' => 'form-control m-input m-input--solid', 'placeholder' => __('validation.custom.enter.phone')]) !!}
                                 </div>
@@ -174,12 +174,12 @@
                             <div class="form-group m-form__group row">
                                 <div class="col-10 ml-auto">
                                     <h3 class="m-form__section">
-                                        2. {{ __('admin.address') }}
+                                        2. {{ __('base.address') }}
                                     </h3>
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
-                                {!! Form::label('city', __('admin.city'), ['class' => 'col-2 col-form-label']) !!}
+                                {!! Form::label('city', __('base.city'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
                                     {!! Form::select(
                                         'city',
@@ -193,7 +193,7 @@
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
-                                {!! Form::label('district', __('admin.district'), ['class' => 'col-2 col-form-label']) !!}
+                                {!! Form::label('district', __('base.district'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
                                     {!! Form::select(
                                         'district',
@@ -207,7 +207,7 @@
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
-                                {!! Form::label('address', __('admin.address'), ['class' => 'col-2 col-form-label']) !!}
+                                {!! Form::label('address', __('base.address'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
                                     {!! Form::text('address', count($user->locations) > 0 ? $user->locations[0]->address : null, ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('validation.custom.enter.address')]) !!}
                                 </div>
@@ -221,19 +221,19 @@
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
-                                {!! Form::label('user_name', __('admin.user_name'), ['class' => 'col-2 col-form-label']) !!}
+                                {!! Form::label('user_name', __('base.user_name'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
-                                    {!! Form::text('user_name', $user->user_name, ['class' => 'form-control m-input m-input--solid', 'disabled', 'placeholder' => __('admin.user_name')]) !!}
+                                    {!! Form::text('user_name', $user->user_name, ['class' => 'form-control m-input m-input--solid', 'disabled', 'placeholder' => __('base.user_name')]) !!}
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
-                                {!! Form::label('password', __('admin.password'), ['class' => 'col-2 col-form-label']) !!}
+                                {!! Form::label('password', __('base.password'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
                                     {!! Form::password('password', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('validation.custom.enter.password')]) !!}
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
-                                {!! Form::label('password_confirmation', __('admin.password_confirmation'), ['class' => 'col-2 col-form-label']) !!}
+                                {!! Form::label('password_confirmation', __('base.password_confirmation'), ['class' => 'col-2 col-form-label']) !!}
                                 <div class="col-7">
                                     {!! Form::password('password_confirmation', ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('validation.custom.enter.password_confirmation')]) !!}
                                 </div>
@@ -244,9 +244,9 @@
                                 <div class="row">
                                     <div class="col-2"></div>
                                     <div class="col-7">
-                                        {!! Form::submit(__('admin.update'), ['id' => 'save', 'class' => 'btn btn-accent m-btn m-btn--air m-btn--custom']) !!}
+                                        {!! Form::submit(__('base.update'), ['id' => 'save', 'class' => 'btn btn-accent m-btn m-btn--air m-btn--custom']) !!}
                                         &nbsp;&nbsp;
-                                        {!! Form::reset(__('admin.reset'), ['class' => 'btn btn-secondary m-btn m-btn--air m-btn--custom']) !!}
+                                        {!! Form::reset(__('base.reset'), ['class' => 'btn btn-secondary m-btn m-btn--air m-btn--custom']) !!}
                                     </div>
                                 </div>
                             </div>

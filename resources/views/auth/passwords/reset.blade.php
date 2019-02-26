@@ -37,7 +37,7 @@
                         <div class="m-login__signin">
                             <div class="m-login__head">
                                 <h3 class="m-login__title">
-                                    {{ __('admin.reset_pasword') }}
+                                    {{ __('base.reset_pasword') }}
                                 </h3>
                             </div>
                             {!! Form::open(['method' => 'POST', 'route' => 'password.update', 'class' => 'm-login__form m-form']) !!}
@@ -60,10 +60,10 @@
                                 </div>
                                 <hr>
                                 <div class="form-group m-form__group">
-                                    {!! Form::password('password_confirmation', ['class' => 'form-control m-input m-login__form-input--last', 'placeholder' => __('admin.password_confirmation'), 'required']) !!}
+                                    {!! Form::password('password_confirmation', ['class' => 'form-control m-input m-login__form-input--last', 'placeholder' => __('base.password_confirmation'), 'required']) !!}
                                 </div>
                                 <div class="m-login__form-action">
-                                    {!! Form::submit(__('admin.submit'), ['class' => 'btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air']) !!}
+                                    {!! Form::submit(__('base.submit'), ['class' => 'btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air']) !!}
                                 </div>
                             {!! Form::close() !!}
                         </div>

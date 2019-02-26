@@ -26,13 +26,13 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group m-form__group row">
-                                    {!! Form::label('title-schedule', __('admin.title'), ['class' => 'col-lg-2 col-form-label']) !!}
+                                    {!! Form::label('title-schedule', __('base.title'), ['class' => 'col-lg-2 col-form-label']) !!}
                                     <div class="col-lg-8">
                                         {!! Form::text('name', null, ['class' => 'form-control m-input m-input--solid', 'id' => 'title-schedule', 'placeholder' => __('admin.placeholder.title'), 'autocomplete' => 'off']) !!}
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row">
-                                    {!! Form::label('budget-schedule', __('admin.budget'), ['class' => 'col-lg-2 col-form-label']) !!}
+                                    {!! Form::label('budget-schedule', __('base.budget'), ['class' => 'col-lg-2 col-form-label']) !!}
                                     <div class="col-lg-8">
                                         {!! Form::number('budget', null, ['class' => 'form-control m-input m-input--solid', 'id' => 'budget-schedule', 'placeholder' => __('admin.placeholder.budget')]) !!}
                                     </div>
@@ -40,7 +40,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="form-group m-form__group row">
-                                    <label class="col-lg-2 col-form-label">{{ __('admin.note') }}</label>
+                                    <label class="col-lg-2 col-form-label">{{ __('base.note') }}</label>
                                     <div class="col-lg-8">
                                         <div class="input-group">
                                             {!! Form::textarea('note', null, ['class' => 'form-control m-input m-input--solid', 'id' => 'note-schedule', 'placeholder' => __('admin.placeholder.note'), 'rows' => 6]) !!}
@@ -63,7 +63,7 @@
                                          class="btn btn btn-sm btn-brand m-btn m-btn--icon m-btn--pill m-btn--wide">
                                         <span>
                                             <i class="la la-plus"></i>
-                                            <span>{{ __('admin.create_new_task') }}</span>
+                                            <span>{{ __('base.create') . ' ' . __('base.task') }}</span>
                                         </span>
                                     </div>
                                 </div>
@@ -77,9 +77,9 @@
                             <div class="col-lg-2"></div>
                             <div class="col-lg-2">
                                 <button type="button" class="btn btn-success"
-                                        id="submit-form-create">{{ __('admin.create') }}</button>
+                                        id="submit-form-create">{{ __('base.create') }}</button>
                                 <button type="button" class="btn btn-secondary"
-                                        id="cancel">{{ __('admin.cancel') }}</button>
+                                        id="cancel">{{ __('base.cancel') }}</button>
                             </div>
                         </div>
                     </div>
@@ -135,7 +135,7 @@
 
                         let arr = Object.entries(res);
 
-                        let html = '<option hidden value="" disable>' + Lang.get('admin.choose_time_frame') + '</option>';
+                        let html = '<option hidden value="" disable>' + Lang.get('base.choose') + ' ' + Lang.get('base.time_frame') + '</option>';
 
                         arr.forEach(function (element, index) {
 
@@ -151,7 +151,7 @@
 
                 event.preventDefault();
 
-                let html = '<div class="form-group m-form__group row align-items-center single-task"> <div class="col-md-3"> <div class="m-form__group m-form__group--inline"> <div class="m-form__label"> <label>Name:</label> </div> <div class="m-form__control"> <input type="name" class="form-control m-input m-input--solid title-task" placeholder="' + Lang.get('admin.task.title') + '"> </div> </div> <div class="d-md-none m--margin-bottom-10"></div> <br> <div class="m-form__group m-form__group--inline"> <div class="m-form__label"> <label>Time:</label> </div> <div class="m-form__control"> <select name="time_frame" class="form-control m-input m-input--solid select-time-frame input-width-97-left-3"> </select> </div> </div> <div class="d-md-none m--margin-bottom-10"></div> </div> <div class="col-md-3"> <div class="m-form__group m-form__group--inline"> <div class="m-form__label"> <label class="m-label m-label--single">Category:</label> </div> <div class="m-form__control"> <select name="category" class="form-control m-input m-input--solid select-category"> </select> </div> </div> <div class="d-md-none m--margin-bottom-10"></div> </div> <div class="col-md-3"> <div class="m-form__group m-form__group--inline"> <div class="m-form__label"> <label class="m-label m-label--single">Item:</label> </div> <div class="m-form__control"> <select name="item" class="form-control m-input m-input--solid select-item" > <option value="">' + Lang.get('admin.choose_time_frame') + '</option> </select> </div> </div> <div class="d-md-none m--margin-bottom-10"></div> </div> <div class="col-md-2"> <div class="m-form__group m-form__group--inline"> <div class="m-form__label"> <label class="m-label m-label--single">Priority:</label> </div> <div class="m-form__control"> <select name="" class="form-control m-input m-input--solid select-priority" > <option value="1">' + Lang.get('admin.high') + '</option> <option value="0">' + Lang.get('admin.low') + '</option> </select> </div> </div> <div class="d-md-none m--margin-bottom-10"></div> </div> <div class="col-md-1"> <div class="btn-sm btn btn-danger m-btn m-btn--icon m-btn--pill task-delete"> <span> <i class="la la-trash-o"></i> <span>Delete</span> </span> </div> </div> </div>';
+                let html = '<div class="form-group m-form__group row align-items-center single-task"> <div class="col-md-3"> <div class="m-form__group m-form__group--inline"> <div class="m-form__label"> <label>Name:</label> </div> <div class="m-form__control"> <input type="name" class="form-control m-input m-input--solid title-task" placeholder="' + Lang.get('admin.task.title') + '"> </div> </div> <div class="d-md-none m--margin-bottom-10"></div> <br> <div class="m-form__group m-form__group--inline"> <div class="m-form__label"> <label>Time:</label> </div> <div class="m-form__control"> <select name="time_frame" class="form-control m-input m-input--solid select-time-frame input-width-97-left-3"> </select> </div> </div> <div class="d-md-none m--margin-bottom-10"></div> </div> <div class="col-md-3"> <div class="m-form__group m-form__group--inline"> <div class="m-form__label"> <label class="m-label m-label--single">Category:</label> </div> <div class="m-form__control"> <select name="category" class="form-control m-input m-input--solid select-category"> </select> </div> </div> <div class="d-md-none m--margin-bottom-10"></div> </div> <div class="col-md-3"> <div class="m-form__group m-form__group--inline"> <div class="m-form__label"> <label class="m-label m-label--single">Item:</label> </div> <div class="m-form__control"> <select name="item" class="form-control m-input m-input--solid select-item" > <option value="">' + Lang.get('admin.choose') + ' ' + Lang.get('admin.time_frame') + '</option> </select> </div> </div> <div class="d-md-none m--margin-bottom-10"></div> </div> <div class="col-md-2"> <div class="m-form__group m-form__group--inline"> <div class="m-form__label"> <label class="m-label m-label--single">Priority:</label> </div> <div class="m-form__control"> <select name="" class="form-control m-input m-input--solid select-priority" > <option value="1">' + Lang.get('admin.high') + '</option> <option value="0">' + Lang.get('admin.low') + '</option> </select> </div> </div> <div class="d-md-none m--margin-bottom-10"></div> </div> <div class="col-md-1"> <div class="btn-sm btn btn-danger m-btn m-btn--icon m-btn--pill task-delete"> <span> <i class="la la-trash-o"></i> <span>Delete</span> </span> </div> </div> </div>';
 
                 loadSelectCategories();
 
@@ -176,7 +176,7 @@
                     })
                         .done(function (res) {
 
-                            let html = '<option hidden value="">' + Lang.get('admin.choose_item') + '</option>';
+                            let html = '<option hidden value="">' + Lang.get('admin.choose') + ' ' + Lang.get('base.item') + '</option>';
 
                             res.forEach(function (element, index) {
 
