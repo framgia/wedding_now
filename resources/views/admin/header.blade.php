@@ -45,7 +45,7 @@
                         <li class="m-menu__item m-menu__item--submenu m-menu__item--rel" m-menu-submenu-toggle="click" m-menu-link-redirect="1" aria-haspopup="true">
                             <a href="javascript:;" class="m-menu__link m-menu__toggle">
                                 <i class="m-menu__link-icon flaticon-add"></i>
-                                <span class="m-menu__link-text">{{ __('admin.action') }}</span>
+                                <span class="m-menu__link-text">{{ __('base.action') }}</span>
                                 <i class="m-menu__hor-arrow la la-angle-down"></i>
                                 <i class="m-menu__ver-arrow la la-angle-right"></i>
                             </a>
@@ -56,7 +56,7 @@
                                         <a href="#" class="m-menu__link">
                                             <i class="m-menu__link-icon flaticon-file"></i>
                                             <span class="m-menu__link-text">
-                                                {{ __('admin.create.post') }}
+                                                {{ __('base.create') . ' ' . __('base.post') }}
                                             </span>
                                         </a>
                                     </li>
@@ -314,7 +314,7 @@
                                             <form class="m-list-search__form">
                                                 <div class="m-list-search__form-wrapper">
                                                     <span class="m-list-search__form-input-wrapper">
-                                                        <input id="m_quicksearch_input" autocomplete="off" type="text" name="q" class="m-list-search__form-input" value="" placeholder="{{ __('admin.search') }}">
+                                                        <input id="m_quicksearch_input" autocomplete="off" type="text" name="q" class="m-list-search__form-input" value="" placeholder="{{ __('base.placeholder.search') }}">
                                                     </span>
                                                     <span class="m-list-search__form-icon-close" id="m_quicksearch_close">
                                                         <i class="la la-remove"></i>
@@ -378,7 +378,7 @@
                                                                             12 {{ __('admin.news.users_registered') }}
                                                                         </span>
                                                                         <span class="m-list-timeline__time">
-                                                                            {{ __('admin.just_now') }}
+                                                                            {{ __('base.just_now') }}
                                                                         </span>
                                                                     </div>
                                                                 </div>
@@ -395,7 +395,7 @@
                                                                             {{ __('admin.news.order_received') }}
                                                                         </a>
                                                                         <span class="m-list-timeline__time">
-                                                                            {{ __('admin.just_now') }}
+                                                                            {{ __('base.just_now') }}
                                                                         </span>
                                                                     </div>
                                                                 </div>
@@ -431,7 +431,7 @@
                                     <div class="m-dropdown__inner">
                                         <div class="m-dropdown__header m--align-center background-url-quick-actions">
                                             <span class="m-dropdown__header-title">
-                                                {{ __('admin.quick_actions') }}
+                                                {{ __('base.quick_actions') }}
                                             </span>
                                             <span class="m-dropdown__header-subtitle">
                                                 {{ __('admin.shortcuts') }}
@@ -459,7 +459,7 @@
                                                             <a href="#" class="m-nav-grid__item">
                                                                 <i class="m-nav-grid__icon flaticon-folder"></i>
                                                                 <span class="m-nav-grid__text">
-                                                                    {{ __('admin.create_new_task') }}
+                                                                    {{ __('base.create') . ' ' . __('base.task') }}
                                                                 </span>
                                                             </a>
                                                             <a href="#" class="m-nav-grid__item">
@@ -512,7 +512,7 @@
                                                             <span class="m-nav__link-title">
                                                                 <span class="m-nav__link-wrap">
                                                                     <span class="m-nav__link-text">
-                                                                        {{ __('admin.my_profile') }}
+                                                                        {{ __('base.my_profile') }}
                                                                     </span>
                                                                     <span class="m-nav__link-badge">
                                                                         <span class="m-badge m-badge--success">
@@ -527,7 +527,7 @@
                                                         <a href="#" class="m-nav__link">
                                                             <i class="m-nav__link-icon flaticon-share"></i>
                                                             <span class="m-nav__link-text">
-                                                                {{ __('admin.activity') }}
+                                                                {{ __('base.activity') }}
                                                             </span>
                                                         </a>
                                                     </li>
@@ -535,7 +535,7 @@
                                                         <a href="#" class="m-nav__link">
                                                             <i class="m-nav__link-icon flaticon-chat-1"></i>
                                                             <span class="m-nav__link-text">
-                                                                {{ __('admin.messages') }}
+                                                                {{ __('base.messages') }}
                                                             </span>
                                                         </a>
                                                     </li>
@@ -544,7 +544,7 @@
                                                         <a href="#" class="m-nav__link">
                                                             <i class="m-nav__link-icon flaticon-info"></i>
                                                             <span class="m-nav__link-text">
-                                                                {{ __('admin.faq') }}
+                                                                {{ __('base.faq') }}
                                                             </span>
                                                         </a>
                                                     </li>
@@ -552,14 +552,14 @@
                                                         <a href="#" class="m-nav__link">
                                                             <i class="m-nav__link-icon flaticon-lifebuoy"></i>
                                                             <span class="m-nav__link-text">
-                                                                {{ __('admin.support') }}
+                                                                {{ __('base.support') }}
                                                             </span>
                                                         </a>
                                                     </li>
                                                     <li class="m-nav__separator m-nav__separator--fit"></li>
                                                     <li class="m-nav__item">
                                                         <a href="{{ route('login') }}" class="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
-                                                            {{ __('admin.logout') }}
+                                                            {{ __('base.logout') }}
                                                         </a>
                                                     </li>
                                                 </ul>

@@ -11,10 +11,10 @@
                         <li><a href="pricing-plan.html">Pricing</a></li>
                         @auth
                             <li><a href="{{ route('user.profile', Auth::user()->user_name) }}">{{ Auth::user()->name }}</a></li>
-                            <li><a href="{{ route('logout') }}">{{ __('admin.logout') }}</a></li>
+                            <li><a href="{{ route('logout') }}">{{ __('base.logout') }}</a></li>
                         @endauth
                         @guest
-                            <li><a href="{{ route('login') }}">{{ __('admin.login') }} | {{ __('register') }}</a></li>
+                            <li><a href="{{ route('login') }}">{{ __('base.login') }} | {{ __('register') }}</a></li>
                         @endguest
                         <li class="search-btn search-icon text-center">
                             <a href="#"><i class="fa fa-search" aria-hidden="true"></i></a>

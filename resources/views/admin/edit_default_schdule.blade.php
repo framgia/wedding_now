@@ -27,13 +27,13 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group m-form__group row">
-                                    {!! Form::label('title-schedule', __('admin.title'), ['class' => 'col-lg-2 col-form-label']) !!}
+                                    {!! Form::label('title-schedule', __('base.title'), ['class' => 'col-lg-2 col-form-label']) !!}
                                     <div class="col-lg-10">
                                         {!! Form::text('name', $scheduleDefault->name, ['class' => 'form-control ', 'id' => 'title-schedule', 'placeholder' => __('admin.placeholder.title'), 'autocomplete' => 'off']) !!}
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row">
-                                    {!! Form::label('budget-schedule', __('admin.budget'), ['class' => 'col-lg-2 col-form-label']) !!}
+                                    {!! Form::label('budget-schedule', __('base.budget'), ['class' => 'col-lg-2 col-form-label']) !!}
                                     <div class="col-lg-10">
                                         {!! Form::number('budget', $scheduleDefault->budget, ['class' => 'form-control ', 'id' => 'budget-schedule', 'placeholder' => __('admin.placeholder.budget')]) !!}
                                     </div>
@@ -41,7 +41,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="form-group m-form__group row">
-                                    {!! Form::label('budget-schedule', __('admin.note'), ['class' => 'col-lg-2 col-form-label']) !!}
+                                    {!! Form::label('budget-schedule', __('base.note'), ['class' => 'col-lg-2 col-form-label']) !!}
                                     <div class="col-lg-10">
                                         <div class="input-group">
                                             {!! Form::textarea('note', $scheduleDefault->note, ['class' => 'form-control ', 'id' => 'note-schedule', 'placeholder' => __('admin.placeholder.note'), 'rows' => 6]) !!}
@@ -64,7 +64,7 @@
                                      class="btn btn btn-sm btn-brand m-btn m-btn--icon m-btn--pill m-btn--wide">
                                     <span>
                                         <i class="la la-plus"></i>
-                                        <span>{{ __('admin.create_new_task') }}</span>
+                                        <span>{{ __('base.create') . ' ' . __('base.task') }}</span>
                                     </span>
                                 </div>
                             </div>
@@ -77,7 +77,7 @@
                     <div class="row">
                         <div class="col-lg-2"></div>
                         <div class="col-lg-2">
-                            {!! Form::submit(__('admin.update'), ['class' => 'btn btn-success', 'id' => 'submit-form-update']) !!}
+                            {!! Form::submit(__('base.update'), ['class' => 'btn btn-success', 'id' => 'submit-form-update']) !!}
                         </div>
                     </div>
                 </div>

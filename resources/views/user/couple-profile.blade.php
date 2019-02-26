@@ -107,11 +107,11 @@
                                         <div class="col-sm-8">
                                             <label class="m-radio m-radio--state-success">
                                                 {!! Form::radio('gender', __('page.profile.male'), ($user->gender == 'male' ? true : false)) !!}
-                                                {{ __('admin.male') }}
+                                                {{ __('base.male') }}
                                             </label>
                                             <label class="m-radio m-radio--state-brand">
                                                 {!! Form::radio('gender', __('page.profile.female'), ($user->gender == 'female' ? true : false)) !!}
-                                                {{ __('admin.female') }}
+                                                {{ __('base.female') }}
                                             </label>
                                         </div>
                                     </div>
@@ -168,7 +168,7 @@
                                             {!! Form::label('password', __('page.profile.new_password')) !!}
                                         </div>
                                         <div class="col-sm-8">
-                                            {!! Form::password('password', ['class' => 'form-control', 'placeholder' => __('admin.password')]) !!}
+                                            {!! Form::password('password', ['class' => 'form-control', 'placeholder' => __('base.password')]) !!}
                                         </div>
                                     </div>
                                     <div class="form-group row">

@@ -11,7 +11,7 @@
                 <div class="m-portlet__head-title">
                     <h3 class="m-portlet__head-text">
                         {{ __('admin.default_schedule') }}
-                        <small>{{ __('admin.create_by_admin') }}</small>
+                        <small>{{ __('base.create_by_admin') }}</small>
                     </h3>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                             <div class="col-md-4">
                                 <div class="m-input-icon m-input-icon--left">
                                     <input type="text" class="form-control m-input m-input--solid"
-                                           placeholder="{{ __('admin.search') }}" id="generalSearch">
+                                           placeholder="{{ __('base.placeholder.search') }}" id="generalSearch">
                                     <span class="m-input-icon__icon m-input-icon__icon--left">
                                     <span>
                                         <i class="la la-search"></i>
@@ -65,7 +65,7 @@
                            class="btn btn-accent m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill">
                             <span>
                                 <i class="la la-cart-plus"></i>
-                                <span>{{ __('admin.create_schedule') }}</span>
+                                <span>{{ __('base.create_schedule') }}</span>
                             </span>
                         </a>
                         <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -87,17 +87,17 @@
                             <span class="width-th-span">{{ __('admin.id') }}</span>
                         </th>
                         <th class="m-datatable__cell m-datatable__cell--sort">
-                            <span class="width-th-span">{{ __('admin.name') }}</span></th>
+                            <span class="width-th-span">{{ __('base.name') }}</span></th>
                         <th class="m-datatable__cell m-datatable__cell--sort">
-                            <span class="width-th-span">{{ __('admin.budget') }}</span></th>
+                            <span class="width-th-span">{{ __('base.budget') }}</span></th>
                         <th class="m-datatable__cell m-datatable__cell--sort">
                             <span class="width-th-span">{{ __('admin.number_tasks') }}</span></th>
                         <th class="m-datatable__cell m-datatable__cell--sort">
                             <span class="width-th-span">{{ __('admin.type') }}</span></th>
                         <th class="m-datatable__cell m-datatable__cell--sort">
-                            <span class="width-th-span">{{ __('admin.note') }}</span></th>
+                            <span class="width-th-span">{{ __('base.note') }}</span></th>
                         <th class="m-datatable__cell m-datatable__cell--sort">
-                            <span class="width-th-span">{{ __('admin.actions') }}</span></th>
+                            <span class="width-th-span">{{ __('base.actions') }}</span></th>
                     </tr>
                     </thead>
                     <tbody class="m-datatable__body">
@@ -143,7 +143,7 @@
                                         <div class="dropdown-menu dropdown-menu-right">
                                             <a class="dropdown-item"
                                                href="{{ route('admin.edit-schedule-default', ['slug' => $scheduleWedding->slug, 'id' => $scheduleWedding->id]) }}">
-                                                <i class="la la-edit"></i>{{ __('admin.edit') }}</a>
+                                                <i class="la la-edit"></i>{{ __('base.edit') }}</a>
                                             <a href="#" class="dropdown-item delete-schedule"
                                                data-id="{{ $scheduleWedding->id }}">
                                                 <i class="la la-leaf"></i>
@@ -177,7 +177,7 @@
 
                 let id = $(this).attr('data-id');
 
-                if (confirm(Lang.get('admin.confirm_delete'))) {
+                if (confirm(Lang.get('base.confirm_delete'))) {
                     $.ajax({
                         url: route('admin.delete-schedule-default', {id: id}),
                         type: 'delete',

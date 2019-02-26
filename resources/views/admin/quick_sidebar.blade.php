@@ -6,17 +6,17 @@
         <ul id="m_quick_sidebar_tabs" class="nav nav-tabs m-tabs m-tabs-line m-tabs-line--brand" role="tablist">
             <li class="nav-item m-tabs__item">
                 <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_quick_sidebar_tabs_messenger" role="tab">
-                    {{ __('admin.messages') }}
+                    {{ __('base.messages') }}
                 </a>
             </li>
             <li class="nav-item m-tabs__item">
                 <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_quick_sidebar_tabs_settings" role="tab">
-                    {{ __('admin.settings') }}
+                    {{ __('base.settings') }}
                 </a>
             </li>
             <li class="nav-item m-tabs__item">
                 <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_quick_sidebar_tabs_logs" role="tab">
-                    {{ __('admin.logs') }}
+                    {{ __('base.logs') }}
                 </a>
             </li>
         </ul>
@@ -58,7 +58,7 @@
                     <div class="m-messenger__seperator"></div>
                     <div class="m-messenger__form">
                         <div class="m-messenger__form-controls">
-                            <input type="text" name="" placeholder="{{ __('admin.type_here') }}" class="m-messenger__form-input">
+                            <input type="text" name="" placeholder="{{ __('base.placeholder.type_here') }}" class="m-messenger__form-input">
                         </div>
                         <div class="m-messenger__form-tools">
                             <a href="" class="m-messenger__form-attachment">
@@ -72,7 +72,7 @@
                 <div class="m-list-settings">
                     <div class="m-list-settings__group">
                         <div class="m-list-settings__heading">
-                            {{ __('admin.general_settings') }}
+                            {{ __('base.general_settings') }}
                         </div>
                         <div class="m-list-settings__item">
                             <span class="m-list-settings__item-label">
@@ -94,7 +94,7 @@
                 <div class="m-list-timeline">
                     <div class="m-list-timeline__group">
                         <div class="m-list-timeline__heading">
-                            {{ __('admin.system_logs') }}
+                            {{ __('base.system_logs') }}
                         </div>
                         @for ($i = 0; $i < 5; $i++)
                         <div class="m-list-timeline__items">
