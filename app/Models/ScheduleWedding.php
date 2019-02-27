@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ScheduleWedding extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'schedule_weddings';
 
     protected $fillable = [
@@ -18,6 +21,8 @@ class ScheduleWedding extends Model
         'note',
         'slug',
     ];
+
+    protected $dates = ['deleted_at'];
 
     public function scheduleMetas()
     {

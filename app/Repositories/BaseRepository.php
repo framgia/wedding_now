@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\ImageManagerStatic as ResizeImage;
 
 /**
  * Interface BaseRepositoryInterface
@@ -45,24 +47,19 @@ class BaseRepository implements RepositoryInterface
         return $this->model->destroy($id);
     }
 
-    public function saveFile($currentFile, $newFile, $path)
+    public function saveFile($currentFile, $newFile, $path, $width, $height)
     {
-        // currentFile: avatar hiện tại
-        // newFile: avatar mới
-        // path: đường dẫn muốn lưu file
-        $name = $newFile->getClientOriginalName();
-        $newName = str_random(4) . '_' . $name;
-        // kiểm tra xem có trùng tên với các file trên server hay k, nếu có thì random tên khác và nối chuỗi
-        while (file_exists($path . $newName)) {
-            $newName = str_random(4) . '_' . $name;
+        if (!File::exists($path)) {
+            File::makeDirectory($path);
         }
-        // kiểm tra xem file có tồn tại trên server hay không, nếu có thì xóa
-        if (file_exists($path . $currentFile) && $currentFile) {
-            unlink($path . $currentFile);
-        }
-        $newFile->move($path, $newName);
 
-        return $newName;
+        $filename = time() . '_' . str_slug($newFile->getClientOriginalName()) . '.' . $newFile->getClientOriginalExtension();
+
+        $file_path = public_path($path . $filename);
+
+        ResizeImage::make($newFile->getRealPath())->resize($width, $height)->save($file_path);
+
+        return $filename;
     }
 
     public function create($data)

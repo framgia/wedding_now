@@ -87,7 +87,9 @@ class UserController extends Controller
                         'name' => $this->userModel->saveFile(
                             ($user->media ? $user->media->name : null),
                             $file,
-                            config('asset.users.avatar')
+                            config('asset.users.avatar'),
+                            80,
+                            80
                         )
                     ]
                 );

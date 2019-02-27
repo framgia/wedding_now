@@ -262,6 +262,7 @@ class ScheduleWeddingController extends Controller
     public function getItemWithVendorPluckByIdCategory(Request $request)
     {
         $category_id = $request->id;
+        
         $items = Item::with('users')
             ->whereHas('categories', function ($query) use ($category_id) {
                 $query->where('category_id', $category_id);

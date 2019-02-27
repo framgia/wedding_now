@@ -157,8 +157,13 @@
                         </form>
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer row">
+                    <div class="col-sm-6"> 
                     {!! Form::submit(__('page.action.save'), ['class' => 'btn save-schedule-info']) !!}
+                </div>
+                <div class="col-sm-6"> 
+                    {!! Form::submit(__('page.action.delete'), ['class' => 'btn delete-schedule-info']) !!}
+                </div>
                 </div>
             </div>
         </div>
@@ -518,6 +523,25 @@
                 else {
 
                     $('.search-venue').hide();
+                }
+            });
+
+            $('.delete-schedule-info').click(function(event) {
+
+                event.preventDefault();
+
+                if (confirm(Lang.get('page.question.delete'))) {
+
+                    $.ajax({
+                        url: route('client.delete-schedule'),
+                        type: 'delete',
+                    })
+                    .done(function(res) {
+                        location.href = route('client.to-do-list');
+                    })
+                    .fail(function() {
+                        toastr.error( Lang.get('page.message.fail') );
+                    })
                 }
             });
         });

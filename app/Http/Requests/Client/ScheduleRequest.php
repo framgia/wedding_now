@@ -24,11 +24,14 @@ class ScheduleRequest extends FormRequest
     public function rules()
     {
         return [
-            'info_schedule.name' => 'required',
-            'info_schedule.budget' => 'required|min:0',
-            'arr_tasks.*.name' => 'required',
-            'arr_tasks.*.category_id' => 'required|integer',
-            'arr_tasks.*.time_frame_id' => 'required|integer',
+            'my_identity' => 'required|string|in:groom,bride',
+            'partner_identity' => 'required|string|in:groom,bride',
+            'my_name' => 'required|string|max:30|min:0|string',
+            'partner_name' => 'required|max:30|min:0|string',
+            'venue' => 'required|string',
+            'wedding_date' => 'required|',
+            'my_avatar' => 'max:2048|mimes:jpg,png',
+            'partner_avatar' => 'max:2048|mimes:jpg,png',
         ];
     }
 }

@@ -3,14 +3,21 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Client\ScheduleRequest;
 use App\Http\Requests\Client\TaskRequest;
 use App\Models\Category;
 use App\Models\Item;
+use App\Models\Location;
+use App\Models\Media;
+use App\Models\ScheduleMeta;
 use App\Models\ScheduleWedding;
 use App\Models\Task;
 use App\Models\TimeFrame;
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Item\ItemRepository;
+use App\Repositories\Location\LocationRepository;
+use App\Repositories\Media\MediaRepository;
+use App\Repositories\ScheduleMeta\ScheduleMetaRepository;
 use App\Repositories\ScheduleWedding\ScheduleWeddingRepository;
 use App\Repositories\Task\TaskRepository;
 use App\Repositories\TimeFrame\TimeFrameRepository;
@@ -18,7 +25,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-use App\Http\Requests\Client\ScheduleRequest;
 use Carbon\Carbon;
 
 class ScheduleController extends Controller
@@ -28,8 +34,11 @@ class ScheduleController extends Controller
     protected $task;
     protected $timeFrame;
     protected $item;
+    protected $meta;
+    protected $media;
+    protected $location;
 
-    public function __construct(ScheduleWedding $scheduleWedding, Task $task, Category $category, TimeFrame $timeFrame, Item $item)
+    public function __construct(ScheduleWedding $scheduleWedding, Task $task, Category $category, TimeFrame $timeFrame, Item $item, ScheduleMeta $meta, Media $media, Location $location)
     {
         $this->categories = new CategoryRepository($category);
 
@@ -40,18 +49,17 @@ class ScheduleController extends Controller
         $this->timeFrame = new TimeFrameRepository($timeFrame);
 
         $this->item = new ItemRepository($item);
+
+        $this->meta = new ScheduleMetaRepository($meta);
+
+        $this->media = new MediaRepository($media);
+
+        $this->location = new LocationRepository($location);
     }
 
     public function toDo()
     {
-        $scheduleWeddings = $this->scheduleWedding->getScheduleClient(Auth::id(), null);
-
-        if (count($scheduleWeddings) == 1) {
-
-            Session::put('schedule_id', $scheduleWeddings[0]->id);
-        }
-
-        $scheduleId = Session::get('schedule_id');
+        $scheduleWeddings = $this->scheduleWedding->checkIssetSchedule();
 
         if (count($scheduleWeddings) == 0 || !Session::has('schedule_id')) {
 
@@ -61,18 +69,14 @@ class ScheduleController extends Controller
 
             $combo = config('define.type_schedule.combo');
 
-            return view('user.list-schedule', compact('scheduleWeddings', 'default', 'custom', 'combo', 'scheduleWeddingId'));
+            return view('user.list-schedule', compact('scheduleWeddings', 'default', 'custom', 'combo'));
         }
 
         $timeFrames = $this->timeFrame->getDataPluck();
 
         $categories = $this->categories->getDataPluck();
 
-        $categoriesWithCountTasks = $this->categories->getCategoriesWithCountTasks($scheduleId);
-
-        $totalTasks = $this->task->getTasksBySchedule($scheduleId);
-
-        return view('user.to-do-list', compact('timeFrames', 'categories', 'scheduleWeddingId', 'categoriesWithCountTasks', 'totalTasks'));
+        return view('user.to-do-list', compact('timeFrames', 'categories'));
     }
 
     public function getToDoList(Request $request)
@@ -84,9 +88,7 @@ class ScheduleController extends Controller
 
         $scheduleId = Session::get('schedule_id');
 
-        $scheduleWedding = $this->scheduleWedding->getScheduleClient(null, $scheduleId);
-
-        $tasks = $this->task->getTasksBySchedule($scheduleWedding->id);
+        $tasks = $this->task->getTasksBySchedule($scheduleId, $request->category_id);
 
         $categories = $this->categories->getDataPluck();
 
@@ -158,37 +160,166 @@ class ScheduleController extends Controller
 
         $type = $request->type;
 
-        if ($type == config('define.type_schedule.default')) {
+        switch ($type) {
+            case config('define.type_schedule.default'):
+                {
+                    $schedule_id = $this->scheduleWedding->getScheduleWeddingDefault()->id;
 
-            $schedule_id = $this->scheduleWedding->getScheduleWeddingDefault()->id;
+                    DB::transaction(function () use ($schedule_id, $type) {
 
-            DB::transaction(function () use ($schedule_id, $type) {
+                        $schedule = $this->scheduleWedding->create([
+                            'name' => config('define.wedding.of') . Auth::user()->name,
+                            'slug' => config('define.wedding.slug') . str_slug(Auth::user()->name),
+                            'user_id' => Auth::id(),
+                            'type' => $type,
+                            'budget' => 0,
+                            'schedule_wedding_id' => $schedule_id,
+                        ]);
 
-                $schedule = $this->scheduleWedding->create([
-                    'name' => config('define.wedding.of') . Auth::user()->name,
-                    'slug' => config('define.wedding.slug') . Auth::user()->name,
-                    'user_id' => Auth::id(),
-                    'type' => $type,
-                    'budget' => 0,
-                    'schedule_wedding_id' => $schedule_id,
-                ]);
+                        Session::put('schedule_id', $schedule->id);
 
-                Session::put('schedule_id', $schedule->id);
+                        $defaultTasks = $this->task->getTasksBySchedule($schedule_id, null);
 
-                $defaultTasks = $this->task->getTasksBySchedule($schedule_id);
+                        foreach ($defaultTasks as $task) {
+                            $this->task->create([
+                                'name' => $task->name,
+                                'priority' => $task->priority,
+                                'category_id' => $task->category_id,
+                                'item_user_id' => $task->item_user_id,
+                                'time_frame_id' => $task->time_frame_id,
+                                'schedule_wedding_id' => $schedule->id,
+                            ]);
+                        }
+                    });
 
-                foreach ($defaultTasks as $task) {
-                    $this->task->create([
-                        'name' => $task->name,
-                        'priority' => $task->priority,
-                        'category_id' => $task->category_id,
-                        'item_user_id' => $task->item_user_id,
-                        'time_frame_id' => $task->time_frame_id,
-                        'schedule_wedding_id' => $schedule->id,
-                    ]);
+                    break;
                 }
-            });
+            case config('define.type_schedule.custom'):
+                {
+                    $schedule = $this->scheduleWedding->create([
+                        'name' => config('define.wedding.of') . Auth::user()->name,
+                        'slug' => config('define.wedding.slug') . str_slug(Auth::user()->name),
+                        'user_id' => Auth::id(),
+                        'type' => $type,
+                        'budget' => 0,
+                    ]);
+
+                    Session::put('schedule_id', $schedule->id);
+
+                    break;
+                }
         }
+    }
+
+    public function getCategoryFilter()
+    {
+        $scheduleId = Session::get('schedule_id');
+
+        $categoriesWithCountTasks = $this->categories->getCategoriesWithCountTasks($scheduleId);
+
+        $totalTasks = $this->task->getTasksBySchedule($scheduleId, null);
+
+        return view('user.sections.category_filter', compact('categoriesWithCountTasks', 'totalTasks'))->render();
+    }
+
+    public function scheduleInfoView()
+    {
+        $scheduleWeddings = $this->scheduleWedding->checkIssetSchedule();
+
+        if (count($scheduleWeddings) == 0 || !Session::has('schedule_id')) {
+
+            $default = config('define.type_schedule.default');
+
+            $custom = config('define.type_schedule.custom');
+
+            $combo = config('define.type_schedule.combo');
+
+            return view('user.list-schedule', compact('scheduleWeddings', 'default', 'custom', 'combo'));
+        }
+
+        return view('user.schedule_info');
+    }
+
+    public function getScheduleInfo()
+    {
+        $id = Session::get('schedule_id');
+
+        $schedule = $this->scheduleWedding->getScheduleClient(null, $id);
+
+        return $schedule;
+    }
+
+    public function changePicture(Request $request)
+    {
+        $scheduleId = Session::get('schedule_id');
+
+        DB::transaction(function () use ($scheduleId, $request) {
+
+            $schedule = $this->scheduleWedding->findById($scheduleId);
+
+            $file_name = $this->scheduleWedding->saveFile(null, $request->img_schedule, config('asset.schedule'), 276, 276);
+
+            $this->media->saveMediaOfSchedule($schedule, [
+                'name' => $file_name,
+            ]);
+        });
+
+        return response()->json([
+            'message' => trans('base.success'),
+        ]);
+    }
+
+    public function updateSchedule(ScheduleRequest $request)
+    {
+        $scheduleId = Session::get('schedule_id');
+
+        DB::transaction(function () use ($scheduleId, $request) {
+
+            $this->scheduleWedding->update($scheduleId, [
+                'marriage_day' => $request->wedding_date,
+            ]);
+
+            $my_avatar = null;
+
+            $partner_avatar = null;
+
+            if ($request->my_avatar) {
+                $my_avatar = $this->scheduleWedding
+                    ->saveFile(null, $request->my_avatar, config('asset.schedule_avatar'), 100, 100);
+            }
+            if ($request->partner_avatar) {
+                $partner_avatar = $this->scheduleWedding
+                    ->saveFile(null, $request->partner_avatar, config('asset.schedule_avatar'), 100, 100);
+            }
+
+            $keyValues = [
+                'my_name' => $request->my_name,
+                'my_identity' => $request->my_identity,
+                'my_avatar' => $my_avatar,
+                'partner_name' => $request->partner_name,
+                'partner_identity' => $request->partner_identity,
+                'partner_avatar' => $partner_avatar,
+            ];
+
+            $this->meta->updateMetas($scheduleId, $keyValues);
+
+            $schedule = $this->scheduleWedding->findById($scheduleId);
+
+            if ($this->location->getLocationOfSchedule($schedule)) {
+                $this->location->updateLocationOfSchedule($schedule, [
+                    'address' => $request->venue,
+                ]);
+            } else {
+                $this->location->createLocationOfSchedule($schedule, [
+                    'address' => $request->venue,
+                    'district_id' => $request->district
+                ]);
+            }
+        });
+
+        return response()->json([
+            'message' => trans('base.success'),
+        ]);
     }
 
     public function planningPackage()
@@ -223,6 +354,22 @@ class ScheduleController extends Controller
         Session::put('schedule_id', $schedule->id);
 
         return redirect('to-do-list');
+    }
+
+    public function destroy()
+    {
+        $scheduleId = Session::get('schedule_id');
+
+        DB::transaction(function () use ($scheduleId) {
+
+            $this->scheduleWedding->destroy($scheduleId);
+
+            Session::forget('schedule_id');
+        });
+
+        return response()->json([
+            'message' => trans('base.success')
+        ]);
     }
 
 }

@@ -4,7 +4,8 @@ namespace App\Repositories\ScheduleWedding;
 
 use App\Models\ScheduleWedding;
 use App\Repositories\BaseRepository;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class ScheduleWeddingRepository extends BaseRepository implements ScheduleWeddingRepositoryInterface
 {
@@ -30,17 +31,19 @@ class ScheduleWeddingRepository extends BaseRepository implements ScheduleWeddin
     public function getScheduleClient($userId, $scheduleId)
     {
         if ($userId != null) {
-            $schedules = ScheduleWedding::where([
+            $schedules = ScheduleWedding::with('scheduleMetasPluck')->where([
                 ['schedule_wedding_id', '!=', null],
                 ['user_id', '=', $userId],
-            ])->get();
+            ])->orWhere([
+                ['user_id', '=', $userId],
+                ['type', '=', config('define.type_schedule.custom')],
+            ])->orderBy('id', 'desc')->get();
 
             return $schedules;
         }
-        $schedule = ScheduleWedding::where([
-            ['schedule_wedding_id', '!=', null],
-            ['id', '=', $scheduleId],
-        ])->first();
+
+        $schedule = ScheduleWedding::with(['scheduleMetasPluck', 'user', 'user.media', 'imgMain', 'location'])
+            ->where('id', '=', $scheduleId)->first();
 
         return $schedule;
     }
@@ -52,5 +55,17 @@ class ScheduleWeddingRepository extends BaseRepository implements ScheduleWeddin
         $data['slug'] = str_slug($data['name']);
 
         return $this->model->create($data);
+    }
+    public function checkIssetSchedule()
+    {
+        $scheduleWeddings = $this->getScheduleClient(Auth::id(), null);
+
+        if (count($scheduleWeddings) == 1) {
+
+            Session::put('schedule_id', $scheduleWeddings[0]->id);
+        }
+
+        return $scheduleWeddings;
+
     }
 }
