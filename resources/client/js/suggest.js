@@ -24,11 +24,13 @@ jQuery(document).ready(function($) {
     function showInputBudget() {
         $('#item').hide();
         $('#budget').show();
+        $('.reset-item').hide();
     }
 
     function hideInputBudget() {
         $('#item').show();
         $('#budget').hide();
+        $('.reset-item').show();
     }
 
     function showInputNote() {
@@ -59,14 +61,14 @@ jQuery(document).ready(function($) {
         $(this).parent('li').addClass('active');
         $('.close-item').addClass('show');
         $('#budget').removeClass('budget');
+        $('.marry-day').hide();
 
-        let idTask = $(this).data('id');
         let price = parseFloat($(this).find('span.currency').text().replace(',', '.')) * 1000000;
         let text = $(this).children('span.name').text();
 
         $('span.c-name').text(text);
         $('#item').val(price);
-
+        $('.text-note').text(text);
         let textNote = $(this).find('input.task_note').val();
         $('.t-note').val(textNote);
         hideInputBudget();
@@ -78,6 +80,8 @@ jQuery(document).ready(function($) {
         $('#budget').addClass('budget');
         $('.side-bar li').removeClass('active');
         $('span.c-name').text(home);
+        $('.marry-day').show();
+        $('.text-note').text('');
         showInputBudget();
         showInputNote();
     });
@@ -107,7 +111,7 @@ jQuery(document).ready(function($) {
             newCate += '<a href="#" data-percent="" class="list-category">';
             newCate += '<span class="name">' + category + '</span>';
             newCate += '<i class="fa fa-angle-right" aria-hidden="true"></i>';
-            newCate += '<span class="currency"></span>';
+            newCate += '<span class="currency">0</span>';
             newCate += '<input class="price" name="price[]" type="hidden">';
             newCate += '<input class="task_note" name="task_note[]" type="hidden">';
             newCate += '</a>';
@@ -119,4 +123,11 @@ jQuery(document).ready(function($) {
         $('#newCate').modal('hide');
     });
 
+    $('.reset-item').on('click', function() {
+        let itemValue = $(this).prev('.item').val();
+        $(this).prev('.item').val(0);
+        $('.side-bar').find('li.active span.currency').text(0);
+        $('.side-bar').find('li.active input.price').val(0);
+        getValueItem(itemValue, 0);
+    });
 });
