@@ -24,9 +24,16 @@ class ScheduleWedding extends Model
         return $this->hasMany(ScheduleMeta::class);
     }
 
+    public function scheduleMetasPluck()
+    {
+        return $this->scheduleMetas()
+            ->join('schedule_weddings', 'schedule_weddings.id', '=', 'schedule_metas.schedule_wedding_id')
+            ->select('schedule_metas.schedule_wedding_id', 'schedule_metas.key', 'schedule_metas.value');
+    }
+
     public function location()
     {
-        return $this->morphOne(Location::class, 'localtionable');
+        return $this->morphOne(Location::class, 'locationable');
     }
 
     public function medias()
@@ -42,5 +49,15 @@ class ScheduleWedding extends Model
     public function tasks()
     {
         return $this->hasMany(Task::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function imgMain()
+    {
+        return $this->medias()->orderBy('id', 'desc')->limit(1);
     }
 }
