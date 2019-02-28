@@ -45,6 +45,7 @@ class UsersTableSeeder extends Seeder
             'gender' => 'male',
             'phone' => '0123456789',
         ];
+        
         $user = User::create($user);
 
         //4) Set User Role
@@ -55,5 +56,35 @@ class UsersTableSeeder extends Seeder
             'address' => 'asasd asdasd',
             'district_id' => 1,
         ]);
+
+        $data = [
+            [
+                'name' => 'Nguyen Van B',
+                'user_name' => 'ann1',
+                'birthday' => Carbon::create('1994', '12', '23'),
+                'email' => 'admin1@gmail.com',
+                'password' => bcrypt('123456'),
+                'gender' => 'male',
+                'phone' => '0123456788',
+            ], [
+                'name' => 'Nguyen Van C',
+                'user_name' => 'ann2',
+                'birthday' => Carbon::create('1994', '12', '23'),
+                'email' => 'admin2@gmail.com',
+                'password' => bcrypt('123456'),
+                'gender' => 'male',
+                'phone' => '0123456787',
+            ], [
+                'name' => 'Nguyen Van D',
+                'user_name' => 'ann3',
+                'birthday' => Carbon::create('1994', '12', '23'),
+                'email' => 'admin3@gmail.com',
+                'password' => bcrypt('123456'),
+                'gender' => 'male',
+                'phone' => '0123456786',
+            ],
+        ];
+
+        DB::table('users')->insert($data);
     }
 }

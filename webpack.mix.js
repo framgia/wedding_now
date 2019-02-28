@@ -19,7 +19,7 @@ const WebpackShellPlugin = require('webpack-shell-plugin');
 mix.webpackConfig({
     plugins:
     [
-        new WebpackShellPlugin({onBuildStart:['php artisan lang:js'], onBuildEnd:[]})
+        new WebpackShellPlugin({onBuildStart:['php artisan lang:js --quiet'], onBuildEnd:[]})
     ]
 });
 
@@ -38,6 +38,7 @@ mix.copyDirectory('resources/assets', 'public/assets');
 mix.copyDirectory('resources/client/fonts', 'public/assets/user/fonts');
 mix.copyDirectory('node_modules/font-awesome/fonts', 'public/assets/user/fonts');
 mix.copyDirectory('node_modules/font-awesome/css/font-awesome.min.css', 'public/assets/user/css/fontawesome.css');
+mix.copyDirectory('resources/images/', 'public/storage/');
 
 mix.styles([
     'node_modules/bootstrap/dist/css/bootstrap.min.css',

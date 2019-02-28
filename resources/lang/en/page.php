@@ -149,6 +149,7 @@ return [
     'message' => [
         'fail' => 'Something wrong, please try again',
     ],
+    'your_list_schedule' => 'Your List Schedule',
     'suggest' => [
         'new_category' => 'New category',
         'budget' => 'Budget',

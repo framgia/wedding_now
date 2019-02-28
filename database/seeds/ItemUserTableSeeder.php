@@ -14,43 +14,43 @@ class ItemUserTableSeeder extends Seeder
     {
         $data = [
             [
-                'user_id' => 5,
+                'user_id' => 2,
                 'item_id' => 1,
                 'price' => 100,
             ], [
-                'user_id' => 5,
+                'user_id' => 2,
                 'item_id' => 2,
                 'price' => 213,
             ], [
-                'user_id' => 6,
+                'user_id' => 3,
                 'item_id' => 3,
                 'price' => 123,
             ], [
-                'user_id' => 6,
+                'user_id' => 3,
                 'item_id' => 2,
                 'price' => 123,
             ], [
-                'user_id' => 6,
+                'user_id' => 3,
                 'item_id' => 4,
                 'price' => 4234,
             ], [
-                'user_id' => 7,
+                'user_id' => 4,
                 'item_id' => 5,
                 'price' => 234,
             ], [
-                'user_id' => 8,
+                'user_id' => 5,
                 'item_id' => 2,
                 'price' => 345,
             ], [
-                'user_id' => 7,
+                'user_id' => 2,
                 'item_id' => 3,
                 'price' => 234,
             ], [
-                'user_id' => 9,
+                'user_id' => 3,
                 'item_id' => 1,
                 'price' => 567,
             ], [
-                'user_id' => 9,
+                'user_id' => 2,
                 'item_id' => 3,
                 'price' => 100,
             ], [

@@ -76,7 +76,7 @@ class ScheduleController extends Controller
 
         $categories = $this->categories->getDataPluck();
 
-        return view('user.to-do-list', compact('timeFrames', 'categories'));
+        return view('user.to-do-list', compact('timeFrames', 'categories', 'scheduleWeddings'));
     }
 
     public function getToDoList(Request $request)

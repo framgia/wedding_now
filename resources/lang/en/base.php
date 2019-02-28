@@ -22,6 +22,7 @@ return [
     'title' => 'Title',
     'budget' => 'Budget',
     'note' => 'Note',
+    'priority' => 'Priority',
     // end other
 
     // button
@@ -39,6 +40,7 @@ return [
     'search' => 'Search',
     'upload_file' => 'Upload file',
     'choose' => 'Choose',
+    'close' => 'Close',
     // end button
 
     // model
@@ -54,6 +56,8 @@ return [
     'task' => 'Task',
     'time_frame' => 'Time frame',
     'user' => 'User',
+    'category' => 'Category',
+
     // end model
 
     // placeholder

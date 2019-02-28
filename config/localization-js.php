@@ -15,6 +15,7 @@ return [
         'admin',
         'validation',
         'page',
+        'base',
     ],
 
     /*
