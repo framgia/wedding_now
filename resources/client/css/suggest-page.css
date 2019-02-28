@@ -22,6 +22,7 @@ i.fa.fa-usd {
 span.c-name {
     font-weight: bold;
     font-size: 20px;
+    color: #ff4061;
 }
 
 a.remove {
@@ -47,7 +48,7 @@ a.remove {
     text-align: center;
 }
 
-i.fa.fa-angle-right {
+.side-bar i.fa.fa-angle-right {
     float: right;
 }
 
@@ -171,4 +172,28 @@ button.btn-new{
 
 button.btn-new:focus {
     outline: none;
+}
+
+.marry-day {
+    padding: 35px 20px 0;
+}
+
+.marry-day input {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 3px 10px;
+    text-align: center;
+}
+
+.marry-day span {
+    font-weight: 600;
+    color: #0abde3;
+    font-size: 20px;
+    margin-right: 15px;
+}
+
+span.reset-item {
+    color: #ff4061;
+    margin-left: 15px;
+    cursor: pointer;
 }

@@ -29,4 +29,5 @@ return [
     'main_schedule' => 'storage/wedding/main-schedule.jpg',
     'ring_img' => 'storage/wedding/icon_ring.png',
     'default_avatar' => 'storage/avatar/user_default.png',
+    'days' => 30,
 ];

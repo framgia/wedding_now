@@ -19,6 +19,14 @@
                             {!! Form::text('name', __('page.suggest.schedule_of') . Auth::user()->name, ['class' => 's-name', 'title' => __('page.suggest.edit_title')]) !!}
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </div>
+                        <div class="marry-day">
+                            <div class="row">
+                                <div class="col-sm-6 col-sm-offset-3 text-center">
+                                    <span>{{ __('page.suggest.marry_day') }}:</span>
+                                    {!! Form::date('marriage_day', $time, ['class' => 'marryage_day']) !!}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -57,18 +65,20 @@
         <!-- Modal -->
         <div class="modal fade login-model" id="newCate" role="dialog">
             <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h5 class="modal-title text-center">{{ __('page.suggest.new_category') }}</h5>
-                    </div>
-                    <div class="modal-body login-model-body text-center">
-                        <div class="form-group">
-                            {!! Form::text('new_category', null, ['class' => 'form-control new-cate', 'placeholder' => __('page.placeholder.category')]) !!}
+                {!! Form::open([]) !!}
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h5 class="modal-title text-center">{{ __('page.suggest.new_category') }}</h5>
                         </div>
-                        {!! Form::button(__('page.action.create'), ['class' => 'btn btn-default create-cate']) !!}
+                        <div class="modal-body login-model-body text-center">
+                            <div class="form-group">
+                                {!! Form::text('new_category', null, ['class' => 'form-control new-cate', 'placeholder' => __('page.placeholder.category')]) !!}
+                            </div>
+                            {!! Form::button(__('page.action.create'), ['class' => 'btn btn-default create-cate']) !!}
+                        </div>
                     </div>
-                </div>
+                {!! Form::close() !!}
             </div>
         </div>
     </section>

@@ -157,5 +157,7 @@ return [
         'schedule_of' => 'Schedule Wedding Of ',
         'schedule_name' => 'Schedule name',
         'edit_title' => 'Click here to edit title',
+        'marry_day' => 'Marryage Day',
+        'venue' => 'Venue',
     ],
 ];

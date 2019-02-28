@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\Client\ScheduleRequest;
+use Carbon\Carbon;
 
 class ScheduleController extends Controller
 {
@@ -197,16 +198,13 @@ class ScheduleController extends Controller
 
     public function suggestions()
     {
-        $scheduleWedding = $this->scheduleWedding->getData(['tasks.timeFrame'], ['user_id' => Auth::id(), 'type' => 'client']);
+        $scheduleWedding = $this->scheduleWedding->getData(['tasks.timeFrame'], ['type' => 'suggest'])->first();
+        $time = Carbon::now()->addDays(config('define.days'));
 
-        if (count($scheduleWedding) == 0) {
-            $scheduleWedding = $this->scheduleWedding->getData(['tasks.timeFrame'], ['type' => 'suggest'])->first();
-        }
-
-        return view('user.planning-suggest', compact('scheduleWedding'));
+        return view('user.planning-suggest', compact('scheduleWedding', 'time'));
     }
 
-    public function store(ScheduleRequest $request)
+    public function store(Request $request)
     {
         $schedule = $this->scheduleWedding->store($request->all());
         foreach ($request->task_name as $key => $taskName) {
@@ -224,7 +222,7 @@ class ScheduleController extends Controller
         Session::forget('schedule_id');
         Session::put('schedule_id', $schedule->id);
 
-        return redirect('to-do-list')->with('success', trans('base.success'));
+        return redirect('to-do-list');
     }
 
 }
