@@ -58,6 +58,8 @@ Route::group(['namespace' => 'User'], function () {
         Route::get('schedule/{slug}', 'ScheduleController@show')->name('schedule.show');
 
         Route::get('search-venue/{keyword}', 'LocationController@getDistrict')->name('client.get-district');
+
+        Route::delete('delete-schedule', 'ScheduleController@destroy')->name('client.delete-schedule');
     });
 });
 

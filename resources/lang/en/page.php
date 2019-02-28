@@ -87,6 +87,7 @@ return [
     ],
     'question' => [
         'choose_type_schedule' => 'Which do you want to make your schedule ?',
+        'delete' => 'Are you want to delete?',
     ],
     'type_chedule' => [
         'default' => 'Choose Default',
@@ -122,7 +123,8 @@ return [
         'update' => 'Update',
         'save' => 'Save',
         'back' => 'Back',
-        'edit' => 'Edit'
+        'edit' => 'Edit',
+        'delete' => 'Delete',
     ],
     'filter' => [
         'by_category' => ' By Category',

@@ -22,6 +22,8 @@ jQuery(document).ready(function($) {
             reader.readAsDataURL(this.files[0]);
 
             submitForm();
+
+            location.reload();
         }
     });
 

@@ -279,13 +279,13 @@
 }
 
 .save-schedule-info {
-    width: 20% !important;
-    margin-right: 40%;
-    border-radius: 5px;
+    width: 30% !important;
+    margin-right: 35%;
+    border-radius: 5px !important;
     background-color: rgb(25, 188, 188) !important;
     z-index: 1;
     position: relative;
-    /*font-size: 13px;*/
+    font-size: 13px;
     text-align: center;
     color: #fff;
     line-height: 1.88;
@@ -300,6 +300,17 @@
 .save-schedule-info:hover {
     background-color: rgb(25, 169, 188) !important;
     color: #fff;
+}
+
+.delete-schedule-info {
+    width: 30%;
+    padding: 8px 0px;
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+    background-color: rgb(236, 9, 49) !important;
+    border-radius: 5px !important;
+    margin-right: 35%;
 }
 
 .avatar-left:hover {
