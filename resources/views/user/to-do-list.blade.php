@@ -9,7 +9,6 @@
 @endsection
 
 @section('main-content')
-    <!-- to do list -->
     <section id="to-do-list" class="to-do-list-main-block">
         <div class="container">
             <ul class="to-do-list-tabs general-nav-tabs tabs">
@@ -21,7 +20,10 @@
                 <li><a href="#" class="btn btn-default"><span class="badge">{{ __('page.page.real_wedding') }}</span></a></li>
             </ul>
             <div class="to-do-list-block">
-                <h3 class="create-task-heading">{{ __('page.page.to_do_list') }}</h3>
+                <h3 class="create-task-heading">
+                    {!! Form::submit('Choose Schedule', ['id' => 'btn-choose-schedule', 'class' => 'btn btn-info', 'data-toggle' => 'modal', 'data-target' => '#myModal']) !!}
+                    {{ __('page.page.to_do_list') }}
+                </h3>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="create-btn padding-bottom-10">
@@ -60,12 +62,38 @@
                         <div id="show-list-category"></div>
                     </div>
                     <div class="col-md-6" id="list_tasks">
-                        {!! Form::hidden('schedule_choose', Session::get('schedule_id'), ['id' => 'schudule-choose']) !!}
+                        
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content model-schedule-info">
+                <div class="modal-header">
+                    <button type="button" class="modal-close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center">{{ __('page.your_list_schedule') }}</h4>
+                </div>
+                <div class="modal-body row">
+                    <div class="col-lg-12">
+                        @foreach ($scheduleWeddings as $scheduleWedding)
+                            <div class="col-lg-6 padding-bottom-15">
+                                <h5 class="padding-top-10">{{ $scheduleWedding->name }}</h5>
+                                <p>{{ __('page.marrige_day') . $scheduleWedding->marriage_day }}</p>
+                                <button class="btn btn-info btn-choose-schedule"
+                                        data-id="{{ $scheduleWedding->id }}">{{ __('page.choose') }}</button>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="modal-footer row">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('base.close') }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script')
@@ -346,6 +374,26 @@
                     errors.forEach(function(value, index) {
                         toastr.error(value[1][0], 'Error!');
                     });
+                })
+            });
+
+            $('.btn-choose-schedule').click(function(event) {
+
+                event.preventDefault();
+
+                let id = $(this).attr('data-id');
+
+                $.ajax({
+                    url: route('client.get-to-do-list'),
+                    type: 'get',
+                    dataType: '',
+                    data: { id_choose: id },
+                })
+                .done(function (res) {
+                    location.reload();
+                })
+                .fail(function () {
+                    toastr.error( Lang.get('page.message.fail') );
                 })
             });
         });

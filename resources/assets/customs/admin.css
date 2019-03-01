@@ -35,6 +35,11 @@
     margin-left: 56px;
 }
 
+.task-delete {
+    margin-top: 19px;
+    margin-left: 56px;
+}
+
 .task-note {
     height: 100px;
 }

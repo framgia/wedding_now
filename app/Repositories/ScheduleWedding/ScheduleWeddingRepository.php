@@ -31,7 +31,7 @@ class ScheduleWeddingRepository extends BaseRepository implements ScheduleWeddin
     public function getScheduleClient($userId, $scheduleId)
     {
         if ($userId != null) {
-            $schedules = ScheduleWedding::with('scheduleMetasPluck')->where([
+            $schedules = ScheduleWedding::with(['scheduleMetasPluck', 'user', 'user.media', 'imgMain', 'location'])->where([
                 ['schedule_wedding_id', '!=', null],
                 ['user_id', '=', $userId],
             ])->orWhere([
