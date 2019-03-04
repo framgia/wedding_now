@@ -30,8 +30,8 @@ class ScheduleRequest extends FormRequest
             'partner_name' => 'required|max:30|min:0|string',
             'venue' => 'required|string',
             'wedding_date' => 'required|',
-            'my_avatar' => 'max:2048|mimes:jpg,png',
-            'partner_avatar' => 'max:2048|mimes:jpg,png',
+            'my_avatar' => 'max:2048|image|mimes:png',
+            'partner_avatar' => 'max:2048|image|mimes:png',
         ];
     }
 }
