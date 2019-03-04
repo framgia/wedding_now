@@ -24,7 +24,7 @@
                 <h3 class="create-task-heading">{{ __('page.my_wedding') }}</h3>
                 <div class="col-lg-12 padding-left-right-0">
                     <div class="dash-image">
-                        {!! Form::open(['id' => 'upload-image-schedule']) !!}
+                        {!! Form::open(['id' => 'upload-image-schedule', 'file' => true]) !!}
                             {!! Form::submit(__('page.change_photo'), ['class' => 'dash-btn-change-photo']) !!}
                             {!! Form::file('img_schedule', ['class' => 'img-file d-none']) !!}
                         {!! Form::close() !!}
@@ -357,8 +357,16 @@
                     toastr.success(res.message);
                     presentScheduleInfoPage(getScheduleInfo());
                 })
-                .fail(function() {
-                    toastr.error( Lang.get('page.message.fail') );
+                .fail(function(xhr, status, error) {
+
+                    var message = JSON.parse(xhr.responseText);
+
+                    var errors = Object.entries(message.errors);
+
+                    errors.forEach(function(value, index) {
+
+                        toastr.error(value[1][0], 'Error!');
+                    });
                 })
             });
 

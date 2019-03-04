@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\ScheduleRequest;
 use App\Http\Requests\Client\TaskRequest;
+use App\Http\Requests\Client\UpdateSchedulePicture;
 use App\Models\Category;
 use App\Models\Item;
 use App\Models\Location;
@@ -249,7 +250,7 @@ class ScheduleController extends Controller
         return $schedule;
     }
 
-    public function changePicture(Request $request)
+    public function changePicture(UpdateSchedulePicture $request)
     {
         $scheduleId = Session::get('schedule_id');
 
