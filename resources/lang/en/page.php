@@ -7,6 +7,7 @@ return [
         'home' => 'Wedding Now',
         'planning_package' => 'Planning Package',
         'planning_suggestions' => 'Suggestions for you',
+        'timeline' => 'Timeline',
     ],
 
     'page' => [
@@ -19,6 +20,7 @@ return [
         'real_wedding' => 'Real Wedding',
         'planning_package' => 'Planning Package',
         'planning_suggestions' => 'Suggestions for you',
+        'timeline' => 'Timeline',
     ],
 
     'index' => [
@@ -162,5 +164,9 @@ return [
         'edit_title' => 'Click here to edit title',
         'marry_day' => 'Marryage Day',
         'venue' => 'Venue',
+    ],
+    'timeline' => [
+        'more' => 'Show more',
+        'less' => 'Show less',
     ],
 ];
