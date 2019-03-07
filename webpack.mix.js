@@ -70,6 +70,7 @@ mix.scripts([
     'node_modules/jquery.counterup/jquery.counterup.min.js',
     'node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
     'node_modules/toastr/build/toastr.min.js',
+    'node_modules/interactjs/dist/interact.js',
     ], 'public/assets/user/js/page.js');
 
 //mix js admin

@@ -64,6 +64,8 @@ Route::group(['namespace' => 'User'], function () {
         Route::delete('delete-schedule', 'ScheduleController@destroy')->name('client.delete-schedule');
 
         Route::get('timeline', 'ScheduleController@timeline');
+
+        Route::get('design-invitation', 'CardController@index')->name('client.design-card');
     });
 });
 
