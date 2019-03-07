@@ -1,5 +1,5 @@
 body {
-    font-family: 'Lora', sans-serif;
+    font-family: 'aleo', sans-serif;
     font-weight: 400;
     color: #333;
     font-size: 14px;
@@ -19,7 +19,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Lora', sans-serif;
+    font-family: 'aleo', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 500;
@@ -72,7 +72,7 @@ a:active {
 }
 
 p {
-    font-family: 'Lora', sans-serif;
+    font-family: 'aleo', sans-serif;
     font-weight: 400;
     color: #333;
     font-size: 15px;
@@ -294,7 +294,7 @@ ul {
 }
 
 .read-more {
-    font-family: 'Lora', sans-serif;
+    font-family: 'aleo', sans-serif;
     font-weight: 700;
     padding: 0;
     font-size: 14px;
@@ -389,7 +389,7 @@ ul {
 .search-box {
     width: 95%;
     border: none;
-    font-family: 'Lora', sans-serif;
+    font-family: 'aleo', sans-serif;
     font-size: 14px;
     color: #999;
     text-transform: uppercase;
@@ -397,7 +397,7 @@ ul {
 }
 
 .search-box::-webkit-input-placeholder {
-    font-family: 'Lora', sans-serif;
+    font-family: 'aleo', sans-serif;
     font-size: 14px;
     font-weight: 900;
     color: #999;

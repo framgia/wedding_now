@@ -58,6 +58,7 @@ mix.styles([
     'resources/client/css/to-do-list.css',
     'resources/client/css/schedule-info.css',
     'resources/client/css/suggest-page.css',
+    'resources/client/css/timeline.css',
 ], 'public/assets/user/css/page.css');
 
 mix.scripts([

@@ -373,4 +373,9 @@ class ScheduleController extends Controller
         ]);
     }
 
+    public function timeline()
+    {
+        return view('user.timeline');
+    }
+
 }
