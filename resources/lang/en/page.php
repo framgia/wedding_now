@@ -23,6 +23,7 @@ return [
         'planning_package' => 'Planning Package',
         'planning_suggestions' => 'Suggestions for you',
         'timeline' => 'Timeline',
+        'design_card' => 'Design Card',
     ],
 
     'index' => [
@@ -181,5 +182,23 @@ return [
         'my_wedding' => 'My Wedding',
         'todo_list' => 'To Do List',
         'timeline' => 'Timeline',
-    ]
+    ],
+    'design_card' => [
+        'add_text_box' => 'Add text box',
+        'choose' => [
+            'font' => 'Choose Font',
+            'align' => 'Choose Align',
+            'size' => 'Choose size',
+            'height_line' => 'Choose Height Line',
+            'width' => 'Choose Width',
+            'height' => 'Choose Height',
+        ],
+        'placeholder_text_box' => 'Enter Some Text Here',
+        'align' => [
+            'start' => 'Start',
+            'center' => 'Center',
+            'left' => 'Left',
+            'right' => 'Right',
+        ]
+    ],
 ];
