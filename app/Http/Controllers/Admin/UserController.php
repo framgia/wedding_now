@@ -98,8 +98,6 @@ class UserController extends Controller
     public function show($id)
     {
         $user = $this->user->findById($id)->load('roles', 'locations.district.city');
-        // $roles = Role::pluck('name', 'id');
-        // $city = City::pluck('name', 'id');
 
         return $user;
     }

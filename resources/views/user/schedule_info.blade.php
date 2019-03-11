@@ -12,14 +12,7 @@
     <!-- to do list -->
     <section id="to-do-list" class="to-do-list-main-block">
         <div class="container">
-            <ul class="to-do-list-tabs general-nav-tabs tabs">
-                <li><a href="{{ route('client.schedule') }}" class=" active btn btn-default"><span class="badge">{{ __('page.page.dashboard') }}</span></a></li>
-                <li><a href="#" class="btn btn-default"><span class="badge">{{ __('page.page.profile') }}</span></a></li>
-                <li><a href="{{ route('client.to-do-list') }}" class="btn btn-default"><span class="badge">{{ __('page.page.to_do_list') }}</span></a></li>
-                <li><a href="#" class="btn btn-default"><span class="badge">{{ __('page.page.my_budget') }}</span></a></li>
-                <li><a href="#" class="btn btn-default"><span class="badge">{{ __('page.page.my_wishlist') }}</span></a></li>
-                <li><a href="#" class="btn btn-default"><span class="badge">{{ __('page.page.real_wedding') }}</span></a></li>
-            </ul>
+            @include('user.sections.to_do_list_tab')
             <div class="to-do-list-block">
                 <h3 class="create-task-heading">{{ __('page.my_wedding') }}</h3>
                 <div class="col-lg-12 padding-left-right-0">
@@ -158,10 +151,10 @@
                     </div>
                 </div>
                 <div class="modal-footer row">
-                    <div class="col-sm-6"> 
+                    <div class="col-sm-6">
                     {!! Form::submit(__('page.action.save'), ['class' => 'btn save-schedule-info']) !!}
                 </div>
-                <div class="col-sm-6"> 
+                <div class="col-sm-6">
                     {!! Form::submit(__('page.action.delete'), ['class' => 'btn delete-schedule-info']) !!}
                 </div>
                 </div>
@@ -293,12 +286,12 @@
                     let path = $('.avatar-left').attr('data-path');
 
                     if(my_avatar != null) {
-                     
+
                         $('.avatar-left').attr('src', path + my_avatar);
                     }
 
                     if(partner_avatar != null) {
-                    
+
                         $('.avatar-right').attr('src', path + partner_avatar);
                     }
                 }
@@ -452,7 +445,7 @@
             });
 
             $('.avatar-right').click(function(event) {
-                
+
                event.preventDefault();
 
                $('.avatar-right-input').click();
@@ -486,7 +479,7 @@
                         type: 'GET',
                         beforeSend: function() {
                             $('.spin-custom').removeClass('d-none');
-                        }   
+                        }
                     })
                     .done(function(res) {
 
@@ -513,9 +506,9 @@
                         }, 300);
                     })
                     .fail(function() {
-                        
+
                         $('.search-venue').hide();
-                    }) 
+                    })
 
                     $('.list-venue p').click(function(event) {
 
