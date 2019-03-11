@@ -168,5 +168,16 @@ return [
     'timeline' => [
         'more' => 'Show more',
         'less' => 'Show less',
+        'undefined' => 'Undefined',
+        'no_note' => 'No notes',
+        'high' => 'HIGH',
+        'task' => 'Tasks',
+        'budget' => 'Budget',
+        'marriage_day' => 'Marriage Day',
     ],
+    'header' => [
+        'my_wedding' => 'My Wedding',
+        'todo_list' => 'To Do List',
+        'timeline' => 'Timeline',
+    ]
 ];

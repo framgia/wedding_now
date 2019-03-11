@@ -6,12 +6,12 @@
     padding: 14px 20px;
 }
 
-i.fa.fa-plus-circle {
+.suggest i.fa.fa-plus-circle {
     color: #ff4061;
     margin-right: 6px;
 }
 
-i.fa.fa-usd {
+.suggest i.fa.fa-usd {
     font-size: 35px;
     border: 1px solid #ddd;
     padding: 11px 19px;

@@ -35,6 +35,7 @@
         "mapit": "0.0.21",
         "owl.carousel": "^2.3.4",
         "toastr": "^2.1.4",
-        "waypoints": "^4.0.1"
+        "waypoints": "^4.0.1",
+        "wow.js": "^1.2.2"
     }
 }

@@ -76,6 +76,11 @@
     src: url('../fonts/Youngblood.ttf');
 }
 
+@font-face {
+    font-family: caviar;
+    src: url('../fonts/UVF Caviar Dreams Bold.ttf');
+}
+
 .navigation #cssmenu ul li a {
     font-family: punchbowl;
     font-size: 12px;

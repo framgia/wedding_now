@@ -45,6 +45,7 @@ mix.styles([
     'node_modules/owl.carousel/dist/assets/owl.carousel.css',
     'node_modules/js-datepicker/dist/datepicker.min.css',
     'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
+    'node_modules/wow.js/css/libs/animate.css',
     'resources/client/css/flaticon.css',
     'resources/client/css/layers.css',
     'resources/client/css/magnific-popup.css',
@@ -70,6 +71,8 @@ mix.scripts([
     'node_modules/jquery.counterup/jquery.counterup.min.js',
     'node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
     'node_modules/toastr/build/toastr.min.js',
+    'node_modules/wow.js/dist/wow.min.js',
+    'resources/client/js/custom.js'
     ], 'public/assets/user/js/page.js');
 
 //mix js admin
