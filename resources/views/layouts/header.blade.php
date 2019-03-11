@@ -52,11 +52,7 @@
                                     <li><a href="guest-list.html">Guest List</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#">Real Weddings<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                                <ul class="sub-menu">
-                                    <li><a href="real-wedding-listing.html">Real Wedding Listing</a></li>
-                                    <li><a href="real-wedding-single-listing.html">Real Wedding single Listing</a></li>
-                                </ul>
+                            <li><a href="{{ route('real-wedding.index') }}">{{ __('page.page.real_wedding') }}</a>
                             </li>
                             <li><a href="#">Contact<i class="fa fa-angle-down"></i></a>
                                 <ul class="sub-menu">

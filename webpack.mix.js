@@ -59,6 +59,7 @@ mix.styles([
     'resources/client/css/schedule-info.css',
     'resources/client/css/suggest-page.css',
     'resources/client/css/timeline.css',
+    'resources/client/css/real_wedding.css',
 ], 'public/assets/user/css/page.css');
 
 mix.scripts([

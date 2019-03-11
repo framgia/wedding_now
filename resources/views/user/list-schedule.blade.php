@@ -12,20 +12,7 @@
     <!-- to do list -->
     <section id="to-do-list" class="to-do-list-main-block">
         <div class="container">
-            <ul class="to-do-list-tabs general-nav-tabs tabs">
-                <li><a href="#" class="btn btn-default"><span class="badge">{{ __('page.page.dashboard') }}</span></a>
-                </li>
-                <li><a href="#" class="btn btn-default"><span class="badge">{{ __('page.page.profile') }}</span></a>
-                </li>
-                <li><a href="#" class="active btn btn-default"><span
-                                class="badge">{{ __('page.page.to_do_list') }}</span></a></li>
-                <li><a href="#" class="btn btn-default"><span class="badge">{{ __('page.page.my_budget') }}</span></a>
-                </li>
-                <li><a href="#" class="btn btn-default"><span class="badge">{{ __('page.page.my_wishlist') }}</span></a>
-                </li>
-                <li><a href="#" class="btn btn-default"><span
-                                class="badge">{{ __('page.page.real_wedding') }}</span></a></li>
-            </ul>
+            @include('user.sections.to_do_list_tab')
             <div class="to-do-list-block">
                 @if(count($scheduleWeddings) > 1)
                     @foreach ($scheduleWeddings as $scheduleWedding)
@@ -70,7 +57,7 @@
 @section('script')
     <script type="text/javascript" defer="">
         jQuery(document).ready(function ($) {
-            
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),

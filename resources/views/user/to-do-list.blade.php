@@ -11,14 +11,7 @@
 @section('main-content')
     <section id="to-do-list" class="to-do-list-main-block">
         <div class="container">
-            <ul class="to-do-list-tabs general-nav-tabs tabs">
-                <li><a href="{{ route('client.schedule') }}" class="btn btn-default"><span class="badge">{{ __('page.page.dashboard') }}</span></a></li>
-                <li><a href="#" class="btn btn-default"><span class="badge">{{ __('page.page.profile') }}</span></a></li>
-                <li><a href="{{ route('client.to-do-list') }}" class="active btn btn-default"><span class="badge">{{ __('page.page.to_do_list') }}</span></a></li>
-                <li><a href="#" class="btn btn-default"><span class="badge">{{ __('page.page.my_budget') }}</span></a></li>
-                <li><a href="#" class="btn btn-default"><span class="badge">{{ __('page.page.my_wishlist') }}</span></a></li>
-                <li><a href="#" class="btn btn-default"><span class="badge">{{ __('page.page.real_wedding') }}</span></a></li>
-            </ul>
+            @include('user.sections.to_do_list_tab')
             <div class="to-do-list-block">
                 <h3 class="create-task-heading">
                     {!! Form::submit('Choose Schedule', ['id' => 'btn-choose-schedule', 'class' => 'btn btn-info', 'data-toggle' => 'modal', 'data-target' => '#myModal']) !!}
@@ -62,7 +55,7 @@
                         <div id="show-list-category"></div>
                     </div>
                     <div class="col-md-6" id="list_tasks">
-                        
+
                     </div>
                 </div>
             </div>
