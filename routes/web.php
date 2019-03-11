@@ -69,7 +69,7 @@ Route::group(['namespace' => 'User'], function () {
 
         Route::delete('delete-schedule', 'ScheduleController@destroy')->name('client.delete-schedule');
 
-        Route::get('timeline', 'ScheduleController@timeline');
+        Route::get('timeline', 'ScheduleController@timeline')->name('client.timeline');
     });
 });
 

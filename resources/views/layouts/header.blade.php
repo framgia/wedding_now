@@ -17,12 +17,12 @@
                             </li>
                             <li>
                                 <a href="#">
-                                    Pages
+                                    {{ __('page.header.my_wedding') }}
                                     <i class="fa fa-angle-down" aria-hidden="true"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a href="my-profile">My Profile</a></li>
-                                    <li><a href="to-do-list">To Do List</a></li>
+                                    <li><a href="{{ route('client.to-do-list') }}">{{ __('page.header.todo_list') }}</a></li>
+                                    <li><a href="{{ route('client.timeline') }}">{{ __('page.header.timeline') }}</a></li>
                                 </ul>
                             </li>
                             <li><a href="#">Listing<i class="fa fa-angle-down" aria-hidden="true"></i></a>

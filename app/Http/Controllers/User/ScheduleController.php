@@ -375,7 +375,15 @@ class ScheduleController extends Controller
 
     public function timeline()
     {
-        return view('user.timeline');
+        $scheduleId = Session::get('schedule_id');
+        if (!isset($scheduleId)) {
+            return redirect()->route('client.to-do-list');
+        }
+        $schedule = $this->scheduleWedding->findById($scheduleId)->load('tasks.category');
+        $tasks = $schedule->tasks;
+        $countTask = count($tasks);
+
+        return view('user.timeline', compact('schedule', 'tasks', 'countTask'));
     }
 
 }
