@@ -20,7 +20,6 @@ class TasksTableSeeder extends Seeder
                 'note' => 'Writing some things',
                 'time_frame_id' => 1,
                 'schedule_wedding_id' => 1,
-                'percent' => null
             ], [
                 'name' => 'Đặt Xe',
                 'priority' => 1,
@@ -28,7 +27,6 @@ class TasksTableSeeder extends Seeder
                 'note' => 'Writing some things',
                 'time_frame_id' => 1,
                 'schedule_wedding_id' => 1,
-                'percent' => null
             ], [
                 'name' => 'Đặt Váy',
                 'priority' => 1,
@@ -36,7 +34,6 @@ class TasksTableSeeder extends Seeder
                 'note' => 'Writing some things',
                 'time_frame_id' => 1,
                 'schedule_wedding_id' => 1,
-                'percent' => null
             ], [
                 'name' => 'Địa điểm',
                 'priority' => 1,
@@ -44,7 +41,6 @@ class TasksTableSeeder extends Seeder
                 'note' => 'Writing some things',
                 'time_frame_id' => 1,
                 'schedule_wedding_id' => 2,
-                'percent' => 15
             ], [
                 'name' => 'Đồ ăn',
                 'priority' => 1,
@@ -52,7 +48,6 @@ class TasksTableSeeder extends Seeder
                 'note' => 'Writing some things',
                 'time_frame_id' => 1,
                 'schedule_wedding_id' => 2,
-                'percent' => 35
             ], [
                 'name' => 'Nhiếp ảnh',
                 'priority' => 1,
@@ -60,7 +55,6 @@ class TasksTableSeeder extends Seeder
                 'note' => 'Writing some things',
                 'time_frame_id' => 1,
                 'schedule_wedding_id' => 2,
-                'percent' => 5
             ], [
                 'name' => 'Hoa',
                 'priority' => 1,
@@ -68,7 +62,6 @@ class TasksTableSeeder extends Seeder
                 'note' => 'Writing some things',
                 'time_frame_id' => 1,
                 'schedule_wedding_id' => 2,
-                'percent' => 5
             ], [
                 'name' => 'Bánh',
                 'priority' => 1,
@@ -76,7 +69,6 @@ class TasksTableSeeder extends Seeder
                 'note' => 'Writing some things',
                 'time_frame_id' => 1,
                 'schedule_wedding_id' => 2,
-                'percent' => 2
             ], [
                 'name' => 'Trang phục',
                 'priority' => 1,
@@ -84,7 +76,6 @@ class TasksTableSeeder extends Seeder
                 'note' => 'Writing some things',
                 'time_frame_id' => 1,
                 'schedule_wedding_id' => 2,
-                'percent' => 5
             ], [
                 'name' => 'DJ',
                 'priority' => 1,
@@ -92,7 +83,6 @@ class TasksTableSeeder extends Seeder
                 'note' => 'Writing some things',
                 'time_frame_id' => 1,
                 'schedule_wedding_id' => 2,
-                'percent' => 0
             ], [
                 'name' => 'Quay Phim',
                 'priority' => 1,
@@ -100,7 +90,6 @@ class TasksTableSeeder extends Seeder
                 'note' => 'Writing some things',
                 'time_frame_id' => 1,
                 'schedule_wedding_id' => 2,
-                'percent' => 8
             ], [
                 'name' => 'Nhạc',
                 'priority' => 1,
@@ -108,7 +97,6 @@ class TasksTableSeeder extends Seeder
                 'note' => 'Writing some things',
                 'time_frame_id' => 1,
                 'schedule_wedding_id' => 2,
-                'percent' => 10
             ], [
                 'name' => 'Trang điểm',
                 'priority' => 1,
@@ -116,7 +104,6 @@ class TasksTableSeeder extends Seeder
                 'note' => 'Writing some things',
                 'time_frame_id' => 1,
                 'schedule_wedding_id' => 2,
-                'percent' => 5
             ], [
                 'name' => 'Khác',
                 'priority' => 1,
@@ -124,7 +111,6 @@ class TasksTableSeeder extends Seeder
                 'note' => 'Writing some things',
                 'time_frame_id' => 1,
                 'schedule_wedding_id' => 2,
-                'percent' => '10'
             ]
         ];
 

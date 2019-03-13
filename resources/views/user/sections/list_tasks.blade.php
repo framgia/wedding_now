@@ -1,23 +1,44 @@
-<h4 class="create-task-heading">{{ __('page.task.list') }}</h4>
 <div class="to-do-list">
     <div class="panel-group faq-panel">
         @foreach($tasks as $task)
-            <div class="panel panel-default task-single">
-                <a href="" class="task-single-a">
-                    <div class="row">
-                        <div class="col-md-10 info-task" data-id="{{ $task->id }}">
-                            <h4 class="panel-title to-do-list-heading h4-padding-10">
-                                {{ $task->name . ' (' . $task->timeFrame->time_frame . ')' }}
-                            </h4>
-                            <p class="padding-left-10">{{ $task->category->name }}</p>
-                        </div>
-                        <div class="col-md-2">
-                            <span class="delete-task" data-id="{{ $task->id }}">
-                                <i class="fa fa-trash i-float-right" aria-hidden="true"></i>
-                            </span>
+            <div class="panel-group faq-panel task-single" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="heading_{{ $task->id }}">
+                        <h4 class="panel-title to-do-list-heading">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_{{ $task->id }}" aria-expanded="true" aria-controls="collapse_{{ $task->id }}">
+                                <b>{{ $task->name }}</b>
+                                <span class="faq-btn faq-btn-plus hidden-xs">
+                                    <i class="fa fa-angle-double-down" aria-hidden="true"></i>
+                                </span>
+                                <span class="faq-btn faq-btn-minus hidden-xs">
+                                    <i class="fa fa-angle-double-up" aria-hidden="true"></i>
+                                </span>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse_{{ $task->id }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading_{{ $task->id }}">
+                        <div class="panel-body to-do-list-dtl">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <div class="date">{{ '(' . $task->timeFrame->time_frame . ')' }}</div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="to-do-list-action-tabs">
+                                        <a href="#" class="done-task" data-status="{{ $task->status }}" data-id="{{ $task->id }}">
+                                            <i class="fa fa-check" aria-hidden="true" title="{{ __('base.done') }}"></i>
+                                        </a>
+                                        <a href="#" class="info-task" data-id="{{ $task->id }}">
+                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                        </a>
+                                        <a href="#" class="delete-task" data-id="{{ $task->id }}">
+                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
         @endforeach
     </div>

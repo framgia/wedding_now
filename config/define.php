@@ -31,4 +31,5 @@ return [
     'default_avatar' => 'storage/avatar/user_default.png',
     'days' => 30,
     'paginate' => 21,
+    'done' => 1,
 ];

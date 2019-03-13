@@ -15,6 +15,7 @@ return [
         'home' => 'Home',
         'dashboard' => 'Dashboard',
         'to_do_list' => 'To Do List',
+        'checklist' => 'Checklist',
         'my_budget' => 'My Budget',
         'vendor_manager' => 'Vendor Manager',
         'wedding_card' => 'Wedding Card',

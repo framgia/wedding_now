@@ -83,7 +83,6 @@ class ScheduleController extends Controller
     public function getToDoList(Request $request)
     {
         if (isset($request->id_choose)) {
-
             Session::put('schedule_id', $request->id_choose);
         }
 
@@ -220,7 +219,9 @@ class ScheduleController extends Controller
 
         $totalTasks = $this->task->getTasksBySchedule($scheduleId, null);
 
-        return view('user.sections.category_filter', compact('categoriesWithCountTasks', 'totalTasks'))->render();
+        $doneTasks = $totalTasks->where('done', config('define.done'))->count();
+
+        return view('user.sections.category_filter', compact('categoriesWithCountTasks', 'totalTasks', 'doneTasks'))->render();
     }
 
     public function scheduleInfoView()
