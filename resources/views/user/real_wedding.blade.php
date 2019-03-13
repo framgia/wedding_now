@@ -17,6 +17,9 @@
                                     <span><i class="fa fa-angle-down" aria-hidden="true"></i></span>
                                     </button>
                                     <ul class="dropdown-menu city" aria-labelledby="dropdownMenu2">
+                                        <li>
+                                            <a href="#">{{ __('validation.custom.select.city') }}</a>
+                                        </li>
                                         @foreach ($cities as $city)
                                             <li>
                                                 <a href="#" data-id="{{ $city['id'] }}">{{ $city['name'] }}</a>
@@ -59,13 +62,13 @@
                             <div class="category-listing-section">
                                 <div class="category-listing-dtl">
                                     <div class="category-listing-img">
-                                        <a href="#" title="{{ __('base.view') }}"><img src="{{ asset(config('asset.users.images.user_wedding') . ($value['medias']->isNotEmpty() ? $value['medias'][0]['name'] : 'upcoming-wedd-3.jpg')) }}" class="img-responsive real-wedding-list" alt="category-img"></a>
+                                        <a href="{{ route('timeline', $value->id) }}" title="{{ __('base.view') }}"><img src="{{ asset(config('asset.users.images.user_wedding') . ($value['medias']->isNotEmpty() ? $value['medias'][0]['name'] : 'upcoming-wedd-3.jpg')) }}" class="img-responsive real-wedding-list" alt="category-img"></a>
                                     </div>
                                     <div class="category-info">
                                         <h6 class="category-dtl-heading"><a href="#">
-                                            {{ $value['scheduleMetasPluck']->isNotEmpty() ? $value['scheduleMetasPluck'][array_search('my_name', $value['scheduleMetasPluck']->toArray())]['value'] : 'null' }}
+                                            {{ __('page.page.timeline') }} of {{ $scheduleWeddings['scheduleMetasPluck'] ? $scheduleWeddings['scheduleMetasPluck'][array_search('my_name', array_column($scheduleWeddings['scheduleMetasPluck']->toArray(), 'key'))]['value'] : 'null' }}
                                             &nbsp;&amp;&nbsp;
-                                            {{ $value['scheduleMetasPluck']->isNotEmpty() ? $value['scheduleMetasPluck'][array_search('partner_name', $value['scheduleMetasPluck']->toArray())]['value'] : 'null' }}
+                                            {{ $scheduleWeddings['scheduleMetasPluck'] ? $scheduleWeddings['scheduleMetasPluck'][array_search('partner_name', array_column($scheduleWeddings['scheduleMetasPluck']->toArray(), 'key'))]['value'] : 'null' }}
                                         </a></h6>
                                         <div class="category-dtl-address"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $value['location']['address'] }} {{ '- ' . $value['marriage_day'] }}</div>
                                     </div>

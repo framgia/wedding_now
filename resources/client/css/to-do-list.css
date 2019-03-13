@@ -7,30 +7,12 @@
     padding-bottom: 15px;
 }
 
-.h4-padding-10 {
-    padding: 10px;
-    color: black;
-    font-size: 22px;
-}
-
 .i-float-right {
     float: right;
     padding-top: 18px;
     font-size: 30px !important;
     padding-right: 20px;
     padding-top: 18px;
-}
-
-.task-single:hover {
-    background-color: #ede9e8;
-}
-
-.delete-task {
-    display: none;
-}
-
-.delete-task:hover {
-    font-weight: bold;
 }
 
 .btn-choose-type-schedule {
@@ -59,10 +41,6 @@
 
 .category-item {
     margin-bottom: 10px;
-}
-
-.category-item:hover .text-name{
-    text-decoration: underline;
 }
 
 .padding-bottom-10 {

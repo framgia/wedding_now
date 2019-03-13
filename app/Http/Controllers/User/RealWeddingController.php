@@ -51,7 +51,10 @@ class RealWeddingController extends Controller
 
     public function getMaxCost()
     {
-        return ScheduleWedding::max('final_cost');
+        $maxCost = ScheduleWedding::max('final_cost');
+
+        // if $maxCost == null return 1₫
+        return $maxCost ? $maxCost : 1;
     }
 
     public function getCost($getCost)

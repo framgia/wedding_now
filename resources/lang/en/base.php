@@ -74,10 +74,12 @@ return [
     'system_logs' => 'System logs',
     'logs' => 'Logs',
 
+    // action
     'action' => 'Actions',
     'activity' => 'Activity',
     'quick_actions' => 'Quick actions',
     'send_messages' => 'Send messages',
+    'back_to' => 'Back to',
 
     'faq' => 'FAQ',
     'section' => 'Section',
@@ -126,7 +128,13 @@ return [
 
     // status
     'just_now' => 'Just now',
+    'status' => 'Status',
     'done' => 'Done',
+    'to_do' => 'To Do',
     'inprocess' => 'Inprocess',
+    'no_records' => 'No records found !',
     // end status
+
+    'by' => 'By',
+    'of' => 'of',
 ];
