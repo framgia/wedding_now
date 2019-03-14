@@ -1,0 +1,54 @@
+@font-face {
+    font-family: aleo;
+    src: url('../fonts/SVN-Aleo Light.otf');
+}
+
+@font-face {
+    font-family: aleo1;
+    src: url('../fonts/SVN-Aleo Light.otf');
+}
+
+@font-face {
+    font-family: punchbowl;
+    src: url('../fonts/iCielPunchbowl-Bold.otf');
+}
+
+@font-face {
+    font-family: romantically;
+    src: url('../fonts/iCielRomantically-Regular.otf');
+}
+
+@font-face {
+    font-family: mussica;
+    src: url('../fonts/MussicaSwash.otf');
+}
+
+@font-face {
+    font-family: turbayne;
+    src: url('../fonts/Turbayne.ttf');
+}
+
+@font-face {
+    font-family: aphrodite;
+    src: url('../fonts/UVF Aphrodite Pro.ttf');
+}
+
+@font-face {
+    font-family: geotica;
+    src: url('../fonts/UVF Geotica 2012.ttf');
+}
+
+@font-face {
+    font-family: assassin;
+    src: url('../fonts/VN_Assassin.ttf');
+}
+
+@font-face {
+    font-family: heroe;
+    src: url('../fonts/VN_HeroeMonolineBigPro.otf');
+}
+
+@font-face {
+    font-family: youngblood;
+    src: url('../fonts/Youngblood.ttf');
+}

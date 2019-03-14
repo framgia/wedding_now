@@ -32,6 +32,26 @@
 }
 
 @font-face {
+    font-family: aleoBoldItalic;
+    src: url('../fonts/SVN-Aleo Bold Italic.otf');
+}
+
+@font-face {
+    font-family: aleoBold;
+    src: url('../fonts/SVN-Aleo Bold.otf');
+}
+
+@font-face {
+    font-family: aleoRegular;
+    src: url('../fonts/SVN-Aleo Regular.otf');
+}
+
+@font-face {
+    font-family: aleoLightItalic;
+    src: url('../fonts/SVN-Aleo Light Italic.otf');
+}
+
+@font-face {
     font-family: punchbowl;
     src: url('../fonts/iCielPunchbowl-Bold.otf');
 }
@@ -62,6 +82,11 @@
 }
 
 @font-face {
+    font-family: quattrocento;
+    src: url('../fonts/UVF Quattrocento-Regular.ttf');
+}
+
+@font-face {
     font-family: assassin;
     src: url('../fonts/VN_Assassin.ttf');
 }
@@ -69,6 +94,26 @@
 @font-face {
     font-family: heroe;
     src: url('../fonts/VN_HeroeMonolineBigPro.otf');
+}
+
+@font-face {
+    font-family: valentina;
+    src: url('../fonts/VN_Valentina Regular.ttf');
+}
+
+@font-face {
+    font-family: museo;
+    src: url('../fonts/VN_Museo Slab 500.ttf');
+}
+
+@font-face {
+    font-family: vnCariar;
+    src: url('../fonts/VN_Cariar Dreams Regular.ttf');
+}
+
+@font-face {
+    font-family: dooType;
+    src: url('../fonts/VN_dooType - Encorpada Classic.otf');
 }
 
 @font-face {

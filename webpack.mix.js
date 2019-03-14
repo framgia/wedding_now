@@ -73,7 +73,9 @@ mix.scripts([
     'node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
     'node_modules/toastr/build/toastr.min.js',
     'node_modules/wow.js/dist/wow.min.js',
-    'resources/client/js/custom.js'
+    'resources/client/js/custom.js',
+    'node_modules/interactjs/dist/interact.js',
+    'node_modules/textarea-autosize/dist/jquery.textarea_autosize.min.js',
     ], 'public/assets/user/js/page.js');
 
 //mix js admin

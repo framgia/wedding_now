@@ -65,4 +65,9 @@ class ScheduleWedding extends Model
     {
         return $this->medias()->orderBy('id', 'desc')->limit(1);
     }
+
+    public function cards()
+    {
+        return $this->hasMany(Card::class);
+    }
 }
