@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Item;
+use App\Models\ItemUser;
 
 class ItemsTableSeeder extends Seeder
 {
@@ -12,15 +14,6 @@ class ItemsTableSeeder extends Seeder
      */
     public function run()
     {
-        $items = [];
-
-        for ($i = 1; $i <= 5; $i++) {
-            $items[] = [
-                'name' => 'item ' . $i,
-                'slug' => 'item-' . $i,
-            ];
-        }
-
-        DB::table('items')->insert($items);
+        factory(Item::class, 100)->create();
     }
 }

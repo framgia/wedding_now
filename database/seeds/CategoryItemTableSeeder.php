@@ -12,31 +12,14 @@ class CategoryItemTableSeeder extends Seeder
      */
     public function run()
     {
-        $category_items = [
-            [
-                'category_id' => 1,
-                'item_id' => 2
-            ], [
-                'category_id' => 2,
-                'item_id' => 1
-            ], [
-                'category_id' => 3,
-                'item_id' => 2
-            ], [
-                'category_id' => 4,
-                'item_id' => 1
-            ], [
-                'category_id' => 3,
-                'item_id' => 2
-            ], [
-                'category_id' => 2,
-                'item_id' => 1
-            ], [
-                'category_id' => 5,
-                'item_id' => 3
-            ],
-        ];
+        $categoryItem = [];
+        for ($i = 0; $i < 100; $i++) {
+            $categoryItem[] = [
+                'category_id' => rand(1, 11),
+                'item_id' => rand(1, 100)
+            ];
+        }
 
-        DB::table('category_item')->insert($category_items);
+        DB::table('category_item')->insert($categoryItem);
     }
 }

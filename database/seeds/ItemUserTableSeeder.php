@@ -12,58 +12,14 @@ class ItemUserTableSeeder extends Seeder
      */
     public function run()
     {
-        $data = [
-            [
-                'user_id' => 2,
-                'item_id' => 1,
-                'price' => 100,
-            ], [
-                'user_id' => 2,
-                'item_id' => 2,
-                'price' => 213,
-            ], [
-                'user_id' => 3,
-                'item_id' => 3,
-                'price' => 123,
-            ], [
-                'user_id' => 3,
-                'item_id' => 2,
-                'price' => 123,
-            ], [
-                'user_id' => 3,
-                'item_id' => 4,
-                'price' => 4234,
-            ], [
-                'user_id' => 4,
-                'item_id' => 5,
-                'price' => 234,
-            ], [
-                'user_id' => 5,
-                'item_id' => 2,
-                'price' => 345,
-            ], [
-                'user_id' => 2,
-                'item_id' => 3,
-                'price' => 234,
-            ], [
-                'user_id' => 3,
-                'item_id' => 1,
-                'price' => 567,
-            ], [
-                'user_id' => 2,
-                'item_id' => 3,
-                'price' => 100,
-            ], [
-                'user_id' => 5,
-                'item_id' => 4,
-                'price' => 100,
-            ], [
-                'user_id' => 5,
-                'item_id' => 3,
-                'price' => 100,
-            ],
-        ];
-
-        DB::table('item_user')->insert($data);
+        $itemUser = [];
+        for ($i = 0; $i < 100; $i++) {
+            $itemUser[] = [
+                'user_id' => rand(1, 100),
+                'item_id' => rand(1, 100),
+                'price' => rand(500, 100000)
+            ];
+        }
+        DB::table('item_user')->insert($itemUser);
     }
 }
