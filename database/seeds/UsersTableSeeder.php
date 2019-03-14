@@ -45,10 +45,10 @@ class UsersTableSeeder extends Seeder
             'gender' => 'male',
             'phone' => '0123456789',
         ];
-        
+
         $user = User::create($user);
 
-        //4) Set User Role
+        // 4) Set User Role
         $user->attachRole($role);
 
         // location
@@ -86,5 +86,15 @@ class UsersTableSeeder extends Seeder
         ];
 
         DB::table('users')->insert($data);
+        factory(User::class, 100)->create()->each(function($user) {
+            $user->locations()->create([
+                'address' => str_random(10),
+                'locationable_id' => $user->id,
+                'locationable_type' => 'App\Models\User',
+                'district_id' => rand(1, 812),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+        });
     }
 }

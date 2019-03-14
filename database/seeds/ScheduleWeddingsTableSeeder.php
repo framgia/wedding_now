@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\ScheduleWedding;
 
 class ScheduleWeddingsTableSeeder extends Seeder
 {
@@ -35,19 +36,7 @@ class ScheduleWeddingsTableSeeder extends Seeder
             ]
         ];
 
-        for ($i = 0; $i < 40; $i++) {
-            $schedule_weddings[] = [
-                'name' => 'Schedule Wedding ' . $i,
-                'slug' => 'schedule-wedding-' . $i,
-                'user_id' => 1,
-                'type' => 'custom',
-                'schedule_wedding_id' => null,
-                'budget' => 0,
-                'note' => null,
-                'final_cost' => rand(100000000, 200000000)
-            ];
-        }
-
         DB::table('schedule_weddings')->insert($schedule_weddings);
+        factory(ScheduleWedding::class, 40)->create();
     }
 }
