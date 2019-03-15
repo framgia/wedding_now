@@ -115,6 +115,8 @@ span.task-title {
     font-weight: bold;
     font-size: 13px;
     text-transform: capitalize;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .timeline .date.right {
@@ -151,12 +153,19 @@ p.task-category {
     text-align: right;
 }
 
+span.date {
+    margin-left: -4px;
+}
+
+.task-right span.task-title {
+    margin-left: -4px;
+}
+
 .task-left span.date {
     border-bottom-right-radius: 19px;
     border-bottom-left-radius: 0;
     border-top-right-radius: 19px;
     border-top-left-radius: 0;
-    margin-left: -3px;
 }
 
 .task-left span.task-title {
@@ -262,6 +271,7 @@ pre {
     padding: 0;
     line-height: 28px;
     background: transparent;
+    white-space: normal;
 }
 
 @media screen and (max-width: 768px) {

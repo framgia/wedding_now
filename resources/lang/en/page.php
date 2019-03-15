@@ -177,6 +177,7 @@ return [
         'task' => 'Tasks',
         'budget' => 'Budget',
         'marriage_day' => 'Marriage Day',
+        'no_task' => 'No tasks',
     ],
     'header' => [
         'my_wedding' => 'My Wedding',

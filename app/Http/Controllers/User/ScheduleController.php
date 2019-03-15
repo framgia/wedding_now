@@ -374,17 +374,29 @@ class ScheduleController extends Controller
         ]);
     }
 
-    public function timeline()
+    public function getScheduleTask($id)
     {
-        $scheduleId = Session::get('schedule_id');
-        if (!isset($scheduleId)) {
-            return redirect()->route('client.to-do-list');
-        }
-        $schedule = $this->scheduleWedding->findById($scheduleId)->load('tasks.category');
+        $schedule = $this->scheduleWedding->findById($id)->load('tasks.category');
         $tasks = $schedule->tasks;
         $countTask = count($tasks);
 
         return view('user.timeline', compact('schedule', 'tasks', 'countTask'));
     }
 
+    public function myTimeline()
+    {
+        $scheduleId = Session::get('schedule_id');
+        if (!isset($scheduleId)) {
+            return redirect()->route('client.to-do-list');
+        }
+
+        return $this->getScheduleTask($scheduleId);
+    }
+
+    public function timeline($slug)
+    {
+        $id = last(explode('-', $slug));
+
+        return $this->getScheduleTask($id);
+    }
 }
