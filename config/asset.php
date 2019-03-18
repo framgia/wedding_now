@@ -37,4 +37,5 @@ return [
     ],
     'schedule' => 'storage/wedding/schedule/',
     'schedule_avatar' => 'storage/avatar/',
+    'card_template' => 'storage/template_card/',
 ];
