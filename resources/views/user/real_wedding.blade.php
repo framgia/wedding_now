@@ -62,14 +62,18 @@
                             <div class="category-listing-section">
                                 <div class="category-listing-dtl">
                                     <div class="category-listing-img">
-                                        <a href="{{ route('timeline', $value->id) }}" title="{{ __('base.view') }}"><img src="{{ asset(config('asset.users.images.user_wedding') . ($value['medias']->isNotEmpty() ? $value['medias'][0]['name'] : 'upcoming-wedd-3.jpg')) }}" class="img-responsive real-wedding-list" alt="category-img"></a>
+                                        <a href="{{ route('client.timeline', $value->slug . '-' . $value->id) }}" title="{{ __('base.view') }}">
+                                            <img src="{{ asset(config('asset.users.images.user_wedding') . ($value['medias']->isNotEmpty() ? $value['medias'][0]['name'] : 'upcoming-wedd-3.jpg')) }}" class="img-responsive real-wedding-list" alt="category-img">
+                                        </a>
                                     </div>
                                     <div class="category-info">
-                                        <h6 class="category-dtl-heading"><a href="#">
-                                            {{ __('page.page.timeline') }} of {{ $scheduleWeddings['scheduleMetasPluck'] ? $scheduleWeddings['scheduleMetasPluck'][array_search('my_name', array_column($scheduleWeddings['scheduleMetasPluck']->toArray(), 'key'))]['value'] : 'null' }}
+                                        <h6 class="category-dtl-heading">
+                                            <a href="{{ route('client.timeline', $value->slug . '-' . $value->id) }}">
+                                            {{ __('page.page.timeline') }} of {{ $data['scheduleMetasPluck'] ? $data['scheduleMetasPluck'][array_search('my_name', array_column($data['scheduleMetasPluck']->toArray(), 'key'))]['value'] : 'null' }}
                                             &nbsp;&amp;&nbsp;
-                                            {{ $scheduleWeddings['scheduleMetasPluck'] ? $scheduleWeddings['scheduleMetasPluck'][array_search('partner_name', array_column($scheduleWeddings['scheduleMetasPluck']->toArray(), 'key'))]['value'] : 'null' }}
-                                        </a></h6>
+                                            {{ $data['scheduleMetasPluck'] ? $data['scheduleMetasPluck'][array_search('partner_name', array_column($data['scheduleMetasPluck']->toArray(), 'key'))]['value'] : 'null' }}
+                                            </a>
+                                        </h6>
                                         <div class="category-dtl-address"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $value['location']['address'] }} {{ '- ' . $value['marriage_day'] }}</div>
                                     </div>
                                 </div>
@@ -77,7 +81,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="category-text-heading">
-                                                <a href="#">{{ $value['tasks_count'] }} {{ __('base.task') }}</a>
+                                                <a href="{{ route('client.timeline', $value->slug . '-' . $value->id) }}">{{ $value['tasks_count'] }} {{ __('base.task') }}</a>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
