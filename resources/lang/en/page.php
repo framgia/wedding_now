@@ -130,6 +130,7 @@ return [
         'back' => 'Back',
         'edit' => 'Edit',
         'delete' => 'Delete',
+        'download' => 'Download',
     ],
     'filter' => [
         'by_category' => ' By Category',
@@ -194,12 +195,18 @@ return [
             'width' => 'Choose Width',
             'height' => 'Choose Height',
         ],
-        'placeholder_text_box' => 'Enter Some Text Here',
+        'placeholder' => [
+            'text_box' => 'Enter Some Text Here',
+            'size' => 'Enter Size',
+            'line-height' => 'Enter Height Line',
+            'height' => 'Enter Height',
+            'width' => 'Enter Width',
+        ],
         'align' => [
             'start' => 'Start',
             'center' => 'Center',
             'left' => 'Left',
             'right' => 'Right',
-        ]
+        ],
     ],
 ];

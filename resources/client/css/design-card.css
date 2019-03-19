@@ -43,3 +43,95 @@
     font-size: 14px;
     height: 46px;
 }
+
+.list-template {
+    list-style: none;
+}
+
+.list-template li {
+    margin-bottom: 15px;
+}
+
+.font-aleo-sans-serif {
+    font-family: aleo, sans-serif;
+}
+
+.font-aleo {
+    font-family: aleo;
+}
+
+.font-aleoBoldItalic {
+    font-family: aleoBoldItalic;
+}
+
+.font-aleoBold {
+    font-family: aleoBold;
+}
+
+.font-aleoLightItalic {
+    font-family: aleoLightItalic;
+}
+
+.font-aleoRegular {
+    font-family: aleoRegular;
+}
+
+.font-punchbowl {
+    font-family: punchbowl;
+}
+
+.font-mussica {
+    font-family: mussica;
+}
+
+.font-turbayne {
+    font-family: turbayne;
+}
+
+.font-aphrodite {
+    font-family: aphrodite;
+}
+
+.font-romantically {
+    font-family: romantically;
+}
+
+.font-geotica {
+    font-family: geotica;
+}
+
+.font-assassin {
+    font-family: assassin;
+}
+
+.font-heroe {
+    font-family: heroe;
+}
+
+.font-valentina {
+    font-family: valentina;
+}
+
+.font-museo {
+    font-family: museo;
+}
+
+.font-quattrocento {
+    font-family: quattrocento;
+}
+
+.font-vnCariar {
+    font-family: vnCariar;
+}
+
+.font-dooType {
+    font-family: dooType;
+}
+
+.font-youngblood {
+    font-family: youngblood;
+}
+
+.font-caviar {
+    font-family: caviar;
+}
