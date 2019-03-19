@@ -1,11 +1,11 @@
 @extends('layouts.main')
 
 @section('title')
-    {{ __('Schedule Info') }}
+    {{ __('page.page.schedule_info') }}
 @endsection
 
 @section('page-name')
-{{ __('To Do List') }}
+{{ __('page.page.schedule_info') }}
 @endsection
 
 @section('main-content')
@@ -46,30 +46,16 @@
                                     <li class="cursor-pointer">
                                         <p>
                                             <span class="number-task-complete">
-                                                <strong>{{ __('2') }}</strong>{{ __(' of 21') }}</span>
+                                                <strong>{{ $doneTasks }}</strong>{{ __('page.schedule_info.of', ['total' => $totalTasks]) }}</span>
                                         </p>
-                                        <small>{{ __('task_complete') }}</small>
+                                        <small>{{ __('page.schedule_info.task_complete') }}</small>
                                     </li>
                                     <li class="cursor-pointer">
                                         <p>
                                             <span class="number-task-complete">
-                                                <strong>{{ __('2') }}</strong>{{ __(' of 21') }}</span>
+                                                <strong>{{ $notDoneTasks }}</strong>{{ __('page.schedule_info.of', ['total' => $totalTasks]) }}</span>
                                         </p>
-                                        <small>{{ __('task_complete') }}</small>
-                                    </li>
-                                    <li class="cursor-pointer">
-                                        <p>
-                                            <span class="number-task-complete">
-                                                <strong>{{ __('2') }}</strong>{{ __(' of 21') }}</span>
-                                        </p>
-                                        <small>{{ __('task_complete') }}</small>
-                                    </li>
-                                    <li class="cursor-pointer">
-                                        <p>
-                                            <span class="number-task-complete">
-                                                <strong>{{ __('2') }}</strong>{{ __(' of 21') }}</span>
-                                        </p>
-                                        <small>{{ __('task_complete') }}</small>
+                                        <small>{{ __('page.schedule_info.task_to_do') }}</small>
                                     </li>
                                 </ul>
                             </div>
@@ -206,6 +192,7 @@
             }
 
             function presentScheduleInfoPage(object) {
+
                 let my_name = object.user.name;
 
                 let my_avatar = null;
@@ -218,13 +205,29 @@
 
                 if (object.schedule_metas_pluck.length != 0) {
 
-                    my_name = object.schedule_metas_pluck[0].value;
+                    let arr = object.schedule_metas_pluck;
 
-                    my_avatar = object.schedule_metas_pluck[2].value;
+                    arr.forEach(function(element, index) {
 
-                    partner_name = object.schedule_metas_pluck[3].value;
-
-                    partner_avatar = object.schedule_metas_pluck[5].value;
+                        switch (element.key) {
+                            case 'my_name': {
+                                my_name = element.value;
+                                break;
+                            }
+                            case 'my_avatar': {
+                                my_avatar = element.value;
+                                break;
+                            }
+                            case 'partner_name': {
+                                partner_name = element.value;
+                                break;
+                            }
+                            case 'partner_avatar': {
+                                partner_avatar = element.value;
+                                break;
+                            }
+                        }
+                    });
                 }
 
                 let base_path = $('.dash-ul-li-img-left').attr('data-path');
@@ -271,17 +274,37 @@
 
                 if (object.schedule_metas_pluck.length != 0) {
 
-                    my_name = object.schedule_metas_pluck[0].value;
+                    let arr = object.schedule_metas_pluck;
 
-                    my_identity = object.schedule_metas_pluck[1].value;
+                    arr.forEach(function(element, index) {
 
-                    my_avatar = object.schedule_metas_pluck[2].value;
-
-                    partner_name = object.schedule_metas_pluck[3].value;
-
-                    partner_identity = object.schedule_metas_pluck[4].value;
-
-                    partner_avatar = object.schedule_metas_pluck[5].value;
+                        switch (element.key) {
+                            case 'my_name': {
+                                my_name = element.value;
+                                break;
+                            }
+                            case 'my_avatar': {
+                                my_avatar = element.value;
+                                break;
+                            }
+                            case 'partner_name': {
+                                partner_name = element.value;
+                                break;
+                            }
+                            case 'partner_avatar': {
+                                partner_avatar = element.value;
+                                break;
+                            }
+                            case 'my_identity': {
+                                my_identity = element.value;
+                                break;
+                            }
+                            case 'partner_identity': {
+                                partner_identity = element.value;
+                                break;
+                            }
+                        }
+                    });
 
                     let path = $('.avatar-left').attr('data-path');
 

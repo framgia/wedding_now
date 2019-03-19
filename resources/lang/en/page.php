@@ -24,6 +24,13 @@ return [
         'planning_suggestions' => 'Suggestions for you',
         'timeline' => 'Timeline',
         'design_card' => 'Design Card',
+        'schedule_info' => 'Schedule Information',
+    ],
+
+    'schedule_info' => [
+        'task_complete' => 'Task Complete',
+        'of' => ' of :total',
+        'task_to_do' => 'Task To Do',
     ],
 
     'index' => [
