@@ -62,6 +62,7 @@ mix.styles([
     'resources/client/css/timeline.css',
     'resources/client/css/real_wedding.css',
     'resources/client/css/design-card.css',
+    'node_modules/print-js/dist/print.css',
 ], 'public/assets/user/css/page.css');
 
 mix.scripts([
@@ -77,6 +78,7 @@ mix.scripts([
     'resources/client/js/custom.js',
     'node_modules/interactjs/dist/interact.js',
     'node_modules/textarea-autosize/dist/jquery.textarea_autosize.min.js',
+    'node_modules/print-js/dist/print.js',
     ], 'public/assets/user/js/page.js');
 
 //mix js admin

@@ -184,7 +184,7 @@
 
                 $('.card-wedding').css('background-repeat', 'round');
 
-                res.textBox.forEach(function(element) {
+                res.textBoxs.forEach(function(element) {
 
                     let stylesTextBox = '';
 
