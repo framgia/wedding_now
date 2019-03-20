@@ -35,4 +35,9 @@ class Post extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
+
+    public function rate()
+    {
+        return $this->morphOne(Rate::class, 'rateable');
+    }
 }

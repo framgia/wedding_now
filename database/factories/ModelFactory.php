@@ -38,6 +38,9 @@ $factory->define(Item::class, function (Faker $faker) {
     return [
         'name' => $faker->sentence(3),
         'slug' => str_random(10),
+        'description' => $faker->text(300),
+        'price' => $faker->randomNumber(6),
+        'user_id' => $faker->numberBetween(10, 99),
     ];
 });
 

@@ -30,7 +30,7 @@ use Carbon\Carbon;
 
 class ScheduleController extends Controller
 {
-    protected $categories;
+    protected $category;
     protected $scheduleWedding;
     protected $task;
     protected $timeFrame;
@@ -41,7 +41,7 @@ class ScheduleController extends Controller
 
     public function __construct(ScheduleWedding $scheduleWedding, Task $task, Category $category, TimeFrame $timeFrame, Item $item, ScheduleMeta $meta, Media $media, Location $location)
     {
-        $this->categories = new CategoryRepository($category);
+        $this->category = new CategoryRepository($category);
 
         $this->scheduleWedding = new ScheduleWeddingRepository($scheduleWedding);
 
@@ -87,7 +87,7 @@ class ScheduleController extends Controller
 
         $timeFrames = $this->timeFrame->getDataPluck();
 
-        $categories = $this->categories->getDataPluck();
+        $categories = $this->category->getDataPluck();
 
         return view('user.to-do-list', compact('timeFrames', 'categories', 'scheduleWeddings'));
     }
@@ -103,7 +103,7 @@ class ScheduleController extends Controller
 
         $tasks = $this->task->getTasksBySchedule($scheduleId, $request->category_id);
 
-        $categories = $this->categories->getDataPluck();
+        $categories = $this->category->getDataPluck();
 
         return view('user.sections.list_tasks', compact('tasks', 'categories'))->render();
     }
@@ -162,7 +162,7 @@ class ScheduleController extends Controller
     {
         $task = $this->task->findById($id);
         $timeFrames = $this->timeFrame->getDataPluck();
-        $categories = $this->categories->getDataPluck();
+        $categories = $this->category->getDataPluck();
 
         return view('user.sections.single-task', compact('timeFrames', 'categories', 'task'))->render();
     }
@@ -228,7 +228,7 @@ class ScheduleController extends Controller
     {
         $scheduleId = $this->meta->getChosenSchedule()->schedule_wedding_id;
 
-        $categoriesWithCountTasks = $this->categories->getCategoriesWithCountTasks($scheduleId);
+        $categoriesWithCountTasks = $this->category->getCategoriesWithCountTasks($scheduleId);
 
         $totalTasks = $this->task->getTasksBySchedule($scheduleId, null);
 
