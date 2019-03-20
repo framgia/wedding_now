@@ -12,7 +12,7 @@ class Task extends Model
         'name',
         'priority',
         'category_id',
-        'item_user_id',
+        'item_id',
         'note',
         'time_occurs',
         'time_frame_id',
@@ -31,9 +31,9 @@ class Task extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function itemUser()
+    public function item()
     {
-        return $this->belongsTo(ItemUser::class);
+        return $this->belongsTo(Item::class);
     }
 
     public function timeFrame()

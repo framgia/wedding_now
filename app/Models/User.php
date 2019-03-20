@@ -59,7 +59,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function items()
     {
-        return $this->belongsToMany(Item::class)->withPivot('price');
+        return $this->hasMany(Item::class);
     }
 
     public function media()
