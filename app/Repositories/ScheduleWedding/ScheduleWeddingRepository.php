@@ -6,6 +6,8 @@ use App\Models\ScheduleWedding;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use App\Models\ScheduleMeta;
+use App\Repositories\ScheduleMeta\ScheduleMetaRepository;
 
 class ScheduleWeddingRepository extends BaseRepository implements ScheduleWeddingRepositoryInterface
 {
@@ -40,7 +42,6 @@ class ScheduleWeddingRepository extends BaseRepository implements ScheduleWeddin
                 ['type', '=', config('define.type_schedule.custom')],
             ])->orderBy('id', 'desc')->get();
 
-            // ->whereNotIn('key', ['my_name'])
             return $schedules;
         }
 
@@ -57,17 +58,5 @@ class ScheduleWeddingRepository extends BaseRepository implements ScheduleWeddin
         $data['slug'] = str_slug($data['name']);
 
         return $this->model->create($data);
-    }
-    public function checkIssetSchedule()
-    {
-        $scheduleWeddings = $this->getScheduleClient(Auth::id(), null);
-
-        if (count($scheduleWeddings) == 1) {
-
-            Session::put('schedule_id', $scheduleWeddings[0]->id);
-        }
-
-        return $scheduleWeddings;
-
     }
 }

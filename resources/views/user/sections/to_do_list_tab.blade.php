@@ -3,7 +3,7 @@
         <a href="{{ route('client.schedule') }}"
             class="btn btn-default @if(Route::currentRouteName() === 'client.schedule') active @endif"
             >
-            <span class="badge">{{ __('page.page.dashboard') }}</span>
+            <span class="badge">{{ __('page.my_wedding') }}</span>
         </a>
     </li>
     <li>

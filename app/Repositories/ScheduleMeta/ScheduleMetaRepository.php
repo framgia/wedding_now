@@ -4,6 +4,7 @@ namespace App\Repositories\ScheduleMeta;
 
 use App\Models\ScheduleMeta;
 use App\Repositories\BaseRepository;
+use Illuminate\Support\Facades\Auth;
 
 class ScheduleMetaRepository extends BaseRepository implements ScheduleMetaRepositoryInterface
 {
@@ -15,7 +16,7 @@ class ScheduleMetaRepository extends BaseRepository implements ScheduleMetaRepos
         ], [
             'schedule_wedding_id' => $scheduleId,
             'key' => $key,
-            'value' => $value
+            'value' => $value,
         ]);
     }
 
@@ -25,5 +26,26 @@ class ScheduleMetaRepository extends BaseRepository implements ScheduleMetaRepos
             $this->updateMeta($scheduleId, $key, $value);
 
         }
+    }
+
+    public function getChosenSchedule()
+    {
+        return $this->model->with('scheduleWedding')
+            ->whereHas('scheduleWedding.user', function ($query) {
+                $query->where('users.id', Auth::id());
+            })->where('key', config('define.default'))->first();
+    }
+
+    public function setChosenSchedule($scheduleId)
+    {
+        $chosenSchedule = $this->getChosenSchedule();
+
+        $this->model->updateOrCreate([
+            'id' => isset($chosenSchedule) ? $chosenSchedule->id : null,
+        ], [
+            'schedule_wedding_id' => $scheduleId,
+            'key' => config('define.default'),
+            'value' => config('define.default'),
+        ]);
     }
 }

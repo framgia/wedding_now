@@ -58,11 +58,23 @@ class ScheduleController extends Controller
         $this->location = new LocationRepository($location);
     }
 
+    public function checkIssetSchedule()
+    {
+        $scheduleWeddings = $this->scheduleWedding->getScheduleClient(Auth::id(), null);
+
+        if (count($scheduleWeddings) == 1) {
+
+            $this->meta->setChosenSchedule($scheduleWeddings[0]->id);
+        }
+
+        return $scheduleWeddings;
+    }
+
     public function toDo()
     {
-        $scheduleWeddings = $this->scheduleWedding->checkIssetSchedule();
+        $scheduleWeddings = $this->checkIssetSchedule();
 
-        if (count($scheduleWeddings) == 0 || !Session::has('schedule_id')) {
+        if (count($scheduleWeddings) == 0 || !$this->meta->getChosenSchedule()) {
 
             $default = config('define.type_schedule.default');
 
@@ -83,10 +95,11 @@ class ScheduleController extends Controller
     public function getToDoList(Request $request)
     {
         if (isset($request->id_choose)) {
-            Session::put('schedule_id', $request->id_choose);
+
+            $this->meta->setChosenSchedule($request->id_choose);
         }
 
-        $scheduleId = Session::get('schedule_id');
+        $scheduleId = $this->meta->getChosenSchedule()->schedule_wedding_id;
 
         $tasks = $this->task->getTasksBySchedule($scheduleId, $request->category_id);
 
@@ -97,7 +110,7 @@ class ScheduleController extends Controller
 
     public function createTask(TaskRequest $request)
     {
-        $scheduleWeddingId = Session::get('schedule_id');
+        $scheduleWeddingId = $this->meta->getChosenSchedule()->schedule_wedding_id;
 
         $scheduleWedding = $this->scheduleWedding->findById($scheduleWeddingId);
 
@@ -176,7 +189,7 @@ class ScheduleController extends Controller
                             'schedule_wedding_id' => $schedule_id,
                         ]);
 
-                        Session::put('schedule_id', $schedule->id);
+                        $this->meta->setChosenSchedule($schedule->id);
 
                         $defaultTasks = $this->task->getTasksBySchedule($schedule_id, null);
 
@@ -204,7 +217,7 @@ class ScheduleController extends Controller
                         'budget' => 0,
                     ]);
 
-                    Session::put('schedule_id', $schedule->id);
+                    $this->meta->setChosenSchedule($schedule->id);
 
                     break;
                 }
@@ -213,7 +226,7 @@ class ScheduleController extends Controller
 
     public function getCategoryFilter()
     {
-        $scheduleId = Session::get('schedule_id');
+        $scheduleId = $this->meta->getChosenSchedule()->schedule_wedding_id;
 
         $categoriesWithCountTasks = $this->categories->getCategoriesWithCountTasks($scheduleId);
 
@@ -226,9 +239,9 @@ class ScheduleController extends Controller
 
     public function scheduleInfoView()
     {
-        $scheduleWeddings = $this->scheduleWedding->checkIssetSchedule();
+        $scheduleWeddings = $this->checkIssetSchedule();
 
-        if (count($scheduleWeddings) == 0 || !Session::has('schedule_id')) {
+        if (count($scheduleWeddings) == 0 || !$this->meta->getChosenSchedule()) {
 
             $default = config('define.type_schedule.default');
 
@@ -239,12 +252,20 @@ class ScheduleController extends Controller
             return view('user.list-schedule', compact('scheduleWeddings', 'default', 'custom', 'combo'));
         }
 
-        return view('user.schedule_info');
+        $totalTasks = $this->task->getTasksBySchedule($this->meta->getChosenSchedule()->schedule_wedding_id, null);
+
+        $doneTasks = $totalTasks->where('done', config('define.done'))->count();
+
+        $totalTasks = count($totalTasks);
+
+        $notDoneTasks = $totalTasks - $doneTasks;
+
+        return view('user.schedule_info', compact('totalTasks', 'doneTasks', 'notDoneTasks'));
     }
 
     public function getScheduleInfo()
     {
-        $id = Session::get('schedule_id');
+        $id = $this->meta->getChosenSchedule()->schedule_wedding_id;
 
         $schedule = $this->scheduleWedding->getScheduleClient(null, $id);
 
@@ -253,7 +274,7 @@ class ScheduleController extends Controller
 
     public function changePicture(UpdateSchedulePicture $request)
     {
-        $scheduleId = Session::get('schedule_id');
+        $scheduleId = $this->meta->getChosenSchedule()->schedule_wedding_id;
 
         DB::transaction(function () use ($scheduleId, $request) {
 
@@ -273,7 +294,7 @@ class ScheduleController extends Controller
 
     public function updateSchedule(ScheduleRequest $request)
     {
-        $scheduleId = Session::get('schedule_id');
+        $scheduleId = $this->meta->getChosenSchedule()->schedule_wedding_id;
 
         DB::transaction(function () use ($scheduleId, $request) {
 
@@ -360,13 +381,11 @@ class ScheduleController extends Controller
 
     public function destroy()
     {
-        $scheduleId = Session::get('schedule_id');
+        $scheduleId = $this->meta->getChosenSchedule()->schedule_wedding_id;
 
         DB::transaction(function () use ($scheduleId) {
 
             $this->scheduleWedding->destroy($scheduleId);
-
-            Session::forget('schedule_id');
         });
 
         return response()->json([
@@ -385,7 +404,7 @@ class ScheduleController extends Controller
 
     public function myTimeline()
     {
-        $scheduleId = Session::get('schedule_id');
+        $scheduleId = $this->meta->getChosenSchedule()->schedule_wedding_id;
         if (!isset($scheduleId)) {
             return redirect()->route('client.to-do-list');
         }

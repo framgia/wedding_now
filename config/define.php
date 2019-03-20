@@ -32,6 +32,8 @@ return [
     'days' => 30,
     'paginate' => 21,
     'done' => 1,
+    'to_do' => 0,
     'image_card_text_box' => 'image-background',
     'logo' => 'storage/wedding/logo.png',
+    'default' => 'default',
 ];
