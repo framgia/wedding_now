@@ -24,4 +24,11 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
 
         return $result;
     }
+
+    public function getItem($id)
+    {
+        $items = Category::find($id)->items()->with('user')->get();
+
+        return $items;
+    }
 }
