@@ -19,6 +19,7 @@
                     <div class="create-btn padding-bottom-10">
                     </div>
                     <div id="create-task-div" class="display-none">
+                        {{-- create task --}}
                         <h5 class="create-task-heading">{{ __('page.task.new') }}</h5>
                         <form id="create-task-form" action="#">
                             <div class="create-task-block">
@@ -98,6 +99,7 @@
                                 </div>
                             </div>
                         </form>
+                        {{-- endcreate task --}}
                     </div>
                     <div class="modal-show-product"></div>
                     {{-- view by --}}
@@ -203,12 +205,14 @@
                     let checkTagExists = $(`.view-by strong:contains("${display_name}")`);
                     let checkTypeExists = $(`.view-by .alert-custom a[data-type="${type}"]`);
 
-                    if (status && status != undefined && status != '') {
-                        checkStatus = status;
-                    }
+                    var conditionStatus = (status && status != undefined && status != '');
+                    var conditionCategory = (category_id && category_id != undefined && category_id != '');
 
-                    if (category_id && category_id != undefined && category_id != '') {
-                        checkCategory = category_id;
+                    if (!conditionStatus && !conditionCategory) {
+                        checkCategory = null;
+                    } else {
+                        checkStatus = conditionStatus ? status : checkStatus;
+                        checkCategory = conditionCategory ? category_id : checkCategory;
                     }
 
                     if (!checkTagExists.length) {

@@ -41,6 +41,7 @@ mix.copyDirectory('node_modules/font-awesome/css/font-awesome.min.css', 'public/
 mix.copyDirectory('resources/images/', 'public/storage/');
 
 mix.styles([
+    'resources/client/css/font-google.css',
     'node_modules/bootstrap/dist/css/bootstrap.min.css',
     'node_modules/owl.carousel/dist/assets/owl.carousel.css',
     'node_modules/js-datepicker/dist/datepicker.min.css',
@@ -77,9 +78,9 @@ mix.scripts([
     'node_modules/toastr/build/toastr.min.js',
     'node_modules/wow.js/dist/wow.min.js',
     'resources/client/js/custom.js',
-    'node_modules/interactjs/dist/interact.js',
-    'node_modules/textarea-autosize/dist/jquery.textarea_autosize.min.js',
-    'node_modules/print-js/dist/print.js',
+    'node_modules/displacejs/dist/displace.min.js',
+    'node_modules/dom-to-image/dist/dom-to-image.min.js',
+    'node_modules/file-saver/dist/FileSaver.min.js',
     ], 'public/assets/user/js/page.js');
 
 //mix js admin

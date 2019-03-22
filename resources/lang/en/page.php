@@ -197,6 +197,7 @@ return [
     ],
     'design_card' => [
         'add_text_box' => 'Add text box',
+        'style_your_message' => 'Style Your Message',
         'choose' => [
             'font' => 'Choose Font',
             'align' => 'Choose Align',
@@ -204,6 +205,7 @@ return [
             'height_line' => 'Choose Height Line',
             'width' => 'Choose Width',
             'height' => 'Choose Height',
+            'template' => 'Choose Template'
         ],
         'placeholder' => [
             'text_box' => 'Enter Some Text Here',
@@ -218,6 +220,7 @@ return [
             'left' => 'Left',
             'right' => 'Right',
         ],
+        'change_background' => 'Change background',
     ],
     'news' => [
         'breadcrumb' => 'News',

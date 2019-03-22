@@ -80,9 +80,12 @@ Route::group(['namespace' => 'User'], function () {
 
         Route::get('design-card', 'CardController@index')->name('client.design-card');
 
-        Route::get('load-card', 'CardController@getCard')->name('client.load-card');
+        Route::get('load-card', 'CardController@getDesignCard')->name('client.load-card');
 
         Route::post('save-card', 'CardController@saveCard')->name('client.add-card');
+
+        Route::post('choose-template', 'CardController@chooseTemplate')->name('client.choose-template');
+
         Route::get('timeline', 'ScheduleController@myTimeline')->name('client.my.timeline');
         Route::get('timeline/{slug}', 'ScheduleController@timeline')->name('client.timeline');
         Route::get('get-item', 'ScheduleController@getItem')->name('client.get-item');
