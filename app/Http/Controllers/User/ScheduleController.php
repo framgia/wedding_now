@@ -101,7 +101,7 @@ class ScheduleController extends Controller
 
         $scheduleId = $this->meta->getChosenSchedule()->schedule_wedding_id;
 
-        $tasks = $this->task->getTasksBySchedule($scheduleId, $request->category_id);
+        $tasks = $this->task->getTasksBySchedule($scheduleId, $request->category_id, $request->status);
 
         $categories = $this->category->getDataPluck();
 
@@ -155,7 +155,7 @@ class ScheduleController extends Controller
 
     public function getItemByCategory(Request $request)
     {
-        return $this->item->getItemByCategory($request->id);
+        return $this->item->getItemByCategory($request->id, $request->status);
     }
 
     public function getSingleTask($id)
@@ -232,7 +232,7 @@ class ScheduleController extends Controller
 
         $totalTasks = $this->task->getTasksBySchedule($scheduleId, null);
 
-        $doneTasks = $totalTasks->where('done', config('define.done'))->count();
+        $doneTasks = $totalTasks->where('status', config('define.done'));
 
         return view('user.sections.category_filter', compact('categoriesWithCountTasks', 'totalTasks', 'doneTasks'))->render();
     }

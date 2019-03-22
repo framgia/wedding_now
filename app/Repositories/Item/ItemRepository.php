@@ -12,7 +12,8 @@ class ItemRepository extends BaseRepository implements ItemRepositoryInterface
         $items = Item::with('users')
             ->whereHas('categories', function ($query) use ($id) {
                 $query->where('category_id', $id);
-            })->get();
+            })
+            ->get();
 
         return $items;
     }
