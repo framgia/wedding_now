@@ -14,7 +14,6 @@
                 {!! Form::submit(__('base.choose') . ' ' . __('base.schedule'), ['id' => 'btn-choose-schedule', 'class' => 'btn btn-pink', 'data-toggle' => 'modal', 'data-target' => '#myModal']) !!}
                 {!! Form::submit(__('base.create') . ' ' . __('base.task'), ['id' => 'create-btn', 'class' => 'btn btn-pink']) !!}
             </h3>
-            <h4><b>{{ __('base.view') . ' ' . __('base.by') }}</b></h4>
             <div class="row">
                 <div class="col-md-5">
                     <div class="create-btn padding-bottom-10">
@@ -49,6 +48,11 @@
                             </div>
                         </form>
                     </div>
+
+                    {{-- view by --}}
+                    <div class="view-by"></div>
+                    {{-- end view by --}}
+
                     <div id="show-list-category"></div>
                 </div>
                 <div class="col-md-7" id="list_tasks">
@@ -84,6 +88,26 @@
         </div>
     </div>
 </div>
+
+{{-- status --}}
+<input type="hidden" name="done" id="status_done" value="{{ config('define.done') }}">
+<input type="hidden" name="done" id="status_to_do" value="{{ config('define.to_do') }}">
+{{-- end status --}}
+@endsection
+
+@section('css')
+    <style>
+        .alert-custom {
+            border: 1px solid gray;
+            border-radius: 25px;
+            display: inline-block;
+            padding: 11px
+        }
+
+        .alert-custom a {
+            color: black;
+        }
+    </style>
 @endsection
 
 @section('script')
@@ -95,6 +119,12 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
             }
         });
+
+        var checkCategory = null;
+        var checkStatus = null;
+
+        var statusDone = $('#status_done').val();
+        var statusToDo = $('#status_to_do').val();
 
         function loadCategoryFilter()
         {
@@ -108,9 +138,39 @@
                 $('#show-list-category').html(res);
 
                 $('.category-filter').click(function(event) {
-                   event.preventDefault();
-                   let category_id = $(this).attr('data-id');
-                   loadToDoList(category_id);
+                    event.preventDefault();
+                    let category_id = $(this).attr('data-id');
+                    let status = $(this).attr('data-status');
+                    let display_name = $(this).attr('data-name');
+                    let type = $(this).attr('data-type');
+
+                    let checkTagExists = $(`.view-by strong:contains("${display_name}")`);
+                    let checkTypeExists = $(`.view-by .alert-custom a[data-type="${type}"]`);
+
+                    if (status && status != undefined && status != '') {
+                        checkStatus = status;
+                    }
+
+                    if (category_id && category_id != undefined && category_id != '') {
+                        checkCategory = category_id;
+                    }
+
+                    if (checkTypeExists) {
+                        checkTypeExists.parents('.alert-custom').remove();
+                    }
+
+                    if (!checkTagExists.length) {
+                        $('.view-by').append(`
+                            <div class="alert alert-dismissible alert-custom">
+                                <a href="#" data-status="${statusDone}" data-type="${type}" data-id="${category_id}">
+                                    <strong>${display_name}</strong>
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        `);
+                    }
+
+                   loadToDoList(checkCategory, checkStatus);
                 });
             })
             .fail(function() {
@@ -118,13 +178,33 @@
             })
         }
 
-        function loadToDoList(category_id) {
+        // remove tag filter
+        $('body').on('click', '.alert-custom', function(event) {
+            event.preventDefault();
+            let category_id = $(this).children('a').attr('data-id');
+            let status = $(this).children('a').attr('data-status');
+            let type = $(this).children('a').attr('data-type');
+
+            if (type == 'status') {
+                checkStatus = null;
+            } else if (type == 'category') {
+                checkCategory = null;
+            }
+
+            loadToDoList(checkCategory, checkStatus);
+            $(this).remove();
+        });
+
+        function loadToDoList(category_id, type = null) {
             $.ajax({
                 async: false,
                 url: route('client.get-to-do-list'),
                 type: 'get',
                 dataType: '',
-                data: {category_id: category_id},
+                data: {
+                    category_id: category_id,
+                    status: type
+                },
             })
             .done(function(res) {
 
@@ -363,6 +443,8 @@
 
             $('#show-list-category').hide();
 
+            $('.view-by').hide();
+
             $('#create-task-div').show();
 
             $('#create-task-form')[0].reset();
@@ -375,6 +457,8 @@
             $('#create-btn').show();
 
             $('#show-list-category').show();
+
+            $('.view-by').show();
 
             $('#create-task-div').hide();
 
