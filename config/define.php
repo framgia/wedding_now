@@ -36,4 +36,21 @@ return [
     'image_card_text_box' => 'image-background',
     'logo' => 'storage/wedding/logo.png',
     'default' => 'default',
+    'post' => [
+        'default_image' => 'default.jpeg',
+        'path' => 'storage/news/',
+        'status' => [
+            'draft' => 'draft',
+            'public' => 'public',
+        ],
+        'topic' => [
+            'path' => 'storage/news/topics/',
+            'default_image' => 'default.svg',
+        ],
+        'paginate' => 10,
+        'recommend' => 1,
+        'newest' => 4,
+        'most_popular' => 5,
+        'no_paginate' => 0,
+    ],
 ];

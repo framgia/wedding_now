@@ -63,6 +63,7 @@ mix.styles([
     'resources/client/css/real_wedding.css',
     'resources/client/css/design-card.css',
     'node_modules/print-js/dist/print.css',
+    'resources/client/css/news.css',
 ], 'public/assets/user/css/page.css');
 
 mix.scripts([
