@@ -86,9 +86,11 @@ Route::group(['namespace' => 'User'], function () {
 
     Route::group(['prefix' => 'news'], function() {
 
-        Route::get('/', 'PostController@index');
+        Route::get('/', 'PostController@index')->name('post.index');
 
         Route::get('/loadMore', 'PostController@loadPostScrollPaginate')->name('post.loadMore');
+
+        Route::get('/{topic}/{id}/{slug}', 'PostController@detailPost')->name('post.detail');
     });
 });
 

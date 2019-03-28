@@ -10,7 +10,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
 {
     public function getMostRatePost($number = null, $numberSkip = null, ...$id)
     {
-        $posts = $this->model->with(['medias', 'topic'])
+        $posts = $this->model->with(['medias', 'topic', 'user.media'])
             ->withCount('rates')
             ->orderBy('rates_count', 'desc')
             ->numberStarPost()
@@ -27,7 +27,9 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
             ->public()
             ->get();
 
-        $posts = $this->checkImageCollection($posts, config('define.post.path'), config('define.post.default_image'));
+        $posts = $this->checkImagePostCollection($posts, config('define.post.path'), config('define.post.default_image'));
+
+        $posts = $this->checkAvatarOfUserPostCollection($posts, config('asset.users.avatar'), config('asset.user_default'));
 
         return $posts;
     }
@@ -44,7 +46,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
             }
         }
 
-        $posts = $this->model->with(['medias', 'topic'])
+        $posts = $this->model->with(['medias', 'topic', 'user.media'])
             ->withCount('rates')
             ->orderBy('id', 'desc')
             ->orderBy('rates_count', 'desc')
@@ -56,12 +58,14 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
             ->limit($paginate)
             ->get();
 
-        $posts = $this->checkImageCollection($posts, config('define.post.path'), config('define.post.default_image'));
+        $posts = $this->checkImagePostCollection($posts, config('define.post.path'), config('define.post.default_image'));
+
+        $posts = $this->checkAvatarOfUserPostCollection($posts, config('asset.users.avatar'), config('asset.user_default'));
 
         return $posts;
     }
 
-    public function checkImageCollection($collection, $basePath, $pathDefault)
+    public function checkImagePostCollection($collection, $basePath, $pathDefault)
     {
         $newCollection = $collection->transform(function($item) use ($basePath, $pathDefault) {
 
@@ -82,6 +86,30 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
             } else {
 
                 $item->image = $pathDefault;
+            }
+
+            return $item;
+        });
+
+        return $newCollection;
+    }
+
+    public function checkAvatarOfUserPostCollection($collection, $basePath, $pathDefault)
+    {
+        $newCollection = $collection->transform(function($item) use ($basePath, $pathDefault) {
+
+            if ($item->user->media) {
+
+                if (File::exists($basePath . $item->user->media->name)) {
+
+                    $item->avatar_user = $item->user->media->name;
+                } else {
+
+                    $item->avatar_user = $pathDefault;
+                };
+            } else {
+
+                $item->avatar_user = $pathDefault;
             }
 
             return $item;

@@ -57,12 +57,8 @@
                             </li>
                             <li><a href="{{ route('real-wedding.index') }}">{{ __('page.page.real_wedding') }}</a>
                             </li>
-                            <li><a href="#">Contact<i class="fa fa-angle-down"></i></a>
-                                <ul class="sub-menu">
-                                    <li><a href="contact-us.html">Contact 1</a></li>
-                                    <li><a href="contact-us-2.html">Contact 2</a></li>
-                                    <li><a href="contact-us-3.html">Contact 3</a></li>
-                                </ul>
+                            <li>
+                                <a href="{{ route('post.index') }}">{{ __('page.page.news') }}</a>
                             </li>
                         </ul>
                     </div>
