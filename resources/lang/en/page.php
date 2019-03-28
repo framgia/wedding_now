@@ -9,6 +9,7 @@ return [
         'planning_package' => 'Planning Package',
         'planning_suggestions' => 'Suggestions for you',
         'timeline' => 'Timeline',
+        'posts' => 'Posts'
     ],
 
     'page' => [

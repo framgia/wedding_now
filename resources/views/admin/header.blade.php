@@ -53,10 +53,10 @@
                                 <span class="m-menu__arrow m-menu__arrow--adjust"></span>
                                 <ul class="m-menu__subnav">
                                     <li class="m-menu__item" aria-haspopup="true">
-                                        <a href="#" class="m-menu__link">
+                                        <a href="{{ route('posts.create') }}" class="m-menu__link">
                                             <i class="m-menu__link-icon flaticon-file"></i>
                                             <span class="m-menu__link-text">
-                                                {{ __('base.create') . ' ' . __('base.post') }}
+                                                {{ __('base.create') . ' ' . __('base.posts') }}
                                             </span>
                                         </a>
                                     </li>

@@ -96,9 +96,20 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/', 'AdminController@index')->name('admin.index');
 
     Route::group(['namespace' => 'Admin'], function () {
+        Route::resource('posts', 'PostController');
+
+        Route::get('posts-list', 'PostController@getAll')->name('posts.list');
+
+        Route::delete('posts-delete-file/{file}', 'PostController@deleteFile')->name('posts.delete.file');
+
+        Route::post('posts-send-file', 'PostController@sendFile')->name('posts.send.file');
+
         Route::get('user', 'UserController@index')->name('admin.user.index');
+
         Route::get('user-list', 'UserController@getList')->name('admin.user.list');
+
         Route::get('user-create', 'UserController@gcreate')->name('admin.user.create');
+
         Route::post('user-create', 'UserController@store')->name('admin.user.create');
 
         Route::group(['prefix' => 'role', 'middleware' => ['role:admin']], function () {
