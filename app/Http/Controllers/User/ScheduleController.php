@@ -158,6 +158,13 @@ class ScheduleController extends Controller
         return $this->item->getItemByCategory($request->id, $request->status);
     }
 
+    public function getItem(Request $request)
+    {
+        $items = $this->category->getItem($request->id);
+
+        return view('user.sections.product_modal', compact('items'));
+    }
+
     public function getSingleTask($id)
     {
         $task = $this->task->findById($id);

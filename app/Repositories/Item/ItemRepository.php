@@ -9,7 +9,7 @@ class ItemRepository extends BaseRepository implements ItemRepositoryInterface
 {
     public function getItemByCategory($id)
     {
-        $items = Item::with('users')
+        $items = Item::with('user')
             ->whereHas('categories', function ($query) use ($id) {
                 $query->where('category_id', $id);
             })

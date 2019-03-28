@@ -75,8 +75,8 @@ Route::group(['namespace' => 'User'], function () {
 
         Route::post('save-card', 'CardController@saveCard')->name('client.add-card');
         Route::get('timeline', 'ScheduleController@myTimeline')->name('client.my.timeline');
-
         Route::get('timeline/{slug}', 'ScheduleController@timeline')->name('client.timeline');
+        Route::get('get-item', 'ScheduleController@getItem')->name('client.get-item');
     });
 });
 

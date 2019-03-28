@@ -26,18 +26,39 @@
                                     {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'task-title', 'placeholder' => __('page.placeholder.title'), 'autocomplete' => 'off']) !!}
                                 </div>
                                 <div class="row col-md-12 padding-bottom-15">
-                                    <div class="col-md-4 select-3">
+                                    <div class="col-md-6 select-3">
                                         {!! Form::select('time_frame', $timeFrames, null, ['class' => 'form-control', 'placeholder' => __('page.placeholder.time_frame'), 'id' => 'task-time-frame']) !!}
                                     </div>
-                                    <div class="col-md-4 select-3">
-                                        {!! Form::select('time_frame', $categories, null, ['class' => 'form-control', 'placeholder' => __('page.placeholder.category'), 'id' => 'task-category']) !!}
+                                    <div class="col-md-6 select-3">
+                                        {!! Form::select('categories', $categories, null, ['class' => 'form-control', 'placeholder' => __('page.placeholder.category'), 'id' => 'task-category']) !!}
                                     </div>
-                                    <div class="col-md-4 select-3">
+                                    <div class="col-md-6 select-3">
+                                        {!! Form::text(
+                                                'categories',
+                                                null,
+                                                [
+                                                    'class' => 'form-control time-occurs',
+                                                    'placeHolder' => 'Choose time ',
+                                                    'onfocus' => '(this.type="date")',
+                                                    'onblur' => '(this.type="text")'
+                                                ]
+                                            )
+                                        !!}
+                                    </div>
+                                    <div class="col-md-6 select-3">
                                         <select name="priority" class="form-control" id="task-priority">
                                             <option value="" hidden>{{ __('page.placeholder.priority') }}</option>
                                             <option value="1">{{ __('page.priority.high') }}</option>
                                             <option value="0">{{ __('page.priority.low') }}</option>
                                         </select>
+                                    </div>
+                                    <div class="col-md-12 select-3">
+                                        <div class="show-list-group-item dislay-none">
+                                            <div class="text-left">
+                                                <button type="button" class="btn btn-info btn-show-product" data-toggle="modal" data-target="#product-modal">Show vendor</button>
+                                            </div>
+                                            <div class="modal-show-product"></div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row col-md-12">
@@ -464,6 +485,23 @@
 
             $('#create-task-form')[0].reset();
         });
+    });
+</script>
+<script>
+    jQuery(document).ready(function($) {
+        $(document).on('change', '#task-category', function() {
+            event.preventDefault();
+            let idTask = $(this).val();
+            $.ajax({
+                type: 'get',
+                url: route('client.get-item'),
+                data: {id: idTask},
+                success: function (response) {
+                    $('.modal-show-product').html(response);
+                    $('.btn-show-product').click();
+                }
+            });
+        })
     });
 </script>
 @endsection
