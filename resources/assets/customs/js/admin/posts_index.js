@@ -10,14 +10,14 @@ $(document).ready(function() {
         height: 400,
         callbacks: {
             onImageUploadError: function(msg, event) {
-                toastr.error( Lang.get('base.error') );
+                toastr.error( Lang.get('base.error') )
             },
             onMediaDelete: function(target) {
                 var filename = target[0].src.split('/').pop()
-                deleteFile(filename);
+                deleteFile(filename)
             },
             onImageUpload: function(files, editor, welEditable) {
-                sendFile(files[0], editor, welEditable);
+                sendFile(files[0], editor, welEditable)
             }
         }
     })
@@ -35,8 +35,8 @@ $(document).ready(function() {
     }
 
     function sendFile(file, editor, welEditable) {
-        data = new FormData();
-        data.append('file', file);
+        data = new FormData()
+        data.append('file', file)
 
         $.ajax({
             url: route('posts.send.file'),
@@ -141,6 +141,9 @@ $(document).ready(function() {
                                         <a class="dropdown-item get-post" data-toggle="modal" data-target="#m_select2_modal" href="#">
                                             <i class="la la-edit"></i> ${Lang.get('base.edit')}
                                         </a>
+                                        <a class="dropdown-item delete-post" href="#">
+                                            <i class="la la-trash"></i> ${Lang.get('base.delete')}
+                                        </a>
                                     </div>
                                 </div>
                             `;
@@ -183,6 +186,32 @@ $(document).ready(function() {
         })
     })
 
+    $('body').on('click', '.delete-post', function(event) {
+        event.preventDefault()
+
+        var id = $(this).closest('tr').find('td:eq(0) input[type="checkbox"]').val()
+
+        swal({
+            title: Lang.get('base.confirm_delete'),
+            type: 'warning',
+            showCancelButton: !0,
+            confirmButtonText: Lang.get('base.yes_delete')
+        }).then(function(e) {
+            $.ajax({
+                url: route('posts.destroy', id),
+                type: 'DELETE',
+                data: { 'id': id }
+            })
+            .done(function(data) {
+                e.value && swal(Lang.get('base.delete') + '!', 'success')
+                reloadDatatable()
+            })
+            .fail(function(message) {
+                showError(message)
+            })
+        })
+    })
+
     $('body').on('click', '#update_post', function(event) {
         event.preventDefault()
 
@@ -209,7 +238,7 @@ $(document).ready(function() {
         var getError = $.parseJSON(message.responseText)
 
         $.each(getError.errors, function (key, value) {
-            toastr.error(value);
+            toastr.error(value)
         })
     }
 
@@ -221,9 +250,9 @@ $(document).ready(function() {
         .done(function(data) {
             Datatable.init(data)
         })
-        .fail(function() {
-            console.log('error')
-        });
+        .fail(function(mess) {
+            showError(mess)
+        })
     }
 
     $('#tag').select2({
@@ -240,7 +269,7 @@ $(document).ready(function() {
     getPostList()
 
     function reloadDatatable() {
-        $('.m_datatable').mDatatable().destroy();
-        getPostList();
+        $('.m_datatable').mDatatable().destroy()
+        getPostList()
     }
 })
