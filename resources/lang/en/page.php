@@ -1,4 +1,5 @@
 <?php
+
 return [
     'title' => [
         'profile' => 'My Profile',
@@ -215,5 +216,15 @@ return [
             'left' => 'Left',
             'right' => 'Right',
         ],
+    ],
+    'news' => [
+        'title' => 'Wedding News',
+        'recommended' => 'Recommended',
+        'topic_title' => 'WeddingWire article topics',
+        'recently_title' => 'Recently Added on WeddingWire',
+        'most_popular_title' => 'Most Popular on WeddingNow',
+        'topic_title_left' => 'Article Topics on WeddingNow',
+        'slogan' => 'Planning a wedding is a truly magical experience. We’re offering our expertise to help make the planning process fun and stress-free for you from beginning to end. From decor inspiration to vow help, we’ve covered it all in our articles.',
+        'placeholder_search' => 'Search WeddingWire articles',
     ],
 ];
