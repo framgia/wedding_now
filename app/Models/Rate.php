@@ -9,8 +9,9 @@ class Rate extends Model
     protected $table = 'rates';
 
     protected $fillable = [
-        'start',
+        'star',
         'content',
+        'user_id',
         'rateable_id',
         'rateable_type',
     ];
@@ -18,5 +19,10 @@ class Rate extends Model
     public function rateable()
     {
         return $this->morphTo();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

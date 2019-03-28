@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $table = 'news';
+    protected $table = 'posts';
 
     protected $fillable = [
         'title',
@@ -14,6 +14,8 @@ class Post extends Model
         'schedule_wedding_id',
         'user_id',
         'slug',
+        'brief',
+        'status',
     ];
 
     public function user()
@@ -36,8 +38,28 @@ class Post extends Model
         return $this->belongsToMany(Tag::class);
     }
 
-    public function rate()
+    public function rates()
     {
-        return $this->morphOne(Rate::class, 'rateable');
+        return $this->morphMany(Rate::class, 'rateable');
+    }
+
+    public function topic()
+    {
+        return $this->belongsTo(Topic::class);
+    }
+
+    public function scopeNumberStarPost($query)
+    {
+        return $query->join('rates', function($q) {
+                $q->on('rates.rateable_id', '=', 'posts.id');
+                $q->where('rates.rateable_type', '=', 'App\Models\Post');
+            })->selectRaw('sum(star) as number_star')
+                ->groupBy('rates.rateable_id')
+                ->orderBy('number_star', 'desc');
+    }
+
+    public function scopePublic($query)
+    {
+        return $query->whereStatus(config('define.post.status.public'));
     }
 }

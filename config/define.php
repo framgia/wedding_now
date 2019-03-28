@@ -52,5 +52,6 @@ return [
         'newest' => 4,
         'most_popular' => 5,
         'no_paginate' => 0,
+        'no_skip' => 0,
     ],
 ];
