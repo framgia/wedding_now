@@ -29,10 +29,15 @@ Route::group(['namespace' => 'User'], function () {
     Route::match(['get', 'post'], 'real-wedding-show', 'RealWeddingController@show')->name('real-wedding.show');
 
     Route::get('get-districts/{id}', 'UserController@getDistrictsById')->name('get.districts');
+
     Route::get('planning-package', 'ScheduleController@planningPackage')->name('planning-package');
+
     Route::group(['middleware' => 'auth'], function () {
+
         Route::get('to-do-list', 'ScheduleController@toDo')->name('client.to-do-list');
+
         Route::get('profile/{username}', 'UserController@userProfile')->name('user.profile');
+
         Route::put('update', 'UserController@update')->name('user.update');
 
         Route::get('load-to-do-list', 'ScheduleController@getToDoList')->name('client.get-to-do-list');
@@ -77,6 +82,13 @@ Route::group(['namespace' => 'User'], function () {
         Route::get('timeline', 'ScheduleController@myTimeline')->name('client.my.timeline');
         Route::get('timeline/{slug}', 'ScheduleController@timeline')->name('client.timeline');
         Route::get('get-item', 'ScheduleController@getItem')->name('client.get-item');
+    });
+
+    Route::group(['prefix' => 'news'], function() {
+
+        Route::get('/', 'PostController@index');
+
+        Route::get('/loadMore', 'PostController@loadPostScrollPaginate')->name('post.loadMore');
     });
 });
 

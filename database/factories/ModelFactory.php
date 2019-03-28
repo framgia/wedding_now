@@ -6,6 +6,9 @@ use App\Models\Location;
 use App\Models\Item;
 use App\Models\ScheduleWedding;
 use App\Models\Task;
+use App\Models\Post;
+use App\Models\Topic;
+use App\Models\Tag;
 use Carbon\Carbon;
 
 $factory->define(User::class, function (Faker $faker) {
@@ -66,5 +69,17 @@ $factory->define(Task::class, function (Faker $faker) {
         'time_frame_id' => 1,
         'note' =>  $faker->sentence(15),
         'schedule_wedding_id' => rand(3, 30)
+    ];
+});
+
+$factory->define(Post::class, function(Faker $faker) {
+    return [
+        'title' => $faker->text(100),
+        'content' => $faker->text(10000),
+        'user_id' => 1,
+        'slug' => $faker->text(100),
+        'topic_id' => $faker->randomElement([1, 2, 3, 4]),
+        'brief' => $faker->text(191),
+        'status' => 'public',
     ];
 });

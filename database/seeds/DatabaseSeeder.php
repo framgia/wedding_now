@@ -24,5 +24,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ScheduleWeddingsTableSeeder::class);
         $this->call(TimeFramesTableSeeder::class);
         $this->call(TasksTableSeeder::class);
+        $this->call(TopicsTableSeeder::class);
+        $this->call(TagsTableSeeder::class);
+        $this->call(PostsTableSeeder::class);
     }
 }
