@@ -15,15 +15,21 @@ return [
 
     // notification
     'success' => 'Success!',
-    'error' => 'Error!',
+    'error' => 'Error! Please try again later.',
     // end notification
 
     // other
+    'all' => 'All',
     'title' => 'Title',
+    'content' => 'Content',
     'budget' => 'Budget',
     'note' => 'Note',
     'priority' => 'Priority',
     // end other
+
+    // validate
+    'enter_your' => 'Enter your',
+    // end validate
 
     // button
     'view' => 'View',
@@ -49,7 +55,7 @@ return [
     'district' => 'District',
     'item' => 'Item',
     'permission' => 'Permission',
-    'post' => 'Post',
+    'posts' => 'Posts',
     'role' => 'Role',
     'schedule' => 'Schedule',
     'tag' => 'Tag',

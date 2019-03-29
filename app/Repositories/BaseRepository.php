@@ -47,7 +47,7 @@ class BaseRepository implements RepositoryInterface
         return $this->model->destroy($id);
     }
 
-    public function saveFile($currentFile, $newFile, $path, $width, $height)
+    public function saveFile($currentFile, $newFile, $path, $width = null, $height = null)
     {
         if (!File::exists($path)) {
             File::makeDirectory($path);
@@ -57,7 +57,11 @@ class BaseRepository implements RepositoryInterface
 
         $file_path = public_path($path . $filename);
 
-        ResizeImage::make($newFile->getRealPath())->resize($width, $height)->save($file_path);
+        if ($width && $height) {
+            ResizeImage::make($newFile->getRealPath())->resize($width, $height)->save($file_path);
+        } else {
+            ResizeImage::make($newFile->getRealPath())->save($file_path);
+        }
 
         return $filename;
     }

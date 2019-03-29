@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\File;
 
 class PostRepository extends BaseRepository implements PostRepositoryInterface
 {
+    public function getAll($with, $withCount)
+    {
+        return $this->model->withCount($withCount)->with($with)->get();
+    }
+
     public function getMostRatePost($number = null, $numberSkip = null, ...$id)
     {
         $posts = $this->model->with(['medias', 'topic'])
