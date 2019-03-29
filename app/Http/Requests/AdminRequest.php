@@ -24,7 +24,11 @@ class AdminRequest extends FormRequest
      */
     public function rules()
     {
-        $id = Auth::id();
+        if (isset($this->user_id)) {
+            $id = $this->user_id;
+        } else {
+            $id = Auth::id();
+        }
 
         return [
             'name' => 'required|string|max:255',
@@ -38,30 +42,6 @@ class AdminRequest extends FormRequest
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
             'password' => 'min:6|max:255|nullable',
             'password_confirmation' => 'same:password',
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'name.required' => __('validation.required'),
-            'name.string' => __('validation.string'),
-            'name.max' => __('validation.max.string'),
-            'gender.required' => __('validation.required'),
-            'birthday.required' => __('validation.required'),
-            'city.required' => __('validation.required'),
-            'district.required' => __('validation.required'),
-            'address.required' => __('validation.required'),
-            'phone.required' => __('validation.required'),
-            'phone.digits_between' => __('validation.digits_between'),
-            'phone.unique' => __('validation.unique'),
-            'email.required' => __('validation.required'),
-            'email.string' => __('validation.string'),
-            'email.email' => __('validation.email'),
-            'email.max' => __('validation.max.numeric'),
-            'email.unique' => __('validation.unique'),
-            'password.min' => __('validation.min.string'),
-            'password_confirmation.same' => __('validation.same'),
         ];
     }
 }
