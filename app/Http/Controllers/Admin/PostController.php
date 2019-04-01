@@ -224,6 +224,8 @@ class PostController extends Controller
         try {
             $data = $this->postModel->findById($id);
             $data->comments()->delete();
+            $data->rates()->delete();
+            $data->tags()->detach();
             $data->delete();
 
             return __('base.success');
