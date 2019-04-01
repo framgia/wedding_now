@@ -79,6 +79,7 @@ class PostController extends Controller
         $path = config('asset.storage.post') . $file;
         if (file_exists($path)) {
             unlink($path);
+
             return response()->json(['message' => __('base.success')], 204);
         }
     }
@@ -152,17 +153,6 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -171,18 +161,19 @@ class PostController extends Controller
      */
     public function update(PostCreateRequest $request, $id)
     {
-        // dd($request->all());
         $tag = [];
 
         try {
             DB::beginTransaction();
-                $data = $this->postModel->findById($id);
-                $data = $this->postModel->update([
-                    'title' => $request->title,
-                    'content' => $request->content,
-                    'user_id' => Auth::id(),
-                    'slug' => $this->postModel->slug($request->title)
-                ]);
+                $data = $this->postModel->updateOrCreate(
+                    ['id' => $id],
+                    [
+                        'title' => $request->title,
+                        'content' => $request->content,
+                        'user_id' => Auth::id(),
+                        'slug' => $this->postModel->slug($request->title)
+                    ]
+                );
 
                 if (!$request->tag) {
                     DB::rollBack();

@@ -34,7 +34,7 @@
                 </div>
                 @permission('user-create')
                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                    <a href="#" data-toggle="modal" data-target="#m_modal" class="btn btn-accent m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill">
+                    <a href="#" data-toggle="modal" data-target="#m_modal" class="showCreate btn btn-accent m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill">
                         <span>
                             <i class="la la-plus"></i>
                             <span>
@@ -70,7 +70,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                {!! Form::open(['method' => 'POST', 'route' => 'admin.user.create', 'class' => 'm-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed', 'id' => 'formUser']) !!}
+                {!! Form::open(['method' => 'POST', 'route' => 'admin.user.store', 'class' => 'm-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed', 'id' => 'formUser']) !!}
+                    {!! Form::hidden('user_id', '', ['id' => 'user_id']) !!}
+                    @method('PUT')
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row">
                             <div class="col-lg-4">
@@ -136,16 +138,18 @@
                                     {!! Form::date('birthday', '', ['required', 'class' => 'form-control m-input m-input--solid']) !!}
                             </div>
                             <div class="col-lg-4">
-                                {!! Form::label('role', __('admin.role')) !!}
+                                {!! Form::label('role', __('base.role')) !!}
                                 <div class="m-input-icon m-input-icon--right">
                                     {!! Form::select(
-                                        'role',
+                                        'role[]',
                                         $roles,
                                         null,
                                         [
                                             'placeholder' => __('validation.custom.select.role'),
                                             'class' => 'form-control m-input m-input--solid',
-                                            'required'
+                                            'required',
+                                            'multiple',
+                                            'id' => 'role'
                                         ])
                                     !!}
                                 </div>
@@ -170,7 +174,7 @@
             </div>
             <div class="modal-footer">
                 {!! Form::button(__('base.cancel'), ['class' => 'btn btn-secondary', 'data-dismiss' => 'modal']) !!}
-                {!! Form::button(__('base.submit'), ['class' => 'btn btn-primary', 'id' => 'btnSubmit']) !!}
+                {!! Form::button(__('base.submit'), ['class' => 'createUser btn btn-primary', 'id' => 'btnSubmit']) !!}
             </div>
         </div>
     </div>
@@ -178,5 +182,5 @@
 @endsection
 
 @section('js')
-    <script src="{{ asset('js/admin/user/user.js') }}" type="text/javascript" charset="utf-8" async defer></script>
+    <script src="{{ asset('assets/customs/js/admin/user/user.js') }}" type="text/javascript" charset="utf-8" async></script>
 @endsection

@@ -96,7 +96,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/', 'AdminController@index')->name('admin.index');
 
     Route::group(['namespace' => 'Admin'], function () {
-        Route::resource('posts', 'PostController');
+        Route::resource('posts', 'PostController')->except(['edit']);
 
         Route::get('posts-list', 'PostController@getAll')->name('posts.list');
 
@@ -106,11 +106,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 
         Route::get('user', 'UserController@index')->name('admin.user.index');
 
+        Route::put('user-update/{id}', 'UserController@update')->name('admin.user.update')->middleware(['permission:user-update']);
+
+        Route::get('user/{id}', 'UserController@show')->name('admin.user.show');
+
         Route::get('user-list', 'UserController@getList')->name('admin.user.list');
 
-        Route::get('user-create', 'UserController@gcreate')->name('admin.user.create');
-
-        Route::post('user-create', 'UserController@store')->name('admin.user.create');
+        Route::post('user-create', 'UserController@store')->name('admin.user.store');
 
         Route::group(['prefix' => 'role', 'middleware' => ['role:admin']], function () {
             Route::resource('role', 'RoleController')->except([

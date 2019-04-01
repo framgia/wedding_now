@@ -14,7 +14,10 @@ use App\Http\Requests\Admin\CreateUserRequest;
 use App\Repositories\User\UserRepository;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\AdminRequest;
+
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -120,9 +123,38 @@ class UserController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AdminRequest $request, $id)
     {
-        //
+        $user = $this->user->findById($id)->load('locations.district.city', 'media');
+
+        try {
+            DB::beginTransaction();
+
+                $data = [
+                    'name' => $request->name,
+                    'birthday' => $request->birthday,
+                    'email' => $request->email,
+                    'gender' => $request->gender,
+                    'phone' => $request->phone,
+                    'password' => ($request->password ? Hash::make($request->password) : $user->password),
+                ];
+
+                $location = $user->locations[0];
+
+                $this->user->update($user->id, $data);
+                $user->locations()->updateOrCreate(
+                    ['id' => $location->id],
+                    [
+                        'address' => $request->address,
+                        'district_id' => $request->district,
+                    ]
+                );
+            DB::commit();
+
+            return __('base.success');
+        } catch (Exception $e) {
+            return __('base.fail');
+        }
     }
 
     /**

@@ -58,5 +58,5 @@
 </div>
 @endsection
 @section('js')
-    <script src="{{ asset('assets/customs/js/news_create.js') }}" type="text/javascript" charset="utf-8" defer></script>
+    <script src="{{ asset('assets/customs/js/posts_create.js') }}" type="text/javascript" charset="utf-8" defer></script>
 @endsection

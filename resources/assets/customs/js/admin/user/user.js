@@ -113,8 +113,8 @@ jQuery(document).ready(function() {
         .done(function(data) {
             getData(data);
         })
-        .fail(function() {
-            console.log('error');
+        .fail(function(data) {
+            showError(data)
         });
     }
 
@@ -134,25 +134,118 @@ jQuery(document).ready(function() {
             getUserList();
         })
         .fail(function(data) {
-            var getError = $.parseJSON(data.responseText);
-            $.each(getError.errors, function (key, value) {
-                toastr.error(value);
-            });
+            showError(data)
         });
     }
 
     getUserList();
 
-    $('#btnSubmit').on('click', function(event) {
+    $('body').on('click', '.showCreate', function(event) {
         event.preventDefault();
 
-        submitForm(route('admin.user.create'));
+        resetValueModal();
+        $('.modal-title').text( Lang.get('base.create') + ' ' + Lang.get('base.user') )
+        $('#btnSubmit').removeClass('updateUser').addClass('createUser')
     });
 
-    $('.m_datatable').on('click', 'td', function () {
-        var id = $(this).closest('tr').find('td:eq(0) input[type="checkbox"]').val();
-        console.log(id);
+    $('body').on('click', '.createUser', function(event) {
+        event.preventDefault();
+
+        $('input[name="_method"]').val('POST')
+
+        submitForm(route('admin.user.store'));
     });
+
+    $('body').on('click', '.updateUser', function(event) {
+        event.preventDefault();
+
+        var id = $('#user_id').val()
+        $('input[name="_method"]').val('PUT')
+
+        submitForm(route('admin.user.update', id))
+    });
+
+    var $el = $('#district');
+
+    function getDistrict(cityId, districtId) {
+        $.ajax({
+            url: route('get.districts', cityId),
+            type: 'GET',
+        })
+        .done(function(data) {
+            $el.empty();
+            $el.append(
+                $('<option></option>')
+                .attr('value', '').text( Lang.get('validation.custom.select.district') )
+            );
+            $.each(data, function(key, value) {
+                var checked = false
+                $el.append(
+                    $('<option></option>')
+                    .attr('value', key)
+                    .text( value )
+                );
+            });
+
+            $el.val(districtId)
+        })
+        .fail(function(message) {
+            showError(data)
+        });
+    }
+
+    function setValueModal(data) {
+        $('#name').val(data.name)
+        $('#user_id').val(data.id)
+        $('#email').val(data.email)
+        $('#phone').val(data.phone)
+        $('#city').val(data.locations[0].district.city_id)
+        getDistrict(data.locations[0].district.city_id, data.locations[0].district_id)
+        $('#address').val(data.locations[0].address)
+        $(`input[name='gender'][value='${data.gender}']`).prop('checked',true)
+        $('input[name="birthday"]').val(data.birthday)
+        $('#role').val(data.roles[0].id)
+        $('#user_name').val(data.user_name)
+    }
+
+    function resetValueModal() {
+        $('#name').val('')
+        $('#user_id').val('')
+        $('#email').val('')
+        $('#phone').val('')
+        $('#city').val('')
+        $('#district').val('')
+        $('#address').val('')
+        $('#birthday').val('')
+        $('#role').val('')
+        $('#user_name').val('')
+    }
+
+    $('body').on('click', '.showEdit', function () {
+        var id = $(this).closest('tr').find('td:eq(0) input[type="checkbox"]').val()
+
+
+        $('.modal-title').text( Lang.get('base.edit') + ' ' + Lang.get('base.user') )
+        $('#btnSubmit').removeClass('createUser').addClass('updateUser')
+
+        $.ajax({
+            url: route('admin.user.show', id),
+            type: 'GET',
+        })
+        .done(function(data) {
+            setValueModal(data)
+        })
+        .fail(function(data) {
+            showError(data)
+        })
+    });
+
+    function showError(data) {
+        var getError = $.parseJSON(data.responseText);
+        $.each(getError.errors, function (key, value) {
+            toastr.error(value);
+        });
+    }
 
     var $el = $('#district');
 
@@ -179,7 +272,7 @@ jQuery(document).ready(function() {
             });
         })
         .fail(function(message) {
-            toastr.error(message);
+            showError(message)
         });
     });
 });
