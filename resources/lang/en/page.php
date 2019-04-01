@@ -228,4 +228,12 @@ return [
         'slogan' => 'Planning a wedding is a truly magical experience. We’re offering our expertise to help make the planning process fun and stress-free for you from beginning to end. From decor inspiration to vow help, we’ve covered it all in our articles.',
         'placeholder_search' => 'Search WeddingWire articles',
     ],
+    'todo_list' => [
+        'list' => 'List Product',
+        'near_you' => 'Near you',
+        'other' => 'Other Product',
+        'no_product' => 'No product for you',
+        'item_selected' => 'Item Selected',
+        'show_item' => 'Show items',
+    ]
 ];

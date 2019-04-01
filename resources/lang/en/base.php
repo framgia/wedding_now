@@ -145,4 +145,5 @@ return [
 
     'by' => 'By',
     'of' => 'of',
+    'vnd' => 'vnđ',
 ];

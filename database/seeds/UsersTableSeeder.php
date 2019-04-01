@@ -84,11 +84,40 @@ class UsersTableSeeder extends Seeder
                 'phone' => '0123456786',
             ],
         ];
+        $locations = [
+            [
+                'address' => 'Some where ...',
+                'locationable_id' => 2,
+                'locationable_type' => 'App\Models\User',
+                'district_id' => rand(1, 812),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'address' => 'Some where ...',
+                'locationable_id' => 3,
+                'locationable_type' => 'App\Models\User',
+                'district_id' => rand(1, 812),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'address' => 'Some where ...',
+                'locationable_id' => 4,
+                'locationable_type' => 'App\Models\User',
+                'district_id' => rand(1, 812),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]
+        ];
 
         DB::table('users')->insert($data);
+        DB::table('locations')->insert($locations);
+
+
         factory(User::class, 100)->create()->each(function($user) {
             $user->locations()->create([
-                'address' => str_random(10),
+                'address' => 'Some where ...',
                 'locationable_id' => $user->id,
                 'locationable_type' => 'App\Models\User',
                 'district_id' => rand(1, 812),

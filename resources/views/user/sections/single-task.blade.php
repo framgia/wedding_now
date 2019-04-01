@@ -21,14 +21,11 @@
                     </select>
                 </div>
             </div>
-            <div class="row col-md-12 padding-bottom-15">
-                {!! Form::select('item', [], $task->item_user_id, ['class' => 'form-control', 'placeholder' => __('page.placeholder.item'), 'id' => 'task-item', 'data-item-id' => $task->item_user_id]) !!}
-            </div>
             <div class="row col-md-12">
                 {!! Form::textarea('note', $task->note, ['class' => 'form-control', 'id' => 'task-note', 'placeholder' => __('page.placeholder.note')]) !!}
                 {!! Form::submit(__('page.action.update'), ['class' => 'btn btn-pink', 'id' => 'update-task']) !!}
                 {!! Form::submit(__('page.action.back'), ['class' => 'btn btn-pink', 'id' => 'back']) !!}
-                
+
             </div>
         </div>
     </div>

@@ -122,10 +122,12 @@ class ScheduleController extends Controller
             'time_frame_id' => $request->time_frame_id,
             'time_occurs' => $request->time_occurs,
             'schedule_wedding_id' => $scheduleWedding->id,
-            'item_user_id' => $request->item_user_id,
+            'item_id' => (int)$request->item_id,
         ]);
 
-        return $task;
+        return response()->json([
+            'message' => trans('base.success'),
+        ]);
     }
 
     public function updateTask(TaskRequest $request)
@@ -161,8 +163,9 @@ class ScheduleController extends Controller
     public function getItem(Request $request)
     {
         $items = $this->category->getItem($request->id);
+        $itemsNearUser = $this->category->getItemNearUser($request->id);
 
-        return view('user.sections.product_modal', compact('items'));
+        return view('user.sections.product_modal', compact('items', 'itemsNearUser'));
     }
 
     public function getSingleTask($id)

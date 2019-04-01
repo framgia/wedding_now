@@ -4,6 +4,7 @@ namespace App\Repositories\Category;
 
 use App\Models\Category;
 use App\Repositories\BaseRepository;
+use Auth;
 
 class CategoryRepository extends BaseRepository implements CategoryRepositoryInterface
 {
@@ -30,5 +31,14 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
         $items = Category::find($id)->items()->with('user')->get();
 
         return $items;
+    }
+
+    public function getItemNearUser($id)
+    {
+        $itemsNearUser = Category::find($id)->items()->whereHas('locations.district.city', function($q) {
+            $q->where('name', Auth::user()->locations[0]->district->city->name);
+        })->with('user')->get();
+
+        return $itemsNearUser;
     }
 }

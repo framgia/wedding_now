@@ -34,7 +34,6 @@ class TaskRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'time_frame_id' => 'required|integer',
             'category_id' => 'required|integer',
             'priority' => 'required|integer|min:0|max:1',
         ];
@@ -44,9 +43,7 @@ class TaskRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'time_frame_id' => 'required|integer',
             'category_id' => 'required|integer',
-            'item_user_id' => 'integer',
             'priority' => 'required|integer|min:0|max:1',
         ];
     }
