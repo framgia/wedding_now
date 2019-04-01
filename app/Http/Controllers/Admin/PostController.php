@@ -165,6 +165,7 @@ class PostController extends Controller
 
         try {
             DB::beginTransaction();
+                $data = $this->postModel->findById($id);
                 $data = $this->postModel->updateOrCreate(
                     ['id' => $id],
                     [
@@ -220,6 +221,14 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $data = $this->postModel->findById($id);
+            $data->comments()->delete();
+            $data->delete();
+
+            return __('base.success');
+        } catch (Exception $e) {
+            return __('base.fail');
+        }
     }
 }

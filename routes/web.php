@@ -92,6 +92,18 @@ Route::group(['namespace' => 'User'], function () {
     });
 });
 
+Route::group(['namespace' => 'Admin'], function () {
+    Route::group(['prefix' => 'news', 'middleware' => 'auth'], function() {
+        Route::resource('posts', 'PostController')->except(['edit']);
+
+        Route::get('posts-list', 'PostController@getAll')->name('posts.list');
+
+        Route::delete('posts-delete-file/{file}', 'PostController@deleteFile')->name('posts.delete.file');
+
+        Route::post('posts-send-file', 'PostController@sendFile')->name('posts.send.file');
+    });
+});
+
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/', 'AdminController@index')->name('admin.index');
 
@@ -103,6 +115,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
         Route::delete('posts-delete-file/{file}', 'PostController@deleteFile')->name('posts.delete.file');
 
         Route::post('posts-send-file', 'PostController@sendFile')->name('posts.send.file');
+
+        Route::get('user-list', 'UserController@getList')->name('admin.user.list');
 
         Route::get('user', 'UserController@index')->name('admin.user.index');
 
