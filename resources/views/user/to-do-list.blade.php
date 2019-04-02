@@ -220,6 +220,29 @@
             })
         }
 
+        $('body').on('click', '.done-task', function(event) {
+            event.preventDefault()
+
+            var id = $(this).data('id')
+
+            $.ajax({
+                url: route('client.update-status-task', id),
+                type: 'PUT',
+                data: {id: id},
+            })
+            .done(function() {
+                $('.view-by').empty()
+                $('#show-list-category').empty()
+                $('#list_tasks').empty()
+
+                loadToDoList()
+            })
+            .fail(function(message) {
+                toastr.error( Lang.get('page.message.fail') )
+            })
+
+        })
+
         // remove tag filter
         $('body').on('click', '.alert-custom', function(event) {
             event.preventDefault();

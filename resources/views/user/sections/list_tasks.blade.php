@@ -6,7 +6,12 @@
                     <div class="panel-heading" role="tab" id="heading_{{ $task->id }}">
                         <h4 class="panel-title to-do-list-heading">
                             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_{{ $task->id }}" aria-expanded="true" aria-controls="collapse_{{ $task->id }}">
-                                <b>{{ $task->name }}</b>
+                                <b>
+                                    @if ($task->status == config('define.done'))
+                                        <i class="fa fa-check text-success"></i>
+                                    @endif
+                                    {{ $task->name }}
+                                </b>
                                 <span class="faq-btn faq-btn-plus hidden-xs">
                                     <i class="fa fa-angle-double-down" aria-hidden="true"></i>
                                 </span>

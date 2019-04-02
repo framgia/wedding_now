@@ -54,6 +54,8 @@ Route::group(['namespace' => 'User'], function () {
 
         Route::put('update-task', 'ScheduleController@updateTask')->name('client.update-task');
 
+        Route::put('update-status-task/{id}', 'ScheduleController@updateStatusTask')->name('client.update-status-task');
+
         Route::get('category-filter', 'ScheduleController@getCategoryFilter')->name('client.get-filter-category');
 
         Route::get('schedule-info', 'ScheduleController@scheduleInfoView')->name('client.schedule');
