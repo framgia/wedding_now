@@ -40,4 +40,9 @@ class Item extends Model
     {
         return $this->morphOne(Rate::class, 'rateable');
     }
+
+    public function locations()
+    {
+        return $this->morphMany(Location::class, 'locationable');
+    }
 }

@@ -232,4 +232,12 @@ return [
         'related_news' => 'Related WeddingNow Articles',
         'search' => 'Search',
     ],
+    'todo_list' => [
+        'list' => 'List Product',
+        'near_you' => 'Near you',
+        'other' => 'Other Product',
+        'no_product' => 'No product for you',
+        'item_selected' => 'Item Selected',
+        'show_item' => 'Show items',
+    ]
 ];

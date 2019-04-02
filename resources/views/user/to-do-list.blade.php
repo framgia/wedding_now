@@ -34,7 +34,7 @@
                                     </div>
                                     <div class="col-md-6 select-3">
                                         {!! Form::text(
-                                                'categories',
+                                                'time_occurs',
                                                 null,
                                                 [
                                                     'class' => 'form-control time-occurs',
@@ -52,12 +52,33 @@
                                             <option value="0">{{ __('page.priority.low') }}</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-12 select-3">
-                                        <div class="show-list-group-item dislay-none">
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-md-6 col-sm-offset-3 select-3">
+                                        <div class="show-list-group-item">
                                             <div class="text-left">
-                                                <button type="button" class="btn btn-info btn-show-product" data-toggle="modal" data-target="#product-modal">Show vendor</button>
+                                                <button type="button" class="btn btn-info btn-show-product" data-toggle="modal" data-target="#product-modal">{{ __('page.todo_list.show_item') }}</button>
                                             </div>
                                             <div class="modal-show-product"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 select-3">
+                                    <div class="item-sl mt15">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <span class="s-item-title">{{ __('page.todo_list.item_selected') }}:</span>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="item-selected">
+                                                    <div class="item-s">
+                                                        <li><span class="item-s-name"></span></li>
+                                                        <li><span class="item-s-user"></span></li>
+                                                        <li><span class="item-s-price"></span><span>{{ __('base.vnd') }}</span></li>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -416,6 +437,8 @@
                     category_id: $('#task-category').val(),
                     priority: $('#task-priority').val(),
                     note: $('#task-note').val(),
+                    item_id: $('input[name="item_id"]:checked').val(),
+                    time_occurs: $('.time-occurs').val(),
                 },
             })
             .done(function(res) {
@@ -423,6 +446,14 @@
                 loadToDoList();
 
                 $('#create-task-form')[0].reset();
+                $("input[name='item_id']:checked").prop('checked', false);
+                $('.item-s-name').text('');
+                $('.item-s-user').text('');
+                $('.item-s-price').text('');
+                $('.item-sl').addClass('d-none');
+                $('.btn-show-product').addClass('d-none');
+
+                toastr.success(res.message);
             })
             .fail(function(xhr, status, error) {
 
@@ -501,6 +532,24 @@
                     $('.btn-show-product').click();
                 }
             });
+        })
+        $('.item-sl').addClass('d-none');
+        $('.btn-show-product').addClass('d-none');
+        $(document).on('click', '#select-item', function() {
+            $('.item-sl').removeClass('d-none');
+            $('.btn-show-product').removeClass('d-none');
+
+            let selected = $("input[name='item_id']:checked");
+            console.log(selected.val());
+
+            let itemName = selected.parent('.select-product').prev('.description').find('h1').text();
+            let itemPrice = selected.parent('.select-product').prev('.description').find('.price').text();
+            let itemUser = selected.parent('.select-product').prev('.description').find('.vendor').text();
+
+            $('.item-s-name').text(itemName);
+            $('.item-s-user').text(itemUser);
+            $('.item-s-price').text(itemPrice);
+
         })
     });
 </script>
