@@ -126,6 +126,11 @@
     src: url('../fonts/UVF Caviar Dreams Bold.ttf');
 }
 
+@font-face {
+    font-family: proxima;
+    src: url('../fonts/FontsFree-Net-Proxima-Nova-Light.otf');
+}
+
 .navigation #cssmenu ul li a {
     font-family: punchbowl;
     font-size: 12px;

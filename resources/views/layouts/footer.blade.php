@@ -20,7 +20,7 @@
                                 <div class="row">
                                     <div class="col-xs-3">
                                         <div class="latest-news-img">
-                                            <img src="storage/wedding/footer-news-1.jpg" class="img-responsive" alt="news">
+                                            <img src="{{ asset('storage/wedding/footer-news-1.jpg') }}" class="img-responsive" alt="news">
                                         </div>
                                     </div>
                                     <div class="col-xs-9">
@@ -35,7 +35,7 @@
                                 <div class="row">
                                     <div class="col-xs-3">
                                         <div class="latest-news-img">
-                                            <img src="storage/wedding/footer-news-2.jpg" class="img-responsive" alt="news">
+                                            <img src="{{ asset('storage/wedding/footer-news-2.jpg') }}" class="img-responsive" alt="news">
                                         </div>
                                     </div>
                                     <div class="col-xs-9">
