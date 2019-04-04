@@ -146,6 +146,25 @@ class ScheduleController extends Controller
         ]);
     }
 
+    public function updateStatusTask(Request $request, $id)
+    {
+        try {
+            $task = $this->task->findById($id);
+            $status = (!$task->status || $task->status == 0) ? config('define.done') : config('define.to_do');
+
+            $task->status = $status;
+            $task->save();
+
+            return response()->json([
+                'message' => __('base.success'),
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => __('base.fail'),
+            ]);
+        }
+    }
+
     public function deleteTask($id)
     {
         $this->task->destroy($id);
