@@ -40,7 +40,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="select-product">
-                                                        <input type="radio" id="item{{ $itemUser->id }}" name="item_id">
+                                                        <input type="radio" id="item{{ $itemUser->id }}" name="item_id" value="{{ $itemUser->id }}">
                                                         <label for="item{{ $itemUser->id }}"></label>
                                                     </div>
                                                 </div>
@@ -59,39 +59,42 @@
                         <div class="n-title">
                             <h4>{{ __('page.todo_list.other') }}</h4>
                         </div>
+
                         @if (count($items) > 0)
                             <div class="n-product">
                                 <div class="row">
                                     @foreach ($items as $key => $item)
-                                        <div class="col-md-4 col-sm-6 col-xs-12">
-                                            <div class="blog-card">
-                                                <div class="meta">
-                                                    <a href="#"><div class="photo"></div></a>
-                                                </div>
-                                                <div class="description">
-                                                    <h1 title="{{ $item->name }}">{{ $item->name }}</h1>
-                                                    <a href="#"><p class="vendor">{{ $item->user->name }}</p></a>
-                                                    <div class="more-info">
-                                                        <div class="fl-left">
-                                                            <p>
-                                                                @foreach ($item->locations as $location)
-                                                                    <li title="{{ $location->district->name . ', ' . $location->district->city->name }}">
-                                                                        {{ $location->district->city->name }}
-                                                                    </li>
-                                                                @endforeach
-                                                            </p>
-                                                        </div>
-                                                        <div class="fl-right">
-                                                            <p class="price">{{ number_format($item->price) }}</p>
+                                        @if (!in_array($item->id, $itemsNearUser->pluck('id')->toArray()))
+                                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                                <div class="blog-card">
+                                                    <div class="meta">
+                                                        <a href="#"><div class="photo"></div></a>
+                                                    </div>
+                                                    <div class="description">
+                                                        <h1 title="{{ $item->name }}">{{ $item->name }}</h1>
+                                                        <a href="#"><p class="vendor">{{ $item->user->name }}</p></a>
+                                                        <div class="more-info">
+                                                            <div class="fl-left">
+                                                                <p>
+                                                                    @foreach ($item->locations as $location)
+                                                                        <li title="{{ $location->district->name . ', ' . $location->district->city->name }}">
+                                                                            {{ $location->district->city->name }}
+                                                                        </li>
+                                                                    @endforeach
+                                                                </p>
+                                                            </div>
+                                                            <div class="fl-right">
+                                                                <p class="price">{{ number_format($item->price) }}</p>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="select-product">
-                                                    <input type="radio" id="item{{ $item->id }}" name="item_id" value="{{ $item->id }}">
-                                                    <label for="item{{ $item->id }}"></label>
+                                                    <div class="select-product">
+                                                        <input type="radio" id="item{{ $item->id }}" name="item_id" value="{{ $item->id }}">
+                                                        <label for="item{{ $item->id }}"></label>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        @endif
                                     @endforeach
                                 </div>
                             </div>
@@ -104,7 +107,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-default" id="select-item" type="button" data-dismiss="modal">{{ __('base.save') }}</button>
+                <button class="btn btn-default create-task" id="select-item" type="button" data-dismiss="modal">{{ __('base.save') }}</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('base.close') }}</button>
             </div>
         </div>

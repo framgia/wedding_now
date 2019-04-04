@@ -117,7 +117,7 @@ class ScheduleController extends Controller
         $task = $this->task->create([
             'name' => $request->name,
             'priority' => $request->priority,
-            'category_id' => $request->category_id,
+            'category_id' => (int)$request->category_id,
             'note' => $request->note,
             'time_frame_id' => $request->time_frame_id,
             'time_occurs' => $request->time_occurs,
@@ -135,10 +135,11 @@ class ScheduleController extends Controller
         $this->task->update($request->id, [
             'name' => $request->name,
             'time_frame_id' => $request->time_frame_id,
-            'category_id' => $request->category_id,
+            'category_id' => $request->update_category_id,
             'priority' => $request->priority,
-            'item_user_id' => $request->item,
             'note' => $request->note,
+            'item_id' => (int)$request->item_id,
+            'time_occurs' => $request->time_occurs,
         ]);
 
         return response()->json([

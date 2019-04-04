@@ -235,5 +235,10 @@ return [
         'no_product' => 'No product for you',
         'item_selected' => 'Item Selected',
         'show_item' => 'Show items',
+        'item_name' => 'Item name:',
+        'item_user' => 'Provided by:',
+        'item_price' => 'Price:',
+        'no_item' => 'No item select',
+        'choose_time' => 'Choose time',
     ]
 ];
