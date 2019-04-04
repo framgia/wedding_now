@@ -89,6 +89,10 @@ span.s-item-title {
     border-bottom: 1px solid;
 }
 
+input.form-control.update-time-occurs {
+    height: 45px;
+}
+
 .item-selected p {
     border: 1px solid;
     border-radius: 10px;

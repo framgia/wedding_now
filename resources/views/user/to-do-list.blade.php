@@ -30,7 +30,7 @@
                                         {!! Form::select('time_frame', $timeFrames, null, ['class' => 'form-control', 'placeholder' => __('page.placeholder.time_frame'), 'id' => 'task-time-frame']) !!}
                                     </div>
                                     <div class="col-md-6 select-3">
-                                        {!! Form::select('categories', $categories, null, ['class' => 'form-control', 'placeholder' => __('page.placeholder.category'), 'id' => 'task-category']) !!}
+                                        {!! Form::select('category_id', $categories, null, ['class' => 'form-control', 'placeholder' => __('page.placeholder.category'), 'id' => 'task-category']) !!}
                                     </div>
                                     <div class="col-md-6 select-3">
                                         {!! Form::text(
@@ -38,7 +38,7 @@
                                                 null,
                                                 [
                                                     'class' => 'form-control time-occurs',
-                                                    'placeHolder' => 'Choose time ',
+                                                    'placeHolder' => __('page.todo_list.choose_time'),
                                                     'onfocus' => '(this.type="date")',
                                                     'onblur' => '(this.type="text")'
                                                 ]
@@ -59,7 +59,6 @@
                                             <div class="text-left">
                                                 <button type="button" class="btn btn-info btn-show-product" data-toggle="modal" data-target="#product-modal">{{ __('page.todo_list.show_item') }}</button>
                                             </div>
-                                            <div class="modal-show-product"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -73,9 +72,19 @@
                                             <div class="col-md-12">
                                                 <div class="item-selected">
                                                     <div class="item-s">
-                                                        <li><span class="item-s-name"></span></li>
-                                                        <li><span class="item-s-user"></span></li>
-                                                        <li><span class="item-s-price"></span><span>{{ __('base.vnd') }}</span></li>
+                                                        <li>
+                                                            <b>{{ __('page.todo_list.item_name') }}</b>
+                                                            <span class="item-s-name"></span>
+                                                        </li>
+                                                        <li>
+                                                            <b>{{ __('page.todo_list.item_user') }}</b>
+                                                            <span class="item-s-user"></span>
+                                                        </li>
+                                                        <li>
+                                                            <b>{{ __('page.todo_list.item_price') }}</b>
+                                                            <span class="item-s-price"></span>
+                                                            <span> {{ __('base.vnd') }}</span>
+                                                        </li>
                                                     </div>
                                                 </div>
                                             </div>
@@ -90,7 +99,7 @@
                             </div>
                         </form>
                     </div>
-
+                    <div class="modal-show-product"></div>
                     {{-- view by --}}
                     <div class="view-by"></div>
                     {{-- end view by --}}
@@ -285,23 +294,15 @@
 
                     let category_id = element.find('.selectCategory').val();
 
-                    element.find('.selectItem').html(getItems(category_id));
-
                     element.find('.selectItem').val(user_item_id);
 
                     element.find('.selectCategory').change(function(event) {
 
                         event.preventDefault();
-
-                        let data_item = getItems($(this).val());
-
-                        element.find('.selectItem').html(data_item);
                     });
                 });
 
-                $('.task-single').on('click', '.info-task', function(event) {
-
-                    event.preventDefault();
+                $(document).on('click', '.info-task', function(event) {
 
                     let id = $(this).attr('data-id');
 
@@ -329,13 +330,9 @@
 
                         let item_id = el.find('#task-item').attr('data-item-id');
 
-                        el.find('#task-item').html(getItems(category_id, item_id));
-
                         el.find('#task-category').change(function(event) {
 
                             event.preventDefault();
-
-                            el.find('#task-item').html(getItems($(this).val(), null));
                         });
 
                         $('#update-task').click(function(event) {
@@ -350,9 +347,10 @@
                                     id: el.find('#task-id').val(),
                                     name: el.find('#task-title').val(),
                                     time_frame_id: el.find('#task-time-frame').val(),
-                                    category_id: el.find('#task-category').val(),
+                                    update_category_id: el.find('#update-task-category').val(),
                                     priority: el.find('#task-priority').val(),
-                                    item: el.find('#task-item').val(),
+                                    item_id: parseInt($('input[name="item_id"]:checked').val()),
+                                    time_occurs: $('.update-time-occurs').val(),
                                     note: el.find('#task-note').val(),
                                 },
                             })
@@ -372,6 +370,8 @@
                             })
                         });
                     })
+
+                    return false;
                 });
 
                 $('.delete-task').click(function(event) {
@@ -404,51 +404,11 @@
             })
         }
 
-        function getItems(id_category, id_item) {
-
-            let data_items = '';
-
-            $.ajax({
-                async: false,
-                url: route('client.get-item-by-category'),
-                type: 'get',
-                dataType: '',
-                data: { id: id_category },
-            })
-            .done(function(res) {
-
-                let html = '<option hidden value="">' + Lang.get('base.choose') + ' ' + Lang.get('base.item') + '</option>';
-
-                res.forEach(function(element, index) {
-
-                    element.users.forEach(function(element1, index) {
-
-                        let selected = '';
-
-                        if (id_item == element1.pivot.id) {
-
-                            selected = 'selected';
-                        }
-
-                        html += '<option value="' + element1.pivot.id + '" ' + selected + '>' + element.name + ' - ' + element1.name + '</option>';
-                    })
-                })
-
-                data_items = html;
-            })
-            .fail(function(res) {
-                toastr.error( Lang.get('page.message.fail') );
-            })
-
-            return data_items;
-        }
-
         loadToDoList();
 
         $('#create-task').on('click', function(event) {
 
             event.preventDefault();
-
             $.ajax({
                 async: false,
                 url: route('client.create-task'),
@@ -457,10 +417,10 @@
                 data: {
                     name: $('#task-title').val(),
                     time_frame_id: $('#task-time-frame').val(),
-                    category_id: $('#task-category').val(),
+                    category_id: parseInt($('#task-category').val()),
                     priority: $('#task-priority').val(),
                     note: $('#task-note').val(),
-                    item_id: $('input[name="item_id"]:checked').val(),
+                    item_id: parseInt($('input[name="item_id"]:checked').val()),
                     time_occurs: $('.time-occurs').val(),
                 },
             })
@@ -543,37 +503,79 @@
 </script>
 <script>
     jQuery(document).ready(function($) {
+        $('.item-sl').addClass('d-none');
+        $('.item-sld').addClass('d-none');
+        $('.btn-show-product').addClass('d-none');
+
         $(document).on('change', '#task-category', function() {
-            event.preventDefault();
             let idTask = $(this).val();
+            getItem(idTask);
+        });
+
+        function getItem (idTask, addClass = false) {
+            createTask();
             $.ajax({
                 type: 'get',
                 url: route('client.get-item'),
-                data: {id: idTask},
+                data: { id: idTask },
                 success: function (response) {
                     $('.modal-show-product').html(response);
-                    $('.btn-show-product').click();
+                    $('#product-modal').modal('show');
+                    if (addClass) {
+                        updateTask();
+                    }
                 }
             });
-        })
-        $('.item-sl').addClass('d-none');
-        $('.btn-show-product').addClass('d-none');
-        $(document).on('click', '#select-item', function() {
+        }
+
+        function getItemSelected () {
+            let selected = $("input[name='item_id']:checked");
+            let obj = {
+                itemName: selected.parent('.select-product').prev('.description').find('h1').text(),
+                itemPrice: selected.parent('.select-product').prev('.description').find('.price').text(),
+                itemUser: selected.parent('.select-product').prev('.description').find('.vendor').text(),
+            };
+
+            return obj;
+        };
+
+        function updateTask () {
+            $('#select-item').removeClass('create-task');
+            $('#select-item').addClass('update-task');
+        }
+
+        function createTask () {
+            $('#select-item').removeClass('update-task');
+            $('#select-item').addClass('create-task');
+        }
+
+        $(document).on('click', '.create-task', function () {
             $('.item-sl').removeClass('d-none');
             $('.btn-show-product').removeClass('d-none');
 
-            let selected = $("input[name='item_id']:checked");
-            console.log(selected.val());
+            let itemSelected = getItemSelected();
 
-            let itemName = selected.parent('.select-product').prev('.description').find('h1').text();
-            let itemPrice = selected.parent('.select-product').prev('.description').find('.price').text();
-            let itemUser = selected.parent('.select-product').prev('.description').find('.vendor').text();
-
-            $('.item-s-name').text(itemName);
-            $('.item-s-user').text(itemUser);
-            $('.item-s-price').text(itemPrice);
-
+            $('.item-s-name').text(itemSelected.itemName);
+            $('.item-s-user').text(itemSelected.itemUser);
+            $('.item-s-price').text(itemSelected.itemPrice);
         })
+
+        $(document).on('click', '#update-task-category', function () {
+            let idTask = $(this).val();
+            getItem(idTask, true);
+        })
+
+        $(document).on('click', '.update-task', function () {
+            $('.item-sld').removeClass('d-none');
+            $('.btn-show-product').removeClass('d-none');
+
+            let itemSelected = getItemSelected();
+
+            $('.update-item-name').text(itemSelected.itemName);
+            $('.update-item-user').text(itemSelected.itemUser);
+            $('.update-item-price').text(itemSelected.itemPrice);
+        })
+
     });
 </script>
 @endsection

@@ -43,7 +43,7 @@ class TaskRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'category_id' => 'required|integer',
+            'update_category_id' => 'required|integer',
             'priority' => 'required|integer|min:0|max:1',
         ];
     }

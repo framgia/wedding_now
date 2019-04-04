@@ -25,7 +25,9 @@
                         <div class="panel-body to-do-list-dtl">
                             <div class="row">
                                 <div class="col-sm-8">
-                                    <div class="date">{{ '(' . $task->timeFrame->time_frame . ')' }}</div>
+                                    @if ($task->timeFrame)
+                                        <div class="date">{{ '(' . $task->timeFrame->time_frame . ')' }}</div>
+                                    @endif
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="to-do-list-action-tabs">
