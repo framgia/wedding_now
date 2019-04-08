@@ -12,6 +12,11 @@ class HomeController extends Controller
      *
      * @return void
      */
+    private $langActive = [
+        'vn',
+        'en',
+    ];
+
     public function __construct()
     {
         // $this->middleware(['auth', 'verified']);
@@ -25,5 +30,14 @@ class HomeController extends Controller
     public function index()
     {
         return view('index');
+    }
+
+    public function changeLang(Request $request, $lang)
+    {
+        if (in_array($lang, $this->langActive)) {
+            $request->session()->put(['lang' => $lang]);
+
+            return redirect()->back();
+        }
     }
 }

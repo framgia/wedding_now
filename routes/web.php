@@ -21,6 +21,8 @@ Route::get('login', 'AdminController@getAdminLogin')->middleware('guest')->name(
 
 Route::post('login', 'AdminController@postAdminLogin')->name('login');
 
+Route::get('lang/{lang}', 'HomeController@changeLang')->name('changeLang');
+
 Route::group(['namespace' => 'User'], function () {
 
     Route::get('real-wedding', 'RealWeddingController@index')->name('real-wedding.index');

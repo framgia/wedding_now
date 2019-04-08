@@ -140,3 +140,33 @@
     font-size: 11px;
     padding: 17px 15px;
 }
+
+.top-nav-info .top-detail ul.select-lan li {
+    display: block;
+}
+
+.hover-lan {
+    position: relative;
+}
+
+ul.select-lan {
+    position: absolute;
+    background-color: #181818;
+    padding: 0 8px;
+    display: none;
+    top: -25px;
+    left: -14px;
+    text-align: center;
+    z-index: 999;
+}
+
+li.language:hover .select-lan {
+    display: block;
+}
+
+p.current-lan {
+    color: white;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+

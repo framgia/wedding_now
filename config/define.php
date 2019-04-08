@@ -54,4 +54,6 @@ return [
         'no_paginate' => 0,
         'no_skip' => 0,
     ],
+    'vn' => 'vn',
+    'en' => 'en',
 ];
