@@ -101,6 +101,7 @@
                     </div>
                     <div class="modal-show-product"></div>
                     {{-- view by --}}
+                    <h3>{{ __('base.view') }} {{ __('base.by') }}</h3>
                     <div class="view-by"></div>
                     {{-- end view by --}}
 
@@ -127,8 +128,11 @@
                         <div class="col-lg-6 padding-bottom-15">
                             <h5 class="padding-top-10">{{ $scheduleWedding->name }}</h5>
                             <p>{{ __('page.marrige_day') . $scheduleWedding->marriage_day }}</p>
-                            <button class="btn btn-info btn-choose-schedule"
-                                    data-id="{{ $scheduleWedding->id }}">{{ __('page.choose') }}</button>
+                            <button
+                                class="btn btn-pink btn-choose-schedule"
+                                data-id="{{ $scheduleWedding->id }}">
+                                {{ __('page.choose') }}
+                            </button>
                         </div>
                     @endforeach
                 </div>
@@ -190,6 +194,7 @@
 
                 $('.category-filter').click(function(event) {
                     event.preventDefault();
+
                     let category_id = $(this).attr('data-id');
                     let status = $(this).attr('data-status');
                     let display_name = $(this).attr('data-name');
@@ -206,11 +211,11 @@
                         checkCategory = category_id;
                     }
 
-                    if (checkTypeExists) {
-                        checkTypeExists.parents('.alert-custom').remove();
-                    }
-
                     if (!checkTagExists.length) {
+                        if (checkTypeExists) {
+                            checkTypeExists.parents('.alert-custom').remove();
+                        }
+
                         $('.view-by').append(`
                             <div class="alert alert-dismissible alert-custom">
                                 <a href="#" data-status="${statusDone}" data-type="${type}" data-id="${category_id}">
@@ -265,8 +270,8 @@
                 checkCategory = null;
             }
 
-            loadToDoList(checkCategory, checkStatus);
             $(this).remove();
+            loadToDoList(checkCategory, checkStatus);
         });
 
         function loadToDoList(category_id, type = null) {
@@ -316,6 +321,10 @@
                     .done(function(res) {
 
                         $('#list_tasks').html(res);
+
+                        cancelCreateTask();
+
+                        loadCategoryFilter();
 
                         $('#back').click(function(event) {
 
@@ -406,9 +415,24 @@
 
         loadToDoList();
 
-        $('#create-task').on('click', function(event) {
-
+        $('body').on('click', '#collapse_all', function(event) {
             event.preventDefault();
+
+            expand();
+            collapse();
+        });
+
+        function expand() {
+            $('.collapse').collapse('show');
+        }
+
+        function collapse() {
+            $('.collapse').collapse('hide');
+        }
+
+        $('body').on('click', '#create-task', function(event) {
+            event.preventDefault();
+
             $.ajax({
                 async: false,
                 url: route('client.create-task'),
@@ -476,19 +500,31 @@
 
             $(this).hide();
 
+            createTask();
+
+            loadToDoList();
+        });
+
+        function createTask() {
             $('#show-list-category').hide();
+
+            $('#single-task-detail').hide();
 
             $('.view-by').hide();
 
             $('#create-task-div').show();
 
             $('#create-task-form')[0].reset();
-        });
+        }
 
         $('#cancel-create-task').on('click', function(event) {
 
             event.preventDefault();
 
+            cancelCreateTask();
+        });
+
+        function cancelCreateTask() {
             $('#create-btn').show();
 
             $('#show-list-category').show();
@@ -498,7 +534,7 @@
             $('#create-task-div').hide();
 
             $('#create-task-form')[0].reset();
-        });
+        }
     });
 </script>
 <script>

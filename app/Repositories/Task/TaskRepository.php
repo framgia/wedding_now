@@ -6,7 +6,7 @@ use App\Repositories\BaseRepository;
 
 class TaskRepository extends BaseRepository implements TaskRepositoryInterface
 {
-    public function getTasksBySchedule($id, $categoryId, $status = null)
+    public function getTasksBySchedule($id, $categoryId = null, $status = null)
     {
         return $this->model->with(['timeFrame', 'category'])
             ->when($categoryId != null, function ($query) use ($categoryId) {

@@ -244,5 +244,6 @@ return [
         'item_price' => 'Price:',
         'no_item' => 'No item select',
         'choose_time' => 'Choose time',
+        'collapse_all' => 'Collapse all'
     ]
 ];
