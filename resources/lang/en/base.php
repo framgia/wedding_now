@@ -147,4 +147,6 @@ return [
     'of' => 'of',
     'vnd' => 'vnđ',
     'info' => 'Info!',
+    'vn' => 'vn',
+    'en' => 'en',
 ];

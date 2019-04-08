@@ -406,8 +406,6 @@
                                                         <div class="m-stack m-stack--ver m-stack--general min-height-180">
                                                             <div class="m-stack__item m-stack__item--center m-stack__item--middle">
                                                                 <span class="">
-                                                                    {{ __('admin.news.all_caught_up') }}
-                                                                    <br>
                                                                     {{ __('admin.news.no_new_logs') }}
                                                                 </span>
                                                             </div>
