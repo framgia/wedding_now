@@ -35,34 +35,34 @@
                 </div>
             </div>
 
-                <div class="col-md-12 row pb15">
-                    <div class="item-sld mt15">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <span class="s-item-title">{{ __('page.todo_list.item_selected') }}:</span>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="item-selected">
-                                    <div class="item-s update-info-item">
-                                        <li>
-                                            <b>{{ __('page.todo_list.item_name') }}</b>
-                                            <span class="update-item-name">{{ $task->item ? $task->item->name : __('page.todo_list.no_item') }}</span>
-                                        </li>
-                                        <li>
-                                            <b>{{ __('page.todo_list.item_user') }}</b>
-                                            <span class="update-item-user">{{ $task->item ? $task->item->user->name : '' }}</span>
-                                        </li>
-                                        <li>
-                                            <b>{{ __('page.todo_list.item_price') }}</b>
-                                            <i class="update-item-price">{{ $task->item ? number_format($task->item->price) : '' }}</i>
-                                            <span> {{ __('base.vnd') }}</span>
-                                        </li>
-                                    </div>
+            <div class="col-md-12 row pb15">
+                <div class="item-sld mt15">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span class="s-item-title">{{ __('page.todo_list.item_selected') }}:</span>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="item-selected">
+                                <div class="item-s update-info-item">
+                                    <li>
+                                        <b>{{ __('page.todo_list.item_name') }}</b>
+                                        <span class="update-item-name">{{ $task->item ? $task->item->name : __('page.todo_list.no_item') }}</span>
+                                    </li>
+                                    <li>
+                                        <b>{{ __('page.todo_list.item_user') }}</b>
+                                        <span class="update-item-user">{{ $task->item ? $task->item->user->name : '' }}</span>
+                                    </li>
+                                    <li>
+                                        <b>{{ __('page.todo_list.item_price') }}</b>
+                                        <i class="update-item-price">{{ $task->item ? number_format($task->item->price) : '' }}</i>
+                                        <span> {{ __('base.vnd') }}</span>
+                                    </li>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
             <div class="row col-md-12">
                 {!! Form::textarea('note', $task->note, ['class' => 'form-control', 'id' => 'task-note', 'placeholder' => __('page.placeholder.note')]) !!}

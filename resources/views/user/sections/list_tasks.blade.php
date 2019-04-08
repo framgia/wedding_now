@@ -1,5 +1,17 @@
 <div class="to-do-list">
     <div class="panel-group faq-panel">
+        <p class="pull-right">
+            <button id="collapse_all" class="btn btn-pink">
+                {{ __('page.todo_list.collapse_all') }}
+                <span class="faq-btn faq-btn-plus hidden-xs">
+                    <i class="fa fa-angle-double-down" aria-hidden="true"></i>
+                </span>
+                <span class="faq-btn faq-btn-minus hidden-xs">
+                    <i class="fa fa-angle-double-up" aria-hidden="true"></i>
+                </span>
+            </button>
+        </p>
+        <br><br>
         @foreach($tasks as $task)
             <div class="panel-group faq-panel task-single" id="accordion" role="tablist" aria-multiselectable="true">
                 <div class="panel panel-default">
@@ -10,7 +22,15 @@
                                     @if ($task->status == config('define.done'))
                                         <i class="fa fa-check text-success"></i>
                                     @endif
-                                    {{ $task->name }}
+                                    @if ($task->status == config('define.done'))
+                                        <b class="text-success">
+                                            <del>{{ $task->name }}</del>
+                                        </b>
+                                    @else
+                                        <b>
+                                            {{ $task->name }}
+                                        </b>
+                                    @endif
                                 </b>
                                 <span class="faq-btn faq-btn-plus hidden-xs">
                                     <i class="fa fa-angle-double-down" aria-hidden="true"></i>
@@ -26,7 +46,7 @@
                             <div class="row">
                                 <div class="col-sm-8">
                                     @if ($task->timeFrame)
-                                        <div class="date">{{ '(' . $task->timeFrame->time_frame . ')' }}</div>
+                                        <div class="date">{{ $task->category->name }} - {{ $task->timeFrame->time_frame }}</div>
                                     @endif
                                 </div>
                                 <div class="col-sm-4">
