@@ -33,7 +33,7 @@ return [
     'paginate' => 21,
     'done' => 1,
     'to_do' => 0,
-    'image_card_text_box' => 'image-background',
+    'image_card' => 'image-background',
     'logo' => 'storage/wedding/logo.png',
     'default' => 'default',
     'post' => [
@@ -56,4 +56,10 @@ return [
     ],
     'vn' => 'vn',
     'en' => 'en',
+    'card' => [
+        'template' => 'template',
+        'custom' => 'custom',
+        'name' => 'Card of ',
+        'icon_load_more' => 'storage/wedding/icon_more.png',
+    ],
 ];
