@@ -480,7 +480,7 @@
         $('.text-value').val(text);
         $('.font-value').val(font);
         $('.size-value').val(size);
-    
+    }
 
     function resize() {
         $('.edit-text').css({

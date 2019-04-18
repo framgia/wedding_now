@@ -7,23 +7,29 @@ use App\Repositories\BaseRepository;
 
 class CardMetaRepository extends BaseRepository implements CardMetaRepositoryInterface
 {
-      public function deleteByCard($arrId)
+      public function getByCard($cardId)
+      {
+         return $this->model->where('card_id', $cardId)->get();
+      }
+
+      public function deleteByCard($card_id, $arrId)
       {
          foreach ($arrId as $id) {
 
-            $this->model->where('card_id', $id)->delete();
+            $this->model->where('card_id', $card_id)->where('id', $id)->delete();
          }
       }
 
-      public function updateMeta($card_id, $key, $value)
+      public function updateMeta($cardId, $cardMeta)
       {
          $this->model->updateOrCreate([
-            'card_id' => $card_id,
-            'key' => $key,
+            'card_id' => $cardId,
+            'id' => $cardMeta['id'],
          ], [
-            'card_id' => $card_id,
-            'key' => $key,
-            'value' => $value,
+            'card_id' => $cardId,
+            'div_style' => $cardMeta['div_style'],
+            'textarea_style' => $cardMeta['textarea_style'],
+            'content' => $cardMeta['content']
          ]);
       }
 }

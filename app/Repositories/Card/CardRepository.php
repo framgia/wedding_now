@@ -7,34 +7,34 @@ use App\Repositories\BaseRepository;
 
 class CardRepository extends BaseRepository implements CardRepositoryInterface
 {
-    public function getImageBackground($scheduleId)
+    public function getCard($scheduleId = null, $backgroundImage = null)
     {
-        return $this->model->where([
-            ['schedule_wedding_id', $scheduleId],
-            ['text_box_name', config('define.image_card_text_box')]
-        ])->first(['content']);
+        return $this->model->when($scheduleId != null, function($query) use ($scheduleId) {
+            $query->where('schedule_wedding_id', $scheduleId);
+        })->get();
     }
 
-    public function getCardsBySchedule($scheduleId)
+    public function getTemplate()
     {
-        return $this->model->with('cardMetas')->where([
-            ['schedule_wedding_id', $scheduleId],
-            ['text_box_name', '!=', config('define.image_card_text_box')]
-        ])->orWhere([
-            ['schedule_wedding_id', $scheduleId],
-            ['text_box_name', null]
-        ])->get();
+        return $this->model->whereType(config('define.card.template'))->get();
     }
 
-    public function saveImageBackground($scheduleId, $image)
+    public function saveImageBackground($scheduleId, $image, $templateId = null)
     {
         $this->model->updateOrCreate([
             'schedule_wedding_id' => $scheduleId,
-            'text_box_name' => config('define.image_card_text_box'),
-         ], [
-            'schedule_wedding_id' => $scheduleId,
-            'text_box_name' => config('define.image_card_text_box'),
-            'content' => $image,
-         ]);
+        ], [
+            'background_image' => $image,
+            'name' => config('define.image_card'),
+        ]);
+
+        $this->model->when($templateId != null, function($query) {
+            $query->update([
+                'schedule_wedding_id' => $scheduleId,
+            ], [
+                'background_image' => $image,
+                'name' => config('define.image_card'),
+            ]);
+        });
     }
 }
