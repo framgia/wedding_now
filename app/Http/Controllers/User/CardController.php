@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
 use App\Http\Requests\Client\DesignCardRequest;
 use App\Repositories\ScheduleMeta\ScheduleMetaRepository;
+use Illuminate\Support\Facades\Auth;
 
 class CardController extends Controller
 {
@@ -31,20 +32,67 @@ class CardController extends Controller
 
     public function index()
     {
-        return view('user.design_card');
-    }
+        $scheduleId = $this->scheduleMeta->getChosenSchedule()->schedule_wedding_id;
 
-    public function getCard()
-    {
-        $scheduleWeddingId = $this->scheduleMeta->getChosenSchedule()->schedule_wedding_id;
+        $card = $this->card->getCard($scheduleId)->first();
 
-        $background = $this->card->getImageBackground($scheduleWeddingId);
+        if (!$card) {
 
-        if ($background) {
-            $background = config('asset.card_template') . $background->content;
+            $templates = $this->card->getTemplate();
+
+            return view('user.choose-template', compact('templates'));
         }
 
-        $textBoxs = $this->card->getCardsBySchedule($scheduleWeddingId);
+        return view('user.design-card', compact('card'));
+    }
+
+    public function chooseTemplate(Request $request)
+    {
+        $idCard = $request->id;
+
+        $card = $this->card->findById($idCard);
+
+        $background = $card->background_image;
+
+        $cardMetas = $this->cardMeta->getByCard($idCard);
+
+        $scheduleId = $this->scheduleMeta->getChosenSchedule()->schedule_wedding_id;
+
+        DB::transaction(function() use ($cardMetas, $scheduleId, $background) {
+
+            $card = $this->card->create([
+                'schedule_wedding_id' => $scheduleId,
+                'name' => config('define.card.name') . Auth::user()->name,
+                'type' => config('define.card.custom'),
+                'background_image' => $background
+            ]);
+
+            foreach ($cardMetas as $meta) {
+
+                $this->cardMeta->create([
+                    'card_id' => $card->id,
+                    'content' => $meta->content,
+                    'div_style' => $meta->div_style,
+                    'textarea_style' => $meta->textarea_style,
+                ]);
+            }
+        });
+    }
+
+    public function getDesignCard()
+    {
+        $scheduleId = $this->scheduleMeta->getChosenSchedule()->schedule_wedding_id;
+
+        $card = $this->card->getCard($scheduleId)->first();
+
+        $background = $card->background_image;
+
+        if ($background) {
+
+            $background = config('asset.card_template') . $background;
+        }
+
+        $textBoxs = $this->cardMeta->getByCard($card->id);
 
         return collect(['background' => $background, 'textBoxs' => $textBoxs]);
     }
@@ -53,39 +101,35 @@ class CardController extends Controller
     {
         $scheduleId = $this->scheduleMeta->getChosenSchedule()->schedule_wedding_id;
 
+        $templateId = $request->template_id;
+
+        $card = $this->card->getCard($scheduleId)->first() ?? $this->card->create([
+                'schedule_wedding_id' => $scheduleId,
+                'name' => config('define.card.name') . Auth::user()->name,
+                'type' => config('define.card.custom'),
+                'background_image' => null
+            ]);;
+
         if ($request->background) {
 
-            $this->card->saveImageBackground($scheduleId, $request->background);
+            $this->card->saveImageBackground($scheduleId, $request->background, $templateId);
         }
 
         if ($request->arrDelete) {
 
             $arrDelete = $request->arrDelete;
 
-            DB::transaction(function() use ($arrDelete) {
+            DB::transaction(function() use ($card, $arrDelete) {
 
-                $this->card->destroy($arrDelete);
-
-                $this->cardMeta->deleteByCard($arrDelete);
+                $this->cardMeta->deleteByCard($card->id, $arrDelete);
             });
         }
 
-        if ($request->arrData) {
+        if ($request->arrTextBox) {
 
-            foreach ($request->arrData as $textBox) {
+            foreach ($request->arrTextBox as $cardMeta) {
 
-                $card = $this->card->updateOrCreate([
-                    'id' => $textBox['card_id'],
-                ], [
-                    'content' => $textBox['content'],
-                    'schedule_wedding_id' => $scheduleId,
-                    'style' => $textBox['style'],
-                ]);
-
-                foreach ($textBox['metas'] as $key => $value) {
-
-                    $this->cardMeta->updateMeta($card->id, $key, $value);
-                }
+                $this->cardMeta->updateMeta($card->id, $cardMeta);
             }
         }
     }

@@ -11,7 +11,9 @@ class CardMeta extends Model
     protected $fillable = [
         'card_id',
         'key',
-        'value',
+        'div_style',
+        'content',
+        'textarea_style'
     ];
 
     public function card()

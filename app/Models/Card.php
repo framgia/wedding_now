@@ -11,9 +11,10 @@ class Card extends Model
     protected $fillable = [
         'id',
         'schedule_wedding_id',
-        'text_box_name',
-        'content',
-        'style',
+        'name',
+        'type',
+        'card_id',
+        'background_image'
     ];
 
     public function scheduleWedding()
@@ -24,5 +25,15 @@ class Card extends Model
     public function cardMetas()
     {
         return $this->hasMany(CardMeta::class);
+    }
+
+    public function scopeTemplate($query)
+    {
+        return $query->whereType(config('define.card.template'));
+    }
+
+    public function scopeCustom($query)
+    {
+        return $query->whereType(config('define.card.custom'));
     }
 }
