@@ -14,7 +14,7 @@ class Card extends Model
         'name',
         'type',
         'card_id',
-        'background_image'
+        'background_image',
     ];
 
     public function scheduleWedding()

@@ -13,7 +13,7 @@ class CardMeta extends Model
         'key',
         'div_style',
         'content',
-        'textarea_style'
+        'textarea_style',
     ];
 
     public function card()

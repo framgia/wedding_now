@@ -10,7 +10,9 @@ class CardRepository extends BaseRepository implements CardRepositoryInterface
     public function getCard($scheduleId = null, $backgroundImage = null)
     {
         return $this->model->when($scheduleId != null, function($query) use ($scheduleId) {
-            $query->where('schedule_wedding_id', $scheduleId);
+            return $query->where('schedule_wedding_id', $scheduleId);
+        }, function($query) {
+            return $query->get();
         })->get();
     }
 
