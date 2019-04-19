@@ -67,6 +67,8 @@ mix.styles([
     'resources/client/css/news.css',
     'node_modules/jquery-ui/themes/base/theme.css',
     'node_modules/jquery-ui/themes/base/datepicker.css',
+    'resources/client/css/couple-info.css',
+    'resources/client/css/index.css',
 ], 'public/assets/user/css/page.css');
 
 mix.scripts([

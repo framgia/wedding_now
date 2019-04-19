@@ -1,11 +1,10 @@
 <section id="wedding-plan" class="ptb120">
-    <div class="container">
+    <div class="">
         <div class="section text-center">
             <h3 class="section-heading">{{ __('page.index.planning') }}</h3>
-            <p class="section-sub-heading">{{ __('page.index.choose_planning') }}</p>
         </div>
         <div class="row">
-            <div class="col-md-4 col-sm-6">
+            <div class="col-md-6 col-sm-6">
                 <div class="wedding-plan-block">
                     <div class="wedding-plan-img">
                         <img src="{{ asset(config('asset.users.images.index') . 'wedding-plan-2.jpg') }}" class="img-responsive" alt="wedding-plan">
@@ -21,7 +20,6 @@
                         @endif
                         <div id="modal-schedule" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-lg">
-                                <!-- Modal content-->
                                 <div class="modal-content">
                                     {{ Form::open(['method' => 'post', 'route' => 'client.select-schedule-default']) }}
                                         <div class="modal-header">
@@ -62,7 +60,6 @@
                                                 @endif
                                             </div>
                                         </div>
-
                                         <div class="modal-footer">
                                             {{ Form::submit(__('page.choose'), ['class' => 'btn btn-default']) }}
                                             <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('base.close') }}</button>
@@ -74,16 +71,24 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6">
+            <div class="col-md-6 col-sm-6">
                 <div class="wedding-plan-block">
                     <div class="wedding-plan-img">
                         <img src="{{ asset(config('asset.users.images.index') . 'wedding-plan-3.jpg') }}" class="img-responsive" alt="wedding-plan">
                         <div class="overlay-bg"></div>
                     </div>
                     <div class="wedding-plan-dtl text-center">
-                        <h5 class="heading"><a href="{{ route('user.suggest') }}">{{ __('page.index.planning_suggest') }}</a></h5>
-                        <p class="sub-heading">{{ __('page.index.detail_planning_suggest') }}</p>
-                        <a href="{{ route('user.suggest') }}" class="btn btn-default">{{ __('page.choose') }}</a>
+                        <h5 class="heading">
+                            <a href="{{ route('user.suggest') }}">
+                                {{ __('page.index.planning_suggest') }}
+                            </a>
+                        </h5>
+                        <p class="sub-heading">
+                            {{ __('page.index.detail_planning_suggest') }}
+                        </p>
+                        <a href="{{ route('user.suggest') }}" class="btn btn-default">
+                            {{ __('page.choose') }}
+                        </a>
                     </div>
                 </div>
             </div>
