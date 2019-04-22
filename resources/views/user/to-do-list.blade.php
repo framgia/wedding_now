@@ -8,110 +8,125 @@
 <section id="to-do-list" class="to-do-list-main-block">
     <div class="container">
         @include('user.sections.to_do_list_tab')
-        <div class="to-do-list-block">
-            <h3><b>{{ __('page.page.checklist') }}</b></h3>
-            <h3 class="create-task-heading">
-                {!! Form::submit(__('base.choose') . ' ' . __('base.schedule'), ['id' => 'btn-choose-schedule', 'class' => 'btn btn-pink', 'data-toggle' => 'modal', 'data-target' => '#myModal']) !!}
-                {!! Form::submit(__('base.create') . ' ' . __('base.task'), ['id' => 'create-btn', 'class' => 'btn btn-pink']) !!}
-            </h3>
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="create-btn padding-bottom-10">
-                    </div>
-                    <div id="create-task-div" class="display-none">
-                        {{-- create task --}}
-                        <h5 class="create-task-heading">{{ __('page.task.new') }}</h5>
-                        <form id="create-task-form" action="#">
-                            <div class="create-task-block">
-                                <div class="row col-md-12">
-                                    {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'task-title', 'placeholder' => __('page.placeholder.title'), 'autocomplete' => 'off']) !!}
-                                </div>
-                                <div class="row col-md-12 padding-bottom-15">
-                                    <div class="col-md-6 select-3">
-                                        {!! Form::select('time_frame', $timeFrames, null, ['class' => 'form-control', 'placeholder' => __('page.placeholder.time_frame'), 'id' => 'task-time-frame']) !!}
+        <div class="wrapper">
+            <nav class="my-tabs">
+                <div class="selector"></div>
+                <a class="active" data-toggle="tab" href="#to-do">
+                    {{ __('page.page.to_do_list') }}
+                </a>
+                <a id="get-timeline" data-toggle="tab" href="#timeline">
+                    {{ __('page.title.timeline') }}
+                </a>
+            </nav>
+        </div>
+        <br>
+        <div class="tab-content">
+            <div id="to-do" class="to-do-list-block tab-pane fade in active">
+                {{-- <h3><b>{{ __('page.page.checklist') }}</b></h3> --}}
+                <h3 class="create-task-heading">
+                    {!! Form::submit(__('base.choose') . ' ' . __('base.schedule'), ['id' => 'btn-choose-schedule', 'class' => 'btn btn-pink', 'data-toggle' => 'modal', 'data-target' => '#myModal']) !!}
+                    {!! Form::submit(__('base.create') . ' ' . __('base.task'), ['id' => 'create-btn', 'class' => 'btn btn-pink']) !!}
+                </h3>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="create-btn padding-bottom-10">
+                        </div>
+                        <div id="create-task-div" class="display-none">
+                            {{-- create task --}}
+                            <h5 class="create-task-heading">{{ __('page.task.new') }}</h5>
+                            <form id="create-task-form" action="#">
+                                <div class="create-task-block">
+                                    <div class="row col-md-12">
+                                        {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'task-title', 'placeholder' => __('page.placeholder.title'), 'autocomplete' => 'off']) !!}
                                     </div>
-                                    <div class="col-md-6 select-3">
-                                        {!! Form::select('category_id', $categories, null, ['class' => 'form-control', 'placeholder' => __('page.placeholder.category'), 'id' => 'task-category']) !!}
+                                    <div class="row col-md-12 padding-bottom-15">
+                                        <div class="col-md-6 select-3">
+                                            {!! Form::select('time_frame', $timeFrames, null, ['class' => 'form-control', 'placeholder' => __('page.placeholder.time_frame'), 'id' => 'task-time-frame']) !!}
+                                        </div>
+                                        <div class="col-md-6 select-3">
+                                            {!! Form::select('category_id', $categories, null, ['class' => 'form-control', 'placeholder' => __('page.placeholder.category'), 'id' => 'task-category']) !!}
+                                        </div>
+                                        <div class="col-md-6 select-3">
+                                            {!! Form::text(
+                                                    'time_occurs',
+                                                    null,
+                                                    [
+                                                        'class' => 'form-control time-occurs',
+                                                        'placeHolder' => __('page.todo_list.choose_time'),
+                                                        'onfocus' => '(this.type="date")',
+                                                        'onblur' => '(this.type="text")'
+                                                    ]
+                                                )
+                                            !!}
+                                        </div>
+                                        <div class="col-md-6 select-3">
+                                            <select name="priority" class="form-control" id="task-priority">
+                                                <option value="" hidden>{{ __('page.placeholder.priority') }}</option>
+                                                <option value="1">{{ __('page.priority.high') }}</option>
+                                                <option value="0">{{ __('page.priority.low') }}</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6 select-3">
-                                        {!! Form::text(
-                                                'time_occurs',
-                                                null,
-                                                [
-                                                    'class' => 'form-control time-occurs',
-                                                    'placeHolder' => __('page.todo_list.choose_time'),
-                                                    'onfocus' => '(this.type="date")',
-                                                    'onblur' => '(this.type="text")'
-                                                ]
-                                            )
-                                        !!}
-                                    </div>
-                                    <div class="col-md-6 select-3">
-                                        <select name="priority" class="form-control" id="task-priority">
-                                            <option value="" hidden>{{ __('page.placeholder.priority') }}</option>
-                                            <option value="1">{{ __('page.priority.high') }}</option>
-                                            <option value="0">{{ __('page.priority.low') }}</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="col-md-6 col-sm-offset-3 select-3">
-                                        <div class="show-list-group-item">
-                                            <div class="text-left">
-                                                <button type="button" class="btn btn-info btn-show-product" data-toggle="modal" data-target="#product-modal">{{ __('page.todo_list.show_item') }}</button>
+                                    <div class="col-md-12">
+                                        <div class="col-md-6 col-sm-offset-3 select-3">
+                                            <div class="show-list-group-item">
+                                                <div class="text-left">
+                                                    <button type="button" class="btn btn-info btn-show-product" data-toggle="modal" data-target="#product-modal">{{ __('page.todo_list.show_item') }}</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="col-md-12 select-3">
-                                    <div class="item-sl mt15">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <span class="s-item-title">{{ __('page.todo_list.item_selected') }}:</span>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="item-selected">
-                                                    <div class="item-s">
-                                                        <li>
-                                                            <b>{{ __('page.todo_list.item_name') }}</b>
-                                                            <span class="item-s-name"></span>
-                                                        </li>
-                                                        <li>
-                                                            <b>{{ __('page.todo_list.item_user') }}</b>
-                                                            <span class="item-s-user"></span>
-                                                        </li>
-                                                        <li>
-                                                            <b>{{ __('page.todo_list.item_price') }}</b>
-                                                            <span class="item-s-price"></span>
-                                                            <span> {{ __('base.vnd') }}</span>
-                                                        </li>
+                                    <div class="col-md-12 select-3">
+                                        <div class="item-sl mt15">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <span class="s-item-title">{{ __('page.todo_list.item_selected') }}:</span>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="item-selected">
+                                                        <div class="item-s">
+                                                            <li>
+                                                                <b>{{ __('page.todo_list.item_name') }}</b>
+                                                                <span class="item-s-name"></span>
+                                                            </li>
+                                                            <li>
+                                                                <b>{{ __('page.todo_list.item_user') }}</b>
+                                                                <span class="item-s-user"></span>
+                                                            </li>
+                                                            <li>
+                                                                <b>{{ __('page.todo_list.item_price') }}</b>
+                                                                <span class="item-s-price"></span>
+                                                                <span> {{ __('base.vnd') }}</span>
+                                                            </li>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row col-md-12">
+                                        {!! Form::textarea('note', null, ['class' => 'form-control', 'id' => 'task-note', 'placeholder' => __('page.placeholder.note')]) !!}
+                                        {!! Form::submit(__('page.action.save'), ['class' => 'btn btn-pink', 'id' => 'create-task']) !!}
+                                        {!! Form::submit(__('page.action.cancel'), ['class' => 'btn btn-pink', 'id' => 'cancel-create-task']) !!}
+                                    </div>
                                 </div>
-                                <div class="row col-md-12">
-                                    {!! Form::textarea('note', null, ['class' => 'form-control', 'id' => 'task-note', 'placeholder' => __('page.placeholder.note')]) !!}
-                                    {!! Form::submit(__('page.action.save'), ['class' => 'btn btn-pink', 'id' => 'create-task']) !!}
-                                    {!! Form::submit(__('page.action.cancel'), ['class' => 'btn btn-pink', 'id' => 'cancel-create-task']) !!}
-                                </div>
-                            </div>
-                        </form>
-                        {{-- endcreate task --}}
+                            </form>
+                            {{-- endcreate task --}}
+                        </div>
+                        <div class="modal-show-product"></div>
+                        {{-- view by --}}
+                        <div class="view-by"></div>
+                        {{-- end view by --}}
+
+                        <div id="show-list-category"></div>
                     </div>
-                    <div class="modal-show-product"></div>
-                    {{-- view by --}}
-                    <h3>{{ __('base.view') }} {{ __('base.by') }}</h3>
-                    <div class="view-by"></div>
-                    {{-- end view by --}}
+                    <div class="col-md-7" id="list_tasks">
 
-                    <div id="show-list-category"></div>
+                    </div>
                 </div>
-                <div class="col-md-7" id="list_tasks">
-
-                </div>
+            </div>
+            <div id="timeline" class="tab-pane fade">
             </div>
         </div>
     </div>
@@ -152,29 +167,53 @@
 {{-- end status --}}
 @endsection
 
-@section('css')
-    <style>
-        .alert-custom {
-            border: 1px solid gray;
-            border-radius: 25px;
-            display: inline-block;
-            padding: 11px
-        }
-
-        .alert-custom a {
-            color: black;
-        }
-    </style>
-@endsection
-
 @section('script')
-<script type="text/javascript" defer="">
+<script type="text/javascript" defer>
     jQuery(document).ready(function($) {
 
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
             }
+        });
+
+        var tabs = $('.my-tabs');
+        var selector = $('.my-tabs').find('a').length;
+        //var selector = $(".tabs").find(".selector");
+        var activeItem = tabs.find('.active');
+        var activeWidth = activeItem.innerWidth();
+
+        $('.selector').css({
+            'left': activeItem.position.left + 'px',
+            'width': activeWidth + 'px'
+        });
+
+        $('.my-tabs').on('click', 'a',function(e){
+            e.preventDefault();
+
+            $('.my-tabs a').removeClass('active');
+            $(this).addClass('active');
+
+            var activeWidth = $(this).innerWidth();
+            var itemPos = $(this).position();
+
+            $('.selector').css({
+                'left':itemPos.left + 'px',
+                'width': activeWidth + 'px'
+            });
+        });
+
+        $('body').on('click', '#get-timeline', function(event) {
+            $.ajax({
+                url: route('client.my.timeline'),
+                type: 'GET',
+            })
+            .done(function(data) {
+                $('#timeline').html(data);
+            })
+            .fail(function() {
+                toastr.error( Lang.get('page.message.fail') );
+            });
         });
 
         var checkCategory = null;
