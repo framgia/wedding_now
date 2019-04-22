@@ -170,3 +170,11 @@ p.current-lan {
     font-size: 12px;
 }
 
+.news-dtl .news-heading a {
+    line-height: 32px;
+    color: #202020;
+    font-weight: 700;
+    text-transform: none;
+    margin-bottom: 8px;
+    font-size: 17px;
+}

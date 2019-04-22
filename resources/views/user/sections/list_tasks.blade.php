@@ -1,7 +1,7 @@
 <div class="to-do-list">
     <div class="panel-group faq-panel">
         <p class="pull-right">
-            <button id="collapse_all" class="btn btn-pink">
+            <button id="collapse_all" class="btn btn-pink {{ count($tasks) > 0 ? '' : 'd-none' }}">
                 {{ __('page.todo_list.collapse_all') }}
                 <span class="faq-btn faq-btn-plus hidden-xs">
                     <i class="fa fa-angle-double-down" aria-hidden="true"></i>

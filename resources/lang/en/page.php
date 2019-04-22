@@ -50,13 +50,15 @@ return [
         'perfect' => 'Perfect Checklist',
         'planning' => 'Start Planning Your Wedding',
         'choose_planning' => 'Please choose one of the plannings we have provided below',
-        'planning_default' => 'Planning default',
+        'planning_new' => 'Create new planning',
         'planning_package' => 'Package planning ',
         'planning_suggest' => 'Suggestions for you',
         'view_details' => 'View Details',
-        'detail_planning_default' => 'Create your planning by default',
+        'detail_planning_new' => 'Create your planning',
         'detail_planning_package' => 'Create your planning by package',
         'detail_planning_suggest' => 'Suggestions for you based on budget',
+        'planning_default' => 'Planning default',
+        'detail_planning_default' => 'Create planning default',
     ],
 
     'profile' => [
@@ -194,6 +196,8 @@ return [
         'my_wedding' => 'My Wedding',
         'todo_list' => 'To Do List',
         'timeline' => 'Timeline',
+        'home' => 'Home',
+        'news' => 'News',
     ],
     'design_card' => [
         'add_text_box' => 'Add text box',
@@ -234,6 +238,8 @@ return [
         'placeholder_search' => 'Search WeddingNow articles',
         'related_news' => 'Related WeddingNow Articles',
         'search' => 'Search',
+        'latest_news' => 'Latest News & Updates',
+        'detail_latest_news' => 'News about the latest weddings',
     ],
     'todo_list' => [
         'list' => 'List Product',

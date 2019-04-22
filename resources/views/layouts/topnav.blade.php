@@ -17,11 +17,8 @@
                             <li><a href="{{ route('logout') }}">{{ __('base.logout') }}</a></li>
                         @endauth
                         @guest
-                            <li><a href="{{ route('login') }}">{{ __('base.login') }} | {{ __('register') }}</a></li>
+                            <li><a href="{{ route('login') }}">{{ __('base.login') }} | {{ __('base.register') }}</a></li>
                         @endguest
-                        <li class="search-btn search-icon text-center">
-                            <a href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
-                        </li>
                         <li class="language">
                             <p class="current-lan">{{ session()->get('lang') }}</p>
                             <div class="hover-lan">

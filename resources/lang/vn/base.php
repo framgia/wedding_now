@@ -96,6 +96,7 @@ return [
 
     // auth
     'login' => 'Đăng nhập',
+    'register' => 'Đăng ký',
     'remember_me' => 'Ghi nhớ',
     'logout' => 'Đăng xuất',
     'sign_up' => 'Đăng ký',
@@ -149,4 +150,5 @@ return [
     'info' => 'Thông tin!',
     'vn' => 'vn',
     'en' => 'en',
+    'created_at' => 'Ngày tạo',
 ];

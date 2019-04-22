@@ -1,50 +1,6 @@
 <section class="home-revo-slider">
     <article class="content">
         <div id="rev_slider_1066_1_wrapper" class="rev_slider_wrapper fullscreen-container" data-alias="notgeneric125" data-source="gallery" style="background-color:transparent;padding:0px;">
-            <!-- slider bottom panel -->
-            <div class="slider-bottom-panel">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="select-category-dropdown dropdown">
-                                <button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    <span class="drp-name" data-bind="label">Select Vendor Category</span>
-                                    <span><i class="fa fa-angle-down" aria-hidden="true"></i></span>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" role="menu">
-                                    <li><a href="#">Cake</a></li>
-                                    <li><a href="#">Florist</a></li>
-                                    <li><a href="#">Dresses</a></li>
-                                    <li><a href="#">Jewellery</a></li>
-                                    <li><a href="#">Venue</a></li>
-                                    <li><a href="#">Photography</a></li>
-                                    <li><a href="#">Music</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="select-category-dropdown dropdown">
-                                <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    <span class="drp-name" data-bind="label">Select City</span>
-                                    <span><i class="fa fa-angle-down" aria-hidden="true"></i></span>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <li><a href="#">London</a></li>
-                                    <li><a href="#">New York</a></li>
-                                    <li><a href="#">California</a></li>
-                                    <li><a href="#">Mumbai</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="slider-bottom-panel-btn">
-                                <button type="button" class="btn btn-pink">Find A Vendor</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- end slider bottom panel -->
             <div id="rev_slider_1066_1" class="rev_slider fullscreenbanner" style="display:none;" data-version="5.3.0.2">
                 <ul>
                     <!-- SLIDE  -->

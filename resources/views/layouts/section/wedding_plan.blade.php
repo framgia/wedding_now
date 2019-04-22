@@ -12,9 +12,12 @@
                         <div class="overlay-bg"></div>
                     </div>
                     <div class="wedding-plan-dtl text-center">
-                        <h5 class="heading"><a href="/">{{ __('page.index.planning_default') }}</a></h5>
-                        <p class="sub-heading">{{ __('page.index.detail_planning_default') }}</p>
-                        <a href="/" class="btn btn-default">{{ __('page.index.view_details') }}</a>
+                        <h5 class="heading">{{ __('page.index.planning_new') }}</h5>
+                        <p class="sub-heading">{{ __('page.index.detail_planning_new') }}</p>
+                        {{ Form::open(['method' => 'post', 'route' => 'client.choose-type-schedule']) }}
+                            {{ Form::hidden('type', $custom) }}
+                            {{ Form::submit(__('page.choose'), ['class' => 'btn btn-default']) }}
+                        {{ Form::close() }}
                     </div>
                 </div>
             </div>
@@ -25,9 +28,12 @@
                         <div class="overlay-bg"></div>
                     </div>
                     <div class="wedding-plan-dtl text-center">
-                        <h5 class="heading"><a href="{{ route('planning-package') }}">{{ __('page.index.planning_package') }}</a></h5>
-                        <p class="sub-heading">{{ __('page.index.detail_planning_package') }}</p>
-                        <a href="{{ route('planning-package') }}" class="btn btn-default">{{ __('page.index.view_details') }}</a>
+                        <h5 class="heading">{{ __('page.index.planning_default') }}</h5>
+                        <p class="sub-heading">{{ __('page.index.detail_planning_default') }}</p>
+                        {{ Form::open(['method' => 'post', 'route' => 'client.choose-type-schedule']) }}
+                            {{ Form::hidden('type', $default) }}
+                            {{ Form::submit(__('page.choose'), ['class' => 'btn btn-default']) }}
+                        {{ Form::close() }}
                     </div>
                 </div>
             </div>
@@ -40,7 +46,7 @@
                     <div class="wedding-plan-dtl text-center">
                         <h5 class="heading"><a href="{{ route('user.suggest') }}">{{ __('page.index.planning_suggest') }}</a></h5>
                         <p class="sub-heading">{{ __('page.index.detail_planning_suggest') }}</p>
-                        <a href="{{ route('user.suggest') }}" class="btn btn-default">{{ __('page.index.view_details') }}</a>
+                        <a href="{{ route('user.suggest') }}" class="btn btn-default">{{ __('page.choose') }}</a>
                     </div>
                 </div>
             </div>

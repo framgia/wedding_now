@@ -130,6 +130,7 @@
                         <div class="col-lg-6 padding-bottom-15">
                             <h5 class="padding-top-10">{{ $scheduleWedding->name }}</h5>
                             <p>{{ __('page.marrige_day') . $scheduleWedding->marriage_day }}</p>
+                            <p>{{ __('base.created_at') . ': ' . $scheduleWedding->created_at }}</p>
                             <button
                                 class="btn btn-pink btn-choose-schedule"
                                 data-id="{{ $scheduleWedding->id }}">
