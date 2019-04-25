@@ -153,4 +153,11 @@ return [
     'en' => 'en',
     'created_at' => 'Ngày tạo',
     'view_detail' => 'Xem chi tiết',
+    'author' => 'Tác giả',
+    'price' => 'Giá',
+    'type' => 'Thể loại',
+    'community' => 'Cộng đồng',
+    'love' => 'love',
+    'comment' => 'bình luận',
+    'by_author' => 'Bỏi',
 ];

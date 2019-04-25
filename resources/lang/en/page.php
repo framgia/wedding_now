@@ -62,6 +62,10 @@ return [
         'connect_with_us' => 'Connect with us',
         'search' => 'Search',
         'schedule_default' => 'Schedule default',
+        'wedding_service' => 'Wedding Service',
+        'wedding_idea' => 'Wedding Idea',
+        'enter_search_service' => 'Enter service, supplier...',
+        'enter_search_idea' => 'Enter keywork',
     ],
 
     'profile' => [
@@ -199,7 +203,8 @@ return [
         'order_by_priority' => 'Order By Priority',
         'flow' => 'Flow',
         'unflow' => 'Unflow',
-        'change_priority' => 'Change priority'
+        'change_priority' => 'Change priority',
+        'copy' => 'Copy Schedule',
     ],
     'header' => [
         'my_wedding' => 'My Wedding',
@@ -265,5 +270,22 @@ return [
         'collapse_all' => 'Collapse all',
         'no_task' => 'No task!',
         'reset_default' => 'Reset Default',
+        'collapse_all' => 'Collapse all',
+    ],
+    'real_wedding' => [
+        'list' => 'Wedding List',
+        'filter' => [
+            'title' => 'Filter',
+            'by_price' => 'By Price',
+            'all' => 'All',
+            'option_1' => '0 - 2160$',
+            'option_2' => '2160 - 4320$',
+            'option_3' => '4320 - 8640$',
+            'option_4' => 'more than 17280$',
+        ],
+        'package_services' => 'Package Services'
+    ],
+    'banner' => [
+        'all_services' =>'All Services',
     ]
 ];

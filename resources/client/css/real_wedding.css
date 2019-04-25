@@ -1,3 +1,7 @@
+.real-wedding-main-block {
+    padding: 40px 0 35px;
+}
+
 .real-wedding-list {
     width: 360px;
     height: 240px;
@@ -9,4 +13,259 @@
 
 .general-nav-tabs {
     margin-bottom: 20px;
+}
+
+.dropdown .dropdown-menu {
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 200px;
+}
+
+.category-listing-text {
+    padding: 7px 30px 7px 30px;
+}
+
+.real-wedding-main-block .news-dtl .news-heading a {
+    line-height: 25px;
+}
+
+.real-wedding-main-block .news-img {
+    margin-bottom: 5px;
+    min-height: 270px;
+}
+
+.refine-search .dropdown button {
+    height: 37px;
+}
+
+.search-btn .btn-pink {
+    line-height: 0.87;
+}
+
+.dropdown button span {
+    top: 10px;
+}
+
+.page-banner .banner-dtl {
+    padding: 30px 0 30px;
+}
+
+.cover__tab-link {
+    padding: 15px 20px !important;
+}
+
+.page-banner .tab-content {
+    padding: 20px;
+    background: white;
+}
+
+.p-l-r-0 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.pl-10 {
+    padding-left: 10px;
+}
+
+.mb-6 {
+    margin-bottom: 6px;
+}
+
+.mt-5 {
+    margin-top: 5px;
+}
+
+.real-wedding .show-real-wedding {
+    min-height: 800px;
+}
+
+.real-wedding .single-wedding {
+    margin-bottom: 20px;
+}
+
+.single-wedding img {
+    height: auto;
+    width: 100%;
+}
+
+.real-wedding .col-lg-7 .p-l-r-0 .pl-10 {
+    min-height: 158px;
+}
+
+.single-wedding .title {
+    font-size: 16px;
+    margin-bottom: 0px;
+}
+
+.single-wedding .title a {
+    columns: olor: black;
+    font-weight: bold;
+}
+
+.single-wedding .detail {
+    margin-top: 6px;
+    color: #999;
+    font-style: italic
+}
+
+.single-wedding .info {
+    margin-top: 5px;
+    height: 45px;
+}
+
+.single-wedding .location {
+    margin-top: 6px;
+    color: #999;
+}
+
+.single-wedding .location span {
+    padding-left: 10px;
+}
+
+.real-wedding .filter {
+    position: sticky;
+    top: 10px;
+}
+
+.real-wedding .box-filter {
+    min-height: inherit;
+    padding-left: 5px;
+}
+
+.real-wedding .filter li {
+    padding: 5px 0px;
+}
+
+.service-item img {
+    height: auto;
+    width: 100%;
+}
+
+.service-item {
+    padding: 10px 0px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.service-item:last-child {
+    border-bottom: none;
+}
+
+.box-service .title {
+    font-size: 13px;
+    font-weight: bolder;
+    color: darkcyan;
+    font-family: sans-serif;
+}
+
+.box-service .header-title {
+    margin-bottom: 10px;
+}
+
+.box-service {
+    overflow: auto;
+    background: #f3f5f6;
+}
+
+.result-real-wedding .row:hover img {
+    opacity: 0.7;
+    transition: opacity .2s ease-out;
+    -moz-transition: opacity .2s ease-out;
+    -webkit-transition: opacity .2s ease-out;
+    -o-transition: opacity .2s ease-out;
+}
+
+.service-item__inner .col-lg-5 img {
+    padding-left: 10px;
+}
+
+.service-item__inner .col-lg-7 {
+    padding: 0px 10px;
+}
+
+.real-wedding .col-lg-4 .inner .text-center {
+    font-size: 25px;
+    margin-bottom: 35px;
+}
+
+.element-comunity {
+    min-height: 85px;
+}
+
+.element-comunity .title {
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
+.element-comunity .title a {
+    color: #333;
+}
+
+.box-comunity {
+    background: #f3f5f6;
+}
+
+.box-comunity .title {
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.box-comunity .author {
+    padding-top: 12px;
+}
+
+.element-comunity {
+    padding: 15px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.element-comunity:last-child {
+    border-bottom: none;
+}
+
+.comment-box {
+    font-size: 13px;
+}
+
+.comment-box a {
+    padding-left: 10px;
+}
+
+.element-comunity .time {
+    padding-top: 5px;
+    font-size: 14px;
+    font-style: italic;
+    color: #999;
+}
+
+.comunity h4 {
+    font-size: 25px;
+}
+
+.filter h5 {
+    font-size: 18px;
+}
+
+.t-schedule {
+    position: relative;
+}
+
+.copy {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 3% 5%;
+    padding: 10px 17px;
+}
+
+.title-task-real-wedding {
+    padding: 13px 14px 14px 15px !important;
+}
+
+.real-wedding .task-left {
+    margin: 0px 13.5%;
+}
+
+.real-wedding-time-line {
+    min-height: 250px;
 }
