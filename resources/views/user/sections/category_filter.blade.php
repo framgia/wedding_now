@@ -1,4 +1,5 @@
 {{-- status --}}
+<h3>{{ __('base.view') }} {{ __('base.by') }}</h3>
 <div class="col-md-12 row">
     <h4><b>{{ __('base.status') }}</b></h4>
     <div class="col-md-7">

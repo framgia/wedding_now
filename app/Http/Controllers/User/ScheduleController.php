@@ -435,6 +435,7 @@ class ScheduleController extends Controller
     public function myTimeline()
     {
         $scheduleId = $this->meta->getChosenSchedule()->schedule_wedding_id;
+
         if (!isset($scheduleId)) {
             return redirect()->route('client.to-do-list');
         }

@@ -22,7 +22,6 @@
                                 </a>
                                 <ul class="sub-menu">
                                     <li><a href="{{ route('client.to-do-list') }}">{{ __('page.header.todo_list') }}</a></li>
-                                    <li><a href="{{ route('client.my.timeline') }}">{{ __('page.header.timeline') }}</a></li>
                                     @auth
                                     <li><a href="{{ route('user.profile', Auth::user()->user_name) }}">{{ __('page.title.profile') }}</a></li>
                                     @endauth
