@@ -13,16 +13,11 @@
             <span class="badge">{{ __('page.page.to_do_list') }}</span>
         </a>
     </li>
-    <li>
-        <a href="#" class="btn btn-default">
-            <span class="badge">{{ __('page.page.my_budget') }}</span>
-        </a>
-    </li>
-    <li>
+    {{-- <li>
         <a href="#" class="btn btn-default">
             <span class="badge">{{ __('page.page.vendor_manager') }}</span>
         </a>
-    </li>
+    </li> --}}
     <li>
         <a href="{{ route('client.design-card') }}" class="btn btn-default @if(Route::currentRouteName() === 'client.design-card') active @endif">
             <span class="badge">{{ __('page.page.wedding_card') }}</span>

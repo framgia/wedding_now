@@ -91,7 +91,7 @@
             </div>
         @else
             <div class="alert alert-success mt25 pt25" role="alert">
-                <h4 class="alert-heading text-center">{{ __('page.timeline.no_task')}}</h4>
+                <h4 class="alert-heading text-center">{{ __('page.timeline.no_task') }}</h4>
             </div>
         @endif
     </div>
