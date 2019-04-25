@@ -85,7 +85,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="category-price text-right">{{ number_format($value['final_cost'], 0, '', '.') }}₫</div>
+                                            <div class="category-price text-right">{{ number_format($value['final_cost'], 0, '', '.') }} ₫</div>
                                         </div>
                                     </div>
                                 </div>
