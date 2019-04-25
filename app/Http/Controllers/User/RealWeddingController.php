@@ -2,85 +2,120 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Models\City;
+use App\Http\Requests\Client\PaginateRealWeddingRequest;
+use App\Models\Post;
+use App\Models\ScheduleMeta;
 use App\Models\ScheduleWedding;
-
+use App\Models\Task;
+use App\Repositories\Post\PostRepository;
+use App\Repositories\ScheduleMeta\ScheduleMetaRepository;
+use App\Repositories\ScheduleWedding\ScheduleWeddingRepository;
 use App\Http\Controllers\Controller;
-
+use App\Repositories\Task\TaskRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RealWeddingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    protected $post;
+    protected $wedding;
+    protected $task;
+
+    public function __construct(Post $post, ScheduleWedding $scheduleWedding, ScheduleMeta $meta, Task $task)
+    {
+        $this->post = new PostRepository($post);
+        $this->wedding = new ScheduleWeddingRepository($scheduleWedding);
+        $this->meta = new ScheduleMetaRepository($meta);
+        $this->task = new TaskRepository($task);
+    }
+
     public function index()
     {
-        $cities = $this->getCities();
-        $maxCost = $this->getMaxCost();
-        $data = $this->filter([0, $maxCost], null);
+        $posts = $this->post->getMostRatePost(config('define.post.take_three_post'), config('define.post.recommend'));
 
-        return view('user.real_wedding', compact('data', 'cities', 'maxCost'));
+        $packages = $this->wedding->getPackages(config('define.package_service_paginate'));
+
+        return view('user.real-wedding2', compact('posts', 'packages'));
     }
 
-    public function filter($cost, $city)
+    public function loadFilterRealWedding(PaginateRealWeddingRequest $request)
     {
-        $data = ScheduleWedding::where('final_cost', '>', 0)
-            ->where('final_cost', '>=', $cost[0])
-            ->where('final_cost', '<=', $cost[1])
-            ->with('scheduleMetasPluck', 'medias')
-            ->when($city, function($q) use ($city) {
-                $q->whereHas('location.district.city', function($query) use ($city) {
-                    $query->where('id', $city);
-                });
-            }, function($get) {
-                $get->get();
-            })
-            ->withCount('tasks')
-            ->paginate(config('define.paginate'));
+        if ($request->ajax()) {
 
-        return $data;
+            $page = $request->page;
+
+            $minPrice = null;
+
+            $maxPrice = null;
+
+            $orderByRate = null;
+
+            switch ($request->price_option) {
+                case 1:
+
+                    $minPrice = config('define.price_filter.option_1.min');
+
+                    $maxPrice = config('define.price_filter.option_1.max');
+
+                    break;
+                case 2:
+
+                    $minPrice = config('define.price_filter.option_2.min');
+
+                    $maxPrice = config('define.price_filter.option_2.max');
+
+                    break;
+                case 3:
+
+                    $minPrice = config('define.price_filter.option_3.min');
+
+                    $maxPrice = config('define.price_filter.option_3.max');
+
+                    break;
+                case 4:
+
+                    $minPrice = config('define.price_filter.option_4.min');
+
+                    break;
+            }
+
+            $weddings = $this->wedding->paginate($this->wedding->filterWedding($minPrice, $maxPrice, $orderByRate), config('define.real_wedding_paginate'), $page);
+
+            return view('user.sections.result-real-wedding', compact('weddings'))->render();
+        }
     }
 
-    public function getCities()
+    public function detail(Request $request)
     {
-        return City::get();
+        $schedule = $this->wedding->findById($request->id)->load('tasks.category');
+
+        $tasks = $schedule->tasks;
+
+        $countTask = count($tasks);
+
+        return view('user.detail-real-wedding', compact('schedule', 'tasks', 'countTask'));
     }
 
-    public function getMaxCost()
+    public function copySchedule(Request $request)
     {
-        $maxCost = ScheduleWedding::max('final_cost');
+        $schedule = $this->wedding->findById($request->id)->load('tasks');
+        $tasks = $schedule->tasks;
+        $schedule->schedule_wedding_id = $request->id;
+        $schedule->user_id = Auth::id();
+        $schedule->name = config('define.schedule_name') . Auth::user()->name;
+        $schedule->type = config('define.type_schedule.custom');
+        $schedule->slug = str_slug($schedule->name);
 
-        // if $maxCost == null return 1₫
-        return $maxCost ? $maxCost : 1;
-    }
+        $newSchedule = $this->wedding->create($schedule->toArray());
 
-    public function getCost($getCost)
-    {
-        $cost = str_replace(['₫', ' ', '.'], '', $getCost);
-        $data = explode('-', $cost); // [0] => min | [1] => max
+        $tasks->map(function ($item, $key) use ($newSchedule) {
+            $item->schedule_wedding_id = $newSchedule->id;
 
-        return $data;
-    }
+            return $this->task->create($item->toArray());
+        });
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Request $req)
-    {
-        $reqCity[0] = $req->cityId ? $req->cityId : null;
-        $reqCity[1] = $req->cityName ? $req->cityName : null;
+        $this->meta->setChosenSchedule($newSchedule->id);
 
-        $maxCost = $this->getMaxCost();
-        $cost = $req->cost ? $this->getCost($req->cost) : [0, $maxCost];
-        $data = $this->filter($cost, $reqCity[0])->appends($req->except('_token'));
-        $cities = $this->getCities();
-
-        return view('user.real_wedding', compact('data', 'cities', 'reqCity', 'maxCost', 'cost'));
+        return redirect()->route('client.to-do-list');
     }
 }

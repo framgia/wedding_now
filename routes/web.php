@@ -25,10 +25,26 @@ Route::get('lang/{lang}', 'HomeController@changeLang')->name('changeLang');
 
 Route::group(['namespace' => 'User'], function () {
 
-    Route::get('real-wedding', 'RealWeddingController@index')->name('real-wedding.index');
+    Route::group(['prefix' => 'real-wedding'], function() {
 
-    // allow post and get method for this route
-    Route::match(['get', 'post'], 'real-wedding-show', 'RealWeddingController@show')->name('real-wedding.show');
+        Route::get('/', 'RealWeddingController@index')
+            ->name('real-wedding.index');
+
+        Route::get('load', 'RealWeddingController@loadFilterRealWedding')
+            ->name('real-wedding.load');
+        
+        Route::get('detail/{id}/{slug}', 'RealWeddingController@detail')
+            ->name('real-wedding.detail');
+
+        Route::post('copy', 'RealWeddingController@copySchedule')
+            ->name('real-wedding.copy');
+    });
+
+    Route::group(['prefix' => 'package'], function() {
+        
+        Route::get('/{slug}/{id}', 'PackageController@detail')->name('package.detail');
+
+    });
 
     Route::get('get-districts/{id}', 'UserController@getDistrictsById')->name('get.districts');
 

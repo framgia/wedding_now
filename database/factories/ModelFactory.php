@@ -56,18 +56,23 @@ $factory->define(ScheduleWedding::class, function (Faker $faker) {
         'schedule_wedding_id' => null,
         'budget' => rand(50000000, 200000000),
         'note' =>  $faker->sentence(15),
-        'final_cost' => rand(100000000, 200000000)
+        'final_cost' => rand(100000000, 200000000),
     ];
 });
 
 $factory->state(ScheduleWedding::class, 'default', [
     'type' => 'default',
-    'user_id' => 1
+    'user_id' => 1,
 ]);
 
 $factory->state(ScheduleWedding::class, 'suggest', [
     'type' => 'suggest',
-    'user_id' => 1
+    'user_id' => 1,
+]);
+
+$factory->state(ScheduleWedding::class, 'package', [
+    'type' => 'package',
+    'user_id' => 1,
 ]);
 
 $factory->define(Task::class, function (Faker $faker) {
@@ -78,7 +83,7 @@ $factory->define(Task::class, function (Faker $faker) {
         'time_occurs' =>  $faker->dateTimeThisYear(),
         'time_frame_id' => 1,
         'note' =>  $faker->sentence(15),
-        'schedule_wedding_id' => rand(3, 30)
+        'schedule_wedding_id' => rand(3, 60),
     ];
 });
 
