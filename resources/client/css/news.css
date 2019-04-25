@@ -873,7 +873,6 @@
     content: '';
     display: inline-block;
     vertical-align: middle;
-    background-image: url('../storage/news/search_icon.png');
     background-repeat: no-repeat;
     margin-top: -1px;
     -webkit-print-color-adjust: exact;

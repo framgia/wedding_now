@@ -94,12 +94,12 @@
             <div class="col-lg-3">
                 <figure class="articles-featured-small">
                     <div class="articles-featured-small-frame app-link">
-                        <img class="articles-featured-small-image" src="{{ config('asset.card_template') . 'wedding-card-2.jpg' }}">
+                        <img class="articles-featured-small-image" src="{{ asset(config('asset.users.images.user_wedding') . 'couple-img.jpg') }}">
                     </div>
                     <figcaption class="articles-center-element">
                         <div class="articles-center-element-item">
                             <span class="articles-featured-small-category">Places to Celebrate</span>
-                            <a class="articles-featured-small-title" href="https://www.weddingwire.com/wedding-ideas/san-diego-outdoor-wedding-venues">13 Scenic Outdoor Wedding Venues in San Diego </a>
+                            <a class="articles-featured-small-title" href="#">13 Scenic Outdoor Wedding Venues in San Diego </a>
                             <span class="articles-featured-small-content">If you're hoping to marry surrounded by nature, here are our favorite outdoor<span class="app-common-ellipsis">...</span></span>
                         </div>
                     </figcaption>
