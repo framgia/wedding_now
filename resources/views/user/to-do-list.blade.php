@@ -36,42 +36,25 @@
                         <div id="show-list-category">
                             <div class="row">
                                 <h3>{{ __('base.view') }} {{ __('base.by') }}</h3>
-                                <div class="col-md-12">
-                                    <h4><b>{{ __('base.status') }}</b></h4>
-                                    <div class="col-md-7">
-                                        <input
-                                            type="radio"
-                                            id="radio_done"
-                                            name="check_category"
-                                            class="category-filter"
-                                            data-status="{{ config('define.done') }}"
-                                            data-name="{{ __('base.done') }}"
-                                            data-type="status"/>
-                                        <label for="radio_done">
-                                            &emsp;<span class="text-success">{{ __('base.done') }}</span>
-                                        </label>
+                                <div class="col-md-12 mb-10">
+                                    <div class="col-md-4 p-l-r-0">
+                                        <h4 class="title-filter-status">
+                                            <b>{{ __('base.status') }}</b>
+                                        </h4>
                                     </div>
-                                    <div class="col-md-5">
-                                        <p><b>{{ $doneTasks->count() }}</b></p>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input
-                                            type="radio"
-                                            id="radio_todo"
-                                            name="check_category"
-                                            class="category-filter"
-                                            data-status="{{ config('define.to_do') }}"
-                                            data-name="{{ __('base.to_do') }}"
-                                            data-type="status"/>
-                                        <label for="radio_todo">
-                                            &emsp;{{ __('base.to_do') }}
-                                        </label>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <p>
-                                            <b>{{ count($totalTasks) - $doneTasks->count() }}</b>
-                                        </p>
-                                    </div>
+                                    <div class="col-md-6">
+                                        <select class="form-control category-filter">
+                                            <option value="" hidden>
+                                                {{ __('base.choose') . ' ' . __('base.status') }}
+                                            </option>
+                                            <option data-status="{{ config('define.done') }}" data-name="{{ __('base.done') }}"data-type="status">
+                                                {{ __('base.done') }}
+                                            </option>
+                                             <option data-status="{{ config('define.to_do') }}" data-name="{{ __('base.to_do') }}" data-type="status">
+                                                {{ __('base.to_do') }}
+                                            </option>
+                                        </select>
+                                    </div>  
                                 </div>
                                 {{-- end status --}}
 
@@ -347,10 +330,9 @@
                     arrCategory.splice($.inArray(category_id, arrCategory), 1);
                 }
 
-                let status = $(this).attr('data-status');
-                let display_name = $(this).attr('data-name');
-                let type = $(this).attr('data-type');
-
+                let status = $(this).find('option:selected').attr('data-status');
+                let display_name = $(this).find('option:selected').attr('data-name');
+                let type = $(this).find('option:selected').attr('data-type');
 
                 let checkTagExists = $(`.view-by strong:contains("${display_name}")`);
                 let checkTypeExists = $(`.view-by .alert-custom a[data-type="${type}"]`);
