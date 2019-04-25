@@ -96,6 +96,7 @@ return [
 
     // auth
     'login' => 'Login',
+    'register' => 'Register',
     'remember_me' => 'Remember me',
     'logout' => 'Logout',
     'sign_up' => 'Sign up',
@@ -149,4 +150,5 @@ return [
     'info' => 'Info!',
     'vn' => 'vn',
     'en' => 'en',
+    'created_at' => 'Created at',
 ];

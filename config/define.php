@@ -53,6 +53,7 @@ return [
         'most_popular' => 5,
         'no_paginate' => 0,
         'no_skip' => 0,
+        'take_three_post' => 3,
     ],
     'vn' => 'vn',
     'en' => 'en',

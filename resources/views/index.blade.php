@@ -14,23 +14,23 @@
     <!-- end wedding plan -->
 
     <!-- wedding location -->
-    @include('layouts.section.wedding_location')
+    {{-- @include('layouts.section.wedding_location') --}}
     <!-- end wedding location -->
 
     <!-- feature wedding -->
-    @include('layouts.section.feature_wedding')
+    {{-- @include('layouts.section.feature_wedding') --}}
     <!-- end feature wedding -->
 
     <!-- call out -->
-    @include('layouts.section.call_out')
+    {{-- @include('layouts.section.call_out') --}}
     <!-- end call out -->
 
     <!-- why choose -->
-    @include('layouts.section.choose')
+    {{-- @include('layouts.section.choose') --}}
     <!-- end why choose -->
 
     <!-- testimonial -->
-    @include('layouts.section.testimonial')
+    {{-- @include('layouts.section.testimonial') --}}
     <!-- end testimonial -->
 
     <!-- news and update -->

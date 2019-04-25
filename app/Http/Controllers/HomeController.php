@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Repositories\Post\PostRepository;
+use App\Repositories\Topic\TopicRepository;
+use App\Models\Post;
 
 class HomeController extends Controller
 {
@@ -17,9 +20,12 @@ class HomeController extends Controller
         'en',
     ];
 
-    public function __construct()
+    protected $post;
+
+    public function __construct(Post $post)
     {
         // $this->middleware(['auth', 'verified']);
+        $this->post = new PostRepository($post);
     }
 
     /**
@@ -29,7 +35,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('index');
+        $default = config('define.type_schedule.default');
+
+        $custom = config('define.type_schedule.custom');
+
+        $combo = config('define.type_schedule.combo');
+
+        $posts = $this->post->getNewestPostsPaginate(config('define.post.take_three_post'), 0);
+
+        return view('index', compact('default', 'custom', 'combo', 'posts'));
     }
 
     public function changeLang(Request $request, $lang)

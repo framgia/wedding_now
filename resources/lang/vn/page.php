@@ -35,6 +35,20 @@ return [
         'task_to_do' => 'Nhiệm vụ công việc',
     ],
 
+    'index' => [
+        'planning' => 'Bắt đầu với kế hoạch của bạn',
+        'choose_planning' => 'Vui lòng chọn một trong các kế hoạch chúng tôi đã cung cấp dưới đây',
+        'planning_new' => 'Tạo mới',
+        'planning_package' => 'Kế hoạch có sẵn',
+        'planning_suggest' => 'Gợi ý cho bạn',
+        'view_details' => 'Xem chi tiết',
+        'detail_planning_new' => 'Tạo một kế hoạch mới của riêng bạn',
+        'detail_planning_package' => 'Tạo kế hoạch của bạn theo kế hoạch có sẵn',
+        'detail_planning_suggest' => 'Tạo kế hoạch dựa trên ngân sách của bạn',
+        'detail_planning_default' => 'Tạo một kế hoạch mặc định của chúng tôi',
+        'planning_default' => 'Kế hoạch mặc định',
+    ],
+
     'profile' => [
         'dashboard' => 'Bảng điều khiển',
         'profile' => 'Hồ sơ',
@@ -168,6 +182,8 @@ return [
         'my_wedding' => 'Tiệc cưới của tôi',
         'todo_list' => 'Danh sách công việc',
         'timeline' => 'Dòng thời gian',
+        'home' => 'Trang chủ',
+        'news' => 'Tin tức'
     ],
     'design_card' => [
         'add_text_box' => 'Thêm chữ',
@@ -202,6 +218,8 @@ return [
         'topic_title_left' => 'Chủ đề bài viết',
         'slogan' => 'Lên kế hoạch cho một đám cưới là một trải nghiệm thực sự kỳ diệu. Chúng tôi cung cấp chuyên môn của chúng tôi để làm cho quá trình lập kế hoạch của bạn vui vẻ và không căng thẳng cho bạn từ đầu đến cuối. Từ cảm hứng trang trí đến sự nhiệt tình giúp đỡ, chúng tôi đã bao quát tất cả trong các bài viết của mình.',
         'placeholder_search' => 'Tìm kiếm bài viết',
+        'latest_news' => 'Tin tức và cập nhật mới nhất',
+        'detail_latest_news' => 'Tin tức về những đám cưới mới nhất',
     ],
     'todo_list' => [
         'list' => 'Danh sách sản phẩm',

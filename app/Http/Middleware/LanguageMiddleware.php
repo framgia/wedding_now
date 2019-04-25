@@ -15,6 +15,9 @@ class LanguageMiddleware
      */
     public function handle($request, Closure $next)
     {
+        if (!session()->get('lang')) {
+            session()->put(['lang' => 'vn']);
+        }
         if ($lang = $request->session()->get('lang')) {
             \App::setLocale($lang);
         }

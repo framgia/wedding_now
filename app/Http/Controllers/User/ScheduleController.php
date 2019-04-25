@@ -252,6 +252,8 @@ class ScheduleController extends Controller
                     break;
                 }
         }
+
+        return redirect('to-do-list');
     }
 
     public function getCategoryFilter()
