@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
-                <div class="top-text">Welcome to Weddding Now</div>
+                <div class="top-text">{{ __('base.welcome') }} Weddding Now</div>
             </div>
             <div class="col-sm-6">
                 <div class="top-detail text-right">

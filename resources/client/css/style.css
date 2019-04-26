@@ -2820,6 +2820,10 @@ ul {
     display: inline-block;
 }
 
+.general-nav-tabs li:last-child {
+    float: right;
+}
+
 .general-nav-tabs a {
     padding: 0;
     margin-right: 5px;
@@ -2830,7 +2834,7 @@ ul {
 
 .general-nav-tabs a .badge {
     color: #101010;
-    font-size: 14px;
+    font-size: small;
 }
 
 .add-listing-sidebar label {

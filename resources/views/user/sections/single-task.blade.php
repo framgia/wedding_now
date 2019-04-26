@@ -1,5 +1,5 @@
 <div class="col-md-12">
-    <h4 class="create-task-heading">{{ __('page.task.number') . $task->id }}</h4>
+    <h4 class="create-task-heading">{{ __('page.task.number') }}</h4>
     <div id="single-task-detail">
         <div class="create-task-block">
             <div class="row col-md-12">
