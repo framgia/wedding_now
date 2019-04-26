@@ -17,35 +17,22 @@
     {{ Html::script('messages.js') }}
     @yield('css')
 </head>
-<!--body start-->
 <body>
-<!-- preloader -->
     <div class="preloader">
         <div class="status">
         <div class="status-message">
         </div>
         </div>
     </div>
-<!-- end preloader -->
 
-<!--  top bar -->
     @include('layouts.topnav')
-<!--  end top bar -->
 
-<!--  navigation -->
     @include('layouts.header')
-<!--  end navigation -->
-
     @yield('content')
 
-<!-- footer -->
     @include('layouts.footer')
-<!-- end footer -->
 
-<!-- jquery -->
     @include('layouts.section.script')
     @yield('script')
-<!-- end jquery -->
 </body>
-<!--body end -->
 </html>

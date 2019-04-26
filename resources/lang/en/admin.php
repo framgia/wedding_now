@@ -39,6 +39,8 @@ return [
         'payment' => 'Payments',
     ],
     'payment' => 'Payments',
+    'sales' => 'Doanh số',
+    'events' => 'Sự kiện',
     'customer' => [
         'customers' => 'Customers',
         'feedback' => 'Customer Feedbacks',

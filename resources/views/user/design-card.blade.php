@@ -13,10 +13,18 @@
     <div class="container">
         @include('user.sections.to_do_list_tab')
         <div class="container col-lg-12 list-action">
-            <button class="btn btn-pink btn-create-text-box" title="{{ __('page.design_card.add_text_box') }}"><i class="fa fa-plus"></i></button>
-            <button class="btn btn-pink change-background" title="{{ __('page.design_card.change_background') }}"><i class="fa fa-image"></i></button>
-            <button class="btn btn-pink btn-save" title="{{ __('page.action.save') }}"><i class="fa fa-save"></i></button>
-            <button class="btn btn-pink btn-download" title="{{ __('page.action.download') }}"><i class="fa fa-download"></i></button>
+            <button class="btn btn-pink btn-create-text-box" title="{{ __('page.design_card.add_text_box') }}">
+                <i class="fa fa-plus"></i>
+            </button>
+            <button class="btn btn-pink change-background" title="{{ __('page.design_card.change_background') }}">
+                <i class="fa fa-image"></i>
+            </button>
+            <button class="btn btn-pink btn-save" title="{{ __('page.action.save') }}">
+                <i class="fa fa-save"></i>
+            </button>
+            <button class="btn btn-pink btn-download" title="{{ __('page.action.download') }}">
+                <i class="fa fa-download"></i>
+            </button>
         </div>
         <div class="design-card">
             <input type="hidden" name="cardId" value="{{ $card->id ?? $card }}" id="card">

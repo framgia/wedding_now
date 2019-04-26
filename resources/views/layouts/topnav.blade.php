@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
-                <div class="top-text">Welcome to Weddding Now</div>
+                <div class="top-text">{{ __('base.welcome') }} Weddding Now</div>
             </div>
             <div class="col-sm-6">
                 <div class="top-detail text-right">
@@ -36,13 +36,11 @@
                 </div>
             </div>
         </div>
-        <!-- search -->
         <div class="search">
             <div class="container">
-                <input type="search" class="search-box" placeholder="Search"/>
+                <input type="search" class="search-box" placeholder="{{ __('page.index.search') }}"/>
                 <a href="#" class="fa fa-times search-close"></a>
             </div>
         </div>
-        <!-- end search -->
     </div>
 </section>

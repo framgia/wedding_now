@@ -25,6 +25,7 @@ return [
     'budget' => 'Budget',
     'note' => 'Note',
     'priority' => 'Priority',
+    'welcome' => 'Welcome To',
     // end other
 
     // validate

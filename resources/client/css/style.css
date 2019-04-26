@@ -309,7 +309,7 @@ ul {
 }
 
 .section {
-    margin-bottom: 60px;
+    margin-bottom: 30px;
 }
 
 .section-heading {
@@ -618,11 +618,23 @@ ul {
     background-color: #181818;
 }
 
+.top-nav-info .container {
+    height: 40px;
+}
+
+.top-nav-info .container .row {
+    height: 100%;
+}
+
+.top-nav-info .container .col-sm-6:last-child {
+    height: 100%;
+}
+
 .top-nav-info ul>li>a,
 .top-nav-info .top-text {
     color: #fff;
     font-size: 11px;
-    line-height: 4.9;
+    line-height: 3.7;
     letter-spacing: 0.8px;
     text-transform: uppercase;
 }
@@ -635,7 +647,7 @@ ul {
     color: #fff;
     display: inline-block;
     padding: 0 8px;
-    line-height: 3.1;
+    line-height: 2.7;
     z-index: 9999999;
 }
 
@@ -916,6 +928,7 @@ ul {
 
 .wedding-plan-block {
     box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+    min-height: 330px;
 }
 
 .wedding-plan-img {
@@ -1023,7 +1036,7 @@ ul {
 }
 
 .wedding-plan-dtl {
-    padding: 40px 33px 45px 33px;
+    padding: 10px 25px;
 }
 
 .wedding-plan-dtl.whitebg {
@@ -1036,7 +1049,7 @@ ul {
     color: #ff4061;
     text-transform: uppercase;
     font-weight: 700;
-    margin-bottom: 16px;
+    margin-bottom: 5px;
 }
 
 .wedding-plan-dtl .sub-heading {
@@ -1044,7 +1057,8 @@ ul {
     line-height: 1.86;
     letter-spacing: 0.3px;
     color: #777;
-    margin-bottom: 26px;
+    margin-bottom: 10px;
+    min-height: 50px
 }
 
 .wedding-plan-dtl .btn-default {
@@ -2820,6 +2834,10 @@ ul {
     display: inline-block;
 }
 
+.general-nav-tabs li:last-child {
+    float: right;
+}
+
 .general-nav-tabs a {
     padding: 0;
     margin-right: 5px;
@@ -2830,7 +2848,7 @@ ul {
 
 .general-nav-tabs a .badge {
     color: #101010;
-    font-size: 14px;
+    font-size: small;
 }
 
 .add-listing-sidebar label {
@@ -5211,4 +5229,76 @@ input[type=checkbox] {
 
 .meta-tag {
     display: none;
+}
+
+.pt40 {
+    padding-top: 40px;
+}
+
+.pd-0 {
+    padding: 0px;
+}
+
+.pd-left-right-7 {
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+.d-inline-flex {
+    display: inline-flex;
+}
+
+.pb-20 {
+    padding-bottom: 20px;
+}
+
+.mb-5 {
+    margin-bottom: 5px;
+}
+
+.owl-carousel .posts {
+    margin: 0px 5px;
+}
+
+.owl-carousel .posts .news-img {
+    min-height: 170px;
+    margin-bottom: 5px;
+}
+
+.owl-carousel .posts .news-heading a {
+    font-size: 14px;
+    line-height: 23px;
+}
+
+.logo-social {
+    width: 32px;
+    height: 32px;
+}
+
+.logo-social img {
+    max-width: 100%;
+    height: auto;
+}
+
+.ad-box {
+    display: block;
+    border: 3px solid #f3f5f6;
+    margin-bottom: 5px;
+}
+
+.ad-box img {
+    max-width: 100%;
+    height: auto;
+}
+
+.news-block:hover img {
+    opacity: 0.8;
+}
+
+.link:hover {
+    color: #ff4061 !important;
+}
+
+.w-80 {
+    width: 80%;
 }

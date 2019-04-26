@@ -41,7 +41,7 @@ class HomeController extends Controller
 
         $combo = config('define.type_schedule.combo');
 
-        $posts = $this->post->getNewestPostsPaginate(config('define.post.take_three_post'), 0);
+        $posts = $this->post->getNewestPostsPaginate(config('define.post.take_five_post'), config('define.post.no_skip'));
 
         return view('index', compact('default', 'custom', 'combo', 'posts'));
     }

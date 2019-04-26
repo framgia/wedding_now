@@ -35,6 +35,8 @@ return [
     'to_do' => 0,
     'image_card' => 'image-background',
     'logo' => 'storage/wedding/logo.png',
+    'logo_fb' => 'storage/logo/fb.png',
+    'logo_youtube' => 'storage/logo/youtube.png',
     'default' => 'default',
     'post' => [
         'default_image' => 'default.jpeg',
@@ -54,6 +56,7 @@ return [
         'no_paginate' => 0,
         'no_skip' => 0,
         'take_three_post' => 3,
+        'take_five_post' => 5,
     ],
     'vn' => 'vn',
     'en' => 'en',

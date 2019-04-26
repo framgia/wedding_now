@@ -59,6 +59,8 @@ return [
         'detail_planning_suggest' => 'Suggestions for you based on budget',
         'planning_default' => 'Planning default',
         'detail_planning_default' => 'Create planning default',
+        'connect_with_us' => 'Connect with us',
+        'search' => 'Search',
     ],
 
     'profile' => [

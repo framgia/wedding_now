@@ -1,12 +1,11 @@
-<script type="text/javascript" src="{{ asset(config('asset.users.js') . 'page.js') }}"></script> <!-- custom js -->
+<script type="text/javascript" src="{{ asset(config('asset.users.js') . 'page.js') }}"></script>
 
-<script type="text/javascript" src="{{ asset(config('asset.users.js') . 'owl.carousel.js') }}"></script> <!-- owl carousel js -->
-<script type="text/javascript" src="{{ asset(config('asset.users.js') . 'smooth-scroll.js') }}"></script> <!-- smooth scroll js -->
+<script type="text/javascript" src="{{ asset(config('asset.users.js') . 'owl.carousel.js') }}"></script>
+<script type="text/javascript" src="{{ asset(config('asset.users.js') . 'smooth-scroll.js') }}"></script>
 
-<script type="text/javascript" src="{{ asset(config('asset.users.js') . 'menumaker.js') }}"></script> <!-- menu js-->
-<script type="text/javascript" src="{{ asset(config('asset.users.js') . 'jquery.share-tooltip.js') }}"></script> <!-- share tooltip js-->
-<script type="text/javascript" src="{{ asset(config('asset.users.js') . 'price-slider.js') }}"></script> <!-- price slider / filter js-->
-<!-- revolution js files -->
+<script type="text/javascript" src="{{ asset(config('asset.users.js') . 'menumaker.js') }}"></script>
+<script type="text/javascript" src="{{ asset(config('asset.users.js') . 'jquery.share-tooltip.js') }}"></script>
+<script type="text/javascript" src="{{ asset(config('asset.users.js') . 'price-slider.js') }}"></script>
 <script type="text/javascript" src="{{ asset(config('asset.users.revolution_js') . 'jquery.themepunch.tools.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset(config('asset.users.revolution_js') . 'jquery.themepunch.revolution.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset(config('asset.users.extensions_js') . 'revolution.extension.actions.min.js') }}"></script>
@@ -15,17 +14,18 @@
 <script type="text/javascript" src="{{ asset(config('asset.users.extensions_js') . 'revolution.extension.navigation.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset(config('asset.users.extensions_js') . 'revolution.extension.parallax.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset(config('asset.users.extensions_js') . 'revolution.extension.slideanims.min.js') }}"></script>
-<!-- end revolution js files -->
-<script type="text/javascript" src="{{ asset(config('asset.users.js') . 'theme.js') }}"></script> <!-- custom js -->
+<script type="text/javascript" src="{{ asset(config('asset.users.js') . 'theme.js') }}"></script>
 <script type="text/javascript">
     var tpj=jQuery;
+
     var revapi1066;
+
     tpj(document).ready(function() {
-    if(tpj("#rev_slider_1066_1").revolution == undefined){
+
+    if (tpj("#rev_slider_1066_1").revolution == undefined) {
+
         revslider_showDoubleJqueryError("#rev_slider_1066_1");
-    }
-    else
-    {
+    } else {
         revapi1066 = tpj("#rev_slider_1066_1").show().revolution({
         sliderType:"standard",
         jsFileLocation:"//server.local/revslider/wp-content/plugins/revslider/public/assets/js/",
@@ -75,7 +75,7 @@
         visibilityLevels:[1240,1024,778,480],
         gridwidth:[1240,1024,778,480],
         gridwidth: 1000,
-        gridheight:[868,768,960,720],
+        gridheight:[550,768,960,720],
         lazyType:"none",
         parallax: {
             type:"mouse",
@@ -110,4 +110,13 @@
         });
     }
   });
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".owl-carousel").owlCarousel({
+            loop:true,
+            margin:10,
+            autoplay: true,
+        });
+    });
 </script>
