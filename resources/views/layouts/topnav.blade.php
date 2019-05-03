@@ -36,13 +36,11 @@
                 </div>
             </div>
         </div>
-        <!-- search -->
         <div class="search">
             <div class="container">
-                <input type="search" class="search-box" placeholder="Search"/>
+                <input type="search" class="search-box" placeholder="{{ __('page.index.search') }}"/>
                 <a href="#" class="fa fa-times search-close"></a>
             </div>
         </div>
-        <!-- end search -->
     </div>
 </section>
