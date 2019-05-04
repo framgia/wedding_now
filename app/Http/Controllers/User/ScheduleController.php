@@ -89,7 +89,15 @@ class ScheduleController extends Controller
 
         $categories = $this->category->getDataPluck();
 
-        return view('user.to-do-list', compact('timeFrames', 'categories', 'scheduleWeddings'));
+        $scheduleId = $this->meta->getChosenSchedule()->schedule_wedding_id;
+
+        $categoriesWithCountTasks = $this->category->getCategoriesWithCountTasks($scheduleId);
+
+        $totalTasks = $this->task->getTasksBySchedule($scheduleId, null);
+
+        $doneTasks = $totalTasks->where('status', config('define.done'));
+
+        return view('user.to-do-list', compact('timeFrames', 'categories', 'scheduleWeddings', 'categoriesWithCountTasks', 'totalTasks', 'doneTasks'));
     }
 
     public function getToDoList(Request $request)
@@ -103,9 +111,7 @@ class ScheduleController extends Controller
 
         $tasks = $this->task->getTasksBySchedule($scheduleId, $request->category_id, $request->status);
 
-        $categories = $this->category->getDataPluck();
-
-        return view('user.sections.list_tasks', compact('tasks', 'categories'))->render();
+        return view('user.sections.list_tasks', compact('tasks'));
     }
 
     public function createTask(TaskRequest $request)
@@ -459,7 +465,7 @@ class ScheduleController extends Controller
         $schedule = $this->scheduleWedding->findById($id)->load('tasks.category');
 
         $tasks = $schedule->tasks;
-        
+
         $countTask = count($tasks);
 
         return view('user.time-line-real-wedding', compact('schedule', 'tasks', 'countTask'));

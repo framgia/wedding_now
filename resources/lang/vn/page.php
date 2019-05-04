@@ -233,5 +233,7 @@ return [
         'item_price' => 'Giá:',
         'no_item' => 'Chưa chọn sản phẩm',
         'choose_time' => 'Chọn thời gian',
+        'collapse_all' => 'Thu gọn',
+        'no_task' => 'Không có công việc nào!',
     ]
 ];

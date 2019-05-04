@@ -255,6 +255,7 @@ return [
         'item_price' => 'Price:',
         'no_item' => 'No item select',
         'choose_time' => 'Choose time',
-        'collapse_all' => 'Collapse all'
+        'collapse_all' => 'Collapse all',
+        'no_task' => 'No task!',
     ]
 ];

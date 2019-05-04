@@ -10,7 +10,7 @@ class TaskRepository extends BaseRepository implements TaskRepositoryInterface
     {
         return $this->model->with(['timeFrame', 'category'])
             ->when($categoryId != null, function ($query) use ($categoryId) {
-                $query->where('category_id', $categoryId);
+                $query->whereIn('category_id', $categoryId);
             })
             ->when($status != null, function ($query) use ($status) {
                 $query->where('status', $status);
