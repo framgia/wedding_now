@@ -31,6 +31,95 @@
                     <div class="col-md-5">
                         <div class="create-btn padding-bottom-10">
                         </div>
+                        <div class="modal-show-product"></div>
+
+                        <div id="show-list-category">
+                            <div class="row">
+                                <h3>{{ __('base.view') }} {{ __('base.by') }}</h3>
+                                <div class="col-md-12">
+                                    <h4><b>{{ __('base.status') }}</b></h4>
+                                    <div class="col-md-7">
+                                        <input
+                                            type="radio"
+                                            id="radio_done"
+                                            name="check_category"
+                                            class="category-filter"
+                                            data-status="{{ config('define.done') }}"
+                                            data-name="{{ __('base.done') }}"
+                                            data-type="status"/>
+                                        <label for="radio_done">
+                                            &emsp;<span class="text-success">{{ __('base.done') }}</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <p><b>{{ $doneTasks->count() }}</b></p>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input
+                                            type="radio"
+                                            id="radio_todo"
+                                            name="check_category"
+                                            class="category-filter"
+                                            data-status="{{ config('define.to_do') }}"
+                                            data-name="{{ __('base.to_do') }}"
+                                            data-type="status"/>
+                                        <label for="radio_todo">
+                                            &emsp;{{ __('base.to_do') }}
+                                        </label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <p>
+                                            <b>{{ count($totalTasks) - $doneTasks->count() }}</b>
+                                        </p>
+                                    </div>
+                                </div>
+                                {{-- end status --}}
+
+                                {{-- category --}}
+                                <div class="col-md-12 category-item">
+                                    <h4><b>{{ __('page.filter.by_category') }}</b></h4>
+                                    <div class="col-md-7">
+                                        <label for="radio_all">
+                                            <input
+                                                type="checkbox"
+                                                id="radio_all"
+                                                name="check_category"
+                                                class="category-filter"
+                                                data-name="{{ __('page.filter.all') }}"
+                                                data-type="category"/>
+                                            <span class="label-text">&emsp;{{ __('page.filter.all') }}</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <p><b>{{ count($totalTasks) }}</b></p>
+                                    </div>
+                                </div>
+                                @foreach($categoriesWithCountTasks as $category)
+                                    <div class="col-md-12 category-item">
+                                        <div class="col-md-7">
+                                            <label for="radio_{{ $category->id }}">
+                                                <input
+                                                    type="checkbox"
+                                                    id="radio_{{ $category->id }}"
+                                                    name="check_category"
+                                                    class="category-filter cate"
+                                                    data-id="{{ $category->id }}"
+                                                    data-name="{{ $category->name }}"
+                                                    data-type="category"/>
+                                                    <span class="label-text">&emsp;{{ $category->name }}</span>
+                                            </label>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p>
+                                                {{ $category->tasks_count }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
                         <div id="create-task-div" class="display-none">
                             {{-- create task --}}
                             <h5 class="create-task-heading">{{ __('page.task.new') }}</h5>
@@ -114,15 +203,7 @@
                             </form>
                             {{-- endcreate task --}}
                         </div>
-                        <div class="modal-show-product"></div>
-                        {{-- view by --}}
-                        <div class="view-by"></div>
-                        {{-- end view by --}}
-
-                        <div id="show-list-category"></div>
-                    </div>
-                    <div class="col-md-7" id="list_tasks">
-
+                        <div id="list_tasks"></div>
                     </div>
                 </div>
             </div>
@@ -222,61 +303,59 @@
 
         var statusDone = $('#status_done').val();
         var statusToDo = $('#status_to_do').val();
+        var arrCategory = [];
+
+        $('#radio_all').click(function() {
+            $('.category-filter').prop('checked', false);
+            $(this).prop('checked', true);
+            arrCategory = [];
+        })
 
         function loadCategoryFilter()
         {
-            $.ajax({
-                url: route('client.get-filter-category'),
-                type: 'GET',
-                dataType: '',
-                data: {},
-            })
-            .done(function(res) {
-                $('#show-list-category').html(res);
-
-                $('.category-filter').click(function(event) {
-                    event.preventDefault();
-
-                    let category_id = $(this).attr('data-id');
-                    let status = $(this).attr('data-status');
-                    let display_name = $(this).attr('data-name');
-                    let type = $(this).attr('data-type');
-
-                    let checkTagExists = $(`.view-by strong:contains("${display_name}")`);
-                    let checkTypeExists = $(`.view-by .alert-custom a[data-type="${type}"]`);
-
-                    var conditionStatus = (status && status != undefined && status != '');
-                    var conditionCategory = (category_id && category_id != undefined && category_id != '');
-
-                    if (!conditionStatus && !conditionCategory) {
-                        checkCategory = null;
-                    } else {
-                        checkStatus = conditionStatus ? status : checkStatus;
-                        checkCategory = conditionCategory ? category_id : checkCategory;
-                    }
-
-                    if (!checkTagExists.length) {
-                        if (checkTypeExists) {
-                            checkTypeExists.parents('.alert-custom').remove();
-                        }
-
-                        $('.view-by').append(`
-                            <div class="alert alert-dismissible alert-custom">
-                                <a href="#" data-status="${statusDone}" data-type="${type}" data-id="${category_id}">
-                                    <strong>${display_name}</strong>
-                                    <i class="fa fa-times" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        `);
-                    }
-
-                   loadToDoList(checkCategory, checkStatus);
+            $('.category-filter').click(function(event) {
+                $('.cate').click(function() {
+                    $('#radio_all').prop('checked', false);
                 });
-            })
-            .fail(function() {
-                toastr.error( Lang.get('page.message.fail') );
-            })
+
+                let checked = $(this).prop('checked');
+
+                let category_id = parseInt($(this).attr('data-id'));
+                if (!arrCategory.includes(category_id) && category_id && checked) {
+                    arrCategory.push(parseInt(category_id));
+                } else if (arrCategory.includes(category_id) && category_id && !checked) {
+                    arrCategory.splice($.inArray(category_id, arrCategory), 1);
+                }
+
+                let status = $(this).attr('data-status');
+                let display_name = $(this).attr('data-name');
+                let type = $(this).attr('data-type');
+
+
+                let checkTagExists = $(`.view-by strong:contains("${display_name}")`);
+                let checkTypeExists = $(`.view-by .alert-custom a[data-type="${type}"]`);
+
+                var conditionStatus = (status && status != undefined && status != '');
+                var conditionCategory = (arrCategory && arrCategory != undefined && arrCategory != '');
+
+                if (!conditionStatus && !conditionCategory) {
+                    checkCategory = null;
+                } else {
+                    checkStatus = conditionStatus ? status : checkStatus;
+                    checkCategory = conditionCategory ? arrCategory : checkCategory;
+                }
+
+                if (!checkTagExists.length) {
+                    if (checkTypeExists) {
+                        checkTypeExists.parents('.alert-custom').remove();
+                    }
+                }
+
+                loadToDoList(checkCategory, checkStatus);
+            });
         }
+
+        loadCategoryFilter();
 
         $('body').on('click', '.done-task', function(event) {
             event.preventDefault()
@@ -289,9 +368,6 @@
                 data: {id: id},
             })
             .done(function() {
-                $('.view-by').empty()
-                $('#show-list-category').empty()
-                $('#list_tasks').empty()
 
                 loadToDoList()
             })
@@ -330,8 +406,6 @@
                 },
             })
             .done(function(res) {
-
-                loadCategoryFilter();
 
                 $('#list_tasks').html(res);
 
@@ -461,18 +535,8 @@
 
         $('body').on('click', '#collapse_all', function(event) {
             event.preventDefault();
-
-            expand();
-            collapse();
+            $('.panel-collapse').collapse('toggle');
         });
-
-        function expand() {
-            $('.collapse').collapse('show');
-        }
-
-        function collapse() {
-            $('.collapse').collapse('hide');
-        }
 
         $('body').on('click', '#create-task', function(event) {
             event.preventDefault();
@@ -539,22 +603,15 @@
         });
 
         $('#create-btn').on('click', function(event) {
-
             event.preventDefault();
-
-            $(this).hide();
-
             createTask();
-
             loadToDoList();
         });
 
         function createTask() {
-            $('#show-list-category').hide();
-
+            $('#list_tasks').hide();
+            $('#show-list-category').show();
             $('#single-task-detail').hide();
-
-            $('.view-by').hide();
 
             $('#create-task-div').show();
 
@@ -564,16 +621,13 @@
         $('#cancel-create-task').on('click', function(event) {
 
             event.preventDefault();
-
             cancelCreateTask();
         });
 
         function cancelCreateTask() {
-            $('#create-btn').show();
+            $('#list_tasks').show();
 
             $('#show-list-category').show();
-
-            $('.view-by').show();
 
             $('#create-task-div').hide();
 
