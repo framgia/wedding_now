@@ -470,4 +470,26 @@ class ScheduleController extends Controller
 
         return view('user.time-line-real-wedding', compact('schedule', 'tasks', 'countTask'));
     }
+
+    public function selectScheduleDefault(Request $request)
+    {
+        $schedule = $this->scheduleWedding->findById($request->select_schedule)->load('tasks');
+        $tasks = $schedule->tasks;
+        $schedule->user_id = Auth::id();
+        $schedule->name = config('define.schedule_name') . Auth::user()->name;
+        $schedule->type = config('define.type_schedule.custom');
+        $schedule->slug = str_slug($schedule->name);
+
+        $newSchedule = $this->scheduleWedding->create($schedule->toArray());
+
+        $tasks->map(function($item, $key) use ($newSchedule) {
+            $item->schedule_wedding_id = $newSchedule->id;
+
+            return $this->task->create($item->toArray());
+        });
+
+        $this->meta->setChosenSchedule($newSchedule->id);
+
+        return redirect()->route('client.to-do-list');
+    }
 }

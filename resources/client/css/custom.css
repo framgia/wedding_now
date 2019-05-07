@@ -178,3 +178,47 @@ p.current-lan {
     margin-bottom: 8px;
     font-size: 17px;
 }
+
+.wedding-logo {
+    padding: 10px 0px;
+}
+
+#cssmenu>ul>li>a {
+    padding: 25px 18px;
+}
+
+#modal-schedule .modal-content {
+    width: auto;
+}
+
+div#modal-schedule .meta img {
+    width: 100%;
+    height: 100%;
+}
+
+div#modal-schedule .read-more {
+    text-transform: none;
+}
+
+.modal-content .btn-default {
+    width: auto;
+}
+
+div#modal-schedule .fl-right {
+    max-width: 50%
+}
+
+div#modal-schedule .fl-left {
+    max-width: 50%
+}
+
+.navigation #cssmenu ul li:hover ul.sub-menu {
+    top: 58px;
+}
+
+div#modal-schedule .modal-content input {
+    height: auto;
+    margin-bottom: 0;
+    font-style: unset;
+    border: none;
+}

@@ -47,6 +47,7 @@ return [
         'detail_planning_suggest' => 'Tạo kế hoạch dựa trên ngân sách của bạn',
         'detail_planning_default' => 'Tạo một kế hoạch mặc định của chúng tôi',
         'planning_default' => 'Kế hoạch mặc định',
+        'schedule_default' => 'Lịch trình mặc định',
     ],
 
     'profile' => [

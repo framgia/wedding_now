@@ -61,6 +61,7 @@ return [
         'detail_planning_default' => 'Create planning default',
         'connect_with_us' => 'Connect with us',
         'search' => 'Search',
+        'schedule_default' => 'Schedule default',
     ],
 
     'profile' => [

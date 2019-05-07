@@ -60,6 +60,16 @@ $factory->define(ScheduleWedding::class, function (Faker $faker) {
     ];
 });
 
+$factory->state(ScheduleWedding::class, 'default', [
+    'type' => 'default',
+    'user_id' => 1
+]);
+
+$factory->state(ScheduleWedding::class, 'suggest', [
+    'type' => 'suggest',
+    'user_id' => 1
+]);
+
 $factory->define(Task::class, function (Faker $faker) {
     return [
         'name' => $faker->sentence(5),
