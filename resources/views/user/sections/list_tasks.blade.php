@@ -14,7 +14,7 @@
             </p>
             <br><br>
                 @foreach($tasks as $key => $task)
-                    <div class="panel-group faq-panel task-single wow fadeInDown" data-wow-delay="{{ ($key + 1) / 3 }}s" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel-group faq-panel task-single wow fadeInDown" data-wow-delay="{{ ($key + 1) / 10 }}s" id="accordion" role="tablist" aria-multiselectable="true">
                         <div class="panel panel-default">
                             <div class="panel-heading" role="tab" id="heading_{{ $task->id }}">
                                 <h4 class="panel-title to-do-list-heading">

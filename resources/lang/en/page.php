@@ -190,10 +190,16 @@ return [
         'undefined' => 'Undefined',
         'no_note' => 'No notes',
         'high' => 'HIGH',
+        'low' => 'LOW',
         'task' => 'Tasks',
         'budget' => 'Budget',
         'marriage_day' => 'Marriage Day',
         'no_task' => 'No tasks',
+        'order_by_date' => 'Order By Date',
+        'order_by_priority' => 'Order By Priority',
+        'flow' => 'Flow',
+        'unflow' => 'Unflow',
+        'change_priority' => 'Change priority'
     ],
     'header' => [
         'my_wedding' => 'My Wedding',

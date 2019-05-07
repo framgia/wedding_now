@@ -174,10 +174,16 @@ return [
         'undefined' => 'Chưa xác định',
         'no_note' => 'Không có ghi chú nào!',
         'high' => 'Cao',
+        'low' => 'Thấp',
         'task' => 'Công việc',
         'budget' => 'Ngân sách',
         'marriage_day' => 'Ngày tổ chức',
         'no_task' => 'Chưa có công việc',
+        'order_by_date' => 'Sắp xếp theo ngày',
+        'order_by_priority' => 'Sắp xếp theo độ ưu tiên',
+        'flow' => 'Tăng Dần',
+        'unflow' => 'Giảm Dần',
+        'change_priority' => 'Thay đổi độ ưu tiên'
     ],
     'header' => [
         'my_wedding' => 'Tiệc cưới của tôi',

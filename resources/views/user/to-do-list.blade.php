@@ -136,17 +136,7 @@
                                             {!! Form::select('category_id', $categories, null, ['class' => 'form-control', 'placeholder' => __('page.placeholder.category'), 'id' => 'task-category']) !!}
                                         </div>
                                         <div class="col-md-6 select-3">
-                                            {!! Form::text(
-                                                    'time_occurs',
-                                                    null,
-                                                    [
-                                                        'class' => 'form-control time-occurs',
-                                                        'placeHolder' => __('page.todo_list.choose_time'),
-                                                        'onfocus' => '(this.type="date")',
-                                                        'onblur' => '(this.type="text")'
-                                                    ]
-                                                )
-                                            !!}
+                                            {!! Form::text('time_occurs', null, ['class' => 'form-control time-occurs', 'placeHolder' => __('page.todo_list.choose_time'), 'onfocus' => '(this.type="date")', 'onblur' => '(this.type="text")']) !!}
                                         </div>
                                         <div class="col-md-6 select-3">
                                             <select name="priority" class="form-control" id="task-priority">
@@ -207,7 +197,32 @@
                     </div>
                 </div>
             </div>
+
             <div id="timeline" class="tab-pane fade">
+                <div class="container-flud">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right d-flex">
+                                <div class="form-group">
+                                    <label class="form-label">{{ __('page.timeline.order_by_date') }}</label>
+                                    <select class="form-control order-by-date">
+                                        <option value="flow">{{ __('page.timeline.flow') }}</option>
+                                        <option value="unflow">{{ __('page.timeline.unflow') }}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">{{ __('page.timeline.order_by_priority') }}</label>
+                                    <select class="form-control order-by-priority">
+                                        <option value="" hidden>{{ __('page.placeholder.priority') }}</option>
+                                        <option value="high">{{ __('page.priority.high') }}</option>
+                                        <option value="low">{{ __('page.priority.low') }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="time-line-view"></div>
             </div>
         </div>
     </div>
@@ -292,11 +307,11 @@
 
         $('body').on('click', '#get-timeline', function(event) {
             $.ajax({
-                url: route('client.my.timeline'),
+                url: route('client.my-timeline'),
                 type: 'GET',
             })
             .done(function(data) {
-                $('#timeline').html(data);
+                $('#time-line-view').html(data);
             })
             .fail(function() {
                 toastr.error( Lang.get('page.message.fail') );
@@ -713,8 +728,192 @@
             $('.update-item-name').text(itemSelected.itemName);
             $('.update-item-user').text(itemSelected.itemUser);
             $('.update-item-price').text(itemSelected.itemPrice);
-        })
+        });
 
+        $('body').on('change', '.order-by-date', function(event) {
+
+            event.preventDefault();
+
+            let orderByDate = $(this).val();
+
+            $.ajax({
+                url: route('client.my-timeline'),
+                data: {
+                    'orderByDate': orderByDate,
+                },
+                type: 'GET',
+            })
+            .done(function(data) {
+                $('#time-line-view').hide().html(data).fadeIn('slow');
+            })
+            .fail(function() {
+                toastr.error( Lang.get('page.message.fail') );
+            });
+        });
+
+        $('body').on('change', '.order-by-priority', function(event) {
+
+            event.preventDefault();
+
+            let orderByPriority = $(this).val();
+
+            $.ajax({
+                url: route('client.my-timeline'),
+                type: 'GET',
+                data: {
+                    'orderByPriority': orderByPriority,
+                },
+            })
+            .done(function(data) {
+                $('#time-line-view').hide().html(data).fadeIn('slow');
+
+            })
+            .fail(function() {
+                toastr.error( Lang.get('page.message.fail') );
+            });
+        });
+
+        $('body').on('click', '.edit-link', function(event) {
+
+            event.preventDefault();
+
+            let edit_box_element = $(this).closest('.product-addto-links-text').find('.edit-note');
+
+            let text_element = $(this).closest('.more').find('.note');
+
+            let note = text_element.html();
+
+            edit_box_element.find('.note-value').val(note);
+
+            text_element.toggleClass('d-none');
+
+            edit_box_element.toggleClass('d-none');
+        });
+
+        $('body').on('click', '.save-note', function(event) {
+
+            event.preventDefault();
+
+            let edit_box_element = $(this).closest('.product-addto-links-text').find('.edit-note');
+
+            let text_element = $(this).closest('.product-addto-links-text').find('.note');
+
+            text_element.toggleClass('d-none');
+            
+            edit_box_element.toggleClass('d-none');
+
+            let note = edit_box_element.find('.note-value').val();
+
+            let id = edit_box_element.attr('data-id');
+
+            $.ajax({
+                url: route('client.my-timeline.update.note'),
+                type: 'POST',
+                data: {
+                    id: id,
+                    note: note
+                },
+            })
+            .done(function() {
+                text_element.html(note);
+                toastr.success(Lang.get('base.success'))
+            })
+            .fail(function() {
+                toastr.error( Lang.get('page.message.fail') );
+            })
+        });
+
+        $('body').on('input', '.note-value', function(event) {
+            event.preventDefault();
+            $(this).height(25).height($(this)[0].scrollHeight);
+            $(this).autoResize();
+        });
+
+        $('body').on('click', '.choose-date', function(event) {
+
+            event.preventDefault();
+
+            let id = $(this).attr('data-id');
+
+            let element = $(this).closest('.task').find('.datepicker');
+
+            element.datepicker({
+                onSelect: function(dateText, inst) {
+                    var theDate = new Date(Date.parse($(this).datepicker('getDate')));
+                    var dateFormatted = $.datepicker.formatDate('yy/m/d', theDate);
+                    console.log(dateFormatted)
+                    $.ajax({
+                        url: route('client.my-timeline.update.date'),
+                        type: 'POST',
+                        data: {
+                            id: id,
+                            date: dateFormatted,
+                        },
+                    })
+                    .done(function() {
+                        loadMyTimeLine();
+                    })
+                    .fail(function() {
+                        toastr.error( Lang.get('page.message.fail') );
+                    })
+                },
+            });
+
+            element.toggle();
+
+            $(this).val(function(_,t) {
+                return t == 'show' ? 'hide' : 'show';
+            });
+        });
+
+        function loadMyTimeLine() {
+            $.ajax({
+                url: route('client.my-timeline'),
+                type: 'GET',
+            })
+            .done(function(data) {
+                $('#time-line-view').html(data);
+            })
+            .fail(function() {
+                toastr.error( Lang.get('page.message.fail') );
+            });
+        }
+
+        $('body').on('click', '.priority', function(event) {
+
+            event.preventDefault();
+
+            let element = $(this);
+
+            let priority = $(this).attr('data-priority');
+
+            let id = $(this).attr('data-id');
+
+            swal({
+                title: Lang.get('page.timeline.change_priority'),
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: route('client.my-timeline.update.priority'),
+                        type: 'POST',
+                        data: {
+                            priority: priority,
+                            id: id,
+                        },
+                    })
+                    .done(function(res) {
+                        loadMyTimeLine();
+                    })
+                    .fail(function() {
+                        toastr.error( Lang.get('page.message.fail') );
+                    })
+                }
+            });
+        });
     });
 </script>
 @endsection
