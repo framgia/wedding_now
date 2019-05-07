@@ -6,7 +6,7 @@ use App\Repositories\BaseRepository;
 
 class TaskRepository extends BaseRepository implements TaskRepositoryInterface
 {
-    public function getTasksBySchedule($id, $categoryId = null, $status = null)
+    public function getTasksBySchedule($id, $categoryId = null, $status = null, $orderByDate = null, $orderByPriority = null)
     {
         return $this->model->with(['timeFrame', 'category'])
             ->when($categoryId != null, function ($query) use ($categoryId) {
@@ -14,6 +14,24 @@ class TaskRepository extends BaseRepository implements TaskRepositoryInterface
             })
             ->when($status != null, function ($query) use ($status) {
                 $query->where('status', $status);
+            })
+            ->when($orderByDate != null, function($query) use ($orderByDate) {
+                $query->when($orderByDate === config('define.orderByDateUnflow'), function($query) {
+                    $query->orderBy('time_occurs', 'desc');
+                }, function($query) {
+                    $query->orderBy('time_occurs', 'asc');
+                });
+            }, function($query) {
+                $query->get();
+            })
+            ->when($orderByPriority != null, function($query) use ($orderByPriority) {
+                $query->when($orderByPriority === config('define.priority.low'), function($query) {
+                    $query->orderBy('priority', 'asc');
+                }, function($query) {
+                    $query->orderBy('priority', 'desc');
+                });
+            }, function($query) {
+                $query->get();
             })
             ->where('schedule_wedding_id', '=',  $id)
             ->get();

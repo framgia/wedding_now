@@ -39,6 +39,7 @@ mix.copyDirectory('resources/client/fonts', 'public/assets/user/fonts');
 mix.copyDirectory('node_modules/font-awesome/fonts', 'public/assets/user/fonts');
 mix.copyDirectory('node_modules/font-awesome/css/font-awesome.min.css', 'public/assets/user/css/fontawesome.css');
 mix.copyDirectory('resources/images/', 'public/storage/');
+mix.copyDirectory('node_modules/jquery-ui/themes/base/images/', 'public/assets/user/css/images');
 
 mix.styles([
     'resources/client/css/font-google.css',
@@ -65,6 +66,8 @@ mix.styles([
     'resources/client/css/design-card.css',
     'node_modules/print-js/dist/print.css',
     'resources/client/css/news.css',
+    'node_modules/jquery-ui/themes/base/theme.css',
+    'node_modules/jquery-ui/themes/base/datepicker.css',
 ], 'public/assets/user/css/page.css');
 
 mix.scripts([
@@ -81,6 +84,8 @@ mix.scripts([
     'node_modules/displacejs/dist/displace.min.js',
     'node_modules/dom-to-image/dist/dom-to-image.min.js',
     'node_modules/file-saver/dist/FileSaver.min.js',
+    'node_modules/jquery-datepicker/jquery-datepicker.js',
+    'node_modules/sweetalert/dist/sweetalert.min.js'
     ], 'public/assets/user/js/page.js');
 
 //mix js admin

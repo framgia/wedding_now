@@ -67,4 +67,10 @@ return [
         'icon_load_more' => 'storage/wedding/icon_more.png',
     ],
     'schedule_name' => 'Schedule Wedding of ',
+    'priority' => [
+        'low' => 'low',
+        'high' => 'high',
+    ],
+    'orderByDateFlow' => 'flow',
+    'orderByDateUnflow' => 'unflow',
 ];

@@ -86,8 +86,21 @@ Route::group(['namespace' => 'User'], function () {
 
         Route::post('choose-template', 'CardController@chooseTemplate')->name('client.choose-template');
 
-        Route::get('timeline', 'ScheduleController@myTimeline')->name('client.my.timeline');
+        Route::group(['prefix' => 'timeline'], function() {
 
+            Route::get('', 'ScheduleController@myTimeline')
+                ->name('client.my-timeline');
+
+            Route::post('update/note', 'ScheduleController@updateNoteTimeLine')
+                ->name('client.my-timeline.update.note');
+
+            Route::post('update/date', 'ScheduleController@updateDateTimeLine')
+                ->name('client.my-timeline.update.date');
+
+            Route::post('update/priority', 'ScheduleController@updatePriorityTimeLine')
+                ->name('client.my-timeline.update.priority');
+        });
+        
         Route::get('timeline/{slug}', 'ScheduleController@timelineRealWedding')->name('client.timeline');
 
         Route::get('get-item', 'ScheduleController@getItem')->name('client.get-item');
