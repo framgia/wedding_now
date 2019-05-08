@@ -152,4 +152,5 @@ return [
     'vn' => 'vn',
     'en' => 'en',
     'created_at' => 'Created at',
+    'view_detail' => 'View detail',
 ];

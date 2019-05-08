@@ -87,10 +87,12 @@ Route::group(['namespace' => 'User'], function () {
         Route::post('choose-template', 'CardController@chooseTemplate')->name('client.choose-template');
 
         Route::get('timeline', 'ScheduleController@myTimeline')->name('client.my.timeline');
-        
+
         Route::get('timeline/{slug}', 'ScheduleController@timelineRealWedding')->name('client.timeline');
-        
+
         Route::get('get-item', 'ScheduleController@getItem')->name('client.get-item');
+
+        Route::post('select-schedule-default', 'ScheduleController@selectScheduleDefault')->name('client.select-schedule-default');
     });
 
     Route::group(['prefix' => 'news'], function() {

@@ -151,4 +151,5 @@ return [
     'vn' => 'vn',
     'en' => 'en',
     'created_at' => 'Ngày tạo',
+    'view_detail' => 'Xem chi tiết',
 ];

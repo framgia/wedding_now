@@ -45,7 +45,7 @@ class TasksTableSeeder extends Seeder
                 'category_id' => 1,
                 'note' => 'Writing some things',
                 'time_frame_id' => 1,
-                'schedule_wedding_id' => 2,
+                'schedule_wedding_id' => 11,
                 'time_occurs' => Carbon::now()->addDays(1)
             ], [
                 'name' => 'Đồ ăn',
@@ -53,7 +53,7 @@ class TasksTableSeeder extends Seeder
                 'category_id' => 2,
                 'note' => 'Writing some things',
                 'time_frame_id' => 1,
-                'schedule_wedding_id' => 2,
+                'schedule_wedding_id' => 11,
                 'time_occurs' => Carbon::now()->addDays(2)
             ], [
                 'name' => 'Nhiếp ảnh',
@@ -61,7 +61,7 @@ class TasksTableSeeder extends Seeder
                 'category_id' => 3,
                 'note' => 'Writing some things',
                 'time_frame_id' => 1,
-                'schedule_wedding_id' => 2,
+                'schedule_wedding_id' => 11,
                 'time_occurs' => Carbon::now()->addDays(3)
             ], [
                 'name' => 'Hoa',
@@ -69,7 +69,7 @@ class TasksTableSeeder extends Seeder
                 'category_id' => 4,
                 'note' => 'Writing some things',
                 'time_frame_id' => 1,
-                'schedule_wedding_id' => 2,
+                'schedule_wedding_id' => 11,
                 'time_occurs' => Carbon::now()->addDays(4)
             ], [
                 'name' => 'Bánh',
@@ -77,7 +77,7 @@ class TasksTableSeeder extends Seeder
                 'category_id' => 5,
                 'note' => 'Writing some things',
                 'time_frame_id' => 1,
-                'schedule_wedding_id' => 2,
+                'schedule_wedding_id' => 11,
                 'time_occurs' => Carbon::now()->addDays(5)
             ], [
                 'name' => 'Trang phục',
@@ -85,7 +85,7 @@ class TasksTableSeeder extends Seeder
                 'category_id' => 6,
                 'note' => 'Writing some things',
                 'time_frame_id' => 1,
-                'schedule_wedding_id' => 2,
+                'schedule_wedding_id' => 11,
                 'time_occurs' => Carbon::now()->addDays(6)
             ], [
                 'name' => 'DJ',
@@ -93,7 +93,7 @@ class TasksTableSeeder extends Seeder
                 'category_id' => 7,
                 'note' => 'Writing some things',
                 'time_frame_id' => 1,
-                'schedule_wedding_id' => 2,
+                'schedule_wedding_id' => 11,
                 'time_occurs' => Carbon::now()->addDays(7)
             ], [
                 'name' => 'Quay Phim',
@@ -101,7 +101,7 @@ class TasksTableSeeder extends Seeder
                 'category_id' => 8,
                 'note' => 'Writing some things',
                 'time_frame_id' => 1,
-                'schedule_wedding_id' => 2,
+                'schedule_wedding_id' => 11,
                 'time_occurs' => Carbon::now()->addDays(8)
             ], [
                 'name' => 'Nhạc',
@@ -109,7 +109,7 @@ class TasksTableSeeder extends Seeder
                 'category_id' => 9,
                 'note' => 'Writing some things',
                 'time_frame_id' => 1,
-                'schedule_wedding_id' => 2,
+                'schedule_wedding_id' => 11,
                 'time_occurs' => Carbon::now()->addDays(9)
             ], [
                 'name' => 'Trang điểm',
@@ -117,7 +117,7 @@ class TasksTableSeeder extends Seeder
                 'category_id' => 10,
                 'note' => 'Writing some things',
                 'time_frame_id' => 1,
-                'schedule_wedding_id' => 2,
+                'schedule_wedding_id' => 11,
                 'time_occurs' => Carbon::now()->addDays(10)
             ], [
                 'name' => 'Khác',
@@ -125,7 +125,7 @@ class TasksTableSeeder extends Seeder
                 'category_id' => 11,
                 'note' => 'Writing some things',
                 'time_frame_id' => 1,
-                'schedule_wedding_id' => 2,
+                'schedule_wedding_id' => 11,
                 'time_occurs' => Carbon::now()->addDays(11)
             ]
         ];
