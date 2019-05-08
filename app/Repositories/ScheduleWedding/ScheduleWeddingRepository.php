@@ -64,8 +64,8 @@ class ScheduleWeddingRepository extends BaseRepository implements ScheduleWeddin
 
     public function getAllScheduleDefault() {
         $schedule = $this->model->withCount('tasks')
-                    ->where('type', config('define.type_schedule.default'))
-                    ->get();
+            ->where('type', config('define.type_schedule.default'))
+            ->get();
 
         return $schedule;
     }

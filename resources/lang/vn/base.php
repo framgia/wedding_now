@@ -16,6 +16,7 @@ return [
     // notification
     'success' => 'Thành công!',
     'error' => 'Lỗi! Vui lòng thử lại.',
+    'are_you_sure' => 'Bạn có chắc chắn?',
     // end notification
 
     // other

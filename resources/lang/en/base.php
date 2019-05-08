@@ -16,6 +16,7 @@ return [
     // notification
     'success' => 'Success!',
     'error' => 'Error! Please try again later.',
+    'are_you_sure' => 'Are you sure?',
     // end notification
 
     // other
