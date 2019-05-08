@@ -5,6 +5,9 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\ScheduleRequest;
 use App\Http\Requests\Client\TaskRequest;
+use App\Http\Requests\Client\UpdateDateMyTimeLineRequest;
+use App\Http\Requests\Client\UpdateNoteMyTimeLineRequest;
+use App\Http\Requests\Client\UpdatePriorityMyTimeLineRequest;
 use App\Http\Requests\Client\UpdateSchedulePicture;
 use App\Models\Category;
 use App\Models\Item;
@@ -209,12 +212,14 @@ class ScheduleController extends Controller
 
         $type = $request->type;
 
+        $date = Carbon::now();
+
         switch ($type) {
             case config('define.type_schedule.default'):
                 {
                     $schedule_id = $this->scheduleWedding->getScheduleWeddingDefault()->id;
 
-                    DB::transaction(function () use ($schedule_id, $type) {
+                    DB::transaction(function () use ($schedule_id, $type, $date) {
 
                         $schedule = $this->scheduleWedding->create([
                             'name' => config('define.wedding.of') . Auth::user()->name,
@@ -237,6 +242,7 @@ class ScheduleController extends Controller
                                 'item_user_id' => $task->item_user_id,
                                 'time_frame_id' => $task->time_frame_id,
                                 'schedule_wedding_id' => $schedule->id,
+                                'time_occurs' => $date->addDays($task->timeFrame->value),
                             ]);
                         }
                     });
@@ -431,24 +437,65 @@ class ScheduleController extends Controller
         ]);
     }
 
-    public function getScheduleTask($id)
+    public function getScheduleTask($id, $orderByDate = null, $orderByPriority = null)
     {
         $schedule = $this->scheduleWedding->findById($id)->load('tasks.category');
-        $tasks = $schedule->tasks;
+
+        $tasks = $this->task->getTasksBySchedule($id, null, null, $orderByDate, $orderByPriority);
+
         $countTask = count($tasks);
 
-        return view('user.timeline', compact('schedule', 'tasks', 'countTask'));
+        return view('user.sections.timeline', compact('schedule', 'tasks', 'countTask'));
     }
 
-    public function myTimeline()
+    public function myTimeline(Request $request)
     {
+        $orderByDate = $request->orderByDate;
+
+        $orderByPriority = $request->orderByPriority;
+
         $scheduleId = $this->meta->getChosenSchedule()->schedule_wedding_id;
 
         if (!isset($scheduleId)) {
+
             return redirect()->route('client.to-do-list');
         }
 
-        return $this->getScheduleTask($scheduleId);
+        return $this->getScheduleTask($scheduleId, $orderByDate, $orderByPriority);
+    }
+
+    public function updateNoteTimeLine(UpdateNoteMyTimeLineRequest $request)
+    {
+        if ($request->ajax()) {
+            $id = $request->id;
+
+            $this->task->update($id, [
+                'note' => $request->note,
+            ]);
+        }
+    }
+
+    public function updateDateTimeLine(UpdateDateMyTimeLineRequest $request)
+    {
+        if ($request->ajax()) {
+            
+            $id = $request->id;
+
+            $this->task->update($id, [
+                'time_occurs' => $request->date,
+            ]);
+        }
+    }
+
+    public function updatePriorityTimeLine(UpdatePriorityMyTimeLineRequest $request)
+    {
+        if ($request->ajax()) {
+            $id = $request->id;
+
+            $this->task->update($id, [
+                'priority' => $request->priority,
+            ]);
+        }
     }
 
     public function timeline($slug)
