@@ -236,5 +236,6 @@ return [
         'choose_time' => 'Chọn thời gian',
         'collapse_all' => 'Thu gọn',
         'no_task' => 'Không có công việc nào!',
+        'reset_default' => 'Khôi phục mặc định',
     ]
 ];

@@ -24,8 +24,8 @@
             <div id="to-do" class="to-do-list-block tab-pane fade in active">
                 {{-- <h3><b>{{ __('page.page.checklist') }}</b></h3> --}}
                 <h3 class="create-task-heading">
-                    {!! Form::submit(__('base.choose') . ' ' . __('base.schedule'), ['id' => 'btn-choose-schedule', 'class' => 'btn btn-pink', 'data-toggle' => 'modal', 'data-target' => '#myModal']) !!}
-                    {!! Form::submit(__('base.create') . ' ' . __('base.task'), ['id' => 'create-btn', 'class' => 'btn btn-pink']) !!}
+                    {!! Form::submit(__('page.todo_list.reset_default'), ['id' => 'btn-choose-schedule', 'class' => 'btn btn-pink', 'data-toggle' => 'modal', 'data-target' => '#myModal']) !!}
+                    {!! Form::submit(__('base.create') . ' ' . __('base.task'), ['id' => 'create-btn', 'class' => 'btn btn-pink pull-right']) !!}
                 </h3>
                 <div class="row">
                     <div class="col-md-5">
@@ -224,20 +224,25 @@
                 <div class="col-lg-12">
                     @foreach ($scheduleWeddings as $scheduleWedding)
                         <div class="col-lg-6 padding-bottom-15">
-                            <h5 class="padding-top-10">{{ $scheduleWedding->name }}</h5>
-                            <p>{{ __('page.marrige_day') . $scheduleWedding->marriage_day }}</p>
-                            <p>{{ __('base.created_at') . ': ' . $scheduleWedding->created_at }}</p>
-                            <button
-                                class="btn btn-pink btn-choose-schedule"
-                                data-id="{{ $scheduleWedding->id }}">
-                                {{ __('page.choose') }}
-                            </button>
+                            <div class="s-single">
+                                <h5 class="padding-top-10">{{ $scheduleWedding->name }}</h5>
+                                <p>{{ __('base.created_at') . ': ' . $scheduleWedding->created_at }}</p>
+                                <div class="s-info o-auto">
+                                    <span class="pull-left">{{ __('base.task') }}: {{ $scheduleWedding->tasks_count }}</span>
+                                    <span class="pull-right">{{ __('base.budget')}}: {{ number_format($scheduleWedding->budget) }}</span>
+                                </div>
+                                <button
+                                    class="btn btn-purple btn-choose-schedule"
+                                    data-id="{{ $scheduleWedding->id }}">
+                                    {{ __('page.choose') }}
+                                </button>
+                            </div>
                         </div>
                     @endforeach
                 </div>
             </div>
             <div class="modal-footer row">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('base.close') }}</button>
+                <button type="button" class="btn btn-pink" data-dismiss="modal">{{ __('base.close') }}</button>
             </div>
         </div>
     </div>

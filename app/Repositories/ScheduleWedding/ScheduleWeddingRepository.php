@@ -40,7 +40,9 @@ class ScheduleWeddingRepository extends BaseRepository implements ScheduleWeddin
             ])->orWhere([
                 ['user_id', '=', $userId],
                 ['type', '=', config('define.type_schedule.custom')],
-            ])->orderBy('id', 'desc')->get();
+            ])->orderBy('id', 'desc')
+                ->withCount('tasks')
+                ->get();
 
             return $schedules;
         }

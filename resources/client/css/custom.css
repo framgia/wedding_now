@@ -222,3 +222,59 @@ div#modal-schedule .modal-content input {
     font-style: unset;
     border: none;
 }
+
+.o-auto {
+    overflow: auto;
+}
+
+.btn-purple {
+    background-color: #6639a6;
+    border-radius: 4px;
+    text-transform: uppercase;
+    color:#fff;
+    transition: all 0.8s ease;
+}
+
+.btn-purple:hover {
+    background-color: #ff4061;
+    color:#fff;
+}
+
+.s-single {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-family: vnCariar;
+}
+
+.s-single h5 {
+    text-align: center;
+    font-family: vnCariar;
+    font-weight: 800;
+    position: relative;
+    padding-bottom: 11px;
+}
+
+.s-single p {
+    font-family: vnCariar;
+    font-size: 15px;
+    margin-bottom: 11px;
+}
+
+.s-info span {
+    font-size: 15px;
+}
+
+.s-info {
+    margin-bottom: 12px;
+}
+
+.s-single h5::after {
+    content: '';
+    position: absolute;
+    width: 115px;
+    height: 2px;
+    background-color: #ff2e63;
+    left: 33%;
+    bottom: 0;
+}
