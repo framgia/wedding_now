@@ -258,5 +258,6 @@ return [
         'choose_time' => 'Choose time',
         'collapse_all' => 'Collapse all',
         'no_task' => 'No task!',
+        'reset_default' => 'Reset Default',
     ]
 ];
