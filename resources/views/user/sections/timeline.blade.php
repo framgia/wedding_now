@@ -36,9 +36,10 @@
             </div>
         </div>
     </div>
-    <div>
+    <div class="mt-40">
         @if ($countTask)
             <div class="list-timeline-item">
+                <div class="vertical-line"></div>
                 @foreach ($tasks as $key => $value)
                     @if ($key % 2 == 0)
                         <div class="timeline-item">
@@ -63,7 +64,7 @@
                                             <div class="col-lg-10 p-l-r-0">
                                                 <textarea class="note-value"></textarea>
                                             </div>
-                                            <div class="col-lg-2 p-l-r-0">
+                                            <div class="col-lg-2">
                                                 <button class="save-note"><i class="fa fa-save"></i></button>
                                             </div>
                                         </div>

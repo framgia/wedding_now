@@ -48,6 +48,10 @@ return [
         'detail_planning_default' => 'Tạo một kế hoạch mặc định của chúng tôi',
         'planning_default' => 'Kế hoạch mặc định',
         'schedule_default' => 'Lịch trình mặc định',
+        'wedding_service' => 'Dịch vụ',
+        'wedding_idea' => 'Ý tưởng',
+        'enter_search_service' => 'Nhập dịch vụ hoặc nhà cung cấp,...',
+        'enter_search_idea' => 'Nhập từ khóa',
     ],
 
     'profile' => [
@@ -183,7 +187,8 @@ return [
         'order_by_priority' => 'Sắp xếp theo độ ưu tiên',
         'flow' => 'Tăng Dần',
         'unflow' => 'Giảm Dần',
-        'change_priority' => 'Thay đổi độ ưu tiên'
+        'change_priority' => 'Thay đổi độ ưu tiên',
+        'copy' => 'Sao chép lịch trình',
     ],
     'header' => [
         'my_wedding' => 'Tiệc cưới của tôi',
@@ -243,5 +248,21 @@ return [
         'collapse_all' => 'Thu gọn',
         'no_task' => 'Không có công việc nào!',
         'reset_default' => 'Khôi phục mặc định',
-    ]
+    ],
+    'real_wedding' => [
+        'list' => 'Danh sách đám cưới',
+        'filter' => [
+            'title' => 'Bộ lọc',
+            'by_price' => 'Theo giá',
+            'all' => 'Tất cả',
+            'option_1' => '0 - 50 triệu',
+            'option_2' => '50 - 100 triệu',
+            'option_3' => '100 - 150 triệu',
+            'option_4' => 'Trên 50 triệu',
+        ],
+        'package_services' => 'Gói dịch vụ'
+    ],
+    'banner' => [
+        'all_services' =>'Tất cả dịch vụ',
+    ],
 ];

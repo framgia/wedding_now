@@ -20,7 +20,7 @@
             </nav>
         </div>
         <br>
-        <div class="tab-content">
+        <div class="tab-content tab-timel-line">
             <div id="to-do" class="to-do-list-block tab-pane fade in active">
                 {{-- <h3><b>{{ __('page.page.checklist') }}</b></h3> --}}
                 <h3 class="create-task-heading">
