@@ -283,7 +283,7 @@ return [
             'option_3' => '4320 - 8640$',
             'option_4' => 'more than 17280$',
         ],
-        'package_services' => 'Package Services'
+        'package_services' => 'Package Services',
     ],
     'banner' => [
         'all_services' =>'All Services',

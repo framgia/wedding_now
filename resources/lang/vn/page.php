@@ -260,7 +260,7 @@ return [
             'option_3' => '100 - 150 triệu',
             'option_4' => 'Trên 50 triệu',
         ],
-        'package_services' => 'Gói dịch vụ'
+        'package_services' => 'Gói dịch vụ',
     ],
     'banner' => [
         'all_services' =>'Tất cả dịch vụ',

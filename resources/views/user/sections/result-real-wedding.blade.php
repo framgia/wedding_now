@@ -25,7 +25,7 @@
                             <div class="col-lg-7 pl-0">{{ __('base.price') . ': ' . number_format($wedding->final_cost) . ' vnđ' }}</div>
                         </div>
                     </div>
-                    <div class="location" style="">
+                    <div class="location">
                         <i class="fa fa-map-marker"></i><span>{{ $wedding->location ?? 'Hidden' }}</span>
                     </div>
                 </div>

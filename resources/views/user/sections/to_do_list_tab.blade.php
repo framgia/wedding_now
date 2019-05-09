@@ -18,11 +18,4 @@
             <span class="badge">{{ __('page.page.wedding_card') }}</span>
         </a>
     </li>
-    {{-- <li>
-        <a href="{{ route('real-wedding.index') }}"
-            class="btn btn-default @if(Route::currentRouteName() === 'real-wedding.index' || Route::currentRouteName() === 'real-wedding.show') active @endif"
-            >
-            <span class="badge">{{ __('page.page.real_wedding') }}</span>
-        </a>
-    </li> --}}
 </ul>
