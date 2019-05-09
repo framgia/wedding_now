@@ -505,19 +505,6 @@ class ScheduleController extends Controller
         return $this->getScheduleTask($id);
     }
 
-    public function timelineRealWedding($slug)
-    {
-        $id = last(explode('-', $slug));
-
-        $schedule = $this->scheduleWedding->findById($id)->load('tasks.category');
-
-        $tasks = $schedule->tasks;
-
-        $countTask = count($tasks);
-
-        return view('user.time-line-real-wedding', compact('schedule', 'tasks', 'countTask'));
-    }
-
     public function selectScheduleDefault(Request $request)
     {
         $schedule = $this->scheduleWedding->findById($request->select_schedule)->load('tasks');

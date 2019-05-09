@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\ScheduleWedding;
@@ -15,6 +16,7 @@ class ScheduleWeddingsTableSeeder extends Seeder
     {
         factory(ScheduleWedding::class, 10)->states('default')->create();
         factory(ScheduleWedding::class, 1)->states('suggest')->create();
+        factory(ScheduleWedding::class, 30)->states('package')->create();
         factory(ScheduleWedding::class, 40)->create();
     }
 }

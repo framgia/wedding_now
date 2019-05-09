@@ -39,4 +39,5 @@ return [
     'schedule_avatar' => 'storage/avatar/',
     'card_template' => 'storage/template_card/',
     'schedule_default' => 'storage/wedding/',
+    'package' => 'storage/wedding/package/',
 ];

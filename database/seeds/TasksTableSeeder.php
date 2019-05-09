@@ -131,6 +131,6 @@ class TasksTableSeeder extends Seeder
         ];
 
         DB::table('tasks')->insert($data);
-        factory(Task::class, 40)->create();
+        factory(Task::class, 90)->create();
     }
 }

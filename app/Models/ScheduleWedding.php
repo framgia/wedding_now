@@ -65,4 +65,14 @@ class ScheduleWedding extends Model
     {
         return $this->medias()->orderBy('id', 'desc')->limit(1);
     }
+
+    public function scopeIsWeddingUser($query)
+    {
+        return $query->whereType(config('define.type_schedule.custom'));
+    }
+
+    public function scopeIsPackage($query)
+    {
+        return $query->whereType(config('define.type_schedule.package'));
+    }
 }

@@ -2,7 +2,10 @@
 
 namespace App\Repositories;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\ImageManagerStatic as ResizeImage;
 
@@ -85,5 +88,13 @@ class BaseRepository implements RepositoryInterface
     public function updateOrCreate($filter, $data)
     {
         return $this->model->updateOrCreate($filter, $data);
+    }
+
+    public function paginate($items, $perPage = 5, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 }

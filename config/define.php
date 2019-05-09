@@ -16,10 +16,12 @@ return [
         'default' => 'default',
         'custom' => 'custom',
         'combo' => 'combo',
+        'package' => 'package',
     ],
     'wedding' => [
         'of' => 'Wedding Of ',
         'slug' => 'wedding-of-',
+        'default_image' => 'default-image.jpg',
     ],
     'image' => [
         'default' => 'storage/wedding/news-update-1.jpg',
@@ -59,6 +61,7 @@ return [
         'take_five_post' => 5,
     ],
     'vn' => 'vn',
+    'vi' => 'vi',
     'en' => 'en',
     'card' => [
         'template' => 'template',
@@ -73,4 +76,24 @@ return [
     ],
     'orderByDateFlow' => 'flow',
     'orderByDateUnflow' => 'unflow',
+    'price_filter' => [
+        'option_1' => [
+            'min' => 0,
+            'max' => 50000000,
+        ],
+        'option_2' => [
+            'min' => 50000000,
+            'max' => 100000000,
+        ],
+        'option_3' => [
+            'min' => 100000000,
+            'max' => 150000000,
+        ],
+        'option_4' => [
+            'min' => 150000000,
+        ],
+    ],
+    'real_wedding_paginate' => 6,
+    'package_service_paginate' => 4,
+    'zero' => 0,
 ];
