@@ -109,7 +109,7 @@
     background: #ff4081;
     display: inline-block;
     color: #ffffff;
-    padding: 10px 17px;
+    padding: 10px 10px 11px 17px;
     border-bottom-left-radius: 19px;
     border-top-left-radius: 19px;
     font-weight: bold;
@@ -119,8 +119,7 @@
 span.task-title {
     color: white;
     background: #ff4081;
-    padding: 12px 14px 14px 15px;
-    margin-left: -3px;
+    padding: 13px 14px 14px 15px;
     border-top-right-radius: 19px;
     border-bottom-right-radius: 19px;
     font-weight: bold;
@@ -150,18 +149,15 @@ p.task-category {
 }
 
 .task-right {
-    margin: 0 10%;
+    margin: 0 0 0 10%;
 }
 
 .task-left {
-    margin: 0 29%;
+    width: 45%;
+    text-align: end;
 }
 
 span.date {
-    margin-left: -4px;
-}
-
-.task-right span.task-title {
     margin-left: -4px;
 }
 
@@ -177,6 +173,7 @@ span.date {
     border-bottom-left-radius: 19px;
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
+    margin-right: 2px;
 }
 
 span.task-category {
