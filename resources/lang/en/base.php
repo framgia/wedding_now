@@ -162,4 +162,6 @@ return [
     'love' => 'love',
     'comment' => 'comment',
     'by_author' => 'By',
+
+    'vnd' => '₫',
 ];

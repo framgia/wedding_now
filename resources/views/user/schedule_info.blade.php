@@ -159,36 +159,33 @@
                 }
             });
 
-            presentScheduleInfoPage(getScheduleInfo());
+            $.when(getScheduleInfo()).then(function(res) {
+
+                  presentScheduleInfoPage(res);
+            }, function() {
+
+                toastr.error( Lang.get('page.message.fail') );
+            });
 
             $('.dash-couple-btn-edit').click(function(event) {
 
                 event.preventDefault();
 
-                let object = getScheduleInfo();
+                getScheduleInfo().then(function(res) {
 
-                presentScheduleInfoModal(object);
+                    presentScheduleInfoModal(res);
+                }, function() {
+
+                    toastr.error( Lang.get('page.message.fail') );
+                });
             });
 
             function getScheduleInfo() {
 
-                let object = null;
-
-                $.ajax({
-                    async: false,
+                return $.ajax({
                     url: route('client.get-schedule-info'),
                     type: 'GET',
-                    dataType: '',
-                    data: {},
-                })
-                .done(function(res) {
-                    object = res;
-                })
-                .fail(function() {
-                    toastr.error( Lang.get('page.message.fail') );
-                })
-
-                return object;
+                });
             }
 
             function presentScheduleInfoPage(object) {
@@ -371,7 +368,14 @@
                 })
                 .done(function(res) {
                     toastr.success(res.message);
-                    presentScheduleInfoPage(getScheduleInfo());
+                    
+                    getScheduleInfo().then(function(res){
+
+                        presentScheduleInfoPage(res);
+                    }, function() {
+
+                        toastr.error( Lang.get('page.message.fail') );
+                    });
                 })
                 .fail(function(xhr, status, error) {
 
@@ -426,11 +430,17 @@
                 })
                 .done(function(res) {
 
-                   toastr.success(res.message);
+                    toastr.success(res.message);
 
-                   $('#myModal').modal('hide');
+                    $('#myModal').modal('hide');
 
-                   presentScheduleInfoPage(getScheduleInfo());
+                    getScheduleInfo().then(function(res) {
+
+                        presentScheduleInfoPage(res);
+                    }, function() {
+
+                        toastr.error( Lang.get('page.message.fail') );
+                    })
                 })
                 .fail(function(xhr, status, error) {
 
@@ -497,7 +507,6 @@
 
                 if(keyword != '') {
                     $.ajax({
-                        async: false,
                         url: route('client.get-district', { keyword: keyword }),
                         type: 'GET',
                         beforeSend: function() {

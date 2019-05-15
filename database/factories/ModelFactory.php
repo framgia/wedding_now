@@ -31,7 +31,7 @@ $factory->define(Location::class, function (Faker $faker) {
         'address' => 'abcdef',
         'locationable_id' => factory(App\Models\User::class)->create()->id,
         'locationable_type' => 'App\Models\User',
-        'district_id' => rand(1, 812),
+        'district_id' => rand(1, 26),
         'created_at' => Carbon::now(),
         'updated_at' => Carbon::now(),
     ];

@@ -306,6 +306,11 @@ pre {
     background: transparent;
 }
 
+
+.note {
+    white-space: normal !important;
+}
+
 @media screen and (max-width: 768px) {
 
     .timeline .timeline-item:nth-child(even) .timeline-content::after,

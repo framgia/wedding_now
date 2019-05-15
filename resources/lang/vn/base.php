@@ -160,4 +160,6 @@ return [
     'love' => 'love',
     'comment' => 'bình luận',
     'by_author' => 'Bỏi',
+
+    'vnd' => '₫',
 ];

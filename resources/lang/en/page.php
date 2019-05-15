@@ -189,6 +189,7 @@ return [
         'venue' => 'Venue',
     ],
     'timeline' => [
+        'no_choose_date' => 'Not choose',
         'more' => 'Show more',
         'less' => 'Show less',
         'undefined' => 'Undefined',

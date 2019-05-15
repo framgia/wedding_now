@@ -8,21 +8,21 @@
                 <div class="row">
                     <div class="col-sm-10 col-sm-offset-1 text-justify">
                         <div class="t-note">
-                            <pre>{{ $schedule->note }}</pre>
+                            <pre class="note">{{ $schedule->note }}</pre>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="info-item">
                             <i class="fa fa-calendar" aria-hidden="true"></i>
                             <span>{{ __('page.timeline.marriage_day') }}:</span>
-                            <span>{{ $schedule->marriage_day }}</span>
+                            <span>{{ $schedule->marriage_day ?? __('page.timeline.no_choose_date') }}</span>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="info-item">
                             <i class="fa fa-usd" aria-hidden="true"></i>
                             <span>{{ __('page.timeline.budget') }}:</span>
-                            <span>{{ number_format($schedule->budget) }}</span>
+                            <span>{{ number_format($schedule->budget) . __('base.vnd') }}</span>
                         </div>
                     </div>
                     <div class="col-sm-4">

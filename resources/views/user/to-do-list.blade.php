@@ -375,8 +375,7 @@
             })
             .fail(function(message) {
                 toastr.error( Lang.get('page.message.fail') )
-            })
-
+            });
         })
 
         // remove tag filter
@@ -393,12 +392,12 @@
             }
 
             $(this).remove();
+
             loadToDoList(checkCategory, checkStatus);
         });
 
         function loadToDoList(category_id, type = null) {
             $.ajax({
-                async: false,
                 url: route('client.get-to-do-list'),
                 type: 'get',
                 dataType: '',
@@ -432,7 +431,6 @@
                     let id = $(this).attr('data-id');
 
                     $.ajax({
-                        async: false,
                         url: route('client.get-single-task', { id: id }),
                         type: 'GET',
                         dataType: '',
@@ -469,7 +467,6 @@
                             event.preventDefault();
 
                             $.ajax({
-                                async: false,
                                 url: route('client.update-task'),
                                 type: 'PUT',
                                 data: {
@@ -512,7 +509,6 @@
                     let id = el.attr('data-id');
 
                     $.ajax({
-                        async: false,
                         url: route('client.delete-task', { id: id }),
                         type: 'delete',
                         dataType: '',
@@ -544,7 +540,6 @@
             event.preventDefault();
 
             $.ajax({
-                async: false,
                 url: route('client.create-task'),
                 type: 'POST',
                 dataType: '',
