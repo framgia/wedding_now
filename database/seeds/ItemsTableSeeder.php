@@ -20,7 +20,7 @@ class ItemsTableSeeder extends Seeder
                 'address' => str_random(10),
                 'locationable_id' => $item->id,
                 'locationable_type' => 'App\Models\Item',
-                'district_id' => rand(1, 812),
+                'district_id' => rand(1, 26),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);
