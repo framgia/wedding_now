@@ -2,9 +2,9 @@
 
 namespace App\Repositories\Media;
 
-use App\Repositories\RepositoryInterface;
+use App\Repositories\Base\RepositoryInterface;
 
 interface MediaRepositoryInterface extends RepositoryInterface
 {
-    //
+    public function saveMediaOfSchedule($schedule, $data);
 }
