@@ -2,10 +2,17 @@
 
 namespace App\Repositories\Task;
 
-use App\Repositories\BaseRepository;
+use App\Models\Task;
+use App\Repositories\Base\BaseRepository;
+use Illuminate\Database\Eloquent\Model;
 
 class TaskRepository extends BaseRepository implements TaskRepositoryInterface
 {
+    public function __construct(Task $task)
+    {
+        parent::__construct($task);
+    }
+
     public function getTasksBySchedule($id, $categoryId = null, $status = null, $orderByDate = null, $orderByPriority = null)
     {
         return $this->model->with(['timeFrame', 'category'])
