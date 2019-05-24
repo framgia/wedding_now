@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Post\PostRepositoryInterface;
+use App\Repositories\ScheduleMeta\ScheduleMetaRepositoryInterface;
+use App\Repositories\ScheduleWedding\ScheduleWeddingRepositoryInterface;
 use Illuminate\Http\Request;
-use Auth;
-use App\Repositories\Post\PostRepository;
-use App\Repositories\Topic\TopicRepository;
-use App\Models\Post;
-use App\Models\ScheduleWedding;
-use App\Repositories\ScheduleWedding\ScheduleWeddingRepository;
-use App\Models\ScheduleMeta;
-use App\Repositories\ScheduleMeta\ScheduleMetaRepository;
 
 class HomeController extends Controller
 {
@@ -30,16 +25,12 @@ class HomeController extends Controller
 
     protected $scheduleMeta;
 
-    public function __construct(
-        Post $post,
-        ScheduleWedding $scheduleWedding,
-        ScheduleMeta $scheduleMeta
-    )
+    public function __construct(PostRepositoryInterface $post, ScheduleWeddingRepositoryInterface $scheduleWedding, ScheduleMetaRepositoryInterface $scheduleMeta)
     {
         // $this->middleware(['auth', 'verified']);
-        $this->post = new PostRepository($post);
-        $this->scheduleWedding = new ScheduleWeddingRepository($scheduleWedding);
-        $this->scheduleMeta = new ScheduleMetaRepository($scheduleMeta);
+        $this->post = $post;
+        $this->scheduleWedding = $scheduleWedding;
+        $this->scheduleMeta = $scheduleMeta;
     }
 
     /**

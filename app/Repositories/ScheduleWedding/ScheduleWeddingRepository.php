@@ -3,16 +3,19 @@
 namespace App\Repositories\ScheduleWedding;
 
 use App\Models\ScheduleWedding;
-use App\Repositories\BaseRepository;
+use App\Repositories\Base\BaseRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use App\Models\ScheduleMeta;
-use App\Repositories\ScheduleMeta\ScheduleMetaRepository;
 use Illuminate\Support\Facades\File;
 use Carbon\Carbon;
 
 class ScheduleWeddingRepository extends BaseRepository implements ScheduleWeddingRepositoryInterface
 {
+    public function __construct(ScheduleWedding $scheduleWedding)
+    {
+        parent::__construct($scheduleWedding);
+    }
+
     public function deleteTasks($data = [])
     {
         $this->model->destroy($data);
@@ -20,7 +23,7 @@ class ScheduleWeddingRepository extends BaseRepository implements ScheduleWeddin
 
     public function getScheduleWeddingDefault()
     {
-        $scheduleWedding = ScheduleWedding::with([
+        $scheduleWedding = $this->model->with([
             'tasks.category' => function ($query) {
                 $query->get();
             },
@@ -35,21 +38,21 @@ class ScheduleWeddingRepository extends BaseRepository implements ScheduleWeddin
     public function getScheduleClient($userId, $scheduleId)
     {
         if ($userId != null) {
-            $schedules = ScheduleWedding::with(['scheduleMetasPluck', 'user', 'user.media', 'imgMain', 'location'])
-            ->where([
-                ['schedule_wedding_id', '!=', null],
-                ['user_id', '=', $userId],
-            ])->orWhere([
-                ['user_id', '=', $userId],
-                ['type', '=', config('define.type_schedule.custom')],
-            ])->orderBy('id', 'desc')
+            $schedules = $this->model->with(['scheduleMetasPluck', 'user', 'user.media', 'imgMain', 'location'])
+                ->where([
+                    ['schedule_wedding_id', '!=', null],
+                    ['user_id', '=', $userId],
+                ])->orWhere([
+                    ['user_id', '=', $userId],
+                    ['type', '=', config('define.type_schedule.custom')],
+                ])->orderBy('id', 'desc')
                 ->withCount('tasks')
                 ->get();
 
             return $schedules;
         }
 
-        $schedule = ScheduleWedding::with(['scheduleMetasPluck', 'user', 'user.media', 'imgMain', 'location'])
+        $schedule = $this->model->with(['scheduleMetasPluck', 'user', 'user.media', 'imgMain', 'location'])
             ->where('id', '=', $scheduleId)->first();
 
         return $schedule;
@@ -63,7 +66,9 @@ class ScheduleWeddingRepository extends BaseRepository implements ScheduleWeddin
 
         return $this->model->create($data);
     }
-    public function getAllScheduleDefault() {
+
+    public function getAllScheduleDefault()
+    {
         $schedule = $this->model->withCount('tasks')
             ->where('type', config('define.type_schedule.default'))
             ->get();
@@ -76,11 +81,11 @@ class ScheduleWeddingRepository extends BaseRepository implements ScheduleWeddin
         $weddings = $this->model->isWeddingUser()->with('scheduleMetasPluck', 'medias', 'user', 'location')
             ->withCount('tasks')
             ->where('final_cost', '>', config('define.zero'))
-            ->when($minPrice != null, function($query) use ($minPrice) {
+            ->when($minPrice != null, function ($query) use ($minPrice) {
 
                 return $query->where('final_cost', '>=', $minPrice);
             })
-            ->when($maxPrice != null, function($query) use ($maxPrice) {
+            ->when($maxPrice != null, function ($query) use ($maxPrice) {
 
                 return $query->where('final_cost', '<=', $maxPrice);
             })
@@ -124,9 +129,9 @@ class ScheduleWeddingRepository extends BaseRepository implements ScheduleWeddin
 
         Carbon::setLocale($lang);
 
-        $now  = Carbon::now();
+        $now = Carbon::now();
 
-        $newCollection = $collection->transform(function($item) use ($now) {
+        $newCollection = $collection->transform(function ($item) use ($now) {
 
             $value = $item->created_at->diffForHumans($now);
 
@@ -140,13 +145,13 @@ class ScheduleWeddingRepository extends BaseRepository implements ScheduleWeddin
 
     public function checkImageWedding($collection, $basePath, $pathDefault)
     {
-        $newCollection = $collection->transform(function($item) use ($basePath, $pathDefault) {
+        $newCollection = $collection->transform(function ($item) use ($basePath, $pathDefault) {
 
             $value = '';
 
             if (count($item->medias)) {
 
-                $item->medias->each(function($media) use (&$item, $basePath, $pathDefault) {
+                $item->medias->each(function ($media) use (&$item, $basePath, $pathDefault) {
 
                     if (File::exists($basePath . $media->name)) {
 

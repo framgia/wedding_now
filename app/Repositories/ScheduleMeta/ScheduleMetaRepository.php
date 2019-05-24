@@ -3,14 +3,20 @@
 namespace App\Repositories\ScheduleMeta;
 
 use App\Models\ScheduleMeta;
-use App\Repositories\BaseRepository;
+use App\Repositories\Base\BaseRepository;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class ScheduleMetaRepository extends BaseRepository implements ScheduleMetaRepositoryInterface
 {
+    public function __construct(ScheduleMeta $scheduleMeta)
+    {
+        parent::__construct($scheduleMeta);
+    }
+
     public function updateMeta($scheduleId, $key, $value)
     {
-        ScheduleMeta::updateOrCreate([
+        $this->model->updateOrCreate([
             ['schedule_wedding_id', '=', $scheduleId],
             ['key', '=', $key],
         ], [
@@ -24,7 +30,6 @@ class ScheduleMetaRepository extends BaseRepository implements ScheduleMetaRepos
     {
         foreach ($keyValues as $key => $value) {
             $this->updateMeta($scheduleId, $key, $value);
-
         }
     }
 

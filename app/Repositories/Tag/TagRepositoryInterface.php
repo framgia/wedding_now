@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Tag;
 
-use App\Repositories\RepositoryInterface;
+use App\Repositories\Base\RepositoryInterface;
 
 interface TagRepositoryInterface extends RepositoryInterface
 {
