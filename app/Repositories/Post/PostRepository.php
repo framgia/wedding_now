@@ -2,12 +2,18 @@
 
 namespace App\Repositories\Post;
 
-use App\Models\Rate;
-use App\Repositories\BaseRepository;
+use App\Models\Post;
+use App\Repositories\Base\BaseRepository;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\File;
 
 class PostRepository extends BaseRepository implements PostRepositoryInterface
 {
+    public function __construct(Post $post)
+    {
+        parent::__construct($post);
+    }
+
     public function getAll($with, $withCount)
     {
         return $this->model->withCount($withCount)->with($with)->get();

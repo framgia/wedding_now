@@ -3,14 +3,19 @@
 namespace App\Repositories\Topic;
 
 use App\Models\Topic;
-use App\Repositories\BaseRepository;
+use App\Repositories\Base\BaseRepository;
 use Illuminate\Support\Facades\File;
 
 class TopicRepository extends BaseRepository implements TopicRepositoryInterface
 {
+    public function __construct(Topic $topic)
+    {
+        parent::__construct($topic);
+    }
+
     public function checkImageCollection($collection, $basePath, $pathDefault)
     {
-        $newCollection = $collection->transform(function($item) use ($basePath, $pathDefault) {
+        $newCollection = $collection->transform(function ($item) use ($basePath, $pathDefault) {
 
             if ($item->media) {
 
