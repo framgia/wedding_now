@@ -39,7 +39,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
 
     public function getItemNearUser($id)
     {
-        $itemsNearUser = $this->model->find($id)->items()->whereHas('locations.district.city', function($q) {
+        $itemsNearUser = $this->model->find($id)->items()->whereHas('locations.district.city', function ($q) {
             $q->where('name', Auth::user()->locations[0]->district->city->name);
         })->with('user')->get();
 

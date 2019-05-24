@@ -8,48 +8,60 @@ class RepositoryServiceProvider extends ServiceProvider
 {
     protected static $repositories = [
         [
-            'App\Repositories\User\UserRepository',
+            'App\Repositories\Post\PostRepositoryInterface',
+            'App\Repositories\Post\PostRepository',
+        ], [
             'App\Repositories\User\UserRepositoryInterface',
+            'App\Repositories\User\UserRepository',
         ], [
-            'App\Repositories\BaseRepository',
-            'App\Repositories\RepositoryInterface',
-        ], [
-            'App\Repositories\ScheduleWedding\ScheduleWeddingRepository',
             'App\Repositories\ScheduleWedding\ScheduleWeddingRepositoryInterface',
+            'App\Repositories\ScheduleWedding\ScheduleWeddingRepository',
         ], [
-            'App\Repositories\Card\CardRepository',
             'App\Repositories\Card\CardRepositoryInterface',
+            'App\Repositories\Card\CardRepository',
         ], [
-            'App\Repositories\CardMeta\CardMetaRepository',
             'App\Repositories\CardMeta\CardMetaRepositoryInterface',
+            'App\Repositories\CardMeta\CardMetaRepository',
         ], [
-            'App\Repositories\Category\CategoryRepository',
             'App\Repositories\Category\CategoryRepositoryInterface',
+            'App\Repositories\Category\CategoryRepository',
         ], [
-            'App\Repositories\District\DistrictRepository',
             'App\Repositories\District\DistrictRepositoryInterface',
+            'App\Repositories\District\DistrictRepository',
         ], [
-            'App\Repositories\Item\ItemRepository',
             'App\Repositories\Item\ItemRepositoryInterface',
+            'App\Repositories\Item\ItemRepository',
         ], [
-            'App\Repositories\Location\LocationRepository',
             'App\Repositories\Location\LocationRepositoryInterface',
+            'App\Repositories\Location\LocationRepository',
         ], [
-            'App\Repositories\Media\MediaRepository',
             'App\Repositories\Media\MediaRepositoryInterface',
+            'App\Repositories\Media\MediaRepository',
         ], [
-            'App\Repositories\ScheduleMeta\ScheduleMetaRepository',
             'App\Repositories\ScheduleMeta\ScheduleMetaRepositoryInterface',
+            'App\Repositories\ScheduleMeta\ScheduleMetaRepository',
         ], [
-            'App\Repositories\Task\TaskRepository',
             'App\Repositories\Task\TaskRepositoryInterface',
+            'App\Repositories\Task\TaskRepository',
         ], [
-            'App\Repositories\TimeFrame\TimeFrameRepository',
             'App\Repositories\TimeFrame\TimeFrameRepositoryInterface',
+            'App\Repositories\TimeFrame\TimeFrameRepository',
         ], [
-            'App\Repositories\Role\RoleRepository',
             'App\Repositories\Role\RoleRepositoryInterface',
-        ]
+            'App\Repositories\Role\RoleRepository',
+        ], [
+            'App\Repositories\Item\ItemRepositoryInterface',
+            'App\Repositories\Item\ItemRepository',
+        ], [
+            'App\Repositories\Tag\TagRepositoryInterface',
+            'App\Repositories\Tag\TagRepository',
+        ], [
+            'App\Repositories\Topic\TopicRepositoryInterface',
+            'App\Repositories\Topic\TopicRepository',
+        ], [
+            'App\Repositories\City\CityRepositoryInterface',
+            'App\Repositories\City\CityRepository',
+        ],
     ];
 
     /**
@@ -70,10 +82,7 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         foreach (static::$repositories as $repository) {
-            $this->app->bind(
-                $repository[0],
-                $repository[1]
-            );
+            $this->app->bind($repository[0], $repository[1]);
         }
     }
 }

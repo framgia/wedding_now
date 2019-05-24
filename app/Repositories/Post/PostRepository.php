@@ -4,7 +4,6 @@ namespace App\Repositories\Post;
 
 use App\Models\Post;
 use App\Repositories\Base\BaseRepository;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\File;
 
 class PostRepository extends BaseRepository implements PostRepositoryInterface
@@ -26,13 +25,13 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
             ->orderBy('rates_count', 'desc')
             ->numberStarPost()
             ->orderBy('id', 'desc')
-            ->when($id != [], function($query) use ($id) {
+            ->when($id != [], function ($query) use ($id) {
                 $query->whereNotIn('posts.id', $id);
             })
-            ->when($numberSkip != null, function($query) use ($numberSkip) {
+            ->when($numberSkip != null, function ($query) use ($numberSkip) {
                 $query->skip($numberSkip);
             })
-            ->when($number != null, function($query) use ($number) {
+            ->when($number != null, function ($query) use ($number) {
                 $query->take($number);
             })
             ->public()
@@ -61,7 +60,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
             ->withCount('rates')
             ->orderBy('id', 'desc')
             ->orderBy('rates_count', 'desc')
-            ->when($arrayId != [], function($query) use ($arrayId) {
+            ->when($arrayId != [], function ($query) use ($arrayId) {
                 $query->whereNotIn('id', $arrayId);
             })
             ->public()
@@ -78,11 +77,11 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
 
     public function checkImagePostCollection($collection, $basePath, $pathDefault)
     {
-        $newCollection = $collection->transform(function($item) use ($basePath, $pathDefault) {
+        $newCollection = $collection->transform(function ($item) use ($basePath, $pathDefault) {
 
             if ($item->medias) {
 
-                $item->medias->each(function($media) use ($item, $basePath, $pathDefault) {
+                $item->medias->each(function ($media) use (&$item, $basePath, $pathDefault) {
 
                     if (File::exists($basePath . $media->name)) {
 
@@ -107,7 +106,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
 
     public function checkAvatarOfUserPostCollection($collection, $basePath, $pathDefault)
     {
-        $newCollection = $collection->transform(function($item) use ($basePath, $pathDefault) {
+        $newCollection = $collection->transform(function ($item) use ($basePath, $pathDefault) {
 
             if ($item->user->media) {
 
