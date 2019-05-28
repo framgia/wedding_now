@@ -17,7 +17,7 @@ interface RepositoryInterface
 
     public function destroy($id);
 
-    public function saveFile($currentFile, $newFile, $path,  $width = null, $height = null);
+    public function saveFile($currentFile, $newFile, $path, $width = null, $height = null);
 
     public function create($data);
 
@@ -26,5 +26,7 @@ interface RepositoryInterface
     public function updateOrCreate($filter, $data);
 
     public function paginate($items, $perPage = 5, $page = null, $options = []);
+
+    public function findWithCondition($key, $value, $condition = '=');
 
 }
