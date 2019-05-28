@@ -5,12 +5,12 @@ return [
     'logo' => 'assets/demo/default/media/img/logo/',
     'logo_default' => 'logo_default_dark.png',
     'app_logo' => 'assets/app/media/img/logos/',
-    'user_default' => 'user_default.png',
     'login' => 'assets/snippets/custom/pages/user/',
     'app_js' => 'assets/app/js/',
     'media' => 'assets/app/media/',
     'custom' => 'assets/customs/',
     'vendors_base' => 'assets/vendors/base/',
+    'vendors_custom' => 'assets/vendors/custom/',
     'default_base' => 'assets/demo/default/base/',
     'image' => [
         'background' => 'img/bg/',

@@ -4,7 +4,6 @@ namespace App\Repositories\Task;
 
 use App\Models\Task;
 use App\Repositories\Base\BaseRepository;
-use Illuminate\Database\Eloquent\Model;
 
 class TaskRepository extends BaseRepository implements TaskRepositoryInterface
 {
@@ -22,25 +21,25 @@ class TaskRepository extends BaseRepository implements TaskRepositoryInterface
             ->when($status != null, function ($query) use ($status) {
                 $query->where('status', $status);
             })
-            ->when($orderByDate != null, function($query) use ($orderByDate) {
-                $query->when($orderByDate === config('define.orderByDateUnflow'), function($query) {
+            ->when($orderByDate != null, function ($query) use ($orderByDate) {
+                $query->when($orderByDate === config('define.orderByDateUnflow'), function ($query) {
                     $query->orderBy('time_occurs', 'desc');
-                }, function($query) {
+                }, function ($query) {
                     $query->orderBy('time_occurs', 'asc');
                 });
-            }, function($query) {
+            }, function ($query) {
                 $query->get();
             })
-            ->when($orderByPriority != null, function($query) use ($orderByPriority) {
-                $query->when($orderByPriority === config('define.priority.low'), function($query) {
+            ->when($orderByPriority != null, function ($query) use ($orderByPriority) {
+                $query->when($orderByPriority === config('define.priority.low'), function ($query) {
                     $query->orderBy('priority', 'asc');
-                }, function($query) {
+                }, function ($query) {
                     $query->orderBy('priority', 'desc');
                 });
-            }, function($query) {
+            }, function ($query) {
                 $query->get();
             })
-            ->where('schedule_wedding_id', '=',  $id)
+            ->where('schedule_wedding_id', '=', $id)
             ->get();
     }
 }

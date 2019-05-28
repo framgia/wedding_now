@@ -6,6 +6,9 @@ return [
         'vendor' => 2,
         'client' => 3,
     ],
+    'user' => [
+        'image_default' => 'user_default.png',
+    ],
     'api_location' => 'https://thongtindoanhnghiep.co',
     'type' => [
         'admin' => 'administrator',

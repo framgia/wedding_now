@@ -4,7 +4,6 @@ namespace App\Repositories\TimeFrame;
 
 use App\Models\TimeFrame;
 use App\Repositories\Base\BaseRepository;
-use Illuminate\Database\Eloquent\Model;
 
 class TimeFrameRepository extends BaseRepository implements TimeFrameRepositoryInterface
 {

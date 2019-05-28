@@ -4,7 +4,6 @@ namespace App\Repositories\ScheduleMeta;
 
 use App\Models\ScheduleMeta;
 use App\Repositories\Base\BaseRepository;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class ScheduleMetaRepository extends BaseRepository implements ScheduleMetaRepositoryInterface

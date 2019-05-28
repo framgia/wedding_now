@@ -3,13 +3,19 @@
 namespace App\Repositories\Item;
 
 use App\Models\Item;
-use App\Repositories\BaseRepository;
+use App\Repositories\Base\BaseRepository;
+use Illuminate\Database\Eloquent\Model;
 
 class ItemRepository extends BaseRepository implements ItemRepositoryInterface
 {
+    public function __construct(Item $item)
+    {
+        parent::__construct($item);
+    }
+
     public function getItemByCategory($id)
     {
-        $items = Item::with('user')
+        $items = $this->model->with('user')
             ->whereHas('categories', function ($query) use ($id) {
                 $query->where('category_id', $id);
             })
