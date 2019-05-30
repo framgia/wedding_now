@@ -193,7 +193,7 @@ class ScheduleWeddingController extends Controller
     {
         $timeFrames = $this->timeFrame->getDataPluck();
         $categories = $this->category->getDataPluck();
-        $items = Item::with('users')->get();
+        $items = Item::with('user')->get();
         $scheduleDefault = $this->scheduleWedding->getScheduleWeddingDefault();
 
         return view('admin.edit_default_schdule', compact('scheduleDefault', 'timeFrames', 'categories', 'items'));

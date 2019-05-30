@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Auth;
-use App\Models\User;
+use App\Repositories\User\UserRepositoryInterface;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -30,21 +31,23 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/email/verify';
+    protected $user;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(UserRepositoryInterface $user)
     {
         $this->middleware('guest');
+        $this->user = $user;
     }
 
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -68,31 +71,34 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \App\User
      */
     protected function create(array $data)
     {
-        $user = User::create([
-            'name' => $data['name'],
-            'gender' => $data['gender'],
-            'user_name' => $data['user_name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'birthday' => $data['birthday'],
-            'city' => $data['city'],
-            'district' => $data['district'],
-            'address' => $data['address'],
-            'gender' => $data['gender'],
-            'phone' => $data['phone'],
-        ]);
+        $user = null;
 
-        $user->roles()->attach($data['role']);
+        DB::transaction(function () use ($data) {
+            $user = $this->user->create([
+                'name' => $data['name'],
+                'gender' => $data['gender'],
+                'user_name' => $data['user_name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'birthday' => $data['birthday'],
+                'city' => $data['city'],
+                'district' => $data['district'],
+                'address' => $data['address'],
+                'phone' => $data['phone'],
+            ]);
 
-        $user->locations()->create([
-            'district_id' => $data['district'],
-            'address' => $data['address'],
-        ]);
+            $user->roles()->attach($data['role']);
+
+            $user->locations()->create([
+                'district_id' => $data['district'],
+                'address' => $data['address'],
+            ]);
+        });
 
         return $user;
     }
