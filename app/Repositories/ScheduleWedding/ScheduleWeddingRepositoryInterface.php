@@ -6,8 +6,6 @@ use App\Repositories\Base\RepositoryInterface;
 
 interface ScheduleWeddingRepositoryInterface extends RepositoryInterface
 {
-    public function deleteTasks($data = []);
-
     public function getScheduleWeddingDefault();
 
     public function getScheduleClient($userId, $scheduleId);

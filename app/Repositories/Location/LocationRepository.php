@@ -14,18 +14,19 @@ class LocationRepository extends BaseRepository implements LocationRepositoryInt
 
     public function createLocationOfSchedule($schedule, $data)
     {
-        $schedule->location()->create($data);
-    }
-
-    public function getLocationOfSchedule($schedule)
-    {
-        $result = $this->model->where('locationable_id', '=', $schedule->id)->first();
-
-        return $result;
+        return $schedule->location()->create($data);
     }
 
     public function updateLocationOfSchedule($schedule, $data)
     {
-        $schedule->location()->update($data);
+        return $schedule->location()->update($data);
+    }
+
+    public function getLocationByIdAndType($id, $type)
+    {
+        return $this->model->where([
+            'locationable_id' => $id,
+            'locationable_type' => $type,
+        ])->get();
     }
 }

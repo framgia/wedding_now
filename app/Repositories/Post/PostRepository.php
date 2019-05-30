@@ -39,8 +39,6 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
 
         $posts = $this->checkImagePostCollection($posts, config('define.post.path'), config('define.post.default_image'));
 
-        $posts = $this->checkAvatarOfUserPostCollection($posts, config('asset.users.avatar'), config('asset.user_default'));
-
         return $posts;
     }
 
@@ -70,8 +68,6 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
 
         $posts = $this->checkImagePostCollection($posts, config('define.post.path'), config('define.post.default_image'));
 
-        $posts = $this->checkAvatarOfUserPostCollection($posts, config('asset.users.avatar'), config('asset.user_default'));
-
         return $posts;
     }
 
@@ -96,30 +92,6 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
             } else {
 
                 $item->image = $pathDefault;
-            }
-
-            return $item;
-        });
-
-        return $newCollection;
-    }
-
-    public function checkAvatarOfUserPostCollection($collection, $basePath, $pathDefault)
-    {
-        $newCollection = $collection->transform(function ($item) use ($basePath, $pathDefault) {
-
-            if ($item->user->media) {
-
-                if (File::exists($basePath . $item->user->media->name)) {
-
-                    $item->avatar_user = $item->user->media->name;
-                } else {
-
-                    $item->avatar_user = $pathDefault;
-                };
-            } else {
-
-                $item->avatar_user = $pathDefault;
             }
 
             return $item;

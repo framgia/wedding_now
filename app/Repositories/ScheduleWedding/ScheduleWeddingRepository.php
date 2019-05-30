@@ -16,11 +16,6 @@ class ScheduleWeddingRepository extends BaseRepository implements ScheduleWeddin
         parent::__construct($scheduleWedding);
     }
 
-    public function deleteTasks($data = [])
-    {
-        $this->model->destroy($data);
-    }
-
     public function getScheduleWeddingDefault()
     {
         $scheduleWedding = $this->model->with([
@@ -172,5 +167,10 @@ class ScheduleWeddingRepository extends BaseRepository implements ScheduleWeddin
         });
 
         return $newCollection;
+    }
+
+    public function getLocationOfSchedule($schedule)
+    {
+        // TODO: Implement getLocationOfSchedule() method.
     }
 }
