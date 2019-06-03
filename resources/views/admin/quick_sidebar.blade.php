@@ -27,7 +27,7 @@
                         <div class="m-messenger__wrapper">
                             <div class="m-messenger__message m-messenger__message--in">
                                 <div class="m-messenger__message-pic">
-                                    <img src="{{ asset('assets/app/media/img/users/user4.jpg') }}" alt=""/>
+                                    <img src="{{ asset(config('define.default_avatar')) }}" alt=""/>
                                 </div>
                                 <div class="m-messenger__message-body">
                                     <div class="m-messenger__message-arrow"></div>

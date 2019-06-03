@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="{{ asset(config('asset.custom') . 'admin_custom.css') }}">
     <link href="{{ asset(config('asset.vendors_base') . 'vendors.bundle.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset(config('asset.default_base') . 'style.bundle.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('css/demo/fullcalendar.bundle.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset(config('asset.vendors_custom') . 'fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet" type="text/css">
     @yield('css')
     <link rel="stylesheet" type="text/css" href="{{ asset('css/admin/admin.css') }}">
 </head>

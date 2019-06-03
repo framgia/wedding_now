@@ -477,7 +477,7 @@
                             <li class="m-nav__item m-topbar__user-profile m-topbar__user-profile--img m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light" m-dropdown-toggle="click">
                                 <a href="#" class="m-nav__link m-dropdown__toggle">
                                     <span class="m-topbar__userpic">
-                                        <img src="{{ asset(config('asset.users.avatar') . ($user->media ? $user->media->name : config('asset.user_default')) ) }}" class="m--img-rounded m--marginless m--img-centered"/>
+                                        <img src="{{ asset(config('asset.users.avatar') . ($user->media ? $user->media->name : config('define.default_avatar')) ) }}" class="m--img-rounded m--marginless m--img-centered"/>
                                     </span>
                                     <span class="m-topbar__username m--hide">
                                         {{ $user->name }}
@@ -489,7 +489,7 @@
                                         <div class="m-dropdown__header m--align-center background-url-card-user">
                                             <div class="m-card-user m-card-user--skin-dark">
                                                 <div class="m-card-user__pic">
-                                                    <img src="{{ asset(config('asset.users.avatar') . ($user->media ? $user->media->name : config('asset.user_default')) ) }}" class="m--img-rounded m--marginless"/>
+                                                    <img src="{{ asset(config('asset.users.avatar') . ($user->media ? $user->media->name : config('define.default_avatar')) ) }}" class="m--img-rounded m--marginless"/>
                                                 </div>
                                                 <div class="m-card-user__details">
                                                     <span class="m-card-user__name m--font-weight-500">
