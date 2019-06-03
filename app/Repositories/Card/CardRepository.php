@@ -3,15 +3,20 @@
 namespace App\Repositories\Card;
 
 use App\Models\Card;
-use App\Repositories\BaseRepository;
+use App\Repositories\Base\BaseRepository;
 
 class CardRepository extends BaseRepository implements CardRepositoryInterface
 {
+    public function __construct(Card $card)
+    {
+        parent::__construct($card);
+    }
+
     public function getCard($scheduleId = null, $backgroundImage = null)
     {
-        return $this->model->when($scheduleId != null, function($query) use ($scheduleId) {
+        return $this->model->when($scheduleId != null, function ($query) use ($scheduleId) {
             return $query->where('schedule_wedding_id', $scheduleId);
-        }, function($query) {
+        }, function ($query) {
             return $query->get();
         })->get();
     }
@@ -30,7 +35,7 @@ class CardRepository extends BaseRepository implements CardRepositoryInterface
             'name' => config('define.image_card'),
         ]);
 
-        $this->model->when($templateId != null, function($query) {
+        $this->model->when($templateId != null, function ($query) use ($scheduleId, $image) {
             $query->update([
                 'schedule_wedding_id' => $scheduleId,
             ], [

@@ -94,7 +94,12 @@ class BaseRepository implements RepositoryInterface
     {
         $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
         $items = $items instanceof Collection ? $items : Collection::make($items);
-        
+
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+    }
+
+    public function findWithCondition($key, $value, $condition = '=')
+    {
+        return $this->model->where($key, $condition, $value)->get();
     }
 }

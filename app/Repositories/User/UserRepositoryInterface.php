@@ -5,5 +5,5 @@ use App\Repositories\Base\RepositoryInterface;
 
 interface UserRepositoryInterface extends RepositoryInterface
 {
-    //
+    public function findByUserName($username);
 }
