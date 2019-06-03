@@ -22,7 +22,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $recommendPost = $this->post->getMostRatePost(config('define.post.recommend'))->first();
+        $recommendPost = collect($this->post->getMostRatePost(config('define.post.recommend')))->first();
 
         $newestPosts = $this->post->getMostRatePost(config('define.post.newest'), config('define.post.recommend'), $recommendPost->id);
 
@@ -50,9 +50,7 @@ class PostController extends Controller
 
         $topics = $this->topic->checkImageCollection($this->topic->getData(['media']), config('define.post.topic.path'), config('define.post.topic.default_image'));
 
-        $post = $this->post->getData(['medias', 'topic'], ['id' => $request->id]);
-
-        $post = $this->post->checkAvatarOfUserPostCollection($post, config('asset.users.avatar'), config('asset.user_default'))->first();
+        $post = collect($this->post->getData(['medias', 'topic'], ['id' => $request->id]))->first();
 
         return view('user.detail_post', compact('mostPopularPosts', 'topics', 'post'));
     }

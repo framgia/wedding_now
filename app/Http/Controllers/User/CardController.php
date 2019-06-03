@@ -5,6 +5,9 @@ namespace App\Http\Controllers\User;
 use App\Models\Card;
 use App\Models\CardMeta;
 use App\Models\ScheduleMeta;
+use App\Repositories\Card\CardRepositoryInterface;
+use App\Repositories\CardMeta\CardMetaRepositoryInterface;
+use App\Repositories\ScheduleMeta\ScheduleMetaRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ScheduleWedding;
@@ -23,11 +26,11 @@ class CardController extends Controller
     protected $cardMeta;
     protected $scheduleMeta;
 
-    public function __construct(Card $card, CardMeta $cardMeta, ScheduleMeta $scheduleMeta)
+    public function __construct(CardRepositoryInterface $card, CardMetaRepositoryInterface $cardMeta, ScheduleMetaRepositoryInterface $scheduleMeta)
     {
-        $this->card = new CardRepository($card);
-        $this->cardMeta = new CardMetaRepository($cardMeta);
-        $this->scheduleMeta = new ScheduleMetaRepository($scheduleMeta);
+        $this->card = $card;
+        $this->cardMeta = $cardMeta;
+        $this->scheduleMeta = $scheduleMeta;
     }
 
     public function index()

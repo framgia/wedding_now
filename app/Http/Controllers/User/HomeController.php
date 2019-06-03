@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use App\Repositories\Post\PostRepositoryInterface;
 use App\Repositories\ScheduleMeta\ScheduleMetaRepositoryInterface;
 use App\Repositories\ScheduleWedding\ScheduleWeddingRepositoryInterface;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
@@ -20,14 +21,11 @@ class HomeController extends Controller
     ];
 
     protected $post;
-
     protected $scheduleWedding;
-
     protected $scheduleMeta;
 
     public function __construct(PostRepositoryInterface $post, ScheduleWeddingRepositoryInterface $scheduleWedding, ScheduleMetaRepositoryInterface $scheduleMeta)
     {
-        // $this->middleware(['auth', 'verified']);
         $this->post = $post;
         $this->scheduleWedding = $scheduleWedding;
         $this->scheduleMeta = $scheduleMeta;
@@ -56,15 +54,7 @@ class HomeController extends Controller
             $schedule_default = $this->scheduleWedding->getAllScheduleDefault();
         }
 
-        $data = [
-            'default',
-            'custom',
-            'combo',
-            'posts',
-            'schedule_default',
-        ];
-
-        return view('index', compact($data));
+        return view('user.index', compact('default', 'custom', 'combo', 'posts', 'schedule_default',));
     }
 
     public function changeLang(Request $request, $lang)
