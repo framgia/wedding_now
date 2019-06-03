@@ -370,16 +370,18 @@ class ScheduleController extends Controller
 
             $this->meta->updateMetas($scheduleId, $keyValues);
 
-            $schedule = $this->scheduleWedding->findById($scheduleId);
+            $schedule = $this->scheduleWedding->findById($scheduleId)->load('location');
 
-            if ($this->location->getLocationOfSchedule($schedule)) {
+            if ($schedule->location) {
+
                 $this->location->updateLocationOfSchedule($schedule, [
                     'address' => $request->venue,
                 ]);
             } else {
+
                 $this->location->createLocationOfSchedule($schedule, [
                     'address' => $request->venue,
-                    'district_id' => $request->district
+                    'district_id' => $request->district,
                 ]);
             }
         });
@@ -478,7 +480,7 @@ class ScheduleController extends Controller
     public function updateDateTimeLine(UpdateDateMyTimeLineRequest $request)
     {
         if ($request->ajax()) {
-            
+
             $id = $request->id;
 
             $this->task->update($id, [
@@ -516,7 +518,7 @@ class ScheduleController extends Controller
 
         $newSchedule = $this->scheduleWedding->create($schedule->toArray());
 
-        $tasks->map(function($item, $key) use ($newSchedule) {
+        $tasks->map(function ($item, $key) use ($newSchedule) {
             $item->schedule_wedding_id = $newSchedule->id;
 
             return $this->task->create($item->toArray());

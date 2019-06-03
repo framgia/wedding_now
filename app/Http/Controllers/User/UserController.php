@@ -2,54 +2,37 @@
 
 namespace App\Http\Controllers\User;
 
-use Auth;
-
-use App\Models\City;
-use App\Models\District;
-use App\Models\User;
-
+use App\Repositories\City\CityRepositoryInterface;
+use App\Repositories\District\DistrictRepositoryInterface;
+use App\Repositories\User\UserRepositoryInterface;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\AdminRequest;
 use App\Http\Controllers\Controller;
-
-use App\Repositories\User\UserRepository;
-
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-    protected $userModel;
+    protected $user;
+    protected $city;
+    protected $district;
 
-    public function __construct(User $user)
+    public function __construct(UserRepositoryInterface $user, CityRepositoryInterface $city, DistrictRepositoryInterface $district)
     {
-        $this->userModel = new UserRepository($user);
-    }
-
-    public function getCities()
-    {
-        return City::pluck('name', 'id');
-    }
-
-    public function getDistrictsById($id)
-    {
-        return District::where('city_id', $id)->pluck('name', 'id');
-    }
-
-    public function getDistricts()
-    {
-        return District::get()->pluck('name', 'id');
+        $this->user = $user;
+        $this->city = $city;
+        $this->district = $district;
     }
 
     public function userProfile($username)
     {
-        $user = User::where('user_name', $username)->with('locations.district.city')->firstOrFail();
-        $city = $this->getCities();
-        $district = $this->getDistrictsById(count($user->locations) > 0 ? $user->locations[0]->district->city->id : '');
+        $user = Auth::user()->load('locations.district.city');
 
-        if ($user->roles[0]->id == config('define.role.admin')) {
-            return view('admin.user.profile', compact('city', 'district', 'user'));
-        }
+        $city = collect($this->city->getData())->pluck('name', 'id');
+
+        $id = count($user->locations) > 0 ? $user->locations[0]->district->city->id : '';
+
+        $district = collect($this->district->findWithCondition('city_id', $id))->pluck('name', 'id');
 
         return view('user.couple-profile', compact('city', 'district', 'user'));
     }
@@ -57,7 +40,9 @@ class UserController extends Controller
     public function update(AdminRequest $request)
     {
         DB::transaction(function () use ($request) {
+
             $user = Auth::user()->load('locations.district.city', 'media');
+
             $file = $request->file('avatar_file');
 
             $data = [
@@ -71,31 +56,33 @@ class UserController extends Controller
 
             $location = $user->locations[0];
 
-            $this->userModel->update($user->id, $data);
-            $user->locations()->updateOrCreate(
-                ['id' => $location->id],
-                [
-                    'address' => $request->address,
-                    'district_id' => $request->district,
-                ]
-            );
+            $this->user->update($user->id, $data);
+
+            $user->locations()->updateOrCreate([
+                'id' => $location->id
+            ], [
+                'address' => $request->address,
+                'district_id' => $request->district,
+            ]);
+
+            $id = $user->media ? $user->media->id : null;
+
+            $name = $user->media ? $user->media->name : null;
 
             if ($file) {
-                $user->media()->updateOrCreate(
-                    ['id' => ($user->media ? $user->media->id : null)],
-                    [
-                        'name' => $this->userModel->saveFile(
-                            ($user->media ? $user->media->name : null),
-                            $file,
-                            config('asset.users.avatar'),
-                            80,
-                            80
-                        )
-                    ]
-                );
+                $user->media()->updateOrCreate([
+                    'id' => $id
+                ], [
+                    'name' => $this->user->saveFile($name, $file, config('asset.users.avatar'), 80, 80)
+                ]);
             }
         });
 
         return ['message' => __('base.success')];
+    }
+
+    public function getDistrictsById($id)
+    {
+        return $this->district->findWithCondition('city_id', $id)->pluck('name', 'id');
     }
 }
