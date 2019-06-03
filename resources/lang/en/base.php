@@ -126,8 +126,6 @@ return [
     'female' => 'Female',
     'gender' => 'Gender',
     'phone' => 'Phone',
-    'city' => 'City',
-    'district' => 'District',
     'address' => 'Address',
     'user_name' => 'Username',
     'social_links' => 'Social links',
@@ -149,7 +147,6 @@ return [
 
     'by' => 'By',
     'of' => 'of',
-    'vnd' => 'vnđ',
     'info' => 'Info!',
     'vn' => 'vn',
     'en' => 'en',
@@ -160,8 +157,8 @@ return [
     'type' => 'Type',
     'community' => 'Community',
     'love' => 'love',
-    'comment' => 'comment',
     'by_author' => 'By',
 
     'vnd' => '₫',
+    'email_or_username' => 'Email or Username'
 ];
