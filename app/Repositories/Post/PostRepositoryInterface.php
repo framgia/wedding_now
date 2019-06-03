@@ -13,6 +13,4 @@ interface PostRepositoryInterface extends RepositoryInterface
     public function getNewestPostsPaginate($paginate, $skip, $posts = null);
 
     public function checkImagePostCollection($collection, $basePath, $pathDefault);
-
-    public function checkAvatarOfUserPostCollection($collection, $basePath, $pathDefault);
 }

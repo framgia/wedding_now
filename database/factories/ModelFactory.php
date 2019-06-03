@@ -7,8 +7,6 @@ use App\Models\Item;
 use App\Models\ScheduleWedding;
 use App\Models\Task;
 use App\Models\Post;
-use App\Models\Topic;
-use App\Models\Tag;
 use Carbon\Carbon;
 
 $factory->define(User::class, function (Faker $faker) {

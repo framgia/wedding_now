@@ -8,7 +8,7 @@ interface LocationRepositoryInterface extends RepositoryInterface
 {
     public function createLocationOfSchedule($schedule, $data);
 
-    public function getLocationOfSchedule($schedule);
-
     public function updateLocationOfSchedule($schedule, $data);
+
+    public function getLocationByIdAndType($id, $type);
 }
