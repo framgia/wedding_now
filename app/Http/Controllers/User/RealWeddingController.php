@@ -35,7 +35,7 @@ class RealWeddingController extends Controller
 
         $packages = $this->wedding->getPackages(config('define.package_service_paginate'));
 
-        return view('user.real-wedding2', compact('posts', 'packages'));
+        return view('user.real_wedding', compact('posts', 'packages'));
     }
 
     public function loadFilterRealWedding(PaginateRealWeddingRequest $request)
@@ -81,7 +81,7 @@ class RealWeddingController extends Controller
 
             $weddings = $this->wedding->paginate($this->wedding->filterWedding($minPrice, $maxPrice, $orderByRate), config('define.real_wedding_paginate'), $page);
 
-            return view('user.sections.result-real-wedding', compact('weddings'))->render();
+            return view('user.sections.result_real_wedding', compact('weddings'))->render();
         }
     }
 
@@ -93,7 +93,7 @@ class RealWeddingController extends Controller
 
         $countTask = count($tasks);
 
-        return view('user.detail-real-wedding', compact('schedule', 'tasks', 'countTask'));
+        return view('user.detail_real_wedding', compact('schedule', 'tasks', 'countTask'));
     }
 
     public function copySchedule(Request $request)
