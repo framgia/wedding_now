@@ -200,7 +200,7 @@
 
                 let marriage_day = object.marriage_day == null ? Lang.get('page.undefine') : object.marriage_day;
 
-                if (object.schedule_metas_pluck.length != 0) {
+                if (object.schedule_metas_pluck.length !== 0) {
 
                     let arr = object.schedule_metas_pluck;
 
@@ -243,7 +243,7 @@
 
                 $('.dash-couple-marriage-day').text(Lang.get('page.marrige_day') + new Date(marriage_day).toLocaleString());
 
-                if (object.img_main.length != 0) {
+                if (object.img_main.length !== 0) {
 
                     let path = $('.dash-couple-img').attr('data-path');
 
@@ -269,7 +269,7 @@
 
                 $('#dateWedding').val(object.marriage_day);
 
-                if (object.schedule_metas_pluck.length != 0) {
+                if (object.schedule_metas_pluck.length !== 0) {
 
                     let arr = object.schedule_metas_pluck;
 
@@ -320,7 +320,7 @@
 
                 $('#txtNameRight').val(partner_name);
 
-                if (my_identity == 'groom') {
+                if (my_identity === 'groom') {
 
                     $('.rdoGenderLeft:eq(0)').addClass('gender-left-active');
 
@@ -332,7 +332,7 @@
                     $('.gender_left_value').val('bride');
                 }
 
-                if (partner_identity == 'groom') {
+                if (partner_identity === 'groom') {
 
                     $('.rdoGenderRight:eq(0)').addClass('gender-left-active');
 
@@ -368,7 +368,7 @@
                 })
                 .done(function(res) {
                     toastr.success(res.message);
-                    
+
                     getScheduleInfo().then(function(res){
 
                         presentScheduleInfoPage(res);
@@ -471,7 +471,7 @@
                     reader.onload = function (e) {
 
                         $('.avatar-left').attr('src', e.target.result);
-                    }
+                    };
 
                     reader.readAsDataURL(this.files[0]);
                 }
@@ -493,7 +493,7 @@
                     reader.onload = function (e) {
 
                         $('.avatar-right').attr('src', e.target.result);
-                    }
+                    };
 
                     reader.readAsDataURL(this.files[0]);
                 }
@@ -505,7 +505,7 @@
 
                 let keyword = $(this).val();
 
-                if(keyword != '') {
+                if('' !== keyword) {
                     $.ajax({
                         url: route('client.get-district', { keyword: keyword }),
                         type: 'GET',
@@ -525,7 +525,7 @@
 
                         $('.list-venue').html(html);
 
-                        if (res.length != 0) {
+                        if (0 !== res.length) {
 
                             $('.search-venue').show();
                         } else {
@@ -540,9 +540,9 @@
                     .fail(function() {
 
                         $('.search-venue').hide();
-                    })
+                    });
 
-                    $('.list-venue p').click(function(event) {
+                    $('body').on('click', '.list-venue p', function(event) {
 
                         event.preventDefault();
 

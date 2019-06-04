@@ -4,7 +4,6 @@
 @section('main-content')
 <section class="real-wedding-main-block">
     <div class="container">
-        
     </div>
 </section>
 @endsection

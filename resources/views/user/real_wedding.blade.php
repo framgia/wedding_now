@@ -3,7 +3,7 @@
 @section('page-name', __('page.page.real_wedding'))
 @section('main-content')
 <section class="real-wedding-main-block">
-    <div class="container">
+    <div class="container mt-20">
         <section class="post-section row">
             <div class="col-lg-12">
                 @foreach ($posts as $post)
@@ -71,7 +71,7 @@
                                         </div>
                                         <div class="col-lg-7">
                                             <h6 class="header-title">
-                                                <a href="#">{{ $package->name }}</a>
+                                                <a href="{{ route('package.detail', ['id' => $package->id, 'slug' => $package->slug]) }}">{{ $package->name }}</a>
                                             </h6>
                                             <div class="infor">
                                                 <div>

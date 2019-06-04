@@ -47,6 +47,9 @@
                                             <option value="" hidden>
                                                 {{ __('base.choose') . ' ' . __('base.status') }}
                                             </option>
+                                            <option data-status="null" data-name="{{ __('base.all') }}"data-type="status">
+                                                {{ __('base.all') }}
+                                            </option>
                                             <option data-status="{{ config('define.done') }}" data-name="{{ __('base.done') }}"data-type="status">
                                                 {{ __('base.done') }}
                                             </option>
@@ -312,7 +315,7 @@
             $('.category-filter').prop('checked', false);
             $(this).prop('checked', true);
             arrCategory = [];
-        })
+        });
 
         function loadCategoryFilter()
         {
@@ -337,8 +340,8 @@
                 let checkTagExists = $(`.view-by strong:contains("${display_name}")`);
                 let checkTypeExists = $(`.view-by .alert-custom a[data-type="${type}"]`);
 
-                var conditionStatus = (status && status != undefined && status != '');
-                var conditionCategory = (arrCategory && arrCategory != undefined && arrCategory != '');
+                var conditionStatus = (status && status != undefined && status !== '');
+                var conditionCategory = (arrCategory && arrCategory != undefined && arrCategory !== '');
 
                 if (!conditionStatus && !conditionCategory) {
                     checkCategory = null;
@@ -360,9 +363,9 @@
         loadCategoryFilter();
 
         $('body').on('click', '.done-task', function(event) {
-            event.preventDefault()
+            event.preventDefault();
 
-            var id = $(this).data('id')
+            var id = $(this).data('id');
 
             $.ajax({
                 url: route('client.update-status-task', id),
@@ -376,7 +379,7 @@
             .fail(function(message) {
                 toastr.error( Lang.get('page.message.fail') )
             });
-        })
+        });
 
         // remove tag filter
         $('body').on('click', '.alert-custom', function(event) {
@@ -385,9 +388,9 @@
             let status = $(this).children('a').attr('data-status');
             let type = $(this).children('a').attr('data-type');
 
-            if (type == 'status') {
+            if (type === 'status') {
                 checkStatus = null;
-            } else if (type == 'category') {
+            } else if (type === 'category') {
                 checkCategory = null;
             }
 
@@ -495,7 +498,7 @@
                                 });
                             })
                         });
-                    })
+                    });
 
                     return false;
                 });
@@ -668,7 +671,7 @@
             };
 
             return obj;
-        };
+        }
 
         function updateTask () {
             $('#select-item').removeClass('create-task');
@@ -689,12 +692,12 @@
             $('.item-s-name').text(itemSelected.itemName);
             $('.item-s-user').text(itemSelected.itemUser);
             $('.item-s-price').text(itemSelected.itemPrice);
-        })
+        });
 
         $(document).on('click', '#update-task-category', function () {
             let idTask = $(this).val();
             getItem(idTask, true);
-        })
+        });
 
         $(document).on('click', '.update-task', function () {
             $('.item-sld').removeClass('d-none');
@@ -816,9 +819,8 @@
 
             element.datepicker({
                 onSelect: function(dateText, inst) {
-                    var theDate = new Date(Date.parse($(this).datepicker('getDate')));
-                    var dateFormatted = $.datepicker.formatDate('yy/m/d', theDate);
-                    console.log(dateFormatted)
+                    let theDate = new Date(Date.parse($(this).datepicker('getDate')));
+                    let dateFormatted = $.datepicker.formatDate('yy/m/d', theDate);
                     $.ajax({
                         url: route('client.my-timeline.update.date'),
                         type: 'POST',
