@@ -16,20 +16,14 @@
     {!! Form::open(['route' => 'posts.store', 'method' => 'POST', 'class' => 'm-form m-form--fit m-form--label-align-right', 'files' => true, 'id' => 'form']) !!}
     <div class="m-portlet__body">
         <div class="form-group m-form__group row">
-            {!! Form::label('title', __('base.title'), ['class' => 'col-form-label col-lg-3 col-sm-12']) !!}
-            <div class="col-lg-7 col-md-7 col-sm-12">
+            {!! Form::label('title', __('base.title'), ['class' => 'col-form-label col-lg-1 col-sm-12']) !!}
+            <div class="col-lg-11 col-md-11 col-sm-12">
                 {!! Form::text('title', '', ['class' => 'form-control m-input', 'placeholder' => __('base.enter_your') . ' ' . __('base.title')]) !!}
             </div>
         </div>
-        {{-- <div class="form-group m-form__group row">
-            {!! Form::label('topic', __('base.topic'), ['class' => 'col-form-label col-lg-3 col-sm-12']) !!}
-            <div class="col-lg-7 col-md-7 col-sm-12">
-                {!! Form::select('topic', $topic, null, ['class' => 'form-control m-input']) !!}
-            </div>
-        </div> --}}
         <div class="form-group m-form__group row">
-            {!! Form::label('tag', __('base.tag'), ['class' => 'col-form-label col-lg-3 col-sm-12']) !!}
-            <div class="col-lg-7 col-md-7 col-sm-12">
+            {!! Form::label('tag', __('base.tag'), ['class' => 'col-form-label col-lg-1 col-sm-12']) !!}
+            <div class="col-lg-11 col-md-11 col-sm-12">
                 <select name="tag[]" id="tag" class="form-control m-input" aria-describedby="emailHelp" multiple>
                     @foreach ($tag as $value)
                         <option value="{{ $value }}">{{ $value }}</option>
@@ -38,8 +32,8 @@
             </div>
         </div>
         <div class="form-group m-form__group row">
-            <label class="col-form-label col-lg-3 col-sm-12">{{ __('base.content') }}</label>
-            <div class="col-lg-7 col-md-7 col-sm-12">
+            <label class="col-form-label col-lg-1 col-sm-12">{{ __('base.content') }}</label>
+            <div class="col-lg-11 col-md-11 col-sm-12">
                 {!! Form::textarea('content', '', ['id' => 'summernote']) !!}
             </div>
         </div>

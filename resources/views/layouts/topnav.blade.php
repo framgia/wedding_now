@@ -13,11 +13,23 @@
                             </li>
                         @endif
                         @auth
-                            <li><a href="{{ route('user.profile', Auth::user()->user_name) }}">{{ Auth::user()->name }}</a></li>
-                            <li><a href="{{ route('logout') }}">{{ __('base.logout') }}</a></li>
+                            <li>
+                                <a href="{{ route('user.profile', Auth::user()->user_name) }}">{{ Auth::user()->name }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    {{ __('base.logout') }}
+                                </a>
+                            </li>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         @endauth
                         @guest
-                            <li><a href="{{ route('login') }}">{{ __('base.login') }} | {{ __('base.register') }}</a></li>
+                            <li>
+                                <a href="{{ route('login') }}">{{ __('base.login') }} | {{ __('base.register') }}</a>
+                            </li>
                         @endguest
                         <li class="language">
                             <p class="current-lan">{{ session()->get('lang') }}</p>

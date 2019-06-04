@@ -8,7 +8,7 @@ ft.real-wedding-main-block {
 }
 
 .main-container {
-    padding: 0px;
+    padding: 0;
 }
 
 .general-nav-tabs {
@@ -60,8 +60,8 @@ ft.real-wedding-main-block {
 }
 
 .p-l-r-0 {
-    padding-left: 0px;
-    padding-right: 0px;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .pl-10 {
@@ -95,12 +95,7 @@ ft.real-wedding-main-block {
 
 .single-wedding .title {
     font-size: 16px;
-    margin-bottom: 0px;
-}
-
-.single-wedding .title a {
-    columns: olor: black;
-    font-weight: bold;
+    margin-bottom: 0;
 }
 
 .single-wedding .detail {
@@ -134,7 +129,7 @@ ft.real-wedding-main-block {
 }
 
 .real-wedding .filter li {
-    padding: 5px 0px;
+    padding: 5px 0;
 }
 
 .service-item img {
@@ -143,7 +138,7 @@ ft.real-wedding-main-block {
 }
 
 .service-item {
-    padding: 10px 0px;
+    padding: 10px 0;
     border-bottom: 1px solid #eaeaea;
 }
 
@@ -180,7 +175,7 @@ ft.real-wedding-main-block {
 }
 
 .service-item__inner .col-lg-7 {
-    padding: 0px 10px;
+    padding: 0 10px;
 }
 
 .real-wedding .col-lg-4 .inner .text-center {
@@ -264,4 +259,8 @@ ft.real-wedding-main-block {
 
 .real-wedding-time-line {
     min-height: 250px;
+}
+
+.mt-20 {
+    margin-top: 20px;
 }
