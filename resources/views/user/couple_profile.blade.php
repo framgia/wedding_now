@@ -13,23 +13,8 @@
     <section id="couple-profile" class="couple-profile-main-page">
         <div class="container">
             <div class="couple-profile-tabs general-nav-tabs tabs">
-                <a href="couple-dashboard.html" class="btn btn-default">
-                    <span class="badge">{{ __('page.profile.dashboard') }}</span>
-                </a>
                 <a href="#" class="active btn btn-default">
                     <span class="badge">{{ __('page.profile.profile') }}</span>
-                </a>
-                <a href="to-do-list.html" class="btn btn-default">
-                    <span class="badge">{{ __('page.profile.to_do') }}</span>
-                </a>
-                <a href="budget-planner.html" class="btn btn-default">
-                    <span class="badge">{{ __('page.profile.budget') }}</span>
-                </a>
-                <a href="#" class="btn btn-default">
-                    <span class="badge">{{ __('page.profile.wishlist') }}</span>
-                </a>
-                <a href="real-wedding-listing.html" class="btn btn-default">
-                    <span class="badge">{{ __('page.profile.real_wedding') }}</span>
                 </a>
             </div>
             <div class="row">

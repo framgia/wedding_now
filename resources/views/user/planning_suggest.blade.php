@@ -57,7 +57,7 @@
                         </div>
                     </div>
                     <div class="col-sm-8">
-                        @include('user.sections.section-planning-suggest')
+                        @include('user.sections.section_planning_suggest')
                     </div>
                 </div>
             </div>
