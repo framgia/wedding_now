@@ -43,10 +43,10 @@ class CardController extends Controller
 
             $templates = $this->card->getTemplate();
 
-            return view('user.choose-template', compact('templates'));
+            return view('user.choose_template', compact('templates'));
         }
 
-        return view('user.design-card', compact('card'));
+        return view('user.design_card', compact('card'));
     }
 
     public function chooseTemplate(Request $request)
