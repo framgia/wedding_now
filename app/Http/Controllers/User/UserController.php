@@ -34,7 +34,7 @@ class UserController extends Controller
 
         $district = collect($this->district->findWithCondition('city_id', $id))->pluck('name', 'id');
 
-        return view('user.couple-profile', compact('city', 'district', 'user'));
+        return view('user.couple_profile', compact('city', 'district', 'user'));
     }
 
     public function update(AdminRequest $request)

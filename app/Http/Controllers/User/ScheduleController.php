@@ -85,7 +85,7 @@ class ScheduleController extends Controller
 
             $combo = config('define.type_schedule.combo');
 
-            return view('user.list-schedule', compact('scheduleWeddings', 'default', 'custom', 'combo'));
+            return view('user.list_schedule', compact('scheduleWeddings', 'default', 'custom', 'combo'));
         }
 
         $timeFrames = $this->timeFrame->getDataPluck();
@@ -100,7 +100,7 @@ class ScheduleController extends Controller
 
         $doneTasks = $totalTasks->where('status', config('define.done'));
 
-        return view('user.to-do-list', compact('timeFrames', 'categories', 'scheduleWeddings', 'categoriesWithCountTasks', 'totalTasks', 'doneTasks'));
+        return view('user.to_do_list', compact('timeFrames', 'categories', 'scheduleWeddings', 'categoriesWithCountTasks', 'totalTasks', 'doneTasks'));
     }
 
     public function getToDoList(Request $request)
@@ -203,7 +203,7 @@ class ScheduleController extends Controller
         $timeFrames = $this->timeFrame->getDataPluck();
         $categories = $this->category->getDataPluck();
 
-        return view('user.sections.single-task', compact('timeFrames', 'categories', 'task'))->render();
+        return view('user.sections.single_task', compact('timeFrames', 'categories', 'task'))->render();
     }
 
     public function chooseTypeSchedule(Request $request)
@@ -401,7 +401,7 @@ class ScheduleController extends Controller
         $scheduleWedding = $this->scheduleWedding->getData(['tasks.timeFrame'], ['type' => 'suggest'])->first();
         $time = Carbon::now()->addDays(config('define.days'));
 
-        return view('user.planning-suggest', compact('scheduleWedding', 'time'));
+        return view('user.planning_suggest', compact('scheduleWedding', 'time'));
     }
 
     public function store(Request $request)

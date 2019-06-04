@@ -40,7 +40,7 @@ class PostController extends Controller
         $recentlyPosts = $this->post->getNewestPostsPaginate(config('define.post.paginate'), $request->skip);
 
         if ($request->ajax()) {
-            return view('user.sections.post-paginate-scroll', compact('recentlyPosts'))->render();
+            return view('user.sections.post_paginate_scroll', compact('recentlyPosts'))->render();
         }
     }
 

@@ -20,6 +20,6 @@ class PackageController extends Controller
     {
     	$package = $this->wedding->getPackage($request->id);
 
-    	return view('user.sections.detail-package', compact('package'));
+    	return view('user.sections.detail_package', compact('package'));
     }
 }
