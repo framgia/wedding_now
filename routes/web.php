@@ -201,7 +201,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['rol
     Route::group(['prefix' => 'role', 'middleware' => ['role:admin']], function () {
 
         Route::resource('role', 'RoleController')
-            ->except(['create', 'edit', 'destroy',]);;
+            ->except(['create', 'edit', 'destroy',]);
 
         Route::get('role-delete/{id}', 'RoleController@destroy')
             ->name('role.destroy');
