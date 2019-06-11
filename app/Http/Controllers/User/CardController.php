@@ -2,138 +2,173 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Models\Card;
-use App\Models\CardMeta;
-use App\Models\ScheduleMeta;
+use App\Http\Requests\Client\ChooseOrientationRequest;
 use App\Repositories\Card\CardRepositoryInterface;
 use App\Repositories\CardMeta\CardMetaRepositoryInterface;
+use App\Repositories\PageCard\PageCardRepositoryInterface;
 use App\Repositories\ScheduleMeta\ScheduleMetaRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\ScheduleWedding;
-use Illuminate\Support\Facades\Session;
-use App\Repositories\Card\CardRepository;
-use App\Repositories\CardMeta\CardMetaRepository;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Collection;
-use App\Http\Requests\Client\DesignCardRequest;
-use App\Repositories\ScheduleMeta\ScheduleMetaRepository;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
+use Throwable;
 
 class CardController extends Controller
 {
     protected $card;
     protected $cardMeta;
+    protected $pageCard;
     protected $scheduleMeta;
 
-    public function __construct(CardRepositoryInterface $card, CardMetaRepositoryInterface $cardMeta, ScheduleMetaRepositoryInterface $scheduleMeta)
+    public function __construct(
+        CardRepositoryInterface $card,
+        CardMetaRepositoryInterface $cardMeta,
+        PageCardRepositoryInterface $pageCard,
+        ScheduleMetaRepositoryInterface $scheduleMeta
+    )
     {
         $this->card = $card;
         $this->cardMeta = $cardMeta;
+        $this->pageCard = $pageCard;
         $this->scheduleMeta = $scheduleMeta;
     }
 
+    /**
+     * @return Factory|View
+     */
     public function index()
     {
         $scheduleId = $this->scheduleMeta->getChosenSchedule()->schedule_wedding_id;
 
-        $card = $this->card->getCard($scheduleId)->first();
-
-        if (!$card) {
-
-            $templates = $this->card->getTemplate();
-
-            return view('user.choose_template', compact('templates'));
-        }
+        $card = collect($this->card->getCard($scheduleId))->first();
 
         return view('user.design_card', compact('card'));
     }
 
+    /**
+     * @return string
+     * @throws Throwable
+     */
+    public function getTemplates()
+    {
+        $templates = $this->card->getTemplate();
+
+        return view('user.card.templates', compact('templates'))->render();
+    }
+
+    public function chooseOrientation(ChooseOrientationRequest $request)
+    {
+        $orientation = $request->orientation;
+
+        Session::put('orientation', $orientation);
+    }
+
     public function chooseTemplate(Request $request)
     {
-        $idCard = $request->id;
+        if ($request->ajax()) {
 
-        $card = $this->card->findById($idCard);
+            $idCard = $request->id;
 
-        $background = $card->background_image;
+            $card = $this->card->findById($idCard)->load('pages.cardMetas');
 
-        $cardMetas = $this->cardMeta->getByCard($idCard);
+            return view('user.card.new_card', compact('card'));
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return Factory|View
+     */
+    public function getDesignCard(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $scheduleId = $this->scheduleMeta->getChosenSchedule()->schedule_wedding_id;
+
+            $card = collect($this->card->getCard($scheduleId))->first();
+
+            if ($card) {
+
+                return view('user.card.result_card', compact('card'));
+            }
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return Factory|View
+     */
+    public function createPage(Request $request)
+    {
+        if ($request->ajax()) {
+            return view('user.card.new_page');
+        }
+    }
+
+    public function updateName(Request $request)
+    {
+        $scheduleId = $this->scheduleMeta->getChosenSchedule()->schedule_wedding_id;
+
+        $card = collect($this->card->getCard($scheduleId))->first();
+
+        $card = $this->card->updateOrCreate([
+            'id' => $card->id,
+        ], [
+            'schedule_wedding_id' => $scheduleId,
+            'name' => $request->name,
+            'type' => config('define.card.custom'),
+            'orientation' => config('define.card.vertical'),
+        ]);
+
+        return $card->name;
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function saveCard(Request $request)
+    {
+        $pages = $request->pages;
 
         $scheduleId = $this->scheduleMeta->getChosenSchedule()->schedule_wedding_id;
 
-        DB::transaction(function() use ($cardMetas, $scheduleId, $background) {
+        $card = collect($this->card->getCard($scheduleId))->first();
 
-            $card = $this->card->create([
-                'schedule_wedding_id' => $scheduleId,
-                'name' => config('define.card.name') . Auth::user()->name,
+        DB::transaction(function () use ($card, $scheduleId, $pages) {
+
+            $newCard = $card ?? $this->card->create([
+                'schedule_wedding_id' => $scheduleId, 'name' => config('define.card.name') . Auth::user()->name,
                 'type' => config('define.card.custom'),
-                'background_image' => $background
+                'orientation' => config('define.card.vertical'),
+                'number_pages' => count($pages),
             ]);
 
-            foreach ($cardMetas as $meta) {
+            foreach ($pages as $page) {
 
-                $this->cardMeta->create([
-                    'card_id' => $card->id,
-                    'content' => $meta->content,
-                    'div_style' => $meta->div_style,
-                    'textarea_style' => $meta->textarea_style,
+                $newPage = $this->pageCard->updateOrCreate([
+                    'id' => $page['id'],
+                ], [
+                    'card_id' => $newCard->id,
+                    'background' => $page['background'],
                 ]);
+
+                if (array_key_exists('boxes', $page)) {
+
+                    foreach ($page['boxes'] as $box) {
+
+                        $this->cardMeta->updateOrCreate([
+                            'id' => $box['id'],
+                        ], [
+                            'page_card_id' => $newPage->id,
+                            'div_style' => $box['div_style'],
+                            'textarea_style' => $box['textarea_style'],
+                            'content' => $box['content'],
+                        ]);
+                    }
+                }
             }
         });
-    }
-
-    public function getDesignCard()
-    {
-        $scheduleId = $this->scheduleMeta->getChosenSchedule()->schedule_wedding_id;
-
-        $card = $this->card->getCard($scheduleId)->first();
-
-        $background = $card->background_image;
-
-        if ($background) {
-
-            $background = config('asset.card_template') . $background;
-        }
-
-        $textBoxs = $this->cardMeta->getByCard($card->id);
-
-        return collect(['background' => $background, 'textBoxs' => $textBoxs]);
-    }
-
-    public function saveCard(DesignCardRequest $request)
-    {
-        $scheduleId = $this->scheduleMeta->getChosenSchedule()->schedule_wedding_id;
-
-        $templateId = $request->template_id;
-
-        $card = $this->card->getCard($scheduleId)->first() ?? $this->card->create([
-                'schedule_wedding_id' => $scheduleId,
-                'name' => config('define.card.name') . Auth::user()->name,
-                'type' => config('define.card.custom'),
-                'background_image' => null
-            ]);;
-
-        if ($request->background) {
-
-            $this->card->saveImageBackground($scheduleId, $request->background, $templateId);
-        }
-
-        if ($request->arrDelete) {
-
-            $arrDelete = $request->arrDelete;
-
-            DB::transaction(function() use ($card, $arrDelete) {
-
-                $this->cardMeta->deleteByCard($card->id, $arrDelete);
-            });
-        }
-
-        if ($request->arrTextBox) {
-
-            foreach ($request->arrTextBox as $cardMeta) {
-
-                $this->cardMeta->updateMeta($card->id, $cardMeta);
-            }
-        }
     }
 }

@@ -35,6 +35,11 @@ class PostController extends Controller
         return view('user.post', compact('recommendPost', 'newestPosts', 'recentlyPosts', 'mostPopularPosts', 'topics'));
     }
 
+    /**
+     * @param Request $request
+     * @return string
+     * @throws \Throwable
+     */
     public function loadPostScrollPaginate(Request $request)
     {
         $recentlyPosts = $this->post->getNewestPostsPaginate(config('define.post.paginate'), $request->skip);

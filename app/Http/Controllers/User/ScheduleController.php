@@ -9,22 +9,14 @@ use App\Http\Requests\Client\UpdateDateMyTimeLineRequest;
 use App\Http\Requests\Client\UpdateNoteMyTimeLineRequest;
 use App\Http\Requests\Client\UpdatePriorityMyTimeLineRequest;
 use App\Http\Requests\Client\UpdateSchedulePicture;
-use App\Models\Category;
-use App\Models\Item;
-use App\Models\Location;
-use App\Models\Media;
-use App\Models\ScheduleMeta;
-use App\Models\ScheduleWedding;
-use App\Models\Task;
-use App\Models\TimeFrame;
-use App\Repositories\Category\CategoryRepository;
-use App\Repositories\Item\ItemRepository;
-use App\Repositories\Location\LocationRepository;
-use App\Repositories\Media\MediaRepository;
-use App\Repositories\ScheduleMeta\ScheduleMetaRepository;
-use App\Repositories\ScheduleWedding\ScheduleWeddingRepository;
-use App\Repositories\Task\TaskRepository;
-use App\Repositories\TimeFrame\TimeFrameRepository;
+use App\Repositories\Category\CategoryRepositoryInterface;
+use App\Repositories\Item\ItemRepositoryInterface;
+use App\Repositories\Location\LocationRepositoryInterface;
+use App\Repositories\Media\MediaRepositoryInterface;
+use App\Repositories\ScheduleMeta\ScheduleMetaRepositoryInterface;
+use App\Repositories\ScheduleWedding\ScheduleWeddingRepositoryInterface;
+use App\Repositories\Task\TaskRepositoryInterface;
+use App\Repositories\TimeFrame\TimeFrameRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -42,23 +34,32 @@ class ScheduleController extends Controller
     protected $media;
     protected $location;
 
-    public function __construct(ScheduleWedding $scheduleWedding, Task $task, Category $category, TimeFrame $timeFrame, Item $item, ScheduleMeta $meta, Media $media, Location $location)
+    public function __construct(
+        ScheduleWeddingRepositoryInterface $scheduleWedding,
+        TaskRepositoryInterface $task,
+        CategoryRepositoryInterface $category,
+        TimeFrameRepositoryInterface $timeFrame,
+        ItemRepositoryInterface $item,
+        ScheduleMetaRepositoryInterface $meta,
+        MediaRepositoryInterface $media,
+        LocationRepositoryInterface $location
+    )
     {
-        $this->category = new CategoryRepository($category);
+        $this->category = $category;
 
-        $this->scheduleWedding = new ScheduleWeddingRepository($scheduleWedding);
+        $this->scheduleWedding = $scheduleWedding;
 
-        $this->task = new TaskRepository($task);
+        $this->task = $task;
 
-        $this->timeFrame = new TimeFrameRepository($timeFrame);
+        $this->timeFrame = $timeFrame;
 
-        $this->item = new ItemRepository($item);
+        $this->item = $item;
 
-        $this->meta = new ScheduleMetaRepository($meta);
+        $this->meta = $meta;
 
-        $this->media = new MediaRepository($media);
+        $this->media = $media;
 
-        $this->location = new LocationRepository($location);
+        $this->location = $location;
     }
 
     public function checkIssetSchedule()
@@ -123,7 +124,7 @@ class ScheduleController extends Controller
 
         $scheduleWedding = $this->scheduleWedding->findById($scheduleWeddingId);
 
-        $task = $this->task->create([
+        $this->task->create([
             'name' => $request->name,
             'priority' => $request->priority,
             'category_id' => (int)$request->category_id,
@@ -156,7 +157,7 @@ class ScheduleController extends Controller
         ]);
     }
 
-    public function updateStatusTask(Request $request, $id)
+    public function updateStatusTask($id)
     {
         try {
             $task = $this->task->findById($id);
@@ -186,7 +187,7 @@ class ScheduleController extends Controller
 
     public function getItemByCategory(Request $request)
     {
-        return $this->item->getItemByCategory($request->id, $request->status);
+        return $this->item->getItemByCategory($request->id);
     }
 
     public function getItem(Request $request)
@@ -197,6 +198,11 @@ class ScheduleController extends Controller
         return view('user.sections.product_modal', compact('items', 'itemsNearUser'));
     }
 
+    /**
+     * @param $id
+     * @return string
+     * @throws \Throwable
+     */
     public function getSingleTask($id)
     {
         $task = $this->task->findById($id);
@@ -268,6 +274,10 @@ class ScheduleController extends Controller
         return redirect('to-do-list');
     }
 
+    /**
+     * @return string
+     * @throws \Throwable
+     */
     public function getCategoryFilter()
     {
         $scheduleId = $this->meta->getChosenSchedule()->schedule_wedding_id;

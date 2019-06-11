@@ -78,7 +78,8 @@ class RegisterController extends Controller
     {
         $user = null;
 
-        DB::transaction(function () use ($data) {
+        $user = DB::transaction(function () use ($data) {
+
             $user = $this->user->create([
                 'name' => $data['name'],
                 'gender' => $data['gender'],
@@ -98,6 +99,8 @@ class RegisterController extends Controller
                 'district_id' => $data['district'],
                 'address' => $data['address'],
             ]);
+
+            return $user;
         });
 
         return $user;

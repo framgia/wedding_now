@@ -113,17 +113,32 @@ Route::group(['namespace' => 'User'], function () {
         Route::delete('delete-schedule', 'ScheduleController@destroy')
             ->name('client.delete-schedule');
 
-        Route::get('design-card', 'CardController@index')
-            ->name('client.design-card');
+        Route::group(['prefix' => 'design-card'], function () {
 
-        Route::get('load-card', 'CardController@getDesignCard')
-            ->name('client.load-card');
+            Route::get('', 'CardController@index')
+                ->name('client.design-card');
 
-        Route::post('save-card', 'CardController@saveCard')
-            ->name('client.add-card');
+            Route::get('load-card', 'CardController@getDesignCard')
+                ->name('client.load-card');
 
-        Route::post('choose-template', 'CardController@chooseTemplate')
-            ->name('client.choose-template');
+            Route::get('create-page', 'CardController@createPage')
+                ->name('client.create-page');
+
+            Route::get('get-templates', 'CardController@getTemplates')
+                ->name('client.get-templates');
+
+            Route::put('save-card', 'CardController@saveCard')
+                ->name('client.save-card');
+
+            Route::get('choose-template', 'CardController@chooseTemplate')
+                ->name('client.choose-template');
+
+            Route::put('update-name', 'CardController@updateName')
+                ->name('client.update-name-card');
+
+            Route::post('choose-orientation', 'CardController@chooseOrientation')
+                ->name('client.choose-orientation');
+        });
 
         Route::group(['prefix' => 'timeline'], function () {
 

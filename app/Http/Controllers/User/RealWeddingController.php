@@ -38,6 +38,11 @@ class RealWeddingController extends Controller
         return view('user.real_wedding', compact('posts', 'packages'));
     }
 
+    /**
+     * @param PaginateRealWeddingRequest $request
+     * @return string
+     * @throws \Throwable
+     */
     public function loadFilterRealWedding(PaginateRealWeddingRequest $request)
     {
         if ($request->ajax()) {

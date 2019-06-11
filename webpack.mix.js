@@ -63,7 +63,6 @@ mix.styles([
     'resources/client/css/suggest-page.css',
     'resources/client/css/timeline.css',
     'resources/client/css/real_wedding.css',
-    'resources/client/css/design-card.css',
     'node_modules/print-js/dist/print.css',
     'resources/client/css/news.css',
     'node_modules/jquery-ui/themes/base/theme.css',
@@ -87,6 +86,22 @@ mix.scripts([
     'node_modules/jquery-datepicker/jquery-datepicker.js',
     'node_modules/sweetalert/dist/sweetalert.min.js'
     ], 'public/assets/user/js/page.js');
+
+/**
+ * Mix for design card
+ */
+mix.copyDirectory('resources/client/design_card/css/' , 'public/css/design_card/');
+mix.copyDirectory('resources/client/design_card/js/' , 'public/js/design_card/');
+
+mix.scripts([
+    'resources/client/design_card/js/jquery.min.js',
+    'resources/client/design_card/js/bootstrap.min.js',
+    'node_modules/toastr/build/toastr.min.js',
+    'node_modules/wow.js/dist/wow.min.js',
+    'node_modules/displacejs/dist/displace.min.js',
+    'node_modules/autosize/dist/autosize.min.js',
+    'resources/client/js/jquery-ui.js',
+], 'public/js/design_card/prepare.js');
 
 //mix js admin
 mix.scripts([
