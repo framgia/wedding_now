@@ -4,6 +4,7 @@ namespace App\Repositories\Category;
 
 use App\Models\Category;
 use App\Repositories\Base\BaseRepository;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryRepository extends BaseRepository implements CategoryRepositoryInterface
 {

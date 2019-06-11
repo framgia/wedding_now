@@ -26,16 +26,16 @@ class CardMetaRepository extends BaseRepository implements CardMetaRepositoryInt
         }
     }
 
-    public function updateMeta($cardId, $cardMeta)
+    public function updateMeta($pageId, $cardMeta)
     {
         $this->model->updateOrCreate([
-            'card_id' => $cardId,
+            'page_card_id' => $pageId,
             'id' => $cardMeta['id'],
         ], [
-            'card_id' => $cardId,
+            'page_card_id' => $pageId,
             'div_style' => $cardMeta['div_style'],
             'textarea_style' => $cardMeta['textarea_style'],
-            'content' => $cardMeta['content']
+            'content' => $cardMeta['content'],
         ]);
     }
 }

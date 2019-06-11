@@ -9,7 +9,7 @@ class CardMeta extends Model
     protected $table = 'card_metas';
 
     protected $fillable = [
-        'card_id',
+        'page_card_id',
         'key',
         'div_style',
         'content',

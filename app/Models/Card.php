@@ -9,12 +9,13 @@ class Card extends Model
     protected $table = 'cards';
 
     protected $fillable = [
-        'id',
         'schedule_wedding_id',
         'name',
         'type',
         'card_id',
-        'background_image',
+        'orientation',
+        'number_pages',
+        'present_img',
     ];
 
     public function scheduleWedding()
@@ -22,9 +23,9 @@ class Card extends Model
         return $this->belongTo(ScheduleWedding::class);
     }
 
-    public function cardMetas()
+    public function pages()
     {
-        return $this->hasMany(CardMeta::class);
+        return $this->hasMany(PageCard::class);
     }
 
     public function scopeTemplate($query)
@@ -36,4 +37,6 @@ class Card extends Model
     {
         return $query->whereType(config('define.card.custom'));
     }
+
+
 }
