@@ -61,6 +61,9 @@ class RepositoryServiceProvider extends ServiceProvider
         ], [
             'App\Repositories\City\CityRepositoryInterface',
             'App\Repositories\City\CityRepository',
+        ], [
+            'App\Repositories\PageCard\PageCardRepositoryInterface',
+            'App\Repositories\PageCard\PageCardRepository',
         ],
     ];
 
