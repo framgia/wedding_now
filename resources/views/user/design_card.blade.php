@@ -10,13 +10,6 @@
     <link href="{{ asset(config('asset.users.images.index') . 'favicon.ico') }}" rel="icon" type="image/x-icon"/>
     @routes
     {{ Html::script('messages.js') }}
-    <link href="{{ asset('css/design_card/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/design_card/1.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/design_card/2.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/design_card/3.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/design_card/4.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/design_card/toastr.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/design_card/animate.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/design_card/design_card.css') }}" rel="stylesheet">
 </head>
 
@@ -24,7 +17,6 @@
 @include('user.card.file')
 @include('user.card.select_font')
 @include('user.card.select_size')
-{{-- @include('user.card.choose_orientation') --}}
 <div id="root">
     <div class="_29dFFT66p2ix2AqEl1i9BW">
         <div class="_29dFFT66p2ix2AqEl1i9BW">
@@ -44,7 +36,5 @@
 </div>
 
 </body>
-<script type="text/javascript" src="{{ asset('js/design_card/prepare.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/design_card/jquery.bpopup.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/design_card/design-card.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/design_card/design_card.js') }}"></script>
 </html>

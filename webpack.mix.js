@@ -90,18 +90,25 @@ mix.scripts([
 /**
  * Mix for design card
  */
-mix.copyDirectory('resources/client/design_card/css/' , 'public/css/design_card/');
-mix.copyDirectory('resources/client/design_card/js/' , 'public/js/design_card/');
+
+mix.styles([
+    'node_modules/bootstrap/dist/css/bootstrap.min.css',
+    'resources/client/design_card/css/style.min.css',
+    'node_modules/toastr/build/toastr.min.css',
+    'node_modules/animate.css/animate.min.css',
+    'resources/client/design_card/css/design_card.css',
+], 'public/css/design_card/design_card.css');
 
 mix.scripts([
-    'resources/client/design_card/js/jquery.min.js',
-    'resources/client/design_card/js/bootstrap.min.js',
+    'node_modules/jquery/dist/jquery.min.js',
+    'node_modules/bootstrap/dist/js/bootstrap.min.js',
     'node_modules/toastr/build/toastr.min.js',
     'node_modules/wow.js/dist/wow.min.js',
     'node_modules/displacejs/dist/displace.min.js',
     'node_modules/autosize/dist/autosize.min.js',
-    'resources/client/js/jquery-ui.js',
-], 'public/js/design_card/prepare.js');
+    // 'resources/client/design_card/js/jquery.bpopup.min.js',
+    'resources/client/design_card/js/design_card.js',
+], 'public/js/design_card/design_card.js');
 
 //mix js admin
 mix.scripts([
