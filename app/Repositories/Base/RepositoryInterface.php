@@ -11,7 +11,7 @@ interface RepositoryInterface
 {
     public function findById($id);
 
-    public function getData();
+    public function getData($with = [], $data = [], $dataSelect = ['*'], $attribute = ['id', 'desc']);
 
     public function update($id, $data);
 
@@ -20,8 +20,6 @@ interface RepositoryInterface
     public function saveFile($currentFile, $newFile, $path, $width = null, $height = null);
 
     public function create($data);
-
-    public function slug($str);
 
     public function updateOrCreate($filter, $data);
 

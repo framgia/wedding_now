@@ -4,7 +4,6 @@ namespace App\Repositories\Item;
 
 use App\Models\Item;
 use App\Repositories\Base\BaseRepository;
-use Illuminate\Database\Eloquent\Model;
 
 class ItemRepository extends BaseRepository implements ItemRepositoryInterface
 {

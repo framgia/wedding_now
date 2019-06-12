@@ -12,36 +12,16 @@ class CardRepository extends BaseRepository implements CardRepositoryInterface
         parent::__construct($card);
     }
 
-    public function getCard($scheduleId = null, $backgroundImage = null)
+    public function getCard($scheduleId = null)
     {
         return $this->model->when($scheduleId != null, function ($query) use ($scheduleId) {
-            return $query->where('schedule_wedding_id', $scheduleId);
-        }, function ($query) {
-            return $query->get();
-        })->get();
+
+            $query->where('schedule_wedding_id', $scheduleId);
+        })->get()->load(['pages', 'pages.cardMetas']);
     }
 
     public function getTemplate()
     {
-        return $this->model->whereType(config('define.card.template'))->get();
-    }
-
-    public function saveImageBackground($scheduleId, $image, $templateId = null)
-    {
-        $this->model->updateOrCreate([
-            'schedule_wedding_id' => $scheduleId,
-        ], [
-            'background_image' => $image,
-            'name' => config('define.image_card'),
-        ]);
-
-        $this->model->when($templateId != null, function ($query) use ($scheduleId, $image) {
-            $query->update([
-                'schedule_wedding_id' => $scheduleId,
-            ], [
-                'background_image' => $image,
-                'name' => config('define.image_card'),
-            ]);
-        });
+        return $this->model->with('pages')->whereType(config('define.card.template'))->get();
     }
 }
