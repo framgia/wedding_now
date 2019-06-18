@@ -14,7 +14,7 @@
         </a>
     </li>
     <li>
-        <a href="{{ route('client.design-card') }}" class="btn btn-default @if(Route::currentRouteName() === 'client.design-card') active @endif">
+        <a href="{{ route('client.design-card') }}" target="_blank" class="btn btn-default @if(Route::currentRouteName() === 'client.design-card') active @endif">
             <span class="badge">{{ __('page.page.wedding_card') }}</span>
         </a>
     </li>

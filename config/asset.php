@@ -37,7 +37,20 @@ return [
     ],
     'schedule' => 'storage/wedding/schedule/',
     'schedule_avatar' => 'storage/avatar/',
-    'card_template' => 'storage/template_card/',
+    'card' => [
+        'orientaion' => 'storage/card/orientation/',
+        'horizontal' => [
+            'template' => 'storage/card/horizontal/',
+            'present' => 'storage/card/present/horizontal/',
+            'background' => 'storage/card/background/horizontal/',
+            
+        ],
+        'vertical' => [
+            'template' => 'storage/card/vertical/',
+            'present' => 'storage/card/present/vertical/',
+            'background' => 'storage/card/background/vertical/',
+        ],
+    ],
     'schedule_default' => 'storage/wedding/',
     'package' => 'storage/wedding/package/',
 ];
