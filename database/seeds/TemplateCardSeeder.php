@@ -19,7 +19,7 @@ class TemplateCardSeeder extends Seeder
                 'name' => 'template-demo',
                 'type' => 'template',
                 'orientation' => 'vertical',
-                'present_img' => 'wedding-card-' . $i . '.png',
+                'present_img' => 'card-vertical-' . $i . '.png',
             ];
         }
 

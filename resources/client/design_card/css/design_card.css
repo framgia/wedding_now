@@ -1,0 +1,516 @@
+.content {
+    padding: 10px;
+    resize: unset;
+    outline: none;
+    border: none;
+    overflow-x: hidden;
+    overflow-wrap: unset !important;
+    word-wrap: normal;
+    line-height: 1.6;
+    /* height: 30px; */
+    white-space: pre;
+    overflow: hidden;
+    display: flex;
+    width: 200px;
+    background: none;
+    text-align: center;
+}
+
+.element:focus-within {
+    outline: 1px solid;
+    box-shadow: 0 0 9px 1px rgba(14, 19, 24, .15), 0 0 0 4px rgba(14, 19, 24, .15);
+}
+
+.element {
+    margin: 5px;
+    width: min-content;
+}
+
+.element-new {
+    outline: 1px solid;
+    box-shadow: 0 0 9px 1px rgba(14, 19, 24, .15), 0 0 0 4px rgba(14, 19, 24, .15);
+}
+
+.content::-webkit-input-placeholder {
+    font-size: 0.9em;
+    padding: 0 5px;
+}
+
+/* .element-choose .content {
+    outline: 1px solid;
+    box-shadow: 0 0 9px 1px rgba(14, 19, 24, .15), 0 0 0 4px rgba(14, 19, 24, .15);
+} */
+@font-face {
+    font-family: aleo;
+    src: url('../fonts/SVN-Aleo Light.otf');
+}
+
+@font-face {
+    font-family: aleoBoldItalic;
+    src: url('../fonts/SVN-Aleo Bold Italic.otf');
+}
+
+@font-face {
+    font-family: aleoBold;
+    src: url('../fonts/SVN-Aleo Bold.otf');
+}
+
+@font-face {
+    font-family: aleoRegular;
+    src: url('../fonts/SVN-Aleo Regular.otf');
+}
+
+@font-face {
+    font-family: aleoLightItalic;
+    src: url('../fonts/SVN-Aleo Light Italic.otf');
+}
+
+@font-face {
+    font-family: punchbowl;
+    src: url('../fonts/iCielPunchbowl-Bold.otf');
+}
+
+@font-face {
+    font-family: romantically;
+    src: url('../fonts/iCielRomantically-Regular.otf');
+}
+
+@font-face {
+    font-family: mussica;
+    src: url('../fonts/MussicaSwash.otf');
+}
+
+@font-face {
+    font-family: turbayne;
+    src: url('../fonts/Turbayne.ttf');
+}
+
+@font-face {
+    font-family: aphrodite;
+    src: url('../fonts/UVF Aphrodite Pro.ttf');
+}
+
+@font-face {
+    font-family: geotica;
+    src: url('../fonts/UVF Geotica 2012.ttf');
+}
+
+@font-face {
+    font-family: quattrocento;
+    src: url('../fonts/UVF Quattrocento-Regular.ttf');
+}
+
+@font-face {
+    font-family: assassin;
+    src: url('../fonts/VN_Assassin.ttf');
+}
+
+@font-face {
+    font-family: heroe;
+    src: url('../fonts/VN_HeroeMonolineBigPro.otf');
+}
+
+@font-face {
+    font-family: valentina;
+    src: url('../fonts/VN_Valentina Regular.ttf');
+}
+
+@font-face {
+    font-family: museo;
+    src: url('../fonts/VN_Museo Slab 500.ttf');
+}
+
+@font-face {
+    font-family: vnCariar;
+    src: url('../fonts/VN_Cariar Dreams Regular.ttf');
+}
+
+@font-face {
+    font-family: dooType;
+    src: url('../fonts/VN_dooType - Encorpada Classic.otf');
+}
+
+@font-face {
+    font-family: youngblood;
+    src: url('../fonts/Youngblood.ttf');
+}
+
+@font-face {
+    font-family: caviar;
+    src: url('../fonts/UVF Caviar Dreams Bold.ttf');
+}
+
+@font-face {
+    font-family: proxima;
+    src: url('../fonts/FontsFree-Net-Proxima-Nova-Light.otf');
+}
+
+/* select font */
+.font-aleo-sans-serif {
+    font-family: aleo, sans-serif;
+}
+
+.font-aleo {
+    font-family: aleo;
+}
+
+.font-aleoBoldItalic {
+    font-family: aleoBoldItalic;
+}
+
+.font-aleoBold {
+    font-family: aleoBold;
+}
+
+.font-aleoLightItalic {
+    font-family: aleoLightItalic;
+}
+
+.font-aleoRegular {
+    font-family: aleoRegular;
+}
+
+.font-punchbowl {
+    font-family: punchbowl;
+}
+
+.font-mussica {
+    font-family: mussica;
+}
+
+.font-turbayne {
+    font-family: turbayne;
+}
+
+.font-aphrodite {
+    font-family: aphrodite;
+}
+
+.font-romantically {
+    font-family: romantically;
+}
+
+.font-geotica {
+    font-family: geotica;
+}
+
+.font-assassin {
+    font-family: assassin;
+}
+
+.font-heroe {
+    font-family: heroe;
+}
+
+.font-valentina {
+    font-family: valentina;
+}
+
+.font-museo {
+    font-family: museo;
+}
+
+.font-quattrocento {
+    font-family: quattrocento;
+}
+
+.font-vnCariar {
+    font-family: vnCariar;
+}
+
+.font-dooType {
+    font-family: dooType;
+}
+
+.font-youngblood {
+    font-family: youngblood;
+}
+
+.font-caviar {
+    font-family: caviar;
+}
+
+.font-element:hover ._2Wf-SlnxpiKP9h4IkWZoDa {
+    background: aliceblue;
+}
+
+.btn-trans-page {
+    height: 40px;
+    width: 120px;
+    background: white !important;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    color: brown !important;
+    text-decoration: none;
+}
+
+.btn-trans-page:hover {
+    background: #B25AB2 !important;
+    color: white !important;
+    text-decoration: none;
+}
+
+.translate-page {
+    position: absolute;
+    top: 50%;
+    pointer-events: initial;
+}
+
+.trans-left {
+    left: 1%;
+}
+
+.trans-right {
+    right: 1%;
+}
+
+.main-content {
+    margin: 0 auto;
+}
+
+.create-new-page {
+    background: white !important;
+    color: black;
+}
+
+.background img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.choose-location {
+    background: white !important;
+    color: black;
+}
+
+.text-style-choosen {
+    background: #EFEFF0 !important;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.choose-orientation {
+    opacity: 0.7;
+}
+
+.choose-orientation:hover {
+    opacity: 1;
+}
+
+.choose-orientation img {
+    display: block;
+    margin: auto
+}
+
+._3IhVEuLkTM84fCk54aTYDf-style {
+    background: repeating-linear-gradient(to right, rgb(52, 103, 96) 0%, rgb(52, 103, 96) 100%);
+}
+
+._3YWcVqHzZZ4AI1QXDfQ_j7-style {
+    transition: opacity 150ms ease-in-out 0s;
+    opacity: 1;
+    position: absolute;
+    transform: translate3d(290px, 48px, 0px);
+    top: 0px;
+    left: 0px;
+    will-change: transform;
+}
+
+.o7Ij_KaFGSbR9aX5eZOGJ-style {
+    z-index: 1
+}
+
+.w-h-100 {
+    height: 100%;
+    width: 100%;
+}
+
+.mr-l-10 {
+    margin-left: 10px;
+}
+
+._3hTWb8VB-8BcM4R8pCTRe7-style {
+    transform: translateX(0px);
+}
+
+._3Om7kUQ65-IB58bx3C3A3X-style {
+    transform: translateX(-48px);
+}
+
+.op-1 {
+    opacity: 1;
+}
+
+._2Oq0V-gMoT882uMBxze7ZU-style {
+    min-width: calc(80px);
+    max-width: calc(80px);
+    overflow-y: scroll;
+}
+
+._2Sqc1Y0ScJYKqkdIpJ7A1t-1 {
+    background: repeating-linear-gradient(to right, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 100%);
+
+}
+
+._2Sqc1Y0ScJYKqkdIpJ7A1t-2 {
+    background: repeating-linear-gradient(to right, rgb(84, 84, 84) 0%, rgb(84, 84, 84) 100%);
+
+}
+
+._2Sqc1Y0ScJYKqkdIpJ7A1t-3 {
+    background: repeating-linear-gradient(to right, rgb(115, 115, 115) 0%, rgb(115, 115, 115) 100%);
+
+}
+
+._2Sqc1Y0ScJYKqkdIpJ7A1t-4 {
+    background: repeating-linear-gradient(to right, rgb(166, 166, 166) 0%, rgb(166, 166, 166) 100%);
+}
+
+._2Sqc1Y0ScJYKqkdIpJ7A1t-5 {
+    background: repeating-linear-gradient(to right, rgb(217, 217, 217) 0%, rgb(217, 217, 217) 100%);
+
+}
+
+._2Sqc1Y0ScJYKqkdIpJ7A1t-6 {
+    background: repeating-linear-gradient(to right, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 100%);
+}
+
+._2Sqc1Y0ScJYKqkdIpJ7A1t-7 {
+    background: repeating-linear-gradient(to right, rgb(255, 87, 87) 0%, rgb(255, 87, 87) 100%);
+}
+
+._2Sqc1Y0ScJYKqkdIpJ7A1t-8 {
+    background: repeating-linear-gradient(to right, rgb(255, 102, 196) 0%, rgb(255, 102, 196) 100%);
+}
+
+._2Sqc1Y0ScJYKqkdIpJ7A1t-9 {
+    background: repeating-linear-gradient(to right, rgb(203, 108, 230) 0%, rgb(203, 108, 230) 100%);
+}
+
+._2Sqc1Y0ScJYKqkdIpJ7A1t-10 {
+    background: repeating-linear-gradient(to right, rgb(140, 82, 255) 0%, rgb(140, 82, 255) 100%);
+}
+
+._2Sqc1Y0ScJYKqkdIpJ7A1t-11 {
+    background: repeating-linear-gradient(to right, rgb(82, 113, 255) 0%, rgb(82, 113, 255) 100%);
+}
+
+._2Sqc1Y0ScJYKqkdIpJ7A1t-12 {
+    background: repeating-linear-gradient(to right, rgb(56, 182, 255) 0%, rgb(56, 182, 255) 100%);
+}
+
+._2Sqc1Y0ScJYKqkdIpJ7A1t-13 {
+    background: repeating-linear-gradient(to right, rgb(92, 225, 230) 0%, rgb(92, 225, 230) 100%);
+}
+
+._2Sqc1Y0ScJYKqkdIpJ7A1t-14 {
+    background: repeating-linear-gradient(to right, rgb(126, 217, 87) 0%, rgb(126, 217, 87) 100%);
+}
+
+._2Sqc1Y0ScJYKqkdIpJ7A1t-15 {
+    background: repeating-linear-gradient(to right, rgb(201, 226, 101) 0%, rgb(201, 226, 101) 100%);
+}
+
+._2Sqc1Y0ScJYKqkdIpJ7A1t-16 {
+    background: repeating-linear-gradient(to right, rgb(255, 222, 89) 0%, rgb(255, 222, 89) 100%);
+}
+
+._2Sqc1Y0ScJYKqkdIpJ7A1t-17 {
+    background: repeating-linear-gradient(to right, rgb(255, 189, 89) 0%, rgb(255, 189, 89) 100%);
+}
+
+._2Sqc1Y0ScJYKqkdIpJ7A1t-18 {
+    background: repeating-linear-gradient(to right, rgb(255, 145, 77) 0%, rgb(255, 145, 77) 100%);
+}
+
+._2roMyhYIoYCJM809qezZIK-style {
+    width: 360px;
+}
+
+._2lC2QtQshUItjm2q48r14s-style {
+    width: 360px;
+    height: 550px;
+    margin: 0;
+    pointer-events: auto;
+    position: relative
+}
+
+._3YWcVqHzZZ4AI1QXDfQ_j7-font {
+    transition: opacity 150ms ease-in-out 0s;
+    opacity: 1;
+    position: absolute;
+    transform: translate3d(444px, 96px, 0px);
+    top: 0px;
+    left: 0px;
+    will-change: transform;
+}
+
+.o7Ij_KaFGSbR9aX5eZOGJ-style {
+    z-index: 1;
+}
+
+._3YWcVqHzZZ4AI1QXDfQ_j7-size {
+    transition: opacity 150ms ease-in-out 0s;
+    opacity: 1;
+    position: absolute;
+    transform: translate3d(620px, 96px, 0px);
+    top: 0px;
+    left: 0px;
+    will-change: transform;
+}
+
+._2HgrMtUtM-17EDygExIYkT-style {
+    margin: -4px 0;
+}
+
+.style-template {
+    opacity: 1;
+    height: 212.723px;
+    margin: 4px -4px;
+    transition: opacity 250ms linear 0s;
+}
+
+._1HAK-xJrhdmbiBNACoyK64-style-left {
+    position: absolute;
+    width: 152px;
+    height: 212.723px;
+    overflow: hidden;
+    padding-bottom: 8px;
+    left: 0px;
+    transform: translateX(0px);
+}
+
+.style-template-left {
+    position: absolute;
+    width: 152px;
+    height: 212.723px;
+    transform: translateX(0px);
+}
+
+.o2BsxNaV1uNQQTAROvlNV-style {
+    transform: translateX(0%);
+}
+
+._1HAK-xJrhdmbiBNACoyK64-style-right {
+    position: absolute;
+    width: 152px;
+    height: 212.723px;
+    overflow: hidden;
+    padding-bottom: 8px;
+    left: 0px;
+    transform: translateX(160px);
+}
+
+.style-template-right {
+    position: absolute;
+    width: 152px;
+    height: 212.723px;
+    transform: translateX(0px);
+}
+
+.d-none {
+    display: none !important;
+}

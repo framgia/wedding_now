@@ -62,8 +62,7 @@
                 <div class="_1iLPDAyoz0N_oMYrmGClYh yg713efNdYXCWwfJUPwfD">
                     <div class="">
                         <div>
-                            <button class="_2Rww-JOL60obmcYkaUOyg_ Wqfq1nAfa6if4eEOr6Mza _1z-JWQqxYHVcouNSwtyQUF _3l4uYr79jSRjggcw5QCp88 _2TCGExKrjxZqtaO2my1RkE Wqfq1nAfa6if4eEOr6Mza _1z-JWQqxYHVcouNSwtyQUF _3l4uYr79jSRjggcw5QCp88 _3QJ_C8Lg1l0m5aoIK5piST _2kK9hFUTyqtMKr5EG4GuY4 _3hAGBCfLEPbUbF3OIpOpyI _1iLPDAyoz0N_oMYrmGClYh yg713efNdYXCWwfJUPwfD _3iFOnCGudk41hFHnp5m24H save"
-                                title="{{ __('base.save') }}" type="button">
+                            <button class="_2Rww-JOL60obmcYkaUOyg_ Wqfq1nAfa6if4eEOr6Mza _1z-JWQqxYHVcouNSwtyQUF _3l4uYr79jSRjggcw5QCp88 _2TCGExKrjxZqtaO2my1RkE Wqfq1nAfa6if4eEOr6Mza _1z-JWQqxYHVcouNSwtyQUF _3l4uYr79jSRjggcw5QCp88 _3QJ_C8Lg1l0m5aoIK5piST _2kK9hFUTyqtMKr5EG4GuY4 _3hAGBCfLEPbUbF3OIpOpyI _1iLPDAyoz0N_oMYrmGClYh yg713efNdYXCWwfJUPwfD _3iFOnCGudk41hFHnp5m24H save" title="{{ __('base.save') }}" type="button">
                                 <span class="wDZfRbnecQOufIqcN2_A5">{{ __('base.save') }}</span>
                             </button>
                         </div>
