@@ -2,130 +2,84 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Entrust;
-
-use App\Models\Role;
-use App\Models\Permission;
-use App\Models\User;
-
-use App\Repositories\Role\RoleRepository;
-
-use App\Http\Requests\Admin\RoleRequest;
-use App\Http\Requests\Admin\RoleUpdateRequest;
+use App\Repositories\Permission\PermissionRepositoryInterface;
+use App\Repositories\Role\RoleRepositoryInterface;
+use App\Http\Requests\Admin\CreateRoleRequest;
+use App\Http\Requests\Admin\UpdateRoleRequest;
 use App\Http\Controllers\Controller;
-
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
-    protected $roleModel;
+    protected $role;
+    protected $permission;
 
-    public function __construct(Role $role)
+    public function __construct(RoleRepositoryInterface $role, PermissionRepositoryInterface $permission)
     {
-        $this->roleModel = new RoleRepository($role);
+        $this->role = $role;
+        $this->permission = $permission;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $permission = Permission::all();
+        $permission = $this->permission->getData();
 
-        return view('admin.role.index', compact('permission'));
+        return view('admin.list_role', compact('permission'));
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function getRole()
+    public function getAll()
     {
-        return Role::withCount('permissions')->get();
+        $roles = collect($this->role->getData([], [], ['*'], ['permissions']))->filter(function ($role) {
+            return $role->name != config('define.role.name.admin');
+        });
+
+        return $roles;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(RoleRequest $request)
+    public function store(CreateRoleRequest $request)
     {
-        $role = $this->roleModel->create($request->only('name', 'display_name', 'description'));
+        DB::transaction(function () use ($request) {
 
-        $permission = $request->except(
-            '_token',
-            '_method',
-            'roleId',
-            'name',
-            'display_name',
-            'description'
-        );
+            $role = $this->role->create([
+                strtolower($request->name),
+                $request->display_name,
+                $request->description,
+            ]);
 
-        $role->attachPermission($permission);
-
-        return __('base.success');
+            $role->attachPermission($request->permissions);
+        });
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        return Role::findOrFail($id)->load('permissions');
+        return $this->role->findById($id);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(RoleUpdateRequest $request, $id)
+    public function update(UpdateRoleRequest $request, $id)
     {
-        $this->roleModel->update($id, $request->only('name', 'display_name', 'description'));
+        DB::transaction(function () use ($request, $id) {
 
-        $role = Role::findOrFail($id)->load('permissions');
-        $permission = $request->except(
-            '_token',
-            '_method',
-            'roleId',
-            'name',
-            'display_name',
-            'description'
-        );
+            $this->role->update($id, [
+                $request->name,
+                $request->display_name,
+                $request->description,
+            ]);
 
-        $role->perms()->detach($role->permissions);
-        $role->attachPermission($permission);
+            $role = $this->role->findById($id);
 
-        return __('base.success');
+            $role->permissions()->sync($request->permissions);
+        });
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        try {
-            $role = Role::findOrFail($id);
+        DB::transaction(function () use ($id) {
 
-            $role->delete();
-            $role->users()->sync([]);
+            $role = $this->role->findById($id);
 
-            return __('base.success');
-        } catch (Exception $e) {
-            return __('base.error');
-        }
+            $role->permissions()->detach();
+
+            $this->role->destroy($id);
+        });
     }
 }

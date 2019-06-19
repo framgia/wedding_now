@@ -2,30 +2,31 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Auth;
-
-use App\Models\Tag;
-use App\Models\Post;
-
+use App\Repositories\Post\PostRepositoryInterface;
+use App\Repositories\Tag\TagRepositoryInterface;
+use App\Repositories\Topic\TopicRepositoryInterface;
+use Http\Client\Exception\RequestException;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PostCreateRequest;
-
-use App\Repositories\Post\PostRepository;
-use App\Repositories\Tag\TagRepository;
+use App\Http\Requests\Admin\PostRequest;
 
 class PostController extends Controller
 {
-    protected $postModel, $tagModel;
+    protected $post;
+    protected $tag;
+    protected $topic;
 
-    public function __construct(Post $post, Tag $tag)
+    public function __construct(
+        PostRepositoryInterface $post,
+        TagRepositoryInterface $tag,
+        TopicRepositoryInterface $topic
+    )
     {
-        $this->postModel = new PostRepository($post);
-        $this->tagModel = new TagRepository($tag);
+        $this->post = $post;
+        $this->tag = $tag;
+        $this->topic = $topic;
     }
 
     /**
@@ -35,202 +36,126 @@ class PostController extends Controller
      */
     public function index()
     {
-        $tag = $this->getTagPluck();
-
-        return view('admin.post.index', compact('tag'));
+        return view('admin.list_post');
     }
 
     public function getAll()
     {
-        // with, withcount
-        return $this->postModel->getAll(['tags', 'user'], ['comments'])->toJson();
+        return $this->post->getData(['tags', 'user'], [], ['*'], ['comments'])->toJson();
     }
 
-    public function getTagPluck()
-    {
-        return Tag::pluck('name', 'id');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        $tag = $this->getTagPluck();
+        $tags = $this->tag->getData()->pluck('name', 'id');
 
-        return view('admin.post.create', compact('tag'));
+        $topics = collect($this->topic->getData())->pluck('name', 'id');
+
+        return view('admin.create_post', compact('tags', 'topics'));
     }
 
-    public function sendFile(Request $request)
+    public function store(PostRequest $request)
     {
-        if ($request->hasFile('file') && $request->file('file')->isValid()) {
-            $file = $this->postModel->saveFile(null, $request->file, config('asset.storage.post'));
+        DB::transaction(function () use ($request) {
 
-            return response()->json(config('asset.storage.post') . $file, 200);
-        }
+            $post = $this->post->create([
+                'title' => $request->title,
+                'content' => $request->contents,
+                'user_id' => Auth::id(),
+                'topic_id' => $request->topic,
+                'brief' => $request->title,
+                'slug' => str_slug($request->title),
+                'status' => config('define.post.status.draft'),
+                'type' => config('define.post.type.thinks'),
+            ]);
 
-        return response()->json(['message' => __('base.fail')], 422);
-    }
+            $tags = [];
 
-    public function deleteFile($file)
-    {
-        $path = config('asset.storage.post') . $file;
-        if (file_exists($path)) {
-            unlink($path);
+            foreach ($request->tags as $tag) {
 
-            return response()->json(['message' => __('base.success')], 204);
-        }
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(PostCreateRequest $request)
-    {
-        $tag = [];
-
-        try {
-            DB::beginTransaction();
-                $data = $this->postModel->create([
-                    'title' => $request->title,
-                    'content' => $request->content,
-                    'user_id' => Auth::id(),
-                    'slug' => $this->postModel->slug($request->title)
+                $newTag = $this->tag->updateOrCreate([
+                    'name' => $tag,
+                ], [
+                    'name' => $tag,
                 ]);
 
-                if (!$request->tag) {
-                    DB::rollBack();
+                array_push($tags, $newTag->id);
+            }
 
-                    return response()->json([
-                        'message' => __('base.select') . ' ' . __('base.tag')
-                    ], 422);
-                }
-
-                foreach ($request->tag as $value) {
-                    $check = $this->checkTagExists('name', $value);
-
-                    if (!$check) {
-                        $newTag = $this->tagModel->create(['name' => $value]);
-                        $tagId = $newTag->id;
-                    } else {
-                        $tagId = $check->id;
-                    }
-                    $tag[] = [
-                        'post_id' => $data->id,
-                        'tag_id' => $tagId
-                    ];
-                }
-
-                $data->tags()->attach($tag);
-                // $data->topic()->attach($request->topic);
-            DB::commit();
-
-            return __('base.success');
-        } catch (Exception $e) {
-            return __('base.fail');
-        }
+            $post->tags()->attach($tags);
+        });
     }
 
-    public function checkTagExists($column, $value)
-    {
-        return Tag::where($column, $value)->first();
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        return $this->postModel->findById($id)->load('tags', 'user');
+        $post = $this->post->findById($id)->load('tags', 'user', 'topic');
+
+        return view('admin.show_post', compact('post'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(PostCreateRequest $request, $id)
+    public function edit($id)
     {
-        $tag = [];
+        $post = $this->post->findById($id);
 
-        try {
-            DB::beginTransaction();
-                $data = $this->postModel->findById($id);
-                $data = $this->postModel->updateOrCreate(
-                    ['id' => $id],
-                    [
-                        'title' => $request->title,
-                        'content' => $request->content,
-                        'user_id' => Auth::id(),
-                        'slug' => $this->postModel->slug($request->title)
-                    ]
-                );
-
-                if (!$request->tag) {
-                    DB::rollBack();
-
-                    return response()->json([
-                        'message' => __('base.select') . ' ' . __('base.tag')
-                    ], 422);
-                }
-
-                $data->tags()->detach();
-
-                foreach ($request->tag as $value) {
-                    $check = $this->checkTagExists('name', $value);
-
-                    if (!$check) {
-                        $newTag = $this->tagModel->create(['name' => $value]);
-                        $tagId = $newTag->id;
-                    } else {
-                        $tagId = $check->id;
-                    }
-
-
-                    $tag[] = [
-                        'post_id' => $data->id,
-                        'tag_id' => $tagId
-                    ];
-                }
-
-                $data->tags()->attach($tag);
-                // $data->topic()->attach($request->topic);
-            DB::commit();
-
-            return __('base.success');
-        } catch (Exception $e) {
-            return __('base.fail');
+        if ($post) {
+            $post->load('tags', 'user');
         }
+
+        $tags = $this->tag->getData()->pluck('name', 'id');
+
+        $topics = collect($this->topic->getData())->pluck('name', 'id');
+
+        return view('admin.edit_post', compact('tags', 'topics', 'post'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function update(PostRequest $request, $id)
+    {
+        DB::transaction(function () use ($request, $id) {
+
+            $this->post->update($id, [
+                'title' => $request->title,
+                'content' => $request->contents,
+                'user_id' => Auth::id(),
+                'topic_id' => $request->topic,
+                'brief' => $request->title,
+                'slug' => str_slug($request->title),
+                'status' => config('define.post.status.draft'),
+                'type' => config('define.post.type.thinks'),
+            ]);
+
+            $post = $this->post->findById($id);
+
+            $tags = [];
+
+            foreach ($request->tags as $tag) {
+
+                $newTag = $this->tag->updateOrCreate([
+                    'name' => $tag,
+                ], [
+                    'name' => $tag,
+                ]);
+
+                array_push($tags, $newTag->id);
+            }
+
+            $post->tags()->sync($tags);
+        });
+    }
+
     public function destroy($id)
     {
-        try {
-            $data = $this->postModel->findById($id);
-            $data->comments()->delete();
-            $data->rates()->delete();
-            $data->tags()->detach();
-            $data->delete();
+        DB::transaction(function () use ($id) {
 
-            return __('base.success');
-        } catch (Exception $e) {
-            return __('base.fail');
-        }
+            $post = $this->post->findById($id);
+
+            $post->tags()->detach();
+
+            $post->comments()->delete();
+
+            $post->rates()->delete();
+
+            $post->medias()->delete();
+
+            $this->post->destroy($id);
+        });
     }
 }

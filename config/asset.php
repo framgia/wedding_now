@@ -21,7 +21,6 @@ return [
         'misc' => 'img/misc/',
         'user' => 'img/users/',
     ],
-
     'users' => [
         'revolution_css' => 'assets/user/revolution/css/',
         'css' => 'assets/user/css/',
@@ -49,6 +48,14 @@ return [
             'template' => 'storage/card/vertical/',
             'present' => 'storage/card/present/vertical/',
             'background' => 'storage/card/background/vertical/',
+        ],
+        'template' => [
+            'horizontal' => 'storage/card/template/horizontal/',
+            'vertical' => 'storage/card/template/vertical/',
+        ],
+        'present' => [
+            'horizontal' => 'storage/card/present/horizontal/',
+            'vertical' => 'storage/card/present/vertical/',
         ],
     ],
     'schedule_default' => 'storage/wedding/',

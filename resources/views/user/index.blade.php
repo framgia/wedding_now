@@ -5,19 +5,23 @@
 @endsection
 
 @section('content')
+
     @include('layouts.section.slider')
 
-    @include('layouts.section.news2')
+    <div class="container mb-20">
 
-    @include('layouts.section.wedding_plan')
+        <div class="col-lg-8">
 
-    {{-- @include('layouts.section.wedding_location') --}}
+            @include('layouts.section.wedding_plan')
 
-    {{-- @include('layouts.section.feature_wedding') --}}
+            @include('layouts.section.show_card')
+        </div>
 
-    {{-- @include('layouts.section.call_out') --}}
+        <div class="col-lg-4 pd-0">
 
-    {{-- @include('layouts.section.choose') --}}
+            @include('layouts.section.news')
+        </div>
 
-    {{-- @include('layouts.section.testimonial') --}}
+    </div>
+    
 @endsection

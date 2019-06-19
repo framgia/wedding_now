@@ -171,19 +171,19 @@ p.current-lan {
 }
 
 .news-dtl .news-heading a {
-    line-height: 32px;
+    line-height: 1.4;
     color: #202020;
     font-weight: 700;
     text-transform: none;
     margin-bottom: 8px;
-    font-size: 17px;
+    font-size: 16px;
 }
 
 .wedding-logo {
     padding: 10px 0px;
 }
 
-#cssmenu>ul>li>a {
+#cssmenu > ul > li > a {
     padding: 25px 18px;
 }
 
@@ -231,13 +231,13 @@ div#modal-schedule .modal-content input {
     background-color: #6639a6;
     border-radius: 4px;
     text-transform: uppercase;
-    color:#fff;
+    color: #fff;
     transition: all 0.8s ease;
 }
 
 .btn-purple:hover {
     background-color: #ff4061;
-    color:#fff;
+    color: #fff;
 }
 
 .s-single {
@@ -277,4 +277,46 @@ div#modal-schedule .modal-content input {
     background-color: #ff2e63;
     left: 33%;
     bottom: 0;
+}
+
+.content-new {
+    background: #F3F5F6;
+    overflow: auto;
+}
+
+.content-new .posts {
+    border-bottom: 1px solid #eaeaea;
+    padding: 10px 0px;
+}
+
+.text-author {
+    color: black;
+}
+
+.text-title-new {
+    font-size: unset !important;
+    font-weight: 700;
+    line-height: 0.81;
+    color: #333;
+}
+
+.news-heading {
+    margin-bottom: 0;
+}
+
+.news-heading a:hover {
+    color: #ff4061;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.mb-20 {
+    margin-bottom: 50px;
+}
+
+.show-card-content {
+    overflow: auto;
+    margin: 35px 0;
 }
