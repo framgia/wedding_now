@@ -71,6 +71,8 @@ return [
         'custom' => 'custom',
         'name' => 'Card of ',
         'icon_load_more' => 'storage/wedding/icon_more.png',
+        'horizontal' => 'horizontal',
+        'vertical' => 'vertical',
     ],
     'schedule_name' => 'Schedule Wedding of ',
     'priority' => [

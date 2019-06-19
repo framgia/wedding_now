@@ -150,7 +150,7 @@
 @endsection
 
 @section('script')
-    <script type="text/javascript" defer="">
+    <script type="text/javascript">
         jQuery(document).ready(function($) {
 
             $.ajaxSetup({
@@ -161,7 +161,7 @@
 
             $.when(getScheduleInfo()).then(function(res) {
 
-                  presentScheduleInfoPage(res);
+                presentScheduleInfoPage(res);
             }, function() {
 
                 toastr.error( Lang.get('page.message.fail') );

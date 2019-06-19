@@ -13,16 +13,16 @@
         @include('admin.head_tools')
     </div>
     <!--begin::Form-->
-    {!! Form::open(['route' => 'posts.store', 'method' => 'POST', 'class' => 'm-form m-form--fit m-form--label-align-right', 'files' => true, 'id' => 'form']) !!}
+    {{ Form::open(['route' => 'posts.store', 'method' => 'POST', 'class' => 'm-form m-form--fit m-form--label-align-right', 'files' => true, 'id' => 'form']) }}
     <div class="m-portlet__body">
         <div class="form-group m-form__group row">
-            {!! Form::label('title', __('base.title'), ['class' => 'col-form-label col-lg-1 col-sm-12']) !!}
+            {{ Form::label('title', __('base.title'), ['class' => 'col-form-label col-lg-1 col-sm-12']) }}
             <div class="col-lg-11 col-md-11 col-sm-12">
-                {!! Form::text('title', '', ['class' => 'form-control m-input', 'placeholder' => __('base.enter_your') . ' ' . __('base.title')]) !!}
+                {{ Form::text('title', '', ['class' => 'form-control m-input', 'placeholder' => __('base.title')]) }}
             </div>
         </div>
         <div class="form-group m-form__group row">
-            {!! Form::label('tag', __('base.tag'), ['class' => 'col-form-label col-lg-1 col-sm-12']) !!}
+            {{ Form::label('tag', __('base.tag'), ['class' => 'col-form-label col-lg-1 col-sm-12']) }}
             <div class="col-lg-11 col-md-11 col-sm-12">
                 <select name="tag[]" id="tag" class="form-control m-input" aria-describedby="emailHelp" multiple>
                     @foreach ($tag as $value)
@@ -34,7 +34,7 @@
         <div class="form-group m-form__group row">
             <label class="col-form-label col-lg-1 col-sm-12">{{ __('base.content') }}</label>
             <div class="col-lg-11 col-md-11 col-sm-12">
-                {!! Form::textarea('content', '', ['id' => 'summernote']) !!}
+                {{ Form::textarea('content', '', ['id' => 'summernote']) }}
             </div>
         </div>
     </div>
@@ -42,13 +42,13 @@
         <div class="m-form__actions m-form__actions">
             <div class="row">
                 <div class="col-lg-9 ml-lg-auto">
-                    {!! Form::submit(__('base.submit'), ['class' => 'btn btn-brand', 'id' => 'submit']) !!}
-                    {!! Form::reset(__('base.reset'), ['class' => 'btn btn-secondary', 'id' => 'reset']) !!}
+                    {{ Form::submit(__('base.submit'), ['class' => 'btn btn-brand', 'id' => 'submit']) }}
+                    {{ Form::reset(__('base.reset'), ['class' => 'btn btn-secondary', 'id' => 'reset']) }}
                 </div>
             </div>
         </div>
     </div>
-    {!! Form::close() !!}
+    {{ Form::close() }}
 </div>
 @endsection
 @section('js')

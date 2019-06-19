@@ -240,6 +240,18 @@ return [
             'right' => 'Right',
         ],
         'change_background' => 'Change background',
+        'change_template' => 'Change template',
+        'new_page' => 'New page',
+        'multiple_fonts' => 'Multiple fonts...',
+        'templates' => 'Templates',
+        'text' => 'Text',
+        'default_color' => 'Default Colors',
+        'search_font' => 'Search fonts',
+        'search_template' => 'Search Templates',
+        'orientation' => [
+            'horizontal' => 'Horizontal',
+            'vertical' => 'Vertical',
+        ],
     ],
     'news' => [
         'breadcrumb' => 'News',
@@ -288,5 +300,5 @@ return [
     ],
     'banner' => [
         'all_services' =>'All Services',
-    ]
+    ],
 ];

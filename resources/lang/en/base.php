@@ -50,6 +50,7 @@ return [
     'upload_file' => 'Upload file',
     'choose' => 'Choose',
     'close' => 'Close',
+    'duplicate' => 'Copy page',
     // end button
 
     // model
@@ -160,5 +161,15 @@ return [
     'by_author' => 'By',
 
     'vnd' => '₫',
-    'email_or_username' => 'Email or Username'
+    'email_or_username' => 'Email or Username',
+    'previous' => 'Previous',
+    'next' => 'Next',
+    'orientation' => 'Orientation',
+    'horizontal' => 'Horizontal',
+    'vertical' => 'Vertical',
+    'help' => 'Help',
+    'download' => 'Download',
+    'new' => 'New',
+    'home' => 'Home',
+    'file' => 'File',
 ];
