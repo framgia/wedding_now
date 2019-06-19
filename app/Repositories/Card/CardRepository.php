@@ -20,8 +20,13 @@ class CardRepository extends BaseRepository implements CardRepositoryInterface
         })->get()->load(['pages', 'pages.cardMetas']);
     }
 
-    public function getTemplate()
+    public function getTemplate($orientation = null)
     {
-        return $this->model->with('pages')->whereType(config('define.card.template'))->get();
+        return $this->model->with('pages')
+            ->whereType(config('define.card.template'))
+            ->when($orientation, function ($query) use ($orientation) {
+                $query->whereOrientation($orientation);
+            })
+            ->get();
     }
 }

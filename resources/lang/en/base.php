@@ -50,11 +50,10 @@ return [
     'upload_file' => 'Upload file',
     'choose' => 'Choose',
     'close' => 'Close',
-    'duplicate' => 'Copy page',
+    'uncheck' => 'Uncheck',
     // end button
 
     // model
-    'category' => 'City',
     'city' => 'City',
     'district' => 'District',
     'item' => 'Item',
@@ -69,6 +68,7 @@ return [
     'time_frame' => 'Time frame',
     'user' => 'User',
     'category' => 'Category',
+    'new' => 'New',
 
     // end model
 

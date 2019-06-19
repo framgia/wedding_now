@@ -8,5 +8,5 @@ interface CardRepositoryInterface extends RepositoryInterface
 {
     public function getCard($scheduleId = null);
 
-    public function getTemplate();
+    public function getTemplate($orientation = null);
 }

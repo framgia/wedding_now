@@ -9,7 +9,6 @@
 @endsection
 
 @section('main-content')
-    <!-- couple profile -->
     <section id="couple-profile" class="couple-profile-main-page">
         <div class="container">
             <div class="couple-profile-tabs general-nav-tabs tabs">
@@ -18,7 +17,7 @@
                 </a>
             </div>
             <div class="row">
-                {!! Form::open(['id' => 'update_profile', 'class' => 'm-form m-form--fit m-form--label-align-right', 'route' => 'user.update', 'files' => true]) !!}
+                {{ Form::open(['id' => 'update_profile', 'class' => 'm-form m-form--fit m-form--label-align-right', 'route' => 'user.update', 'files' => true]) }}
                     @method('PUT')
                     <div class="col-md-8 col-md-offset-2">
                         <div class="couple-profile-main-block">
@@ -35,7 +34,7 @@
                                             <div class="upload-btn-wrapper">
                                                 <a href="#" class="btn btn-pink btn-upload">
                                                     {{ __('page.profile.btn_upload') }}
-                                                    {!! Form::file('avatar_file', ['class' => 'd-none', 'id' => 'avatar_file']) !!}
+                                                    {{ Form::file('avatar_file', ['class' => 'd-none', 'id' => 'avatar_file']) }}
                                                 </a>
                                             </div>
                                         </div>
@@ -47,56 +46,56 @@
                                 <form>
                                     <div class="form-group row">
                                         <div class="col-sm-4">
-                                            {!! Form::label('user_name', __('page.profile.user_name')) !!}
+                                            {{ Form::label('user_name', __('page.profile.user_name')) }}
                                         </div>
                                         <div class="col-sm-8">
-                                            {!! Form::text('user_name', $user->user_name, ['class' => 'form-control', 'disabled', 'placeholder' => __('page.profile.user_name')]) !!}
+                                            {{ Form::text('user_name', $user->user_name, ['class' => 'form-control', 'disabled', 'placeholder' => __('page.profile.user_name')]) }}
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-4">
-                                            {!! Form::label('name', __('page.profile.name')) !!}
+                                            {{ Form::label('name', __('page.profile.name')) }}
                                         </div>
                                         <div class="col-sm-8">
-                                            {!! Form::text('name', $user->name, ['required', 'class' => 'form-control', 'placeholder' => __('page.profile.name')]) !!}
+                                            {{ Form::text('name', $user->name, ['required', 'class' => 'form-control', 'placeholder' => __('page.profile.name')]) }}
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-4">
-                                            {!! Form::label('birthday', __('page.profile.birthday')) !!}
+                                            {{ Form::label('birthday', __('page.profile.birthday')) }}
                                         </div>
                                         <div class="col-sm-8">
-                                            {!! Form::date('birthday', $user->birthday, ['required', 'class' => 'form-control']) !!}
+                                            {{ Form::date('birthday', $user->birthday, ['required', 'class' => 'form-control']) }}
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-4">
-                                            {!! Form::label('email', __('page.profile.email')) !!}
+                                            {{ Form::label('email', __('page.profile.email')) }}
                                         </div>
                                         <div class="col-sm-8">
-                                            {!! Form::email('email', $user->email, ['required', 'class' => 'form-control', 'placeholder' => __('page.profile.email')]) !!}
+                                            {{ Form::email('email', $user->email, ['required', 'class' => 'form-control', 'placeholder' => __('page.profile.email')]) }}
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-4">
-                                            {!! Form::label('phone', __('page.profile.phone')) !!}
+                                            {{ Form::label('phone', __('page.profile.phone')) }}
                                         </div>
                                         <div class="col-sm-8">
-                                            {!! Form::text('phone', $user->phone, ['required', 'class' => 'form-control', 'placeholder' => __('page.profile.phone')]) !!}
+                                            {{ Form::text('phone', $user->phone, ['required', 'class' => 'form-control', 'placeholder' => __('page.profile.phone')]) }}
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-4">
-                                            {!! Form::label('gender', __('page.profile.gender')) !!}
+                                            {{ Form::label('gender', __('page.profile.gender')) }}
                                         </div>
                                         <div class="col-sm-8">
                                             <label class="m-radio m-radio--state-success">
-                                                {!! Form::radio('gender', __('page.profile.male'), ($user->gender == 'male' ? true : false)) !!}
-                                                {{ __('base.male') }}
+                                                {{ Form::radio('gender', __('page.profile.male'), ($user->gender == 'male' ? true : false), ['class' => 'gender-radio']) }}
+                                                <span class="gender-text">{{ __('base.male') }}</span>
                                             </label>
                                             <label class="m-radio m-radio--state-brand">
-                                                {!! Form::radio('gender', __('page.profile.female'), ($user->gender == 'female' ? true : false)) !!}
-                                                {{ __('base.female') }}
+                                                {{ Form::radio('gender', __('page.profile.female'), ($user->gender == 'female' ? true : false), ['class' => 'gender-radio']) }}
+                                                <span class="gender-text">{{ __('base.female') }}</span>
                                             </label>
                                         </div>
                                     </div>
@@ -106,10 +105,10 @@
                                 <h3 class="couple-profile-heading">{{ __('page.profile.address') }}</h3>
                                 <div class="form-group row">
                                     <div class="col-sm-4">
-                                        {!! Form::label('city', __('page.profile.city')) !!}
+                                        {{ Form::label('city', __('page.profile.city')) }}
                                     </div>
                                     <div class="col-sm-8">
-                                        {!! Form::select(
+                                        {{ Form::select(
                                             'city',
                                             $city,
                                             count($user->locations) > 0 ? $user->locations[0]->district->city->id : null,
@@ -117,15 +116,15 @@
                                                 'placeholder' => __('validation.custom.select.city'),
                                                 'class' => 'form-control m-input m-input--solid'
                                             ])
-                                        !!}
+                                        }}
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-4">
-                                        {!! Form::label('district', __('page.profile.district')) !!}
+                                        {{ Form::label('district', __('page.profile.district')) }}
                                     </div>
                                     <div class="col-sm-8">
-                                        {!! Form::select(
+                                        {{ Form::select(
                                             'district',
                                             $district,
                                             count($user->locations) > 0 ? $user->locations[0]->district->id : null,
@@ -133,15 +132,15 @@
                                                 'placeholder' => __('validation.custom.select.district'),
                                                 'class' => 'form-control m-input m-input--solid'
                                             ])
-                                        !!}
+                                        }}
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-4">
-                                        {!! Form::label('address', __('page.profile.address')) !!}
+                                        {{ Form::label('address', __('page.profile.address')) }}
                                     </div>
                                     <div class="col-sm-8">
-                                        {!! Form::text('address', count($user->locations) > 0 ? $user->locations[0]->address : null, ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('validation.custom.enter.address')]) !!}
+                                        {{ Form::text('address', count($user->locations) > 0 ? $user->locations[0]->address : null, ['class' => 'form-control m-input m-input--solid', 'placeholder' => __('validation.custom.enter.address')]) }}
                                     </div>
                                 </div>
                             </div>
@@ -150,34 +149,33 @@
                                     <h3 class="couple-profile-heading">{{ __('page.profile.change_password') }}</h3>
                                     <div class="form-group row">
                                         <div class="col-sm-4">
-                                            {!! Form::label('password', __('page.profile.new_password')) !!}
+                                            {{ Form::label('password', __('page.profile.new_password')) }}
                                         </div>
                                         <div class="col-sm-8">
-                                            {!! Form::password('password', ['class' => 'form-control', 'placeholder' => __('base.password')]) !!}
+                                            {{ Form::password('password', ['class' => 'form-control', 'placeholder' => __('base.password')]) }}
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-4">
-                                            {!! Form::label('password', __('page.profile.confirm_password')) !!}
+                                            {{ Form::label('password', __('page.profile.confirm_password')) }}
                                         </div>
                                         <div class="col-sm-8">
-                                            {!! Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => __('page.profile.confirm_password')]) !!}
+                                            {{ Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => __('page.profile.confirm_password')]) }}
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-offset-4 col-sm-8">
-                                            {!! Form::submit(__('page.profile.btn_update'), ['id' => 'save', 'class' => 'btn btn-pink']) !!}
+                                            {{ Form::submit(__('page.profile.btn_update'), ['id' => 'save', 'class' => 'btn btn-pink']) }}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                {!! Form::close() !!}
+                {{ Form::close() }}
             </div>
         </div>
     </section>
-    <!-- end vendor profile -->
 @endsection
 
 @section('script')

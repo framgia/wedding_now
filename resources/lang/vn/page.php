@@ -27,6 +27,9 @@ return [
         'timeline' => 'Dòng thời gian',
         'design_card' => 'Thiết kế thiệp',
         'schedule_info' => 'Thông tin lịch trình',
+        'show_card' => 'Một số mẫu thiệp',
+        'card_horizontal' => 'Thiệp dọc',
+        'card_vertical' => 'Thiệp ngang',
     ],
 
     'schedule_info' => [
@@ -231,8 +234,8 @@ return [
         'search_font' => 'Tìm kiếm fonts',
         'search_template' => 'Tìm kiếm giao diện',
         'orientation' => [
-            'horizontal' => 'Horizontal',
-            'vertical' => 'Vertical',
+            'horizontal' => 'Ngang',
+            'vertical' => 'Dọc',
         ],
     ],
     'news' => [

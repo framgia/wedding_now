@@ -20,7 +20,7 @@ interface ScheduleWeddingRepositoryInterface extends RepositoryInterface
 
     public function getPackage($id);
 
-    public function timePass($collection);
-
     public function checkImageWedding($collection, $basePath, $pathDefault);
+
+    public function getSuggestion();
 }

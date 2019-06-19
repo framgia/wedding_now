@@ -113,31 +113,6 @@ class ScheduleWeddingRepository extends BaseRepository implements ScheduleWeddin
         return $package;
     }
 
-    public function timePass($collection)
-    {
-        $lang = config('define.en');
-
-        if (!Session::get('lang') || Session::get('lang') === config('define.vn')) {
-
-            $lang = config('define.vi');
-        }
-
-        Carbon::setLocale($lang);
-
-        $now = Carbon::now();
-
-        $newCollection = $collection->transform(function ($item) use ($now) {
-
-            $value = $item->created_at->diffForHumans($now);
-
-            $item->time_pass = $value;
-
-            return $item;
-        });
-
-        return $newCollection;
-    }
-
     public function checkImageWedding($collection, $basePath, $pathDefault)
     {
         $newCollection = $collection->transform(function ($item) use ($basePath, $pathDefault) {
@@ -172,5 +147,13 @@ class ScheduleWeddingRepository extends BaseRepository implements ScheduleWeddin
     public function getLocationOfSchedule($schedule)
     {
         // TODO: Implement getLocationOfSchedule() method.
+    }
+
+
+    public function getSuggestion()
+    {
+        return $this->model->whereType(config('define.type_schedule.suggest'))
+            ->firstOrFail()
+            ->load('tasks.timeFrame');
     }
 }

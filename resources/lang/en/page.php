@@ -28,6 +28,9 @@ return [
         'design_card' => 'Design Card',
         'schedule_info' => 'Schedule Information',
         'news' => 'News',
+        'show_card' => 'Make you card simply',
+        'card_horizontal' => 'Horizontal Card',
+        'card_vertical' => 'Vertical Card',
     ],
 
     'schedule_info' => [
