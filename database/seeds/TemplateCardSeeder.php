@@ -18,6 +18,15 @@ class TemplateCardSeeder extends Seeder
             $cards[] = [
                 'name' => 'template-demo',
                 'type' => 'template',
+                'orientation' => 'horizontal',
+                'present_img' => 'card-horizontal-' . $i . '.png',
+            ];
+        }
+
+        for ($i = 1; $i <= 3; $i++) {
+            $cards[] = [
+                'name' => 'template-demo',
+                'type' => 'template',
                 'orientation' => 'vertical',
                 'present_img' => 'card-vertical-' . $i . '.png',
             ];
@@ -27,7 +36,7 @@ class TemplateCardSeeder extends Seeder
 
         $pages = [];
 
-        for ($i = 1; $i <= 3; $i++) {
+        for ($i = 1; $i <= 6; $i++) {
             for ($j = 1; $j <= 4; $j++) {
                 $pages[] = [
                     'card_id' => $i,
