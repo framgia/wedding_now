@@ -27,4 +27,6 @@ interface RepositoryInterface
 
     public function findWithCondition($key, $value, $condition = '=');
 
+    public function timePass($collection);
+
 }

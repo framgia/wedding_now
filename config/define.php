@@ -20,6 +20,7 @@ return [
         'custom' => 'custom',
         'combo' => 'combo',
         'package' => 'package',
+        'suggest' => 'suggest',
     ],
     'wedding' => [
         'of' => 'Wedding Of ',
@@ -73,6 +74,9 @@ return [
         'icon_load_more' => 'storage/wedding/icon_more.png',
         'horizontal' => 'horizontal',
         'vertical' => 'vertical',
+        'number' => [
+            'show_card' => 3,
+        ],
     ],
     'schedule_name' => 'Schedule Wedding of ',
     'priority' => [

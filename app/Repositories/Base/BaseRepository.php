@@ -2,11 +2,13 @@
 
 namespace App\Repositories\Base;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 use Intervention\Image\ImageManagerStatic as ResizeImage;
 
 /**
@@ -92,5 +94,30 @@ class BaseRepository implements RepositoryInterface
     public function findWithCondition($key, $value, $condition = '=')
     {
         return $this->model->where($key, $condition, $value)->get();
+    }
+
+    public function timePass($collection)
+    {
+        $lang = config('define.en');
+
+        if (!Session::get('lang') || Session::get('lang') === config('define.vn')) {
+
+            $lang = config('define.vi');
+        }
+
+        Carbon::setLocale($lang);
+
+        $now = Carbon::now();
+
+        $newCollection = $collection->transform(function ($item) use ($now) {
+
+            $value = $item->created_at->diffForHumans($now);
+
+            $item->time_pass = $value;
+
+            return $item;
+        });
+
+        return $newCollection;
     }
 }

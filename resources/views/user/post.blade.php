@@ -134,7 +134,7 @@
                                 <a class="articles-listing-box-title title-hover" href="{{ route('post.detail', ['topic' => str_slug($post->topic->name, '-'), 'id' => $post->id, 'slug' => str_slug($post->slug, '-')]) }}">{{ $post->title }}</a>
                                 <p class="articles-listing-box-content">{{ $post->brief }}</p>
                                 <div class="articles-listing-box-date">
-                                    <time datetime="2019-03-22">{{ $post->created_at }}</time>
+                                    <time>{{ $post->created_at }}</time>
                                 </div>
                             </div>
                         </div>

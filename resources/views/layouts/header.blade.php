@@ -40,10 +40,14 @@
                                 </li>
                             @endauth
                             <li>
-                                <a href="{{ route('real-wedding.index') }}">{{ __('page.page.real_wedding') }}</a>
+                                <a href="{{ route('real-wedding.index') }}">
+                                    {{ __('page.page.real_wedding') }}
+                                </a>
                             </li>
                             <li>
-                                <a href="{{ route('post.index') }}">{{ __('page.header.news') }}</a>
+                                <a href="{{ route('post.index') }}">
+                                    {{ __('page.header.news') }}
+                                </a>
                             </li>
                         </ul>
                     </div>
