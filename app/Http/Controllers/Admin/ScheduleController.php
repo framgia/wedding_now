@@ -4,81 +4,76 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\SchedulaDefaultRequest;
-use App\Models\Category;
+
 use App\Models\Item;
 use App\Models\ScheduleWedding;
 use App\Models\Task;
-use App\Models\TimeFrame;
-use App\Repositories\Category\CategoryRepository;
-use App\Repositories\ScheduleWedding\ScheduleWeddingRepository;
-use App\Repositories\Task\TaskRepository;
-use App\Repositories\TimeFrame\TimeFrameRepository;
+use App\Repositories\Category\CategoryRepositoryInterface;
+use App\Repositories\ScheduleWedding\ScheduleWeddingRepositoryInterface;
+use App\Repositories\Task\TaskRepositoryInterface;
+use App\Repositories\TimeFrame\TimeFrameRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class ScheduleWeddingController extends Controller
+class ScheduleController extends Controller
 {
-    protected $scheduleWedding;
+    protected $schedule;
     protected $category;
     protected $timeFrame;
     protected $task;
 
-    public function __construct(Category $category, Task $task, TimeFrame $timeFrame, ScheduleWedding $scheduleWedding)
+    public function __construct(
+        CategoryRepositoryInterface $category,
+        TaskRepositoryInterface $task,
+        TimeFrameRepositoryInterface $timeFrame,
+        ScheduleWeddingRepositoryInterface $schedule
+    )
     {
-        $this->scheduleWedding = new ScheduleWeddingRepository($scheduleWedding);
-        $this->category = new CategoryRepository($category);
-        $this->timeFrame = new TimeFrameRepository($timeFrame);
-        $this->task = new TaskRepository($task);
+        $this->schedule = $schedule;
+        $this->category = $category;
+        $this->timeFrame = $timeFrame;
+        $this->task = $task;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function scheduleDefault()
+    {
+        $timeFrames = $this->timeFrame->getDataPluck();
+
+        $categories = $this->category->getDataPluck();
+
+        $items = Item::with('users')->get();
+
+        $schedules = $this->schedule->getScheduleDefault([]);
+
+        return view('admin.schedule.list_default_schedule', compact('schedules', 'timeFrames', 'categories', 'items'));
+    }
+
     public function index()
     {
-        $scheduleWeddings = ScheduleWedding::with([
-            'tasks.category' => function ($query) {
-                $query->get();
-            },
-            'tasks.timeFrame' => function ($query) {
-                $query->get();
-            },
-        ])->withCount('tasks')->where('type', '=', config('define.type.admin'))->get();
+        $schedules = $this->schedule
+            ->getScheduleInAdmin(['tasks.category', 'tasks.timeFrame'], ['tasks'], ['type', '=', config('define.type_schedule.default')]);
 
-        return view('admin.list_default_schedule', compact('scheduleWeddings'));
+        return view('admin.list_default_schedule', compact('schedules'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('admin.create_default_schdule');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $inforSchedule = $request->info_schedule;
         Arr::set($inforSchedule, 'user_id', Auth::id());
         Arr::set($inforSchedule, 'type', config('define.type.admin'));
-        Arr::set($inforSchedule, 'slug', $this->scheduleWedding->slug($inforSchedule['name']));
+        Arr::set($inforSchedule, 'slug', $this->schedule->slug($inforSchedule['name']));
 
         $arrTasks = $request->arr_tasks;
 
         DB::transaction(function () use ($arrTasks, $inforSchedule) {
-            $scheduleWedding = $this->scheduleWedding->create($inforSchedule);
+            $scheduleWedding = $this->schedule->create($inforSchedule);
             foreach ($arrTasks as $task) {
                 Arr::set($task, 'schedule_wedding_id', $scheduleWedding->id);
                 $this->task->create($task);
@@ -90,23 +85,6 @@ class ScheduleWeddingController extends Controller
         ], 200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $timeFrames = $this->timeFrame->getDataPluck();
@@ -117,30 +95,26 @@ class ScheduleWeddingController extends Controller
         return view('admin.edit_default_schdule', compact('scheduleWedding', 'timeFrames', 'categories', 'items'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $inforSchedule = $request->info_schedule;
         Arr::set($inforSchedule, 'user_id', Auth::id());
         Arr::set($inforSchedule, 'type', config('define.type.admin'));
-        Arr::set($inforSchedule, 'slug', $this->scheduleWedding->slug($inforSchedule['name']));
+        Arr::set($inforSchedule, 'slug', $this->schedule->slug($inforSchedule['name']));
         $arrTasks = $request->arr_tasks;
         $idDeletedTasks = $request->id_deleted_tasks;
 
         DB::transaction(function () use ($id, $inforSchedule, $arrTasks, $idDeletedTasks) {
-            $this->scheduleWedding->update($id, [
+
+            $this->schedule->update($id, [
                 'name' => $inforSchedule['name'],
                 'budget' => $inforSchedule['budget'],
                 'note' => $inforSchedule['note'],
                 'slug' => $inforSchedule['slug'],
             ]);
+
             if ($arrTasks != '') {
+
                 foreach ($arrTasks as $task) {
 
                     $this->task->updateOrCreate([
@@ -167,12 +141,6 @@ class ScheduleWeddingController extends Controller
         ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $tasks = $this->task->getTasksBySchedule($id);
@@ -181,22 +149,12 @@ class ScheduleWeddingController extends Controller
             foreach ($tasks as $task) {
                 $this->task->destroy($task->id);
             }
-            $this->scheduleWedding->destroy($id);
+            $this->schedule->destroy($id);
         });
 
         return response()->json([
             'message' => trans('base.success'),
         ]);
-    }
-
-    public function scheduleDefaultIndex()
-    {
-        $timeFrames = $this->timeFrame->getDataPluck();
-        $categories = $this->category->getDataPluck();
-        $items = Item::with('user')->get();
-        $scheduleDefault = $this->scheduleWedding->getScheduleWeddingDefault();
-
-        return view('admin.edit_default_schdule', compact('scheduleDefault', 'timeFrames', 'categories', 'items'));
     }
 
 
@@ -210,7 +168,7 @@ class ScheduleWeddingController extends Controller
         $idDeletedTasks = $request->id_deleted_tasks;
 
         DB::transaction(function () use ($id, $infoSchedule, $arrTasks, $idDeletedTasks) {
-            $this->scheduleWedding->update($id, [
+            $this->schedule->update($id, [
                 'name' => $infoSchedule['name'],
                 'budget' => $infoSchedule['budget'],
                 'note' => $infoSchedule['note'],
@@ -262,7 +220,7 @@ class ScheduleWeddingController extends Controller
     public function getItemWithVendorPluckByIdCategory(Request $request)
     {
         $category_id = $request->id;
-        
+
         $items = Item::with('users')
             ->whereHas('categories', function ($query) use ($category_id) {
                 $query->where('category_id', $category_id);
