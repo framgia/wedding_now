@@ -17,7 +17,7 @@ interface RepositoryInterface
 
     public function destroy($id);
 
-    public function saveFile($currentFile, $newFile, $path, $width = null, $height = null);
+    public function saveFile($currentFile, $newFile, $path, $width = null, $height = null, $delete = false);
 
     public function create($data);
 

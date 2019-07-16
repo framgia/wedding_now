@@ -18,15 +18,18 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
         return $this->model->withCount($withCount)->with($with)->get();
     }
 
-    public function getMostRatePost($number = null, $numberSkip = null, ...$id)
+    public function getMostRatePost($type = [], $number = null, $numberSkip = null, $ids = [])
     {
         $posts = $this->model->with(['medias', 'topic', 'user.media'])
             ->withCount('rates')
             ->orderBy('rates_count', 'desc')
             ->numberStarPost()
             ->orderBy('id', 'desc')
-            ->when($id != [], function ($query) use ($id) {
-                $query->whereNotIn('posts.id', $id);
+            ->when($type != [], function ($query) use ($type) {
+                $query->whereIn('posts.type', $type);
+            })
+            ->when($ids != [], function ($query) use ($ids) {
+                $query->whereNotIn('posts.id', $ids);
             })
             ->when($numberSkip != null, function ($query) use ($numberSkip) {
                 $query->skip($numberSkip);
@@ -64,6 +67,32 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
             ->public()
             ->offset($skip)
             ->limit($paginate)
+            ->get();
+
+        $posts = $this->checkImagePostCollection($posts, config('define.post.path'), config('define.post.default_image'));
+
+        return $posts;
+    }
+
+    public function getPostOrderByView($type = [], $number = null, $numberSkip = null, $ids = [])
+    {
+        $posts = $this->model->with(['medias', 'topic', 'user.media'])
+            ->withCount('rates')
+            ->orderBy('view_count', 'desc')
+            ->numberStarPost()
+            ->when($type != [], function ($query) use ($type) {
+                $query->whereIn('posts.type', $type);
+            })
+            ->when($ids != [], function ($query) use ($ids) {
+                $query->whereNotIn('posts.id', $ids);
+            })
+            ->when($numberSkip != null, function ($query) use ($numberSkip) {
+                $query->skip($numberSkip);
+            })
+            ->when($number != null, function ($query) use ($number) {
+                $query->take($number);
+            })
+            ->public()
             ->get();
 
         $posts = $this->checkImagePostCollection($posts, config('define.post.path'), config('define.post.default_image'));
