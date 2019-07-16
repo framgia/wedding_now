@@ -12,7 +12,7 @@ class DistrictRepository extends BaseRepository implements DistrictRepositoryInt
         parent::__construct($district);
     }
 
-    public function getDistrict($keyword)
+    public function searchLocation($keyword)
     {
         $districts = $this->model->with('city')->where('name', 'like', '%' . $keyword . '%')->get();
 

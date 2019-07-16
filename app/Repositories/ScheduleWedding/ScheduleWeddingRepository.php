@@ -16,41 +16,32 @@ class ScheduleWeddingRepository extends BaseRepository implements ScheduleWeddin
         parent::__construct($scheduleWedding);
     }
 
-    public function getScheduleWeddingDefault()
+    public function getSchedule($userId, $scheduleId, $type)
     {
-        $scheduleWedding = $this->model->with([
-            'tasks.category' => function ($query) {
-                $query->get();
-            },
-            'tasks.timeFrame' => function ($query) {
-                $query->get();
-            },
-        ])->withCount('tasks')->where('type', '=', config('define.type_schedule.default'))->first();
+        $schedules = $this->model->when($userId, function ($query) use ($userId, $type) {
+            $query->where('user_id', '=', $userId)->where('type', '=', $type)
+                ->orderBy('created_at', 'desc')
+                ->withCount('tasks')
+                ->get()->load('scheduleMetasPluck', 'user.media', 'imgMain', 'location');
+        }, function ($query) use ($scheduleId) {
+            $query->withCount('tasks')
+                ->where('id', '=', $scheduleId)
+                ->firstOrFail()->load('scheduleMetasPluck', 'user.media', 'imgMain', 'location');
+        })->get();
 
-        return $scheduleWedding;
+        return $schedules;
     }
 
-    public function getScheduleClient($userId, $scheduleId)
+    public function getScheduleDefault($with = [])
     {
-        if ($userId != null) {
-            $schedules = $this->model->with(['scheduleMetasPluck', 'user', 'user.media', 'imgMain', 'location'])
-                ->where([
-                    ['schedule_wedding_id', '!=', null],
-                    ['user_id', '=', $userId],
-                ])->orWhere([
-                    ['user_id', '=', $userId],
-                    ['type', '=', config('define.type_schedule.custom')],
-                ])->orderBy('id', 'desc')
-                ->withCount('tasks')
-                ->get();
+        return $this->model->with($with)
+            ->withCount('tasks')->whereType(config('define.type_schedule.default'))->get();
+    }
 
-            return $schedules;
-        }
-
-        $schedule = $this->model->with(['scheduleMetasPluck', 'user', 'user.media', 'imgMain', 'location'])
-            ->where('id', '=', $scheduleId)->first();
-
-        return $schedule;
+    public function getScheduleInAdmin($with = [], $withCount = [], $condition = [])
+    {
+        return $this->model->with($with)
+            ->withCount($withCount)->where($condition[0], $condition[1], $condition[2])->get();
     }
 
     public function store($data)

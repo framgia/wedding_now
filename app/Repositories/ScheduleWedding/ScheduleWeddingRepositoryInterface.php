@@ -6,9 +6,7 @@ use App\Repositories\Base\RepositoryInterface;
 
 interface ScheduleWeddingRepositoryInterface extends RepositoryInterface
 {
-    public function getScheduleWeddingDefault();
-
-    public function getScheduleClient($userId, $scheduleId);
+    public function getSchedule($userId, $scheduleId, $type);
 
     public function store($data);
 
@@ -23,4 +21,6 @@ interface ScheduleWeddingRepositoryInterface extends RepositoryInterface
     public function checkImageWedding($collection, $basePath, $pathDefault);
 
     public function getSuggestion();
+
+    public function getScheduleInAdmin($with = [], $withCount = [], $condition = []);
 }

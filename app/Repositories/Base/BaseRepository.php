@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Base;
 
+use App\Relations\HasManyThroughBelongsTo;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -25,13 +26,13 @@ class BaseRepository implements RepositoryInterface
         $this->model = $model;
     }
 
-    public function getData($with = [], $data = [], $dataSelect = ['*'], $attribute = ['id', 'desc'])
+    public function getData($with = [], $data = [], $dataSelect = ['*'], $withCount = [])
     {
         return $this->model
             ->select($dataSelect)
             ->with($with)
+            ->withCount($withCount)
             ->where($data)
-            ->orderBy($attribute[0], $attribute[1])
             ->get();
     }
 
@@ -52,9 +53,10 @@ class BaseRepository implements RepositoryInterface
         return $this->model->destroy($id);
     }
 
-    public function saveFile($currentFile, $newFile, $path, $width = null, $height = null)
+    public function saveFile($currentFile, $newFile, $path, $width = null, $height = null, $delete = false)
     {
         if (!File::exists($path)) {
+
             File::makeDirectory($path);
         }
 
@@ -66,6 +68,10 @@ class BaseRepository implements RepositoryInterface
             ResizeImage::make($newFile->getRealPath())->resize($width, $height)->save($file_path);
         } else {
             ResizeImage::make($newFile->getRealPath())->save($file_path);
+        }
+
+        if ($delete) {
+            unlink($path . $currentFile);
         }
 
         return $filename;
@@ -119,5 +125,18 @@ class BaseRepository implements RepositoryInterface
         });
 
         return $newCollection;
+    }
+
+    public function hasManyThroughBelongTo($related, $through, $firstKey = null, $secondKey = null)
+    {
+        $through = new $through;
+
+        $related = new $related;
+
+        $firstKey = $firstKey ?: $this->getForeignKey();
+
+        $secondKey = $secondKey ?: $related->getForeignKey();
+
+        return new HasManyThroughBelongsTo($related->newQuery(), $this, $through, $firstKey, $secondKey);
     }
 }

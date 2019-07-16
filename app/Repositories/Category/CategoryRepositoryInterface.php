@@ -10,8 +10,12 @@ interface CategoryRepositoryInterface extends RepositoryInterface
 
     public function getCategoriesWithCountTasks($scheduleId);
 
-    public function getItem($id);
+    public function getItem($idCategory);
 
-    public function getItemNearUser($id);
+    public function getItemNearUser($idCategory);
+
+    public function seachItem($idCategory, $keyword, $filterPrice = '');
+
+    public function seachItemsNearUser($idCategory, $keyword, $filterPrice = '');
 
 }

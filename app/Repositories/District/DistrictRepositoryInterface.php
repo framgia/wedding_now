@@ -6,5 +6,5 @@ use App\Repositories\Base\RepositoryInterface;
 
 interface DistrictRepositoryInterface extends RepositoryInterface
 {
-    public function getDistrict($keyword);
+    public function searchLocation($keyword);
 }
