@@ -1,4 +1,4 @@
-@extends('admin.index')
+@extends('layouts.admin.app')
 @section('css')
     <link href="{{ asset('css/demo/fullcalendar.bundle.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/demo/vendors.bundle.css') }}" rel="stylesheet" type="text/css">

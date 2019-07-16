@@ -9,7 +9,7 @@ class Card extends Model
     protected $table = 'cards';
 
     protected $fillable = [
-        'schedule_wedding_id',
+        'schedule_id',
         'name',
         'type',
         'card_id',
@@ -18,9 +18,9 @@ class Card extends Model
         'present_img',
     ];
 
-    public function scheduleWedding()
+    public function schedule()
     {
-        return $this->belongTo(ScheduleWedding::class);
+        return $this->belongTo(Schedule::class);
     }
 
     public function pages()
@@ -37,6 +37,4 @@ class Card extends Model
     {
         return $query->whereType(config('define.card.custom'));
     }
-
-
 }

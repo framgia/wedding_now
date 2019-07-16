@@ -16,6 +16,7 @@ return [
         'validation',
         'page',
         'base',
+        'auth',
     ],
 
     /*

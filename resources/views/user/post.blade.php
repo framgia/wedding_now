@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.user.app')
 
 @section('title')
     {{ __('page.title.home') }}
@@ -10,12 +10,12 @@
         <div class="breadcrumb-content">
             <ul class="list-breadcrumb">
                 <li class="item-breadcrumb">
-                    <a href="{{ route('home') }}">
+                    <a href="{{ route('client.home') }}">
                         <span>{{ __('page.title.home') }}<span>
                     </a>
                 </li>
                 <li class="item-breadcrumb articles-bread-home">
-                    <a href="{{ route('post.index') }}">
+                    <a href="{{ route('client.post.index') }}">
                         <span>{{ __('page.news.breadcrumb') }}</span>
                     </a>
                 </li>
@@ -63,14 +63,14 @@
                             <span class="ribbon-span">{{ __('page.news.recommended') }}</span>
                         </div>
                         <div class="image-recommend">
-                            <a href="{{ route('post.detail', ['topic' => str_slug($recommendPost->topic->name, '-'), 'id' => $recommendPost->id, 'slug' => str_slug($recommendPost->slug, '-')]) }}">
+                            <a href="{{ route('client.post.detail', ['topic' => str_slug($recommendPost->topic->name, '-'), 'id' => $recommendPost->id, 'slug' => str_slug($recommendPost->slug, '-')]) }}">
                                 <img src="{{ config('define.post.path') . $recommendPost->image }}" alt="{{ $recommendPost->topic->name }}">
                             </a>
                         </div>
                         <figcaption class="articles-center-element">
                             <div class="articles-center-element-item">
                                 <span class="articles-featured-big-category">{{ $recommendPost->topic->name }}</span>
-                                <a class="articles-featured-big-title title-hover" href="{{ route('post.detail', ['topic' => str_slug($recommendPost->topic->name, '-'), 'id' => $recommendPost->id, 'slug' => str_slug($recommendPost->slug, '-')]) }}">{{ $recommendPost->title }}</a>
+                                <a class="articles-featured-big-title title-hover" href="{{ route('client.post.detail', ['topic' => str_slug($recommendPost->topic->name, '-'), 'id' => $recommendPost->id, 'slug' => str_slug($recommendPost->slug, '-')]) }}">{{ $recommendPost->title }}</a>
                                 <span class="articles-featured-big-content">{{ $recommendPost->brief }}</span>
                             </div>
                         </figcaption>
@@ -83,14 +83,14 @@
                     <div class="article-small">
                         <figure>
                             <div class="image-article">
-                                <a href="{{ route('post.detail', ['topic' => str_slug($post->topic->name, '-'), 'id' => $post->id, 'slug' => str_slug($post->slug, '-')]) }}">
+                                <a href="{{ route('client.post.detail', ['topic' => str_slug($post->topic->name, '-'), 'id' => $post->id, 'slug' => str_slug($post->slug, '-')]) }}">
                                     <img class="img-article" src="{{ config('define.post.path') . $post->image }}" alt="{{ $post->title }}">
                                 </a>
                             </div>
                             <figcaption class="articles-center-element-small">
                                 <div class="articles-element-item">
                                     <span class="articles-category">{{ $post->topic->name }}</span>
-                                    <a class="articles-featured-big-title-small title-hover" href="{{ route('post.detail', ['topic' => str_slug($post->topic->name, '-'), 'id' => $post->id, 'slug' => str_slug($post->slug, '-')]) }}">{{ $post->title }}</a>
+                                    <a class="articles-featured-big-title-small title-hover" href="{{ route('client.post.detail', ['topic' => str_slug($post->topic->name, '-'), 'id' => $post->id, 'slug' => str_slug($post->slug, '-')]) }}">{{ $post->title }}</a>
                                 </div>
                             </figcaption>
                         </figure>
@@ -126,12 +126,12 @@
                         <div class="pure-u-1-2 col-lg-6 pr-pl-0">
                             <div class="articles-listing-box">
                                 <figure class="articles-listing-box-frame">
-                                    <a href="{{ route('post.detail', ['topic' => str_slug($post->topic->name, '-'), 'id' => $post->id, 'slug' => str_slug($post->slug, '-')]) }}">
+                                    <a href="{{ route('client.post.detail', ['topic' => str_slug($post->topic->name, '-'), 'id' => $post->id, 'slug' => str_slug($post->slug, '-')]) }}">
                                         <img class="articles-listing-box-image" src="{{ config('define.post.path') . $post->image }}">
                                     </a>
                                 </figure>
                                 <p class="articles-listing-box-category">{{ $post->topic->name }}</p>
-                                <a class="articles-listing-box-title title-hover" href="{{ route('post.detail', ['topic' => str_slug($post->topic->name, '-'), 'id' => $post->id, 'slug' => str_slug($post->slug, '-')]) }}">{{ $post->title }}</a>
+                                <a class="articles-listing-box-title title-hover" href="{{ route('client.post.detail', ['topic' => str_slug($post->topic->name, '-'), 'id' => $post->id, 'slug' => str_slug($post->slug, '-')]) }}">{{ $post->title }}</a>
                                 <p class="articles-listing-box-content">{{ $post->brief }}</p>
                                 <div class="articles-listing-box-date">
                                     <time>{{ $post->created_at }}</time>
@@ -152,7 +152,7 @@
                             <div class="widget-most-read">
                                 <div class="widget-most-read-box">
                                     <div class="widget-most-read-box-number">{{ ++$i }}</div>
-                                    <a href="{{ route('post.detail', ['topic' => str_slug($post->topic->name, '-'), 'id' => $post->id, 'slug' => str_slug($post->slug, '-')]) }}" class="widget-most-read-box-title">{{ $post->title }}</a>
+                                    <a href="{{ route('client.post.detail', ['topic' => str_slug($post->topic->name, '-'), 'id' => $post->id, 'slug' => str_slug($post->slug, '-')]) }}" class="widget-most-read-box-title">{{ $post->title }}</a>
                                 </div>
                             </div>
                         @endforeach
@@ -177,36 +177,4 @@
         </div>
     </div>
 </section>
-@endsection
-
-@section('script')
-    <script type="text/javascript" defer="#">
-        jQuery(document).ready(function($) {
-
-            $(window).scroll(function() {
-
-                var skip = $('.articles-listing-items-area').attr('data-skip');
-
-                if (skip != null) {
-
-                    clearTimeout($.data(this, 'scrollCheck'));
-
-                    $.data(this, 'scrollCheck', setTimeout(function() {
-
-                        var scroll_position_for_post_load = $(window).height() + $(window).scrollTop();
-
-                        if (scroll_position_for_post_load >= ($(document).height() - $('.footer-main-block').height() - 200)) {
-
-                            $.get(route('post.loadMore', { skip: skip }), function(data) {
-
-                                $(data).hide().appendTo('.articles-listing-items-area').fadeIn();
-
-                                $('.articles-listing-items-area').attr('data-skip', parseInt(skip) + 10);
-                            })
-                        }
-                    }, 150));
-                }
-            });
-        });
-    </script>
 @endsection

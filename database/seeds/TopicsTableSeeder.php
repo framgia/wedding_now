@@ -14,25 +14,25 @@ class TopicsTableSeeder extends Seeder
     {
         $data = [
             [
-                'name' => 'PLANNING BASICS',
+                'name' => 'Planning Basics',
             ], [
-                'name' => 'WEDDING CEREMONY',
+                'name' => 'Wedding Ceremony',
             ], [
-                'name' => 'WEDDING RECEPTION',
+                'name' => 'Wedding Reception',
             ], [
-                'name' => 'WEDDING SERVICES',
+                'name' => 'Wedding Services',
             ], [
-                'name' => 'HEALTH & BEAUTY',
+                'name' => 'Health & Beauty',
             ], [
-                'name' => 'WEDDING FASHION',
+                'name' => 'Wedding Fashion',
             ], [
-                'name' => 'DESTINATION WEDDINGS',
+                'name' => 'Destination Weddings',
             ], [
-                'name' => 'FAMILY & FRIENDS',
+                'name' => 'Family & Friends',
             ], [
-                'name' => 'EVENTS & PARTIES',
+                'name' => 'Events & Parties',
             ], [
-                'name' => 'MARRIED LIFE',
+                'name' => 'Married Life',
             ],
         ];
 

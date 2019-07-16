@@ -12,14 +12,23 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-
-    // notification
+    'role_name' => [
+        'admin' => 'Administrator',
+        'vendor' => 'Vendor',
+        'client' => 'Client',
+    ],
+    'post_status' => [
+        'public' => 'public',
+        'unpublic' => 'unpublic',
+        'draft' => 'draft',
+    ],
+    'slug' => 'slug',
+    'writer' => 'Writer',
+    'select' => 'Select',
     'success' => 'Success!',
     'error' => 'Error! Please try again later.',
+    'error_label' => 'Error !',
     'are_you_sure' => 'Are you sure?',
-    // end notification
-
-    // other
     'all' => 'All',
     'title' => 'Title',
     'content' => 'Content',
@@ -27,17 +36,13 @@ return [
     'note' => 'Note',
     'priority' => 'Priority',
     'welcome' => 'Welcome To',
-    // end other
-
-    // validate
     'enter_your' => 'Enter your',
-    // end validate
-
-    // button
     'view' => 'View',
     'list' => 'List',
     'create' => 'Create',
     'edit' => 'Edit',
+    'show' => 'Show',
+    'showing' => 'Showing',
     'update' => 'Update',
     'save' => 'Save',
     'delete' => 'Delete',
@@ -51,9 +56,7 @@ return [
     'choose' => 'Choose',
     'close' => 'Close',
     'uncheck' => 'Uncheck',
-    // end button
-
-    // model
+    'id' => 'Id',
     'city' => 'City',
     'district' => 'District',
     'item' => 'Item',
@@ -63,42 +66,33 @@ return [
     'role' => 'Role',
     'schedule' => 'Schedule',
     'tag' => 'Tag',
+    'topic' => 'Topic',
     'task' => 'Task',
-    'number_task' => 'Number Task: ',
+    'number_task' => 'Number Task',
+    'number_item' => 'Number Items',
     'time_frame' => 'Time frame',
     'user' => 'User',
     'category' => 'Category',
     'new' => 'New',
-
-    // end model
-
-    // placeholder
+    'location' => 'Location',
     'placeholder' => [
         'type_here' => 'Type here ...',
         'search' => 'Search ...',
     ],
-    // end placeholder
-
     'description' => 'Description',
-
     'settings' => 'Settings',
     'general_settings' => 'General settings',
     'system_logs' => 'System logs',
     'logs' => 'Logs',
-
-    // action
     'action' => 'Actions',
     'activity' => 'Activity',
     'quick_actions' => 'Quick actions',
     'send_messages' => 'Send messages',
     'back_to' => 'Back to',
-
     'faq' => 'FAQ',
     'section' => 'Section',
     'support' => 'Support',
     'messages' => 'Messages',
-
-    // auth
     'login' => 'Login',
     'register' => 'Register',
     'remember_me' => 'Remember me',
@@ -115,9 +109,12 @@ return [
     'forget_password' => 'Forget password',
     'enter_your_email_to_reset_your_password' => 'Enter your email to reset your password',
     'fail_login' => 'Username or password is not true!',
-
-    // info
+    'login_wic' => 'You can login with',
+    'or' => 'Or',
+    'basic_infor' => 'Basic Information',
+    'basic_account' => 'Basic Account',
     'name' => 'Name',
+    'your_name' => 'Your name',
     'display_name' => 'Display name',
     'update_profile' => 'Update profile',
     'my_profile' => 'My profile',
@@ -130,22 +127,14 @@ return [
     'address' => 'Address',
     'user_name' => 'Username',
     'social_links' => 'Social links',
-    // end info
-
-    // password
     'password' => 'Password',
     'password_confirmation' => 'Password Confirmation',
-    // end password
-
-    // status
     'just_now' => 'Just now',
     'status' => 'Status',
     'done' => 'Done',
     'to_do' => 'To Do',
     'inprocess' => 'Inprocess',
     'no_records' => 'No records found !',
-    // end status
-
     'by' => 'By',
     'of' => 'of',
     'info' => 'Info!',
@@ -159,7 +148,6 @@ return [
     'community' => 'Community',
     'love' => 'love',
     'by_author' => 'By',
-
     'vnd' => '₫',
     'email_or_username' => 'Email or Username',
     'previous' => 'Previous',
@@ -169,7 +157,13 @@ return [
     'vertical' => 'Vertical',
     'help' => 'Help',
     'download' => 'Download',
-    'new' => 'New',
     'home' => 'Home',
     'file' => 'File',
+    'logout_confirm' => 'Are you sure want to logout?',
+    'decrease' => 'Decreament',
+    'increase' => 'Increament',
+    'permission_denied' => 'You dont have permision to do this action !',
+    'rely' => 'Rely',
+    'newest' => 'Newest',
+    'fitest' => 'Fitest',
 ];

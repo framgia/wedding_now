@@ -24,7 +24,7 @@ class UpdateSchedulePicture extends FormRequest
     public function rules()
     {
         return [
-            'img_schedule' => 'mimes:png|image|max:2048',
+            'img_schedule' => 'mimes:png,jpg,jpeg|image|max:2048',
         ];
     }
 }

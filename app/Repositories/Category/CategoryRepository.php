@@ -23,7 +23,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
     public function getCategoriesWithCountTasks($scheduleId)
     {
         $result = $this->model->with(['tasks' => function ($query) use ($scheduleId) {
-            $query->where('schedule_wedding_id', $scheduleId);
+            $query->where('schedule_id', $scheduleId);
         }])->get();
 
         return $result;

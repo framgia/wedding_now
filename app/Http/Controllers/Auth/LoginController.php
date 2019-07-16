@@ -8,6 +8,9 @@ use App\Repositories\Role\RoleRepositoryInterface;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Alert;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 
 class LoginController extends Controller
 {
@@ -68,5 +71,12 @@ class LoginController extends Controller
             $field => $request->get($this->username()),
             'password' => $request->password,
         ];
+    }
+
+    protected function sendFailedLoginResponse()
+    {
+        Alert::error(trans('auth.failed'), 'Oops!');
+
+        return Redirect::back()->withInput(Input::all());
     }
 }

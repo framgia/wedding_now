@@ -24,6 +24,11 @@ class MediaRepository extends BaseRepository implements MediaRepositoryInterface
         $user->media()->create($data);
     }
 
+    public function updateAvatarOfUser($user, $data)
+    {
+        $user->media()->update($data);
+    }
+
     public function getImagePostUploadOfUser()
     {
         return $this->model->where([

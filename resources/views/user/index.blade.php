@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.user.app')
 
 @section('title')
     {{ __('page.title.home') }}
@@ -6,20 +6,20 @@
 
 @section('content')
 
-    @include('layouts.section.slider')
+    @include('layouts.user.section.slider')
 
     <div class="container mb-20">
 
         <div class="col-lg-8">
 
-            @include('layouts.section.wedding_plan')
+            @include('layouts.user.section.wedding_plan')
 
-            @include('layouts.section.show_card')
+            @include('layouts.user.section.show_card')
         </div>
 
         <div class="col-lg-4 pd-0">
 
-            @include('layouts.section.news')
+            @include('layouts.user.section.news')
         </div>
 
     </div>

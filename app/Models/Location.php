@@ -10,9 +10,9 @@ class Location extends Model
 
     protected $fillable = [
         'address',
-        'locationable_id',
-        'locationable_type',
         'district_id',
+        'type',
+        'user_id',
     ];
 
     public function locationable()

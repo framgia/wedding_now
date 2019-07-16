@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,13 +15,21 @@
 
 Auth::routes(['verify' => true]);
 
-Route::group(['namespace' => 'User'], function () {
+Route::group(['namespace' => 'User', 'as' => 'client.'], function () {
+
+    Route::get('/', 'HomeController@index')
+        ->name('home');
 
     Route::get('lang/{lang}', 'HomeController@changeLang')
         ->name('changeLang');
 
-    Route::get('/', 'HomeController@index')
-        ->name('home');
+    Route::group(['prefix' => 'login-social'], function () {
+        Route::get('{social}/redirect', 'SocialAuthController@redirect')
+            ->name('login-with-account-social-redirect');
+
+        Route::get('{social}/callback', 'SocialAuthController@callback')
+            ->name('login-with-account-social-callback');
+    });
 
     Route::group(['prefix' => 'real-wedding'], function () {
 
@@ -42,212 +52,298 @@ Route::group(['namespace' => 'User'], function () {
             ->name('package.detail');
     });
 
-    Route::get('get-districts/{id}', 'UserController@getDistrictsById')
-        ->name('get.districts');
+    Route::group(['prefix' => 'location'], function () {
 
-    Route::get('planning-package', 'ScheduleController@planningPackage')
-        ->name('planning-package');
+        Route::get('get-districts/{id}', 'LocationController@getDistrictsById')
+            ->name('get.districts');
+
+        Route::get('search-location/{keyword}', 'LocationController@searchLocation')
+            ->name('get-district');
+    });
 
     Route::group(['middleware' => 'auth'], function () {
 
-        Route::get('to-do-list', 'ScheduleController@toDo')
-            ->name('client.to-do-list');
+        Route::group(['prefix' => 'schedule'], function () {
 
-        Route::get('profile/{username}', 'UserController@userProfile')
-            ->name('user.profile');
+            Route::get('my-schedule', 'ScheduleController@toDo')
+                ->name('to-do-list');
 
-        Route::put('update', 'UserController@update')
-            ->name('user.update');
+            Route::post('select-schedule-default', 'ScheduleController@selectScheduleDefault')
+                ->name('select-schedule-default');
 
-        Route::get('load-to-do-list', 'ScheduleController@getToDoList')
-            ->name('client.get-to-do-list');
+            Route::get('load-to-do-list', 'ScheduleController@getToDoList')
+                ->name('get-to-do-list');
 
-        Route::post('create-task', 'ScheduleController@createTask')
-            ->name('client.create-task');
+            Route::post('choose-type-schedule', 'ScheduleController@chooseTypeSchedule')
+                ->name('choose-type-schedule');
 
-        Route::delete('delete-task/{id}', 'ScheduleController@deleteTask')
-            ->name('client.delete-task');
+            Route::get('category-filter', 'ScheduleController@getCategoryFilter')
+                ->name('get-filter-category');
 
-        Route::get('load-item-by-category', 'ScheduleController@getItemByCategory')
-            ->name('client.get-item-by-category');
+            Route::get('schedule-info', 'ScheduleController@scheduleInfoView')
+                ->name('schedule');
 
-        Route::get('single-task/{id}', 'ScheduleController@getSingleTask')
-            ->name('client.get-single-task');
+            Route::get('get-schedule-info', 'ScheduleController@getScheduleInfo')
+                ->name('get-schedule-info');
 
-        Route::post('choose-type-schedule', 'ScheduleController@chooseTypeSchedule')
-            ->name('client.choose-type-schedule');
+            Route::post('upload-image-schedule', 'ScheduleController@changePicture')
+                ->name('schedule-upload-image');
 
-        Route::put('update-task', 'ScheduleController@updateTask')
-            ->name('client.update-task');
+            Route::post('update-schedule', 'ScheduleController@updateSchedule')
+                ->name('schedule-update');
 
-        Route::put('update-status-task/{id}', 'ScheduleController@updateStatusTask')
-            ->name('client.update-status-task');
+            Route::get('schedule/{slug}', 'ScheduleController@show')
+                ->name('schedule.show');
 
-        Route::get('category-filter', 'ScheduleController@getCategoryFilter')
-            ->name('client.get-filter-category');
+            Route::delete('delete-schedule', 'ScheduleController@destroy')
+                ->name('delete-schedule');
 
-        Route::get('schedule-info', 'ScheduleController@scheduleInfoView')
-            ->name('client.schedule');
+            Route::get('timeline/{slug}', 'ScheduleController@timelineRealWedding')
+                ->name('timeline');
 
-        Route::get('get-schedule-info', 'ScheduleController@getScheduleInfo')
-            ->name('client.get-schedule-info');
+            Route::get('planning-package', 'ScheduleController@planningPackage')
+                ->name('planning-package');
+        });
 
-        Route::post('upload-image-schedule', 'ScheduleController@changePicture')
-            ->name('client.schedule-upload-image');
+        Route::group(['prefix' => 'task'], function () {
 
-        Route::post('update-schedule', 'ScheduleController@updateSchedule')
-            ->name('client.schedule-update');
+            Route::post('create-task', 'TaskController@createTask')
+                ->name('create-task');
 
-        Route::get('suggestions', 'ScheduleController@suggestions')
-            ->name('user.suggest');
+            Route::delete('delete-task/{id}', 'TaskController@deleteTask')
+                ->name('delete-task');
 
-        Route::post('schedule', 'ScheduleController@store')
-            ->name('schedule.store');
+            Route::get('single-task/{id}', 'TaskController@getSingleTask')
+                ->name('get-single-task');
 
-        Route::get('schedule/{slug}', 'ScheduleController@show')
-            ->name('schedule.show');
+            Route::put('update-task', 'TaskController@updateTask')
+                ->name('update-task');
 
-        Route::get('search-venue/{keyword}', 'LocationController@getDistrict')
-            ->name('client.get-district');
+            Route::put('update-status-task/{id}', 'TaskController@updateStatusTask')
+                ->name('update-status-task');
+        });
 
-        Route::delete('delete-schedule', 'ScheduleController@destroy')
-            ->name('client.delete-schedule');
+        Route::group(['prefix' => 'suggestions'], function () {
+
+            Route::get('/', 'SuggestionController@index')
+                ->name('suggestion.index');
+
+            Route::post('save', 'SuggestionController@store')
+                ->name('suggestion.store');
+        });
+
+        Route::group(['prefix' => 'profile'], function () {
+
+            Route::get('profile', 'UserController@userProfile')
+                ->name('user.profile');
+
+            Route::put('update', 'UserController@update')
+                ->name('user.update');
+        });
 
         Route::group(['prefix' => 'design-card'], function () {
 
             Route::get('', 'CardController@index')
-                ->name('client.design-card');
+                ->name('design-card');
 
             Route::get('load-card', 'CardController@getDesignCard')
-                ->name('client.load-card');
+                ->name('load-card');
 
             Route::get('create-page', 'CardController@createPage')
-                ->name('client.create-page');
+                ->name('create-page');
 
             Route::get('get-templates', 'CardController@getTemplates')
-                ->name('client.get-templates');
+                ->name('get-templates');
 
             Route::put('save-card', 'CardController@saveCard')
-                ->name('client.save-card');
+                ->name('save-card');
 
             Route::get('choose-template', 'CardController@chooseTemplate')
-                ->name('client.choose-template');
+                ->name('choose-template');
 
             Route::put('update-name', 'CardController@updateName')
-                ->name('client.update-name-card');
+                ->name('update-name-card');
 
             Route::post('choose-orientation', 'CardController@chooseOrientation')
-                ->name('client.choose-orientation');
+                ->name('choose-orientation');
         });
 
         Route::group(['prefix' => 'timeline'], function () {
 
             Route::get('', 'ScheduleController@myTimeline')
-                ->name('client.my-timeline');
+                ->name('my-timeline');
 
-            Route::post('update/note', 'ScheduleController@updateNoteTimeLine')
-                ->name('client.my-timeline.update.note');
+            Route::post('update/note', 'TaskController@updateNoteTimeLine')
+                ->name('my-timeline.update.note');
 
-            Route::post('update/date', 'ScheduleController@updateDateTimeLine')
-                ->name('client.my-timeline.update.date');
+            Route::post('update/date', 'TaskController@updateDateTimeLine')
+                ->name('my-timeline.update.date');
 
-            Route::post('update/priority', 'ScheduleController@updatePriorityTimeLine')
-                ->name('client.my-timeline.update.priority');
+            Route::post('update/priority', 'TaskController@updatePriorityTimeLine')
+                ->name('my-timeline.update.priority');
         });
 
-        Route::get('timeline/{slug}', 'ScheduleController@timelineRealWedding')
-            ->name('client.timeline');
+        Route::group(['prefix' => 'item'], function () {
 
-        Route::get('get-item', 'ScheduleController@getItem')
-            ->name('client.get-item');
+            Route::get('get-item', 'ItemController@getItem')
+                ->name('get-item');
 
-        Route::post('select-schedule-default', 'ScheduleController@selectScheduleDefault')
-            ->name('client.select-schedule-default');
+            Route::get('load-item-by-category', 'ItemController@getItemByCategory')
+                ->name('get-item-by-category');
+
+            Route::get('load-item-by-keyword', 'ItemController@seachItem')
+                ->name('get-item-by-keyword');
+        });
     });
 
-    Route::group(['prefix' => 'news'], function () {
+    Route::group(['prefix' => 'news', 'as' => 'post.'], function () {
 
         Route::get('/', 'PostController@index')
-            ->name('post.index');
+            ->name('index');
 
         Route::get('/loadMore', 'PostController@loadPostScrollPaginate')
-            ->name('post.loadMore');
+            ->name('loadMore');
 
         Route::get('/{topic}/{id}/{slug}', 'PostController@detailPost')
-            ->name('post.detail');
+            ->name('detail')
+            ->middleware('filter.view.post');
+
+        Route::post('comment', 'PostController@comment')
+            ->name('comment');
+
+        Route::get('reply', 'PostController@replyView')
+            ->name('reply-view');
+
+        Route::get('load-reply/{id}', 'PostController@loadReply')
+            ->name('load-reply');
+
+        Route::post('reply', 'PostController@reply')
+            ->name('reply');
     });
 });
 
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['role:admin']], function () {
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['role:admin']], function () {
 
-    Route::get('/', 'AdminController@index')
-        ->name('admin.index');
+    Route::get('/', 'HomeController@index')
+        ->name('index');
 
-    Route::resource('posts', 'PostController')->except(['edit']);
+    Route::group(['prefix' => 'post', 'as' => 'post.'], function () {
 
-    Route::get('posts-list', 'PostController@getAll')
-        ->name('posts.list');
+        Route::get('/', 'PostController@index')
+            ->name('index');
 
-    Route::delete('posts-delete-file/{file}', 'PostController@deleteFile')
-        ->name('posts.delete.file');
+        Route::get('get-data', 'PostController@getAll')
+            ->name('get-data');
 
-    Route::post('posts-send-file', 'PostController@sendFile')
-        ->name('posts.send.file');
+        Route::get('create', 'PostController@create')
+            ->name('create');
 
-    Route::get('user-list', 'UserController@getList')
-        ->name('admin.user.list');
+        Route::post('store', 'PostController@store')
+            ->name('store');
 
-    Route::get('user', 'UserController@index')
-        ->name('admin.user.index');
+        Route::get('{id}/show', 'PostController@show')
+            ->name('show');
 
-    Route::put('user-update/{id}', 'UserController@update')
-        ->name('admin.user.update')
-        ->middleware(['permission:user-update']);
+        Route::get('{id}/edit', 'PostController@edit')
+            ->name('edit');
 
-    Route::get('user/{id}', 'UserController@show')
-        ->name('admin.user.show');
+        Route::put('update/{id}', 'PostController@update')
+            ->name('update');
 
-    Route::get('user-list', 'UserController@getList')
-        ->name('admin.user.list');
+        Route::delete('{id}', 'PostController@destroy')
+            ->name('destroy');
 
-    Route::post('user-create', 'UserController@store')
-        ->name('admin.user.store');
-
-    Route::group(['prefix' => 'role', 'middleware' => ['role:admin']], function () {
-
-        Route::resource('role', 'RoleController')
-            ->except(['create', 'edit', 'destroy',]);
-
-        Route::get('role-delete/{id}', 'RoleController@destroy')
-            ->name('role.destroy');
-        Route::get('role-list', 'RoleController@getRole')
-            ->name('role.getRole');
+        Route::get('get-all-tag-pluck', 'TagController@getAllTag')
+            ->name('get-all-tag-pluck');
     });
 
-    Route::get('list-schedule-default', 'ScheduleController@index')
-        ->name('admin.list-schedule-default');
+    Route::group(['prefix' => 'role', 'as' => 'role.'], function () {
 
-    Route::get('list-schedule-default', 'ScheduleWeddingController@index')
-        ->name('admin.list-schedule-default');
+        Route::get('/', 'RoleController@index')
+            ->name('index');
 
-    Route::get('create-schedule-default', 'ScheduleWeddingController@create')
-        ->name('admin.create-schedule-default');
+        Route::get('get-data', 'RoleController@getAll')
+            ->name('get-data');
 
-    Route::get('schedule-default', 'ScheduleWeddingController@scheduleDefaultIndex')
-        ->name('admin.schedule-default.index');
+        Route::get('create', 'RoleController@create')
+            ->name('create');
 
-    Route::put('schedule-default/{id}', 'ScheduleWeddingController@scheduleDefaultUpdate')
-        ->name('admin.schedule-default.update');
+        Route::post('store', 'RoleController@store')
+            ->name('store');
 
-    Route::get('task-in-schedule', 'ScheduleWeddingController@getTasks')
-        ->name('admin.task-in-schedule');
+        Route::get('{id}/show', 'RoleController@show')
+            ->name('show');
 
-    Route::get('categories-pluck', 'ScheduleWeddingController@getCategoryPluck')
-        ->name('admin.categories-pluck');
+        Route::get('{id}/edit', 'RoleController@edit')
+            ->name('edit');
 
-    Route::get('item-with-vendor-pluck-by-category', 'ScheduleWeddingController@getItemWithVendorPluckByIdCategory')
-        ->name('admin.item-with-vendor-pluck-by-category');
+        Route::put('update/{id}', 'RoleController@update')
+            ->name('update');
 
-    Route::get('time-frame-pluck', 'ScheduleWeddingController@getTimeFramePluck')
-        ->name('admin.time-frame-pluck');
+        Route::delete('{id}', 'RoleController@destroy')
+            ->name('destroy');
+    });
+
+    Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
+
+        Route::get('', 'UserController@index')
+            ->name('index');
+
+        Route::get('get-data', 'UserController@getAll')
+            ->name('get-data');
+
+        Route::get('create', 'UserController@create')
+            ->name('create');
+
+        Route::post('store', 'UserController@store')
+            ->name('store');
+
+        Route::get('{id}/show', 'UserController@show')
+            ->name('show');
+
+        Route::get('{id}/edit', 'UserController@edit')
+            ->name('edit');
+
+        Route::put('update/{id}', 'UserController@update')
+            ->name('update');
+
+        Route::delete('{id}', 'UserController@destroy')
+            ->name('destroy');
+    });
+
+    Route::group(['prefix' => 'city'], function () {
+
+        Route::get('get-district', 'CityController@getDistrict')
+            ->name('city.get-district');
+    });
+
+    Route::group(['prefix' => 'schedule'], function () {
+
+        Route::group(['prefix' => 'default', 'as' => 'schedule-default.'], function () {
+
+            Route::get('/', 'ScheduleController@indexScheduleDefault')
+                ->name('index');
+
+            Route::get('/get-data', 'ScheduleController@getDataScheduleDefault')
+                ->name('get-data');
+
+            Route::get('/{id}/show', 'ScheduleController@showScheduleDefault')
+                ->name('show');
+
+            Route::get('/create', 'ScheduleController@createScheduleDefault')
+                ->name('create');
+
+            Route::get('/{id}/edit', 'ScheduleController@showScheduleDefault')
+                ->name('edit');
+        });
+    });
+
+    Route::get('categories-pluck', 'ScheduleController@getCategoryPluck')
+        ->name('categories-pluck');
+
+    Route::get('item-with-vendor-pluck-by-category', 'ScheduleController@getItemWithVendorPluckByIdCategory')
+        ->name('item-with-vendor-pluck-by-category');
+
+    Route::get('time-frame-pluck', 'ScheduleController@getTimeFramePluck')
+        ->name('time-frame-pluck');
 });

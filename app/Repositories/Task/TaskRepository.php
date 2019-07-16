@@ -39,7 +39,7 @@ class TaskRepository extends BaseRepository implements TaskRepositoryInterface
             }, function ($query) {
                 $query->get();
             })
-            ->where('schedule_wedding_id', '=', $id)
+            ->where('schedule_id', '=', $id)
             ->get();
     }
 }

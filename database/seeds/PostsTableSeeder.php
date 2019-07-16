@@ -15,7 +15,8 @@ class PostsTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        factory(Post::class, 50)->create()->each(function($post) use ($faker) {
+        factory(Post::class, 100)->create()->each(function ($post) use ($faker) {
+
             $post->rates()->create([
                 'star' => random_int(1, 5),
                 'content' => 'Good !',
@@ -23,10 +24,21 @@ class PostsTableSeeder extends Seeder
                 'rateable_id' => $post->id,
                 'rateable_type' => 'App\Models\Post',
             ]);
+
             $post->medias()->create([
                 'name' => $faker->randomElement(['news-1.jpg', 'news-2.jpg', 'news-3.jpg', 'news-4.jpg', 'news-5.jpg', 'news-6.jpg']),
                 'mediaable_id' => $post->id,
                 'mediaable_type' => 'App\Models\Post',
+                'type' => 'image',
+            ]);
+
+            $post->comments()->create([
+                'content' => $faker->realText('100'),
+                'user_id' => random_int(1, 5),
+                'commentable_id' => $post,
+                'commentable_type' => 'App\Models\Post',
+                'comment_id' => $faker->randomElement([null, 1, 2, 3]),
+                'created_at' => \Carbon\Carbon::now(),
             ]);
         });
     }

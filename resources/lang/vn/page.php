@@ -36,6 +36,8 @@ return [
         'task_complete' => 'Công việc đã hoàn thành',
         'of' => ' của :total',
         'task_to_do' => 'Nhiệm vụ công việc',
+        'wedding_date' => "Thời gian cưới",
+        'partner' => 'Bạn đời',
     ],
 
     'index' => [
@@ -55,10 +57,17 @@ return [
         'wedding_idea' => 'Ý tưởng',
         'enter_search_service' => 'Nhập dịch vụ hoặc nhà cung cấp,...',
         'enter_search_idea' => 'Nhập từ khóa',
+        'wedding_plan' => [
+            'edit' => [
+                'text' => 'Chỉnh sửa lịch trình',
+                'detail' => 'Thay đổi lịch trình theo ý bạn',
+            ],
+        ],
+        'seach_product_modal' => 'Nhập tên sản phẩm hoặc tên địa chỉ',
     ],
 
     'profile' => [
-        'dashboard' => 'Bảng điều khiển',
+        'dashboard' => 'Trang Quản Trị',
         'profile' => 'Hồ sơ',
         'to_do' => 'Danh sách công việc',
         'budget' => 'Ngân sách của tôi',
@@ -160,9 +169,6 @@ return [
     'bride' => 'Chú rể',
     'wedding_date' => 'Ngày cưới',
     'venue' => 'Địa điểm',
-    'message' => [
-        'fail' => 'Lỗi, Vui lòng thử lại',
-    ],
     'your_list_schedule' => 'Danh sách lịch trình của bạn',
     'suggest' => [
         'new_category' => 'Thêm danh mục',
@@ -179,6 +185,7 @@ return [
     ],
     'timeline' => [
         'no_choose_date' => 'Chưa chọn',
+        'no_choose_location' => 'Chưa chọn',
         'undefined' => 'Chưa xác định',
         'no_note' => 'Không có ghi chú nào!',
         'high' => 'Cao',
@@ -249,6 +256,7 @@ return [
         'placeholder_search' => 'Tìm kiếm bài viết',
         'latest_news' => 'Tin tức và cập nhật mới nhất',
         'detail_latest_news' => 'Tin tức về những đám cưới mới nhất',
+        'most_view' => 'Lượt xem nhiều nhất',
     ],
     'todo_list' => [
         'list' => 'Danh sách sản phẩm',
@@ -265,6 +273,8 @@ return [
         'collapse_all' => 'Thu gọn',
         'no_task' => 'Không có công việc nào!',
         'reset_default' => 'Khôi phục mặc định',
+        'filter_by_price' => 'Lọc theo giá',
+        'supplier' => 'Nhà cung cấp',
     ],
     'real_wedding' => [
         'list' => 'Danh sách đám cưới',
@@ -275,11 +285,14 @@ return [
             'option_1' => '0 - 50 triệu',
             'option_2' => '50 - 100 triệu',
             'option_3' => '100 - 150 triệu',
-            'option_4' => 'Trên 50 triệu',
+            'option_4' => 'Trên 150 triệu',
         ],
         'package_services' => 'Gói dịch vụ',
     ],
     'banner' => [
         'all_services' =>'Tất cả dịch vụ',
     ],
+    'comment' => [
+        'write_comment' => 'Viết phản hồi',
+    ]
 ];

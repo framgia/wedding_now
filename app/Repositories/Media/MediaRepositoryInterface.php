@@ -10,5 +10,7 @@ interface MediaRepositoryInterface extends RepositoryInterface
 
     public function saveAvatarOfUser($user, $data);
 
+    public function updateAvatarOfUser($user, $data);
+
     public function getImagePostUploadOfUser();
 }

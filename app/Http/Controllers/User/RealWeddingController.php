@@ -3,39 +3,51 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Requests\Client\PaginateRealWeddingRequest;
-use App\Models\Post;
-use App\Models\ScheduleMeta;
-use App\Models\ScheduleWedding;
 use App\Models\Task;
-use App\Repositories\Post\PostRepository;
-use App\Repositories\ScheduleMeta\ScheduleMetaRepository;
-use App\Repositories\ScheduleWedding\ScheduleWeddingRepository;
+use App\Repositories\Category\CategoryRepositoryInterface;
+use App\Repositories\Post\PostRepositoryInterface;
+use App\Repositories\ScheduleMeta\ScheduleMetaRepositoryInterface;
 use App\Http\Controllers\Controller;
-use App\Repositories\Task\TaskRepository;
+use App\Repositories\Schedule\ScheduleRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Alert;
 
 class RealWeddingController extends Controller
 {
     protected $post;
-    protected $wedding;
+    protected $schedule;
+    protected $scheduleMeta;
     protected $task;
+    protected $category;
 
-    public function __construct(Post $post, ScheduleWedding $scheduleWedding, ScheduleMeta $meta, Task $task)
+    public function __construct(
+        PostRepositoryInterface $post,
+        ScheduleRepositoryInterface $schedule,
+        ScheduleMetaRepositoryInterface $scheduleMeta,
+        Task $task,
+        CategoryRepositoryInterface $category
+    )
     {
-        $this->post = new PostRepository($post);
-        $this->wedding = new ScheduleWeddingRepository($scheduleWedding);
-        $this->meta = new ScheduleMetaRepository($meta);
-        $this->task = new TaskRepository($task);
+        $this->post = $post;
+        $this->schedule = $schedule;
+        $this->meta = $scheduleMeta;
+        $this->task = $task;
+        $this->category = $category;
     }
 
     public function index()
     {
-        $posts = $this->post->getMostRatePost(config('define.post.take_three_post'), config('define.post.recommend'));
+        $categories = collect($this->category->getData())->pluck('name', 'id');
 
-        $packages = $this->wedding->getPackages(config('define.package_service_paginate'));
+        $posts = $this->post->getMostRatePost([config('define.post.type.schedule'), config('define.post.type.item')], config('define.post.take_three_post'), config('define.post.recommend'));
 
-        return view('user.real_wedding', compact('posts', 'packages'));
+        $packages = $this->schedule->getPackages(config('define.package_service_paginate'));
+
+        $weddings = $this->schedule->paginate($this->schedule->filterWedding(null, null, null), config('define.real_wedding_paginate'), config('define.page_first'));
+
+        return view('user.real_wedding', compact('weddings', 'posts', 'packages', 'categories'));
     }
 
     /**
@@ -84,7 +96,7 @@ class RealWeddingController extends Controller
                     break;
             }
 
-            $weddings = $this->wedding->paginate($this->wedding->filterWedding($minPrice, $maxPrice, $orderByRate), config('define.real_wedding_paginate'), $page);
+            $weddings = $this->schedule->paginate($this->schedule->filterWedding($minPrice, $maxPrice, $orderByRate), config('define.real_wedding_paginate'), $page);
 
             return view('user.sections.result_real_wedding', compact('weddings'))->render();
         }
@@ -92,7 +104,7 @@ class RealWeddingController extends Controller
 
     public function detail(Request $request)
     {
-        $schedule = $this->wedding->findById($request->id)->load('tasks.category');
+        $schedule = $this->schedule->findById($request->id)->load('tasks.category');
 
         $tasks = $schedule->tasks;
 
@@ -103,24 +115,34 @@ class RealWeddingController extends Controller
 
     public function copySchedule(Request $request)
     {
-        $schedule = $this->wedding->findById($request->id)->load('tasks');
-        $tasks = $schedule->tasks;
-        $schedule->schedule_wedding_id = $request->id;
-        $schedule->user_id = Auth::id();
-        $schedule->name = config('define.schedule_name') . Auth::user()->name;
-        $schedule->type = config('define.type_schedule.custom');
-        $schedule->slug = str_slug($schedule->name);
+        $schedule = $this->schedule->findWithCondition('id', $request->id)->first();
 
-        $newSchedule = $this->wedding->create($schedule->toArray());
+        if (!is_null($schedule)) {
 
-        $tasks->map(function ($item, $key) use ($newSchedule) {
-            $item->schedule_wedding_id = $newSchedule->id;
+            DB::transaction(function () use ($schedule, $request) {
 
-            return $this->task->create($item->toArray());
-        });
+                $schedule->load('tasks');
 
-        $this->meta->setChosenSchedule($newSchedule->id);
+                $newSchedule = $this->schedule->create([
+                    'schedule_id' => $request->id,
+                    'user_id' => Auth::id(),
+                    'name' => config('define.schedule_name') . Auth::user()->name,
+                    'budget' => $schedule->budget,
+                    'type' => config('define.type_schedule.custom'),
+                    'slug' => str_slug($schedule->name),
+                ]);
 
-        return redirect()->route('client.to-do-list');
+                $schedule->tasks->map(function ($item) use ($newSchedule) {
+
+                    $item->schedule_id = $newSchedule->id;
+
+                    return $this->task->create($item->toArray());
+                });
+
+                $this->schedule->setScheduleDefault($newSchedule->id);
+            });
+
+            return redirect()->route('client.to-do-list');
+        }
     }
 }

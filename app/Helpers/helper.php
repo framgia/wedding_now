@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
-use App\Models\ScheduleMeta;
+use App\Models\Schedule;
 
 function isAdmin()
 {
@@ -21,14 +21,39 @@ function hasSchedule()
 {
     $result = false;
 
-    $default = ScheduleMeta::with('scheduleWedding')
-        ->whereHas('scheduleWedding.user', function ($query) {
-            $query->where('users.id', Auth::id());
-        })->where('key', config('define.default'))->first();
+    $default = Schedule::where([
+        ['user_id', Auth::id()],
+        ['default',true],
+        ['type', config('define.type_schedule.custom')],
+    ])->first();
 
     if ($default) {
+
         $result = true;
     }
 
     return $result;
+}
+
+function getBriefFromContent($str, $n = 500, $end_char = '&#8230;')
+{
+    if (strlen($str) < $n) {
+        return $str;
+    }
+
+    $str = preg_replace("/\s+/", ' ', str_replace(array("\r\n", "\r", "\n"), ' ', $str));
+
+    if (strlen($str) <= $n) {
+        return $str;
+    }
+
+    $out = "";
+    foreach (explode(' ', trim($str)) as $val) {
+        $out .= $val . ' ';
+
+        if (strlen($out) >= $n) {
+            $out = trim($out);
+            return (strlen($out) == strlen($str)) ? $out : $out . $end_char;
+        }
+    }
 }

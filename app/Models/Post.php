@@ -11,8 +11,9 @@ class Post extends Model
     protected $fillable = [
         'title',
         'content',
-        'schedule_wedding_id',
+        'schedule_id',
         'user_id',
+        'topic_id',
         'slug',
         'brief',
         'status',
@@ -23,14 +24,24 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function scheduleWedding()
+    public function schedule()
     {
-        return $this->belongsTo(ScheduleWedding::class);
+        return $this->belongsTo(Schedule::class);
     }
 
     public function medias()
     {
         return $this->morphMany(Media::class, 'mediaable');
+    }
+
+    public function images()
+    {
+        return $this->medias()->whereType(config('define.type_media.image'));
+    }
+
+    public function videos()
+    {
+        return $this->medias()->whereType(config('define.type_media.video'));
     }
 
     public function comments()
@@ -55,16 +66,21 @@ class Post extends Model
 
     public function scopeNumberStarPost($query)
     {
-        return $query->join('rates', function($q) {
-                $q->on('rates.rateable_id', '=', 'posts.id');
-                $q->where('rates.rateable_type', '=', 'App\Models\Post');
-            })->selectRaw('sum(star) as number_star')
-                ->groupBy('rates.rateable_id')
-                ->orderBy('number_star', 'desc');
+        return $query->join('rates', function ($q) {
+            $q->on('rates.rateable_id', '=', 'posts.id');
+            $q->where('rates.rateable_type', '=', 'App\Models\Post');
+        })->selectRaw('sum(star) as number_star')
+            ->groupBy('rates.rateable_id')
+            ->orderBy('number_star', 'desc');
     }
 
     public function scopePublic($query)
     {
         return $query->whereStatus(config('define.post.status.public'));
+    }
+
+    public function increment($column, $amount = 1, array $extra = [])
+    {
+        return parent::increment($column, $amount, $extra);
     }
 }

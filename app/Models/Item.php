@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
-class Item extends Model
+class Item extends BaseModel
 {
+    use HasRelationships;
+
     protected $table = 'items';
 
     protected $fillable = [
@@ -21,19 +23,22 @@ class Item extends Model
         return $this->belongsToMany(Category::class);
     }
 
-    public function user()
+    public function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class)
+            ->using(ItemUser::class)
+            ->withPivot('price');
+    }
+
+    public function tasks()
+    {
+        return $this->belongsToMany(ItemUser::class)
+            ->withPivot('price');
     }
 
     public function medias()
     {
         return $this->morphMany(Media::class, 'mediaable');
-    }
-
-    public function tasks()
-    {
-        return $this->hasMany(Task::class);
     }
 
     public function rate()
@@ -45,4 +50,5 @@ class Item extends Model
     {
         return $this->morphMany(Location::class, 'locationable');
     }
+
 }

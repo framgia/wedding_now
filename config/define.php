@@ -5,9 +5,30 @@ return [
         'admin' => 1,
         'vendor' => 2,
         'client' => 3,
+        'name' => [
+            'admin' => 'admin',
+            'vendor' => 'vendor',
+            'client' => 'client',
+        ]
     ],
+    'avatar_default' => 'storage/avatar/user_default.png',
     'user' => [
         'image_default' => 'user_default.png',
+    ],
+    'type_media' => [
+        'video' => 'video',
+        'image' => 'iamge',
+    ],
+    'social' => [
+        'facebook' => 'facebook',
+        'google' => 'google',
+    ],
+    'location' => [
+        'type' => [
+            'home' => 'home',
+            'venue' => 'venue',
+        ],
+        'get_home' => 1,
     ],
     'api_location' => 'https://thongtindoanhnghiep.co',
     'type' => [
@@ -35,13 +56,20 @@ return [
     'main_schedule' => 'storage/wedding/main-schedule.jpg',
     'ring_img' => 'storage/wedding/icon_ring.png',
     'default_avatar' => 'storage/avatar/user_default.png',
+    'avatar' => [
+        'width' => 300,
+        'height' => 300,
+    ],
     'days' => 30,
     'paginate' => 21,
     'done' => 1,
     'to_do' => 0,
     'image_card' => 'image-background',
-    'logo' => 'storage/wedding/logo.png',
-    'logo_fb' => 'storage/logo/fb.png',
+    'logo'=> [
+        'website' => 'storage/wedding/logo.png',
+        'fb' => 'storage/logo/fb.png',
+        'gmail' => 'storage/logo/gmail.png',
+    ],
     'logo_youtube' => 'storage/logo/youtube.png',
     'default' => 'default',
     'post' => [
@@ -63,6 +91,16 @@ return [
         'no_skip' => 0,
         'take_three_post' => 3,
         'take_five_post' => 5,
+        'type' => [
+            'schedule' => 'schedule',
+            'item' => 'item',
+            'location' => 'location',
+            'thinks' => 'thinks',
+            'feedback' => 'feedback',
+        ],
+        'media' => [
+            'upload_image' => 6,
+        ],
     ],
     'vn' => 'vn',
     'vi' => 'vi',
@@ -105,4 +143,7 @@ return [
     'real_wedding_paginate' => 6,
     'package_service_paginate' => 4,
     'zero' => 0,
+    'increase' => 'increase',
+    'decrease' => 'decrease',
+    'page_first' => 1,
 ];

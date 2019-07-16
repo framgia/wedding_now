@@ -15,7 +15,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
 
     public function getAll($with, $withCount)
     {
-        return $this->model->withCount($withCount)->with($with)->get();
+        return $this->model->withCount($withCount)->with($with)->public()->get();
     }
 
     public function getMostRatePost($type = [], $number = null, $numberSkip = null, $ids = [])

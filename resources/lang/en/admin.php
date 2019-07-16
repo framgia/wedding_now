@@ -31,6 +31,9 @@ return [
         'hr' => 'HR Reports',
         'app' => 'Reporting App',
     ],
+    'post' => [
+        'no_tag' => 'No tags',
+    ],
     'order' => [
         'manage' => 'Manage orders',
         'lastest' => 'Lastest order',
@@ -89,4 +92,8 @@ return [
         'schedule' => 'Schedule Wedding',
         'default' => 'Schedule Default',
     ],
+    'create_schedule' => 'Create New Schedule',
+    'create_by_admin' => 'Create By Admin',
+    'permission_count' => 'Permission Count',
+    'child_schedules_number' => 'Child Schedule',
 ];

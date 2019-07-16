@@ -9,13 +9,13 @@ class ScheduleMeta extends Model
     protected $table = 'schedule_metas';
 
     protected $fillable = [
-        'schedule_wedding_id',
+        'schedule_id',
         'key',
         'value',
     ];
 
-    public function scheduleWedding()
+    public function schedule()
     {
-        return $this->belongsTo(ScheduleWedding::class);
+        return $this->belongsTo(Schedule::class);
     }
 }

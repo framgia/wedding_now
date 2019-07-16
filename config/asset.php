@@ -1,17 +1,8 @@
 <?php
 
 return [
-    'components_base' => 'assets/demo/default/custom/components/base/',
-    'logo' => 'assets/demo/default/media/img/logo/',
-    'logo_default' => 'logo_default_dark.png',
-    'app_logo' => 'assets/app/media/img/logos/',
-    'login' => 'assets/snippets/custom/pages/user/',
-    'app_js' => 'assets/app/js/',
-    'media' => 'assets/app/media/',
-    'custom' => 'assets/customs/',
-    'vendors_base' => 'assets/vendors/base/',
-    'vendors_custom' => 'assets/vendors/custom/',
-    'default_base' => 'assets/demo/default/base/',
+    'admin_base' => 'asset/admin/',
+    'logo_page_admin' => 'asset/admin/images/img/logo/logo_default_dark.png',
     'image' => [
         'background' => 'img/bg/',
         'error' => 'img/error/',
@@ -21,12 +12,13 @@ return [
         'misc' => 'img/misc/',
         'user' => 'img/users/',
     ],
-    'users' => [
-        'revolution_css' => 'assets/user/revolution/css/',
-        'css' => 'assets/user/css/',
-        'revolution_js' => 'assets/user/revolution/js/',
-        'extensions_js' => 'assets/user/revolution/js/extensions/',
-        'js' => 'assets/user/js/',
+    'user' => [
+        'avatar' => 'storage/avatar/',
+        'revolution_css' => 'asset/user/revolution/css/',
+        'css' => 'asset/user/css/',
+        'revolution_js' => 'asset/user/revolution/js/',
+        'extensions_js' => 'asset/user/revolution/js/extensions/',
+        'js' => 'asset/user/js/',
         'images' => [
             'index' => 'storage/wedding/',
             'user_wedding' => 'storage/wedding/user_wedding/',
@@ -42,7 +34,7 @@ return [
             'template' => 'storage/card/horizontal/',
             'present' => 'storage/card/present/horizontal/',
             'background' => 'storage/card/background/horizontal/',
-            
+
         ],
         'vertical' => [
             'template' => 'storage/card/vertical/',
@@ -58,6 +50,7 @@ return [
             'vertical' => 'storage/card/present/vertical/',
         ],
     ],
+    'post' => 'storage/news/',
     'schedule_default' => 'storage/wedding/',
     'package' => 'storage/wedding/package/',
 ];

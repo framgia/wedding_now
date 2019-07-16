@@ -2,16 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
+use TaylorNetwork\UsernameGenerator\FindSimilarUsernames;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
     use EntrustUserTrait;
+    use HasRelationships;
+    use FindSimilarUsernames;
 
     /**
      * The attributes that are mass assignable.
@@ -58,9 +61,17 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->morphMany(Location::class, 'locationable');
     }
 
+    public function home()
+    {
+        return $this->locations()
+            ->whereType(config('define.location.type.home'))
+            ->take(config('define.location.get_home'));
+    }
+
     public function items()
     {
-        return $this->hasMany(Item::class);
+        return $this->belongsToMany(ItemUser::class)
+            ->using(ItemUser::class)->withPivot('price');
     }
 
     public function media()
@@ -68,9 +79,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->morphOne(Media::class, 'mediaable');
     }
 
-    public function scheduleWeddings()
+    public function schedules()
     {
-        return $this->hasMany(ScheduleWedding::class);
+        return $this->hasMany(Schedule::class);
     }
 
     public function rate()

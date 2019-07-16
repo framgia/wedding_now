@@ -39,5 +39,14 @@ return [
             'tolerance' => env('STRIPE_WEBHOOK_TOLERANCE', 300),
         ],
     ],
-
+    'facebook' => [
+        'client_id' => env('FACEBOOK_APP_ID'),
+        'client_secret' => env('FACEBOOK_APP_SECRET'),
+        'redirect' => 'http://localhost:8000/login-social/facebook/callback',
+    ],
+    'google' => [
+        'client_id' => env('GOOGLE_APP_ID'),
+        'client_secret' =>  env('GOOGLE_APP_SECRET'),
+        'redirect' => 'http://localhost:8000/login-social/google/callback',
+    ],
 ];

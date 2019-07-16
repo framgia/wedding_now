@@ -15,8 +15,13 @@ class LocationController extends Controller
         $this->district = new DistrictRepository($district);
     }
 
-    public function getDistrict($keyword)
+    public function searchLocation($keyword)
     {
-        return $this->district->getDistrict($keyword);
+        return $this->district->searchLocation($keyword);
+    }
+
+    public function getDistrictsById($id)
+    {
+        return $this->district->findWithCondition('city_id', $id)->pluck('name', 'id');
     }
 }

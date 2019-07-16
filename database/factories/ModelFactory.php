@@ -4,7 +4,7 @@ use Faker\Generator as Faker;
 use App\Models\User;
 use App\Models\Location;
 use App\Models\Item;
-use App\Models\ScheduleWedding;
+use App\Models\Schedule;
 use App\Models\Task;
 use App\Models\Post;
 use Carbon\Carbon;
@@ -39,60 +39,66 @@ $factory->define(Item::class, function (Faker $faker) {
     return [
         'name' => $faker->sentence(3),
         'slug' => str_random(10),
-        'description' => $faker->text(300),
-        'price' => $faker->randomNumber(6),
-        'user_id' => $faker->numberBetween(10, 99),
+        'description' => $faker->realText(300),
     ];
 });
 
-$factory->define(ScheduleWedding::class, function (Faker $faker) {
+$factory->define(Schedule::class, function (Faker $faker) {
     return [
         'name' => 'Schedule Wedding of ' . factory(App\Models\User::class)->create()->name,
         'slug' => str_random(10),
-        'user_id' => rand(1, 100),
+        'user_id' => rand(1, 28),
         'type' => 'custom',
-        'schedule_wedding_id' => null,
+        'schedule_id' => null,
         'budget' => rand(50000000, 200000000),
         'note' =>  $faker->sentence(15),
         'final_cost' => rand(100000000, 200000000),
     ];
 });
 
-$factory->state(ScheduleWedding::class, 'default', [
+$factory->state(Schedule::class, 'default', [
     'type' => 'default',
     'user_id' => 1,
 ]);
 
-$factory->state(ScheduleWedding::class, 'suggest', [
+$factory->state(Schedule::class, 'suggest', [
     'type' => 'suggest',
     'user_id' => 1,
 ]);
 
-$factory->state(ScheduleWedding::class, 'package', [
+$factory->state(Schedule::class, 'package', [
     'type' => 'package',
     'user_id' => 1,
 ]);
 
 $factory->define(Task::class, function (Faker $faker) {
     return [
-        'name' => $faker->sentence(5),
+        'name' => $faker->realText(50),
         'priority' => 0,
         'category_id' => rand(1, 11),
         'time_occurs' =>  $faker->dateTimeThisYear(),
         'time_frame_id' => 1,
-        'note' =>  $faker->sentence(15),
-        'schedule_wedding_id' => rand(3, 60),
+        'note' =>  $faker->realText(15),
+        'schedule_id' => rand(8, 17),
     ];
 });
 
 $factory->define(Post::class, function(Faker $faker) {
     return [
-        'title' => $faker->text(100),
-        'content' => $faker->text(10000),
+        'title' => $faker->realText(100),
+        'content' => $faker->realText(1000),
         'user_id' => 1,
         'slug' => $faker->text(100),
         'topic_id' => $faker->randomElement([1, 2, 3, 4]),
-        'brief' => $faker->text(191),
+        'brief' => $faker->realText(191),
         'status' => 'public',
+        'type' => $faker->randomElement(['schedule', 'item', 'location', 'feedback', 'thinks']),
+    ];
+});
+
+$factory->define(Comment::class, function(Faker $faker) {
+    return [
+        'content' => $faker->realText(1000),
+        'user_id' => 1,
     ];
 });

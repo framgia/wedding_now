@@ -37,6 +37,8 @@ return [
         'task_complete' => 'Task Complete',
         'of' => ' of :total',
         'task_to_do' => 'Task To Do',
+        'wedding_date' => "Wedding Date",
+        'partner' => 'Partner',
     ],
 
     'index' => [
@@ -54,7 +56,7 @@ return [
         'planning' => 'Start Planning Your Wedding',
         'choose_planning' => 'Please choose one of the plannings we have provided below',
         'planning_new' => 'Create new planning',
-        'planning_package' => 'Package planning ',
+        'planning_package' => 'Package planning',
         'planning_suggest' => 'Suggestions for you',
         'view_details' => 'View Details',
         'detail_planning_new' => 'Create your planning',
@@ -69,6 +71,13 @@ return [
         'wedding_idea' => 'Wedding Idea',
         'enter_search_service' => 'Enter service, supplier...',
         'enter_search_idea' => 'Enter keywork',
+        'wedding_plan' => [
+            'edit' => [
+                'text' => 'Edit your schedule',
+                'detail' => 'Change your schedule fit to you',
+            ],
+        ],
+        'seach_product_modal' => 'Enter name of location',
     ],
 
     'profile' => [
@@ -174,9 +183,6 @@ return [
     'bride' => 'Bride',
     'wedding_date' => 'Wedding Date',
     'venue' => 'Venue',
-    'message' => [
-        'fail' => 'Something wrong, please try again',
-    ],
     'your_list_schedule' => 'Your List Schedule',
     'suggest' => [
         'new_category' => 'New category',
@@ -193,6 +199,7 @@ return [
     ],
     'timeline' => [
         'no_choose_date' => 'Not choose',
+        'no_choose_location' => 'Not choose',
         'more' => 'Show more',
         'less' => 'Show less',
         'undefined' => 'Undefined',
@@ -270,6 +277,7 @@ return [
         'search' => 'Search',
         'latest_news' => 'Latest News & Updates',
         'detail_latest_news' => 'News about the latest weddings',
+        'most_view' => 'Most View',
     ],
     'todo_list' => [
         'list' => 'List Product',
@@ -286,7 +294,8 @@ return [
         'collapse_all' => 'Collapse all',
         'no_task' => 'No task!',
         'reset_default' => 'Reset Default',
-        'collapse_all' => 'Collapse all',
+        'filter_by_price' => 'Filter By Price',
+        'supplier' => 'Supplier',
     ],
     'real_wedding' => [
         'list' => 'Wedding List',
@@ -302,6 +311,9 @@ return [
         'package_services' => 'Package Services',
     ],
     'banner' => [
-        'all_services' =>'All Services',
+        'all_services' => 'All Services',
     ],
+    'comment' => [
+        'write_comment' => 'Write comment',
+    ]
 ];

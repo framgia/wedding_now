@@ -1,6 +1,57 @@
-@extends('layouts.main')
+@extends('layouts.user.main')
+
 @section('title', __('page.page.real_wedding'))
+
 @section('page-name', __('page.page.real_wedding'))
+
+@section('banner-content')
+    <ul role="tablist" class="nav nav-tabs cover__tab">
+        <li role="presentation" class="cover__tab-li active">
+            <a href="#search-service" aria-controls="search-service" role="tab" data-toggle="tab" class="cover__tab-link" aria-expanded="true">{{ __('page.index.wedding_service') }}</a>
+        </li>
+        <li role="presentation" class="cover__tab-li">
+            <a href="#search-idea" aria-controls="search-idea" role="tab" data-toggle="tab" class="cover__tab-link" aria-expanded="false">{{ __('page.index.wedding_idea') }}</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div id="search-service" class="tab-pane in active">
+            {{ Form::open(['class' => 'row']) }}
+                <div class="col-lg-5">
+                    <input type="text" class="form-control" name=""
+                           placeholder="{{ __('page.index.enter_search_service') }}">
+                </div>
+                <div class="col-lg-3 w-20 p-relative">
+                    {{ Form::select('service', $categories, null, ['placeholder' => __('page.banner.all_services'), 'class' => 'form-control no-arrow-drop pointer']) }}
+                    <span class="p-absolute">
+                        <i class="fa fa-list"></i>
+                    </span>
+                </div>
+                <div class="col-lg-3 w-20 p-relative">
+                    <select class="form-control no-arrow-drop pointer" name="idea">
+                        <option hidden="">{{ __('base.choose') . ' ' . __('base.city') }}</option>
+                    </select>
+                    <span class="p-absolute">
+                        <i class="fa fa-map-marker"></i>
+                    </span>
+                </div>
+                <div class="col-lg-2">
+                    <input type="submit" class="form-control btn btn-pink" name="submit_search" value="{{ __('base.search') }}">
+                </div>
+            {{ Form::close() }}
+        </div>
+        <div id="search-idea" class="tab-pane">
+            {{ Form::open(['class' => 'row']) }}
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" name="idea" placeholder="{{ __('page.index.enter_search_idea') }}">
+                </div>
+                <div class="col-lg-2 pl-0">
+                    <input type="submit" class="form-control btn btn-pink" name="submit_search" value="{{ __('base.search') }}">
+                </div>
+            {{ Form::close() }}
+        </div>
+    </div>
+@endsection
+
 @section('main-content')
 <section class="real-wedding-main-block">
     <div class="container mt-20">
@@ -10,14 +61,14 @@
                     <div class="col-md-4 col-sm-6">
                         <div class="news-block">
                             <div class="news-img">
-                                <a href="{{ route('post.detail', ['topic' => str_slug($post->topic->name, '-'), 'id' => $post->id, 'slug' => str_slug($post->slug, '-')]) }}">
+                                <a href="{{ route('client.post.detail', ['topic' => str_slug($post->topic->name, '-'), 'id' => $post->id, 'slug' => str_slug($post->slug, '-')]) }}">
                                     <img src="{{ config('define.post.path') . $post->image }}" class="img-responsive">
                                 </a>
                                 <div class="meta-tag">{{ $post->created_at }}</div>
                             </div>
                             <div class="news-dtl">
                                 <h6 class="news-heading">
-                                    <a href="{{ route('post.detail', ['topic' => str_slug($post->topic->name, '-'), 'id' => $post->id, 'slug' => str_slug($post->slug, '-')]) }}">{{ $post->title }}</a>
+                                    <a href="{{ route('client.post.detail', ['topic' => str_slug($post->topic->name, '-'), 'id' => $post->id, 'slug' => str_slug($post->slug, '-')]) }}">{{ $post->title }}</a>
                                 </h6>
                             </div>
                         </div>
@@ -32,6 +83,43 @@
                     <div class="col-lg-9 p-l-r-0">
                         <h3>{{ __('page.real_wedding.list') }}</h3>
                         <div class="result-real-wedding">
+                            @foreach ($weddings as $wedding)
+                                <div class="row">
+                                    <div class="col-lg-12 single-wedding">
+                                        <div class="col-lg-5 p-l-r-0">
+                                            <a href="{{ route('client.real-wedding.detail',['id' => $wedding->id, 'slug' => $wedding->slug]) }}">
+                                                <img alt="{{ $wedding->slug }}"
+                                                     src="{{ asset(config('asset.user.images.user_wedding') . $wedding->image) }}">
+                                            </a>
+                                        </div>
+                                        <div class="col-lg-7 p-l-r-0 pl-10">
+                                            <div class="p-l-r-0">
+                                                <h3 class="title">
+                                                    <a class="link" href="{{ route('client.real-wedding.detail',['id' => $wedding->id, 'slug' => $wedding->slug]) }}">{{ $wedding->name }}</a>
+                                                </h3>
+                                                <div class="detail">
+                                                    <span>{{ $wedding->time_pass }}</span>
+                                                </div>
+                                                <div class="info">
+                                                    <h6 class="mb-6">
+                                                        {{ __('base.author') . ': ' . $wedding->user->name }}
+                                                    </h6>
+                                                    <div class="col-lg-12 p-l-r-0">
+                                                        <div class="col-lg-5 pl-0">{{ __('base.task') . ': ' . $wedding->tasks_count }}</div>
+                                                        <div class="col-lg-7 pl-0">{{ __('base.price') . ': ' . number_format($wedding->final_cost) . ' vnđ' }}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="location">
+                                                    <i class="fa fa-map-marker"></i><span>{{ $wedding->location ?? 'Hidden' }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+
+                            {{ $weddings->links() }}
+
                         </div>
                     </div>
                     <div class="col-lg-3 p-l-r-0 box-filter">
@@ -54,7 +142,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
             <div class="col-lg-4">
                 <div class="inner">
@@ -65,13 +153,13 @@
                                 <div class="col-lg-12 p-l-r-0 service-item">
                                      <div class="service-item__inner">
                                         <div class="col-lg-5 p-l-r-0">
-                                            <a href="{{ route('package.detail', ['id' => $package->id, 'slug' => $package->slug]) }}">
+                                            <a href="{{ route('client.package.detail', ['id' => $package->id, 'slug' => $package->slug]) }}">
                                                 <img src="{{ asset(config('asset.package') . $package->image) }}">
                                             </a>
                                         </div>
                                         <div class="col-lg-7">
                                             <h6 class="header-title">
-                                                <a href="{{ route('package.detail', ['id' => $package->id, 'slug' => $package->slug]) }}">{{ $package->name }}</a>
+                                                <a href="{{ route('client.package.detail', ['id' => $package->id, 'slug' => $package->slug]) }}">{{ $package->name }}</a>
                                             </h6>
                                             <div class="infor">
                                                 <div>
@@ -87,7 +175,7 @@
                                                             @endif
                                                         </span>
                                                     @endforeach
-                                                </div> 
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -117,86 +205,14 @@
                                         <div class="time">
                                             <span>{{ '7 hour ago' }}</span>
                                         </div>
-                                    </div>                             
+                                    </div>
                                 @endfor
                             </div>
                         </div>
                     </div>
-                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
-@endsection
-
-@section('script')
-    <script type="text/javascript" defer="">
-        jQuery(document).ready(function($) {
-            function loadData() {
-                $.ajax({
-                    url: route('real-wedding.load'),
-                    type: 'get',
-                })
-                .done(function(res) {
-                    $('.result-real-wedding').html(res);
-                })
-                .fail(function() {
-                    toastr.error( Lang.get('page.message.fail') );
-                })
-            }
-
-            loadData();
-
-            $('body').on('click', '.page-link', function(event) {
-
-                let page = Number($(this).attr('href').split('/?page=')[1]);
-
-                let price_option = $('.filter-by-price').val();
-
-                event.preventDefault();
-
-                $.ajax({
-                    url: route('real-wedding.load'),
-                    type: 'get',
-                    data: {
-                        page: page,
-                        price_option: price_option,
-                    },
-                })
-                .done(function(res) {
-                    $('.result-real-wedding').hide().html(res).fadeIn('slow');
-                    $('html, body').animate({
-                        scrollTop: $('.result-real-wedding').offset().top - 50
-                    }, 700);
-                })
-                .fail(function() {
-                    toastr.error( Lang.get('page.message.fail') );
-                })
-            });
-
-            $('.filter-by-price').change(function(event) {
-
-                event.preventDefault();
-
-                let price_option = Number($(this).val());
-
-                $.ajax({
-                    url: route('real-wedding.load'),
-                    type: 'get',
-                    data: {
-                        price_option: price_option,
-                    },
-                })
-                .done(function(res) {
-                    $('.result-real-wedding').hide().html(res).fadeIn('slow');
-                    $('html, body').animate({
-                        scrollTop: $('.result-real-wedding').offset().top - 50
-                    }, 700);
-                })
-                .fail(function() {
-                    toastr.error( Lang.get('page.message.fail') );
-                })
-            })
-        });
-    </script>
 @endsection

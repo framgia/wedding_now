@@ -1,43 +1,6 @@
 <section class="timeline">
-    <div>
-        <div class="t-schedule text-center pt30 pb15">
-            <div class="t-schedule-name mb50 mt30">
-                <h3>{{ $schedule->name }}</h3>
-            </div>
-            <div class="t-schedule-info">
-                <div class="row">
-                    <div class="col-sm-10 col-sm-offset-1 text-justify">
-                        <div class="t-note">
-                            <pre class="note">{{ $schedule->note }}</pre>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="info-item">
-                            <i class="fa fa-calendar" aria-hidden="true"></i>
-                            <span>{{ __('page.timeline.marriage_day') }}:</span>
-                            <span>{{ $schedule->marriage_day ?? __('page.timeline.no_choose_date') }}</span>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="info-item">
-                            <i class="fa fa-usd" aria-hidden="true"></i>
-                            <span>{{ __('page.timeline.budget') }}:</span>
-                            <span>{{ number_format($schedule->budget) . __('base.vnd') }}</span>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="info-item">
-                            <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                            <span>{{ __('page.timeline.task') }}:</span>
-                            <span>{{ $countTask }}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="mt-40">
-        @if ($countTask)
+        @if (count($tasks))
             <div class="list-timeline-item">
                 <div class="vertical-line"></div>
                 @foreach ($tasks as $key => $value)
@@ -55,9 +18,11 @@
                                                 </span>
                                             </a>
                                             @if ($value->priority == 1)
-                                                <span class="priority priority-high link" data-priority="0" data-id="{{ $value->id }}">{{ __('page.timeline.high') }}</span>
+                                                <span class="priority priority-high link" data-priority="0"
+                                                      data-id="{{ $value->id }}">{{ __('page.timeline.high') }}</span>
                                             @else
-                                                <span class="priority priority-low link" data-priority="1" data-id="{{ $value->id }}">{{ __('page.timeline.low') }}</span>
+                                                <span class="priority priority-low link" data-priority="1"
+                                                      data-id="{{ $value->id }}">{{ __('page.timeline.low') }}</span>
                                             @endif
                                         </div>
                                         <div class="d-none edit-note" data-id="{{ $value->id }}">
@@ -72,7 +37,8 @@
                                 </div>
                             </div>
                             <div class="task-right task">
-                                <span class="date choose-date" data-id="{{ $value->id }}">{{ $value->time_occurs ? $value->time_occurs : __('page.timeline.undefined') }}</span>
+                                <span class="date choose-date"
+                                      data-id="{{ $value->id }}">{{ $value->time_occurs ? $value->time_occurs : __('page.timeline.undefined') }}</span>
                                 <span class="task-title">{{ $value->name }}</span>
                                 <div class="mt-2">
                                     <span class="task-category">{{ $value->category->name }}</span>
@@ -85,7 +51,8 @@
                             <div class="timeline-img"></div>
                             <div class="task-left task">
                                 <span class="task-title">{{ $value->name }}</span>
-                                <span class="date choose-date" data-id="{{ $value->id }}">{{ $value->time_occurs ? $value->time_occurs : __('page.timeline.undefined') }}</span>
+                                <span class="date choose-date"
+                                      data-id="{{ $value->id }}">{{ $value->time_occurs ? $value->time_occurs : __('page.timeline.undefined') }}</span>
                                 <div class="mt-2">
                                     <span class="task-category">{{ $value->category->name }}</span>
                                 </div>
@@ -102,9 +69,12 @@
                                                 </span>
                                             </a>
                                             @if ($value->priority == 1)
-                                                <span class="priority priority-left priority-high link" data-priority="0" data-id="{{ $value->id }}">{{ __('page.timeline.high') }}</span>
+                                                <span class="priority priority-left priority-high link"
+                                                      data-priority="0"
+                                                      data-id="{{ $value->id }}">{{ __('page.timeline.high') }}</span>
                                             @else
-                                                <span class="priority priority-left priority-low link" data-priority="1" data-id="{{ $value->id }}">{{ __('page.timeline.low') }}</span>
+                                                <span class="priority priority-left priority-low link" data-priority="1"
+                                                      data-id="{{ $value->id }}">{{ __('page.timeline.low') }}</span>
                                             @endif
                                         </div>
                                         <div class="d-none edit-note" data-id="{{ $value->id }}">

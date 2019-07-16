@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.user.main')
 
 @section('title')
     {{ __('page.title.timeline') }}
@@ -20,7 +20,17 @@
                         <div class="row">
                             <div class="col-sm-10 col-sm-offset-1 text-justify">
                                 <div class="t-note">
-                                    <pre class="note">{{ $schedule->note }}</pre>
+                                    @if ($schedule->location)
+                                        <pre class="text text-center note">
+                                            <i class="fa fa-map-marker"></i>
+                                            {{ __('base.location') . $schedule->location->name }}
+                                        </pre>
+                                    @else
+                                        <pre class="text text-center note">
+                                            <i class="fa fa-map-marker"></i>
+                                            {{ __('base.location') . ': ' . __('page.timeline.no_choose_location') }}
+                                        </pre>
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -46,12 +56,10 @@
                             </div>
                         </div>
                     </div>
-                    @auth
-                    {{ Form::open(['route' => 'real-wedding.copy']) }}
-                    {{ Form::text('id', $schedule->id, ['class' => 'd-none']) }}
-                    <button class="btn btn-info copy" type="submit">{{ __('page.timeline.copy') }}</button>
+                    {{ Form::open(['route' => 'client.real-wedding.copy', 'id' => 'form-clone-schedule']) }}
+                        {{ Form::text('id', $schedule->id, ['class' => 'd-none']) }}
+                        <button class="btn btn-info clone-schedule" type="submit">{{ __('page.timeline.copy') }}</button>
                     {{ Form::close() }}
-                    @endauth
                 </div>
             </div>
             <div class="mt-40">
@@ -76,48 +84,48 @@
                                             </div>
                                         </div>
                                     </div>
-                                <div class="task-right task">
-                                    <span class="date" data-id="{{ $value->id }}">{{ $value->time_occurs ? $value->time_occurs : __('page.timeline.undefined') }}</span>
-                                    <span class="task-title title-task-real-wedding">{{ $value->name }}</span>
-                                    <div class="mt-2">
-                                        <span class="task-category">{{ $value->category->name }}</span>
+                                    <div class="task-right task">
+                                        <span class="date" data-id="{{ $value->id }}">{{ $value->time_occurs ? $value->time_occurs : __('page.timeline.undefined') }}</span>
+                                        <span class="task-title title-task-real-wedding">{{ $value->name }}</span>
+                                        <div class="mt-2">
+                                            <span class="task-category">{{ $value->category->name }}</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        @else
-                            <div class="timeline-item">
-                                <div class="timeline-img"></div>
-                                <div class="task-left task">
-                                    <span class="task-title title-task-real-wedding">{{ $value->name }}</span>
-                                    <span class="date" data-id="{{ $value->id }}">{{ $value->time_occurs ? $value->time_occurs : __('page.timeline.undefined') }}</span>
-                                    <div class="mt-2">
-                                        <span class="task-category">{{ $value->category->name }}</span>
+                            @else
+                                <div class="timeline-item">
+                                    <div class="timeline-img"></div>
+                                    <div class="task-left task">
+                                        <span class="task-title title-task-real-wedding">{{ $value->name }}</span>
+                                        <span class="date" data-id="{{ $value->id }}">{{ $value->time_occurs ? $value->time_occurs : __('page.timeline.undefined') }}</span>
+                                        <div class="mt-2">
+                                            <span class="task-category">{{ $value->category->name }}</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="timeline-content timeline-card">
-                                    <div class="task-panel-wrapper">
-                                        <div class="product-addto-links-text">
-                                            <div class="more hideContent">
-                                                <pre class="note">{{ $value->note ? $value->note : __('page.timeline.no_note') }}</pre>
-                                                @if ($value->priority == 1)
-                                                    <span class="priority priority-left priority-high">{{ __('page.timeline.high') }}</span>
-                                                @else
-                                                    <span class="priority priority-left priority-low">{{ __('page.timeline.low') }}</span>
-                                                @endif
+                                    <div class="timeline-content timeline-card">
+                                        <div class="task-panel-wrapper">
+                                            <div class="product-addto-links-text">
+                                                <div class="more hideContent">
+                                                    <pre class="note">{{ $value->note ? $value->note : __('page.timeline.no_note') }}</pre>
+                                                    @if ($value->priority == 1)
+                                                        <span class="priority priority-left priority-high">{{ __('page.timeline.high') }}</span>
+                                                    @else
+                                                        <span class="priority priority-left priority-low">{{ __('page.timeline.low') }}</span>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endif
-                    @endforeach
-                </div>
-            @else
-                <div class="alert alert-success mt25 pt25" role="alert">
-                    <h4 class="alert-heading text-center">{{ __('page.timeline.no_task') }}</h4>
-                </div>
-            @endif
-        </div>
+                            @endif
+                        @endforeach
+                    </div>
+                @else
+                    <div class="alert alert-success mt25 pt25" role="alert">
+                        <h4 class="alert-heading text-center">{{ __('page.timeline.no_task') }}</h4>
+                    </div>
+                @endif
+            </div>
         </div>
     </section>
 @endsection

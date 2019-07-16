@@ -17,14 +17,17 @@ class UserController extends Controller
     protected $city;
     protected $district;
 
-    public function __construct(UserRepositoryInterface $user, CityRepositoryInterface $city, DistrictRepositoryInterface $district)
-    {
+    public function __construct(
+        UserRepositoryInterface $user,
+        CityRepositoryInterface $city,
+        DistrictRepositoryInterface $district
+    ) {
         $this->user = $user;
         $this->city = $city;
         $this->district = $district;
     }
 
-    public function userProfile($username)
+    public function userProfile()
     {
         $user = Auth::user()->load('locations.district.city');
 
@@ -79,10 +82,5 @@ class UserController extends Controller
         });
 
         return ['message' => __('base.success')];
-    }
-
-    public function getDistrictsById($id)
-    {
-        return $this->district->findWithCondition('city_id', $id)->pluck('name', 'id');
     }
 }

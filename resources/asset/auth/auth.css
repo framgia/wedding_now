@@ -1,0 +1,115 @@
+.form-control-feedback {
+    display: inline-block;
+    color: red;
+    width: 200px;
+}
+
+#gender-error {
+    display: block;
+}
+
+#role-error {
+    display: block;
+}
+
+.social-link:hover {
+    text-decoration: none;
+}
+
+select {
+    padding: 0 !important;
+}
+
+.m-login.m-login--5 .m-login__wrapper-2 .m-login__contanier {
+    width: 760px;
+}
+
+.radio-choose-regiter label:nth-child(2) {
+    margin-left: 20px;
+}
+
+.radio-choose-regiter {
+    margin-top: 7px;
+}
+
+.text-upcase {
+    text-transform: uppercase;
+}
+
+.search-location {
+    border: 1px solid #dadada;
+    width: 74%;
+    position: absolute;
+    z-index: 10;
+    background-color: white;
+    border-radius: 3px;
+    top: 350px;
+    left: 26%;
+    display: none;
+}
+
+.box-search {
+    overflow: scroll;
+    overflow-x: hidden;
+    margin: 10px;
+    max-height: 175px;
+}
+
+.list-location {
+    width: 97%;
+    margin: auto;
+}
+
+.list-location li {
+    height: 33px;
+    border-bottom: 1px solid #dadada;
+    padding: 6px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.list-location li p {
+    font-family: monospace;
+    font-weight: 500;
+    font-size: 14px;
+    color: #93929A;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.list-location li:hover p {
+    font-size: 15px;
+    color: #66656F;
+}
+
+.spin-custom {
+    width: 11em !important;
+    font-size: 1.5em !important;
+    position: absolute;
+    top: 10px;
+    left: 125px;
+}
+
+.input-focus {
+    border-color: #716aca;
+    color: #575962;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.m-login__signin .form-group,
+.m-login__form-sub,
+.m-login__form-action,
+.m-login__form-action {
+    width: 70%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.m-login__forget-password .form-group {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}

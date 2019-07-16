@@ -9,13 +9,13 @@ class PageCard extends Model
     protected $table = 'page_cards';
 
     protected $fillable = [
-		'card_id',
-		'background',
+        'card_id',
+        'background',
     ];
 
     public function card()
     {
-    	return $this->belongsTo(Card::class);
+        return $this->belongsTo(Card::class);
     }
 
     public function cardMetas()

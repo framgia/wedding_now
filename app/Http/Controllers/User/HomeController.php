@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Repositories\Card\CardRepositoryInterface;
 use App\Repositories\Post\PostRepositoryInterface;
 use App\Repositories\ScheduleMeta\ScheduleMetaRepositoryInterface;
-use App\Repositories\ScheduleWedding\ScheduleWeddingRepositoryInterface;
+use App\Repositories\Schedule\ScheduleRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -28,11 +28,10 @@ class HomeController extends Controller
 
     public function __construct(
         PostRepositoryInterface $post,
-        ScheduleWeddingRepositoryInterface $scheduleWedding,
+        ScheduleRepositoryInterface $scheduleWedding,
         ScheduleMetaRepositoryInterface $scheduleMeta,
         CardRepositoryInterface $card
-    )
-    {
+    ) {
         $this->post = $post;
         $this->scheduleWedding = $scheduleWedding;
         $this->scheduleMeta = $scheduleMeta;
@@ -46,23 +45,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $default = config('define.type_schedule.default');
-
-        $custom = config('define.type_schedule.custom');
-
-        $combo = config('define.type_schedule.combo');
-
-        $posts = $this->post->getNewestPostsPaginate(config('define.post.take_five_post'), config('define.post.no_skip'));
+        $posts = $this->post->getPostOrderByView([config('define.post.type.schedule')], config('define.post.take_five_post'), config('define.post.no_skip'));
 
         $posts = $this->post->timePass($posts);
 
-        $scheduleMeta = $this->scheduleMeta->getChosenSchedule();
-
-        $schedule_default = null;
-
-        if (!$scheduleMeta) {
-            $schedule_default = $this->scheduleWedding->getAllScheduleDefault();
-        }
+        $detaultSchedules = $this->scheduleWedding->getAllScheduleDefault();
 
         $templateHorizontal = $this->card->getTemplate(config('define.card.horizontal'))
             ->take(config('define.card.number.show_card'));
@@ -70,7 +57,7 @@ class HomeController extends Controller
         $templateVertical = $this->card->getTemplate(config('define.card.vertical'))
             ->take(config('define.card.number.show_card'));
 
-        return view('user.index', compact('default', 'custom', 'combo', 'posts', 'schedule_default', 'templateHorizontal', 'templateVertical'));
+        return view('user.index', compact('posts', 'detaultSchedules', 'templateHorizontal', 'templateVertical'));
     }
 
     public function changeLang(Request $request, $lang)

@@ -1,11 +1,16 @@
-@extends('layouts.main')
+@extends('layouts.user.main')
 
 @section('title', __('page.page.to_do_list'))
 
 @section('page-name', __('page.page.to_do_list'))
 
-@section('main-content')
+@section('banner-content')
+    <div class="t-schedule-name mb50 mt30">
+        <h3>{{ $mainSchedule->name }}</h3>
+    </div>
+@endsection
 
+@section('main-content')
     <section id="to-do-list" class="to-do-list-main-block">
         <div class="container">
             @include('user.sections.to_do_list_tab')
@@ -23,13 +28,12 @@
             <br>
             <div class="tab-content tab-timel-line">
                 <div id="to-do" class="to-do-list-block tab-pane fade in active">
-                    {{-- <h3><b>{{ __('page.page.checklist') }}</b></h3> --}}
                     <h3 class="create-task-heading">
-                        {!! Form::submit(__('page.todo_list.reset_default'), ['id' => 'btn-choose-schedule', 'class' => 'btn btn-pink', 'data-toggle' => 'modal', 'data-target' => '#myModal']) !!}
-                        {!! Form::submit(__('base.create') . ' ' . __('base.task'), ['id' => 'create-btn', 'class' => 'btn btn-pink pull-right']) !!}
+                        {{ Form::submit(__('page.todo_list.reset_default'), ['id' => 'btn-choose-schedule', 'class' => 'btn btn-pink', 'data-toggle' => 'modal', 'data-target' => '#myModal']) }}
+                        {{ Form::submit(__('base.create') . ' ' . __('base.task'), ['id' => 'create-btn', 'class' => 'btn btn-pink pull-right']) }}
                     </h3>
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <div class="create-btn padding-bottom-10">
                             </div>
                             <div class="modal-show-product"></div>
@@ -79,15 +83,16 @@
                                             <div class="col-md-7">
                                                 <label for="radio_{{ $category->id }}">
                                                     <input type="checkbox" id="radio_{{ $category->id }}"
-                                                            name="check_category" class="category-filter cate"
-                                                            data-id="{{ $category->id }}" data-name="{{ $category->name }}"
-                                                            data-type="category"/>
+                                                           name="check_category" class="category-filter cate"
+                                                           data-id="{{ $category->id }}"
+                                                           data-name="{{ $category->name }}"
+                                                           data-type="category"/>
                                                     <span class="label-text">&emsp;{{ $category->name }}</span>
                                                 </label>
                                             </div>
                                             <div class="col-md-5">
                                                 <p>
-                                                    {{ $category->tasks_count }}
+                                                    {{ count($category->tasks) }}
                                                 </p>
                                             </div>
                                         </div>
@@ -95,24 +100,23 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-7">
+                        <div class="col-md-8">
                             <div id="create-task-div" class="display-none">
-                                {{-- create task --}}
                                 <h5 class="create-task-heading">{{ __('page.task.new') }}</h5>
                                 <form id="create-task-form" action="#">
                                     <div class="create-task-block">
                                         <div class="row col-md-12">
-                                            {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'task-title', 'placeholder' => __('page.placeholder.title'), 'autocomplete' => 'off']) !!}
+                                            {{ Form::text('name', null, ['class' => 'form-control', 'id' => 'task-title', 'placeholder' => __('page.placeholder.title'), 'autocomplete' => 'off']) }}
                                         </div>
                                         <div class="row col-md-12 padding-bottom-15">
                                             <div class="col-md-6 select-3">
-                                                {!! Form::select('time_frame', $timeFrames, null, ['class' => 'form-control', 'placeholder' => __('page.placeholder.time_frame'), 'id' => 'task-time-frame']) !!}
+                                                {{ Form::select('time_frame', $timeFrames, null, ['class' => 'form-control', 'placeholder' => __('page.placeholder.time_frame'), 'id' => 'task-time-frame']) }}
                                             </div>
                                             <div class="col-md-6 select-3">
-                                                {!! Form::select('category_id', $categories, null, ['class' => 'form-control', 'placeholder' => __('page.placeholder.category'), 'id' => 'task-category']) !!}
+                                                {{ Form::select('category_id', $categories, null, ['class' => 'form-control', 'placeholder' => __('page.placeholder.category'), 'id' => 'task-category']) }}
                                             </div>
                                             <div class="col-md-6 select-3">
-                                                {!! Form::text('time_occurs', null, ['class' => 'form-control time-occurs', 'placeHolder' => __('page.todo_list.choose_time'), 'onfocus' => '(this.type="date")', 'onblur' => '(this.type="text")']) !!}
+                                                {{ Form::text('time_occurs', null, ['class' => 'form-control time-occurs', 'placeHolder' => __('page.todo_list.choose_time'), 'onfocus' => '(this.type="date")', 'onblur' => '(this.type="text")']) }}
                                             </div>
                                             <div class="col-md-6 select-3">
                                                 <select name="priority" class="form-control" id="task-priority">
@@ -164,13 +168,12 @@
                                             </div>
                                         </div>
                                         <div class="row col-md-12">
-                                            {!! Form::textarea('note', null, ['class' => 'form-control', 'id' => 'task-note', 'placeholder' => __('page.placeholder.note')]) !!}
-                                            {!! Form::submit(__('page.action.save'), ['class' => 'btn btn-pink', 'id' => 'create-task']) !!}
-                                            {!! Form::submit(__('page.action.cancel'), ['class' => 'btn btn-pink', 'id' => 'cancel-create-task']) !!}
+                                            {{ Form::textarea('note', null, ['class' => 'form-control', 'id' => 'task-note', 'placeholder' => __('page.placeholder.note')]) }}
+                                            {{ Form::submit(__('page.action.save'), ['class' => 'btn btn-pink', 'id' => 'create-task']) }}
+                                            {{ Form::submit(__('page.action.cancel'), ['class' => 'btn btn-pink', 'id' => 'cancel-create-task']) }}
                                         </div>
                                     </div>
                                 </form>
-                                {{-- endcreate task --}}
                             </div>
                             <div id="list_tasks"></div>
                         </div>
@@ -178,6 +181,51 @@
                 </div>
 
                 <div id="timeline" class="tab-pane fade">
+                    <div>
+                        <div class="t-schedule text-center pt30 pb15">
+
+                            <div class="t-schedule-info">
+                                <div class="row">
+                                    <div class="col-sm-10 col-sm-offset-1 text-justify">
+                                        <div class="t-note">
+                                            @if ($mainSchedule->location)
+                                                <pre class="text text-center note">
+                                                    <i class="fa fa-map-marker"></i>
+                                                    {{ __('base.location') . $mainSchedule->location->name }}
+                                                </pre>
+                                            @else
+                                                <pre class="text text-center note">
+                                                    <i class="fa fa-map-marker"></i>
+                                                    {{ __('base.location') . ': ' . __('page.timeline.no_choose_location') }}
+                                                </pre>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="info-item">
+                                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            <span>{{ __('page.timeline.marriage_day') }}:</span>
+                                            <span>{{ $mainSchedule->marriage_day ?? __('page.timeline.no_choose_date') }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="info-item">
+                                            <i class="fa fa-usd" aria-hidden="true"></i>
+                                            <span>{{ __('page.timeline.budget') }}:</span>
+                                            <span>{{ number_format($mainSchedule->budget) . __('base.vnd') }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="info-item">
+                                            <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                            <span>{{ __('page.timeline.task') }}:</span>
+                                            <span>{{ count($totalTasks) }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="container-flud">
                         <div class="row">
                             <div class="col-lg-12">
@@ -242,10 +290,8 @@
         </div>
     </div>
 
-    {{-- status --}}
     <input type="hidden" name="done" id="status_done" value="{{ config('define.done') }}">
     <input type="hidden" name="done" id="status_to_do" value="{{ config('define.to_do') }}">
-    {{-- end status --}}
 @endsection
 
 @section('script')
@@ -258,11 +304,12 @@
                 }
             });
 
-
             let tabs = $('.my-tabs');
+
             let selector = $('.my-tabs').find('a').length;
-            //let selector = $(".tabs").find(".selector");
+
             let activeItem = tabs.find('.active');
+
             let activeWidth = activeItem.innerWidth();
 
             $('.selector').css({
@@ -271,9 +318,11 @@
             });
 
             $('.my-tabs').on('click', 'a', function (e) {
+
                 e.preventDefault();
 
                 $('.my-tabs a').removeClass('active');
+
                 $(this).addClass('active');
 
                 let activeWidth = $(this).innerWidth();
@@ -286,15 +335,14 @@
             });
 
             $('body').on('click', '#get-timeline', function (event) {
+
                 $.ajax({
                     url: route('client.my-timeline'),
                     type: 'GET',
-                })
-                .done(function (data) {
+                }).done(function (data) {
                     $('#time-line-view').html(data);
-                })
-                .fail(function () {
-                    toastr.error(Lang.get('page.message.fail'));
+                }).fail(function () {
+                    toastr.error(Lang.get('base.error'));
                 });
             });
 
@@ -359,7 +407,9 @@
                     }
 
                     if (!checkTagExists.length) {
+
                         if (checkTypeExists) {
+
                             checkTypeExists.parents('.alert-custom').remove();
                         }
                     }
@@ -379,26 +429,30 @@
                     url: route('client.update-status-task', id),
                     type: 'PUT',
                     data: {id: id},
-                })
-                .done(function () {
+                }).done(function () {
 
                     loadToDoList()
-                })
-                .fail(function (message) {
-                    toastr.error(Lang.get('page.message.fail'))
+                }).fail(function () {
+                    toastr.error(Lang.get('base.error'))
                 });
             });
 
             // remove tag filter
             $('body').on('click', '.alert-custom', function (event) {
+
                 event.preventDefault();
+
                 let category_id = $(this).children('a').attr('data-id');
+
                 let status = $(this).children('a').attr('data-status');
+
                 let type = $(this).children('a').attr('data-type');
 
                 if (type === 'status') {
+
                     checkStatus = null;
                 } else if (type === 'category') {
+
                     checkCategory = null;
                 }
 
@@ -416,8 +470,7 @@
                         category_id: category_id,
                         status: type
                     },
-                })
-                .done(function (res) {
+                }).done(function (res) {
 
                     $('#list_tasks').html(res);
 
@@ -446,8 +499,7 @@
                             type: 'GET',
                             dataType: '',
                             data: {},
-                        })
-                        .done(function (res) {
+                        }).done(function (res) {
 
                             $('#list_tasks').html(res);
 
@@ -490,26 +542,24 @@
                                         time_occurs: $('.update-time-occurs').val(),
                                         note: el.find('#task-note').val(),
                                     },
-                                })
-                                .done(function (res) {
+                                }).done(function (res) {
                                     loadToDoList();
                                     toastr.success(res.message);
-                                })
-                                .fail(function (xhr, status, error) {
+                                }).fail(function (xhr, status, error) {
 
                                     let message = JSON.parse(xhr.responseText);
 
                                     let errors = Object.entries(message.errors);
 
                                     errors.forEach(function (value, index) {
-                                        toastr.error(value[1][0], 'Error!');
+                                        toastr.error(value[1][0], Lang.get('base.error'));
                                     });
                                 })
                             });
-                        })
-                        .fail(function (message) {
+                        }).fail(function (message) {
+
                             toastr.error(Lang.get('page.message.fail'))
-                        });;
+                        });
 
                         return false;
                     });
@@ -522,26 +572,23 @@
 
                         let id = el.attr('data-id');
 
-                        if(confirm(Lang.get('base.confirm_delete'))) {
+                        if (confirm(Lang.get('base.confirm_delete'))) {
 
                             $.ajax({
                                 url: route('client.delete-task', {id: id}),
                                 type: 'delete',
                                 dataType: '',
                                 data: {},
-                            })
-                            .done(function (res) {
+                            }).done(function (res) {
                                 el.closest('.task-single').remove();
                                 toastr.success(res.message);
                                 loadCategoryFilter();
-                            })
-                            .fail(function (res) {
+                            }).fail(function (res) {
                                 toastr.error(Lang.get('page.message.fail'));
                             })
                         }
                     });
-                })
-                .fail(function (res) {
+                }).fail(function (res) {
                     toastr.error(Lang.get('page.message.fail'));
                 })
             }
@@ -549,7 +596,9 @@
             loadToDoList();
 
             $('body').on('click', '#collapse_all', function (event) {
+
                 event.preventDefault();
+
                 $('.panel-collapse').collapse('toggle');
             });
 
@@ -562,16 +611,22 @@
                     type: 'POST',
                     dataType: '',
                     data: {
+
                         name: $('#task-title').val(),
+
                         time_frame_id: $('#task-time-frame').val(),
+
                         category_id: parseInt($('#task-category').val()),
+
                         priority: $('#task-priority').val(),
+
                         note: $('#task-note').val(),
+
                         item_id: parseInt($('input[name="item_id"]:checked').val()),
+
                         time_occurs: $('.time-occurs').val(),
                     },
-                })
-                .done(function (res) {
+                }).done(function (res) {
 
                     loadToDoList();
 
@@ -586,19 +641,17 @@
                     $('.item-s-price').text('');
 
                     $('.item-sl').addClass('d-none');
-                    
                     $('.btn-show-product').addClass('d-none');
 
                     toastr.success(res.message);
-                })
-                .fail(function (xhr, status, error) {
+                }).fail(function (xhr, status, error) {
 
                     let message = JSON.parse(xhr.responseText);
 
                     let errors = Object.entries(message.errors);
 
                     errors.forEach(function (value, index) {
-                        toastr.error(value[1][0], 'Error!');
+                        toastr.error(value[1][0], Lang.get('base.error'));
                     });
                 })
             });
@@ -614,11 +667,9 @@
                     type: 'get',
                     dataType: '',
                     data: {id_choose: id},
-                })
-                .done(function (res) {
+                }).done(function (res) {
                     location.reload();
-                })
-                .fail(function () {
+                }).fail(function () {
                     toastr.error(Lang.get('page.message.fail'));
                 })
             });
@@ -630,8 +681,11 @@
             });
 
             function createTask() {
+
                 $('#list_tasks').hide();
+
                 $('#show-list-category').show();
+
                 $('#single-task-detail').hide();
 
                 $('#create-task-div').show();
@@ -642,10 +696,12 @@
             $('#cancel-create-task').on('click', function (event) {
 
                 event.preventDefault();
+
                 cancelCreateTask();
             });
 
             function cancelCreateTask() {
+
                 $('#list_tasks').show();
 
                 $('#show-list-category').show();
@@ -658,25 +714,44 @@
     </script>
     <script>
         jQuery(document).ready(function ($) {
+
             $('.item-sl').addClass('d-none');
+
             $('.item-sld').addClass('d-none');
+
             $('.btn-show-product').addClass('d-none');
 
             $(document).on('change', '#task-category', function () {
-                let idTask = $(this).val();
-                getItem(idTask);
+
+                let idCategory = $(this).val();
+
+                let name = $(this).find('option:selected').text();
+
+                getItem(idCategory, name);
             });
 
-            function getItem(idTask, addClass = false) {
+            function getItem(idCategory, nameCategory, addClass = false) {
+
                 createTask();
+
                 $.ajax({
                     type: 'get',
                     url: route('client.get-item'),
-                    data: {id: idTask},
+                    data: {
+                        id: idCategory
+                    },
                     success: function (response) {
+
                         $('.modal-show-product').html(response);
+
+                        $('.category-id').attr('data-id', idCategory);
+
+                        $('.text-category').html(nameCategory);
+
                         $('#product-modal').modal('show');
+
                         if (addClass) {
+
                             updateTask();
                         }
                     }
@@ -684,7 +759,9 @@
             }
 
             function getItemSelected() {
+
                 let selected = $("input[name='item_id']:checked");
+
                 let obj = {
                     itemName: selected.parent('.select-product').prev('.description').find('h1').text(),
                     itemPrice: selected.parent('.select-product').prev('.description').find('.price').text(),
@@ -695,41 +772,125 @@
             }
 
             function updateTask() {
+
                 $('#select-item').removeClass('create-task');
+
                 $('#select-item').addClass('update-task');
             }
 
             function createTask() {
+
                 $('#select-item').removeClass('update-task');
+
                 $('#select-item').addClass('create-task');
             }
 
             $(document).on('click', '.create-task', function () {
+
                 $('.item-sl').removeClass('d-none');
+
                 $('.btn-show-product').removeClass('d-none');
 
                 let itemSelected = getItemSelected();
 
                 $('.item-s-name').text(itemSelected.itemName);
+
                 $('.item-s-user').text(itemSelected.itemUser);
+
                 $('.item-s-price').text(itemSelected.itemPrice);
             });
 
+            $('body').on('click', '.detail-task', function(event) {
+
+                event.preventDefault();
+
+                $.ajax({
+                    url: route(''),
+                    type: 'default GET (Other values: POST)',
+                    dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
+                    data: {param1: 'value1'},
+                })
+                .done(function() {
+                    console.log("success");
+                })
+                .fail(function() {
+                    console.log("error");
+                })
+                .always(function() {
+                    console.log("complete");
+                });
+
+            });
+
             $(document).on('click', '#update-task-category', function () {
-                let idTask = $(this).val();
-                getItem(idTask, true);
+
+                let idCategory = $(this).val();
+
+                let name = $(this).find('option:selected').text();
+
+                getItem(idCategory, name, true);
             });
 
             $(document).on('click', '.update-task', function () {
+
                 $('.item-sld').removeClass('d-none');
+
                 $('.btn-show-product').removeClass('d-none');
 
                 let itemSelected = getItemSelected();
 
                 $('.update-item-name').text(itemSelected.itemName);
+
                 $('.update-item-user').text(itemSelected.itemUser);
+
                 $('.update-item-price').text(itemSelected.itemPrice);
             });
+
+            let timeoutSearch = null;
+
+            $('body').on('keyup', '#filter-product-search', function (event) {
+
+                event.preventDefault();
+
+                let keyword = $(this).val();
+
+                seachProductInModal(keyword);
+
+            });
+
+            $('body').on('change', '#filter-price-seach-product', function (event) {
+
+                event.preventDefault();
+
+                let keyword = $('#filter-product-search').val();
+
+                seachProductInModal(keyword);
+            });
+
+            function seachProductInModal(keyword) {
+
+                let idCategory = $('.category-id').attr('data-id');
+
+                let filterPrice = $('#filter-price-seach-product').val();
+
+                clearTimeout(timeoutSearch);
+
+                timeoutSearch = setTimeout(function () {
+                    $.ajax({
+                        url: route('client.get-item-by-keyword'),
+                        type: 'GET',
+                        data: {
+                            id: idCategory,
+                            keyword: keyword,
+                            filterPrice: filterPrice,
+                        },
+                    }).done(function (res) {
+                        $('.result-search-product').html(res);
+                    }).fail(function () {
+                        toastr.error(Lang.get('page.message.fail'));
+                    });
+                }, 500);
+            }
 
             $('body').on('change', '.order-by-date', function (event) {
 
@@ -743,11 +904,9 @@
                         'orderByDate': orderByDate,
                     },
                     type: 'GET',
-                })
-                .done(function (data) {
+                }).done(function (data) {
                     $('#time-line-view').hide().html(data).fadeIn('slow');
-                })
-                .fail(function () {
+                }).fail(function () {
                     toastr.error(Lang.get('page.message.fail'));
                 });
             });
@@ -764,12 +923,10 @@
                     data: {
                         'orderByPriority': orderByPriority,
                     },
-                })
-                .done(function (data) {
+                }).done(function (data) {
                     $('#time-line-view').hide().html(data).fadeIn('slow');
 
-                })
-                .fail(function () {
+                }).fail(function () {
                     toastr.error(Lang.get('page.message.fail'));
                 });
             });
@@ -814,19 +971,20 @@
                         id: id,
                         note: note
                     },
-                })
-                .done(function () {
+                }).done(function () {
                     text_element.html(note);
                     toastr.success(Lang.get('base.success'))
-                })
-                .fail(function () {
+                }).fail(function () {
                     toastr.error(Lang.get('page.message.fail'));
                 })
             });
 
             $('body').on('input', '.note-value', function (event) {
+
                 event.preventDefault();
+
                 $(this).height(25).height($(this)[0].scrollHeight);
+
                 $(this).autoResize();
             });
 
@@ -840,8 +998,11 @@
 
                 element.datepicker({
                     onSelect: function (dateText, inst) {
+
                         let theDate = new Date(Date.parse($(this).datepicker('getDate')));
+
                         let dateFormatted = $.datepicker.formatDate('yy/m/d', theDate);
+
                         $.ajax({
                             url: route('client.my-timeline.update.date'),
                             type: 'POST',
@@ -849,11 +1010,9 @@
                                 id: id,
                                 date: dateFormatted,
                             },
-                        })
-                        .done(function () {
+                        }).done(function () {
                             loadMyTimeLine();
-                        })
-                        .fail(function () {
+                        }).fail(function () {
                             toastr.error(Lang.get('page.message.fail'));
                         })
                     },
@@ -870,11 +1029,9 @@
                 $.ajax({
                     url: route('client.my-timeline'),
                     type: 'GET',
-                })
-                .done(function (data) {
+                }).done(function (data) {
                     $('#time-line-view').html(data);
-                })
-                .fail(function () {
+                }).fail(function () {
                     toastr.error(Lang.get('page.message.fail'));
                 });
             }
@@ -895,24 +1052,23 @@
                     buttons: true,
                     dangerMode: true,
                 })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        $.ajax({
-                            url: route('client.my-timeline.update.priority'),
-                            type: 'POST',
-                            data: {
-                                priority: priority,
-                                id: id,
-                            },
-                        })
-                            .done(function (res) {
+                    .then((willDelete) => {
+
+                        if (willDelete) {
+                            $.ajax({
+                                url: route('client.my-timeline.update.priority'),
+                                type: 'POST',
+                                data: {
+                                    priority: priority,
+                                    id: id,
+                                },
+                            }).done(function (res) {
                                 loadMyTimeLine();
-                            })
-                            .fail(function () {
+                            }).fail(function () {
                                 toastr.error(Lang.get('page.message.fail'));
                             })
-                    }
-                });
+                        }
+                    });
             });
         });
     </script>

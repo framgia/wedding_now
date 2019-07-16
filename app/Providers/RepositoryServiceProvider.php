@@ -14,8 +14,8 @@ class RepositoryServiceProvider extends ServiceProvider
             'App\Repositories\User\UserRepositoryInterface',
             'App\Repositories\User\UserRepository',
         ], [
-            'App\Repositories\ScheduleWedding\ScheduleWeddingRepositoryInterface',
-            'App\Repositories\ScheduleWedding\ScheduleWeddingRepository',
+            'App\Repositories\Schedule\ScheduleRepositoryInterface',
+            'App\Repositories\Schedule\ScheduleRepository',
         ], [
             'App\Repositories\Card\CardRepositoryInterface',
             'App\Repositories\Card\CardRepository',
@@ -64,6 +64,12 @@ class RepositoryServiceProvider extends ServiceProvider
         ], [
             'App\Repositories\PageCard\PageCardRepositoryInterface',
             'App\Repositories\PageCard\PageCardRepository',
+        ], [
+            'App\Repositories\Permission\PermissionRepositoryInterface',
+            'App\Repositories\Permission\PermissionRepository',
+        ], [
+            'App\Repositories\Comment\CommentRepositoryInterface',
+            'App\Repositories\Comment\CommentRepository',
         ],
     ];
 

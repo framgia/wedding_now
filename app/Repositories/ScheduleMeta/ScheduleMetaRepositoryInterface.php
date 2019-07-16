@@ -9,8 +9,4 @@ interface ScheduleMetaRepositoryInterface extends RepositoryInterface
     public function updateMeta($scheduleId, $key, $value);
 
     public function updateMetas($scheduleId, $keyValues);
-
-    public function getChosenSchedule();
-
-    public function setChosenSchedule($scheduleId);
 }

@@ -6,10 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\SchedulaDefaultRequest;
 
 use App\Models\Item;
-use App\Models\ScheduleWedding;
+use App\Models\Schedule;
 use App\Models\Task;
 use App\Repositories\Category\CategoryRepositoryInterface;
-use App\Repositories\ScheduleWedding\ScheduleWeddingRepositoryInterface;
+use App\Repositories\Schedule\ScheduleRepositoryInterface;
 use App\Repositories\Task\TaskRepositoryInterface;
 use App\Repositories\TimeFrame\TimeFrameRepositoryInterface;
 use Illuminate\Http\Request;
@@ -28,34 +28,46 @@ class ScheduleController extends Controller
         CategoryRepositoryInterface $category,
         TaskRepositoryInterface $task,
         TimeFrameRepositoryInterface $timeFrame,
-        ScheduleWeddingRepositoryInterface $schedule
-    )
-    {
+        ScheduleRepositoryInterface $schedule
+    ) {
         $this->schedule = $schedule;
         $this->category = $category;
         $this->timeFrame = $timeFrame;
         $this->task = $task;
     }
 
-    public function scheduleDefault()
+    public function indexScheduleDefault()
     {
-        $timeFrames = $this->timeFrame->getDataPluck();
-
-        $categories = $this->category->getDataPluck();
-
-        $items = Item::with('users')->get();
-
-        $schedules = $this->schedule->getScheduleDefault([]);
-
-        return view('admin.schedule.list_default_schedule', compact('schedules', 'timeFrames', 'categories', 'items'));
+        return view('admin.list_default_schedule');
     }
 
-    public function index()
+    public function createScheduleDefault()
     {
-        $schedules = $this->schedule
-            ->getScheduleInAdmin(['tasks.category', 'tasks.timeFrame'], ['tasks'], ['type', '=', config('define.type_schedule.default')]);
+        return view('admin.create_default_schedule');
+    }
 
-        return view('admin.list_default_schedule', compact('schedules'));
+    public function getDataScheduleDefault()
+    {
+        $schedules = $this->schedule->getAllScheduleDefault();
+
+        if ($schedules) {
+
+            $schedules->load('childSchedules');
+        }
+
+        return $schedules;
+    }
+
+    public function showScheduleDefault($id)
+    {
+        $schedule = $this->schedule->findById($id);
+
+        if ($schedule) {
+
+            $schedule->load('tasks.items');
+        }
+
+        return view('admin.show_default_schedule', compact('schedule'));
     }
 
     public function create()
@@ -90,7 +102,7 @@ class ScheduleController extends Controller
         $timeFrames = $this->timeFrame->getDataPluck();
         $categories = $this->category->getDataPluck();
         $items = Item::with('users')->get();
-        $scheduleWedding = ScheduleWedding::with('tasks')->findOrFail($id);
+        $scheduleWedding = Schedule::with('tasks')->findOrFail($id);
 
         return view('admin.edit_default_schdule', compact('scheduleWedding', 'timeFrames', 'categories', 'items'));
     }

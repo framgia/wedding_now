@@ -169,6 +169,10 @@ return [
         Tightenco\Ziggy\ZiggyServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
         Mariuzzo\LaravelJsLocalization\LaravelJsLocalizationServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
+        UxWeb\SweetAlert\SweetAlertServiceProvider::class,
+        Unisharp\Ckeditor\ServiceProvider::class,
+        UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -235,6 +239,8 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Entrust' => Zizaco\Entrust\EntrustFacade::class,
         'Image' =>  Intervention\Image\ImageServiceProvider::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Alert' => UxWeb\SweetAlert\SweetAlert::class,
     ],
 
 ];

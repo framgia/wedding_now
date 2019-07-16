@@ -52,7 +52,14 @@ class RoleController extends Controller
 
     public function show($id)
     {
-        return $this->role->findById($id);
+        $role = $this->role->findById($id);
+
+        if ($role) {
+
+            $role->load('permissions');
+        }
+
+        return $role;
     }
 
     public function update(UpdateRoleRequest $request, $id)

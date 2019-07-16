@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.user.app')
 
 @section('title')
     {{ __('page.title.home') }}
@@ -10,12 +10,12 @@
             <div class="breadcrumb-content-detail">
                 <ul class="list-breadcrumb">
                     <li class="item-breadcrumb">
-                        <a href="{{ route('home') }}">
+                        <a href="{{ route('client.home') }}">
                             <span>{{ __('page.title.home') }}</span>
                         </a>
                     </li>
                     <li class="item-breadcrumb articles-bread-home">
-                        <a href="{{ route('post.index') }}">
+                        <a href="{{ route('client.post.index') }}">
                             <span>{{ __('page.news.breadcrumb') }}</span>
                         </a>
                     </li>
@@ -43,7 +43,7 @@
                         <div class="articles-post-heading-box">
                             <div class="box-user w-5">
                                 <img class="articles-post-heading-box-avatar"
-                                     src="@if($post->user->media)  {{ asset(config('asset.users.avatar') . $post->user->media->name) }}
+                                     src="@if($post->user->media)  {{ asset(config('asset.user.avatar') . $post->user->media->name) }}
                                      @else {{ asset(config('asset.users.avatar') . config('define.user.image_default')) }} @endif">
                                 <span class="articles-post-heading-box-author">{{ __('base.by') . ' ' . $post->user->name }}</span>
                                 <span class="post-date">
@@ -63,12 +63,12 @@
                             @php
                                 $i = 0;
                             @endphp
-                            @foreach ($mostPopularPosts as $post)
+                            @foreach ($mostPopularPosts as $mostPost)
                                 <div class="widget-most-read">
                                     <div class="widget-most-read-box">
                                         <div class="widget-most-read-box-number">{{ ++$i }}</div>
-                                        <a href="{{ route('post.detail', ['topic' => str_slug($post->topic->name, '-'), 'id' => $post->id, 'slug' => str_slug($post->slug, '-')]) }}"
-                                           class="widget-most-read-box-title">{{ $post->title }}</a>
+                                        <a href="{{ route('client.post.detail', ['topic' => str_slug($mostPost->topic->name, '-'), 'id' => $mostPost->id, 'slug' => str_slug($mostPost->slug, '-')]) }}"
+                                           class="widget-most-read-box-title">{{ $mostPost->title }}</a>
                                     </div>
                                 </div>
                             @endforeach
@@ -92,14 +92,89 @@
                     </div>
                 </div>
             </div>
-            <div class="related-post">
+            <hr align="left" style="width: 68%">
+            <div class="comment-box" style="width: 72%">
+                <div class="row col-sm-12 box-header">
+                    <div class="col-sm-4">
+                        <h6 class="title">
+                            {{ __('base.comment') }}
+                        </h6>
+                    </div>
+                    <div class="col-sm-3 filter">
+                        <select class="form-control" name="">
+                            <option value="">{{ __('base.newest') }}</option>
+                            <option value="">{{ __('base.fitest') }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row col-sm-12 box-comment">
+                    <form action="" method="get" accept-charset="utf-8">
+                        <div class="col-sm-2">
+                        </div>
+                        <div class="col-sm-10">
+                            <form action="#" method="post" accept-charset="utf-8" id="comment-form">
+                                <input type="hidden" name="idPost" value="{{ $post->id }}" class="post-id">
+                                <textarea spellcheck="false" name="contents" class="comment-editor w-100"  placeholder="{{ __('page.comment.write_comment') }}"></textarea>
+                            </form>
+                        </div>
+                    </form>
+                </div>
+                <div class="row col-sm-12">
+                    <ul class="comment-block">
+                    @forelse($post->comments as $comment)
+                        <li class="comment-single">
+                            <div class="box-user col-sm-2">
+                                @if ($comment->user->media && file_exists(asset(config('asset.user.avatar') . $comment->user->media->name )))
+                                    <img src="{{ asset(config('asset.user.avatar') . $comment->user->media->name ) }}">
+                                @else
+                                    <img src="{{ asset(config('define.avatar_default')) }}">
+                                @endif
+                            </div>
+                            <div class="box-content col-sm-10">
+                                <div class="content">
+                                    <div class="content-header">
+                                        <p class="user-post">{{ $comment->user->name }}</p>
+                                        <span>
+                                            <time>{{ $comment->created_at->diffForHumans() }}</time>
+                                        </span>
+                                    </div>
+                                    <div class="content-body">
+                                        {{ $comment->content }}
+                                    </div>
+                                    <div class="content-footer">
+                                        <div class="reply-user" data-id="{{ $comment->id }}">
+                                            @foreach ($comment->replies as $reply)
+                                                @if ($comment->user->media && file_exists(asset(config('asset.user.avatar') . $reply->user->media->name )))
+                                                    <img class="img img-responsive" src="{{ asset(config('asset.user.avatar') .
+                                                        $reply->user->media->name ) }}" alt="">
+                                                @else
+                                                    <img class="img-reply" src="{{ asset(config('define.avatar_default')) }}" alt="">
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                        <div class="reply" data-comment-id="{{ $comment->id }}" data-post-id="{{ $post->id }}">
+                                            <i class="fa fa-reply"></i>
+                                            <a href="#">
+                                                {{ __('base.rely') }}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    @empty
+                    @endforelse
+                </ul>
+                </div>
+            </div>
+            {{-- <div class="related-post">
                 <p class="articles-interesting-title">{{ __('page.news.related_news') }}</p>
                 @for ($i = 0; $i < 4; $i++)
                     <div class="col-lg-3">
                         <figure class="articles-featured-small">
                             <div class="articles-featured-small-frame app-link">
                                 <img class="articles-featured-small-image"
-                                     src="{{ asset(config('asset.users.images.user_wedding') . 'couple-img.jpg') }}">
+                                     src="{{ asset(config('asset.user.images.user_wedding') . 'couple-img.jpg') }}">
                             </div>
                             <figcaption class="articles-center-element">
                                 <div class="articles-center-element-item">
@@ -113,7 +188,7 @@
                         </figure>
                     </div>
                 @endfor
-            </div>
+            </div> --}}
         </div>
     </section>
 @endsection

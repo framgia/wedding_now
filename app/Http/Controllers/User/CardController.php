@@ -26,8 +26,7 @@ class CardController extends Controller
         CardMetaRepositoryInterface $cardMeta,
         PageCardRepositoryInterface $pageCard,
         ScheduleMetaRepositoryInterface $scheduleMeta
-    )
-    {
+    ) {
         $this->card = $card;
         $this->cardMeta = $cardMeta;
         $this->pageCard = $pageCard;
@@ -52,7 +51,7 @@ class CardController extends Controller
      */
     public function getTemplates()
     {
-        $templates = $this->card->getTemplate();
+        $templates = $this->card->getTemplate(config('define.card.vertical'));
 
         return view('user.card.templates', compact('templates'))->render();
     }

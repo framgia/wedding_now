@@ -2,16 +2,15 @@
     <div class="row">
         <div class="col-lg-12 single-wedding">
             <div class="col-lg-5 p-l-r-0">
-                <a href="{{ route('real-wedding.detail',['id' => $wedding->id, 'slug' => $wedding->slug]) }}">
+                <a href="{{ route('client.real-wedding.detail',['id' => $wedding->id, 'slug' => $wedding->slug]) }}">
                     <img alt="{{ $wedding->slug }}"
-                         src="{{ asset(config('asset.users.images.user_wedding') . $wedding->image) }}">
+                         src="{{ asset(config('asset.user.images.user_wedding') . $wedding->image) }}">
                 </a>
             </div>
             <div class="col-lg-7 p-l-r-0 pl-10">
                 <div class="p-l-r-0">
                     <h3 class="title">
-                        <a class="link"
-                           href="{{ route('real-wedding.detail',['id' => $wedding->id, 'slug' => $wedding->slug]) }}">{{ $wedding->name }}</a>
+                        <a class="link" href="{{ route('client.real-wedding.detail',['id' => $wedding->id, 'slug' => $wedding->slug]) }}">{{ $wedding->name }}</a>
                     </h3>
                     <div class="detail">
                         <span>{{ $wedding->time_pass }}</span>

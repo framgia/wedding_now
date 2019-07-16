@@ -1,0 +1,51 @@
+#role {
+    width: 100%;
+}
+
+.gender-radio {
+    margin-left: 20px;
+    margin-top: 0px !important;
+}
+
+.input-create-user {
+    border-bottom: unset !important;
+    padding-top: unset !important;
+}
+
+.text-capitalize {
+    text-transform: capitalize;
+}
+
+.pd-0 {
+    padding: 0px;
+}
+
+.p-relative {
+    position: relative;
+}
+
+.p-absolute {
+    position: absolute;
+}
+
+.avatar-user {
+    cursor: pointer;
+}
+
+.change-text {
+    z-index: 10;
+    position: absolute;
+    font-size: 14px;
+    line-height: 21px;
+    padding: 3px 10px;
+    left: 30%;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: ProximaNova, Helvetica, Arial, sans-serif;
+    border: 0;
+    color: #fff;
+    cursor: pointer;
+    top: 45%;
+    width: 40%;
+    text-align: center;
+}

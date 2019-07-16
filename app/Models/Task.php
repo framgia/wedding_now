@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
@@ -16,7 +17,7 @@ class Task extends Model
         'note',
         'time_occurs',
         'time_frame_id',
-        'schedule_wedding_id',
+        'schedule_id',
         'price',
         'percent',
     ];
@@ -31,9 +32,10 @@ class Task extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function item()
+    public function items()
     {
-        return $this->belongsTo(Item::class);
+        return $this->belongsToMany(ItemUser::class)
+            ->withPivot('price');
     }
 
     public function timeFrame()
@@ -41,8 +43,8 @@ class Task extends Model
         return $this->belongsTo(TimeFrame::class);
     }
 
-    public function scheduleWedding()
+    public function schedule()
     {
-        return $this->belongsTo(ScheduleWedding::class);
+        return $this->belongsTo(Schedule::class);
     }
 }

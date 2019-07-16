@@ -13,7 +13,7 @@ return [
     |
     */
     'account' => [
-        'list' => 'Danh sách',
+        'list' => 'Danh sách tài khoản',
         'account' => 'Tài khoản',
     ],
     'add_new_event' => 'Thêm sự kiện mới',
@@ -30,6 +30,9 @@ return [
         'project' => 'Báo cáo dự án',
         'hr' => 'Báo cáo HR',
         'app' => 'Báo cáo ứng dụng',
+    ],
+    'post' => [
+        'no_tag' => 'Chưa có thẻ',
     ],
     'order' => [
         'manage' => 'Quản lí đơn hàng',
@@ -86,4 +89,8 @@ return [
         'schedule' => 'Lịch trình tiệc cưới',
         'default' => 'Lịch trình mặc định',
     ],
+    'create_schedule' => 'Tạo một lịch trình mới',
+    'create_by_admin' => 'Tạo bởi quản trị viên',
+    'permission_count' => 'Số quyền',
+    'child_schedules_number' => 'Số người dùng đã sử dụng',
 ];

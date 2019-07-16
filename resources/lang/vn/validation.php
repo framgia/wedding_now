@@ -128,6 +128,20 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'select' => [
+            'city' => '-- Chọn thành phố --',
+            'district' => '-- Chọn quận/huyện --',
+            'role' => '-- Chọn quyền --',
+        ],
+        'enter' => [
+            'name' => 'Please enter name',
+            'username' => 'Please enter user name',
+            'email' => 'Please enter email',
+            'phone' => 'Please enter phone',
+            'address' => 'Please enter address',
+            'password' => 'Please enter password',
+            'password_confirmation' => 'Please enter password confirmation',
+        ],
     ],
 
     /*

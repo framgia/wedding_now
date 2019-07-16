@@ -7,14 +7,13 @@ use App\Repositories\City\CityRepositoryInterface;
 use App\Repositories\Role\RoleRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\District\DistrictRepositoryInterface;
-use Entrust;
-
-use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CreateUserRequest;
-use App\Http\Requests\AdminRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use TaylorNetwork\UsernameGenerator\Generator;
+use Entrust;
+use App\Repositories\Media\MediaRepositoryInterface;
 
 class UserController extends Controller
 {
@@ -27,18 +26,20 @@ class UserController extends Controller
     protected $role;
     protected $city;
     protected $district;
+    protected $media;
 
     public function __construct(
         UserRepositoryInterface $user,
         RoleRepositoryInterface $role,
         CityRepositoryInterface $city,
-        DistrictRepositoryInterface $district
-    )
-    {
+        DistrictRepositoryInterface $district,
+        MediaRepositoryInterface $media
+    ) {
         $this->user = $user;
         $this->role = $role;
         $this->city = $city;
         $this->district = $district;
+        $this->media = $media;
     }
 
     public function index()
@@ -84,27 +85,40 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        $user = $this->user->create([
-            'name' => $request->name,
-            'gender' => $request->gender,
-            'user_name' => $request->user_name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'birthday' => $request->birthday,
-            'city' => $request->city,
-            'district' => $request->district,
-            'address' => $request->address,
-            'phone' => $request->phone,
-        ]);
+        $generate = new Generator();
 
-        $user->roles()->attach($request->roles);
+        DB::transaction(function () use ($request, $generate) {
 
-        $user->locations()->create([
-            'district_id' => $request->district,
-            'address' => $request->address,
-        ]);
+            $user = $this->user->create([
+                'name' => $request->name,
+                'gender' => $request->gender,
+                'user_name' => $generate->generate($request->name),
+                'email' => $request->email,
+                'password' => Hash::make('123456'),
+                'birthday' => $request->birthday,
+                'city' => $request->city,
+                'district' => $request->district,
+                'address' => $request->address,
+                'phone' => $request->phone,
+            ]);
 
-        return __('base.success');
+            $user->roles()->attach($request->roles);
+
+            $user->locations()->create([
+                'district_id' => $request->district,
+                'address' => $request->address,
+                'type' => config('define.location.type.home'),
+            ]);
+
+            if ($request->avatar) {
+
+                $image = $this->user->saveFile(null, $request->avatar, config('asset.user.avatar'), config('define.avatar.width'), config('define.avatar.height'), false);
+
+                $this->media->saveAvatarOfUser($user, [
+                    'name' => $image,
+                ]);
+            }
+        });
     }
 
     /**
@@ -191,8 +205,8 @@ class UserController extends Controller
 
                 $image = $this->user->saveFile($user->media->name, $request->avatar, config('asset.user.avatar'), config('define.avatar.width'), config('define.avatar.height'), true);
 
-                $user->media()->update([
-                    'name' => $image,
+                $this->media->updateAvatarOfUser($user, [
+                    'name' => $image
                 ]);
             }
         });

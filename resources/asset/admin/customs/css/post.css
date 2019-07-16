@@ -1,0 +1,138 @@
+.form-control-feedback {
+    color: red;
+}
+
+.box-image-upload {
+    padding: 0px;
+    margin: 10px;
+}
+
+.note-editor .modal .modal-dialog {
+    max-width: 600px;
+}
+
+.image-uploaded {
+    max-height: 300px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.box-paginate {
+    margin-top: 20px;
+}
+
+.box-paginate .pagination {
+    justify-content: center;
+}
+
+.image-uploaded .col-lg-4 {
+    padding-left: 0px;
+    padding-bottom: 20px;
+}
+
+.topic-select {
+    text-transform: capitalize;
+}
+
+.tag-span {
+    padding: 3px 5px;
+    margin: 3px 5px;
+    background: white;
+    border-radius: 6px;
+}
+
+.post-content {
+    word-break: break-word;
+    text-align: justify;
+    overflow: hidden;
+}
+
+.post-content p:only-child {
+    height: 100%;
+    width: 100%;
+}
+
+.post-content p img:only-child {
+    height: 100% !important;
+    width: 100% !important;
+}
+
+.post-content img {
+    max-height: 100%;
+    max-width: 100%;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.show-real-post {
+    overflow: scroll;
+    overflow-x: unset;
+    max-height: 550px;
+}
+
+.info-post {
+    border-radius: 10px;
+    border: 1px solid;
+}
+
+.info-post label {
+    font-size: 20px;
+    font-family: Poppins;
+    text-transform: capitalize;
+    color: blue;
+
+}
+
+.articles-post-heading {
+    margin-bottom: 10px;
+}
+
+.info-post .col-lg-12 p {
+    word-break: break-word;
+    text-align: justify;
+}
+
+.articles-post-heading-title {
+    word-break: break-word;
+    text-align: justify;
+}
+
+.articles-post-heading-box-avatar {
+    border-radius: 100%;
+    width: 48px;
+}
+
+.articles-post-heading-box {
+    border-bottom: 1px solid #d9d9d9;
+    margin-bottom: 20px;
+    padding: 10px 0;
+    letter-spacing: -.32em;
+    flex-flow: row wrap;
+    display: flex;
+}
+
+.w-5 {
+    width: 50%;
+    position: relative;
+}
+
+.articles-post-heading-box-author {
+    margin-top: 3px;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-rendering: auto;
+    font-family: proxima;
+    font-size: 16px;
+    padding-left: 3%;
+    position: absolute;
+}
+
+.post-date {
+    position: absolute;
+    display: block;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-rendering: auto;
+    padding-left: 20%;
+    top: 65%;
+}

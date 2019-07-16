@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Repositories\ScheduleWedding\ScheduleWeddingRepositoryInterface;
+use App\Repositories\Schedule\ScheduleRepositoryInterface;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -11,12 +11,12 @@ class SuggestionController extends Controller
 {
     protected $scheduleWedding;
 
-    public function __construct(ScheduleWeddingRepositoryInterface $scheduleWedding)
+    public function __construct(ScheduleRepositoryInterface $scheduleWedding)
     {
         $this->scheduleWedding = $scheduleWedding;
     }
 
-    public function suggestion()
+    public function index()
     {
         $scheduleWedding = $this->scheduleWedding->getSuggestiion();
 
@@ -37,7 +37,7 @@ class SuggestionController extends Controller
                 'category_id' => $request->category[$key],
                 'time_frame_id' => 1,
                 'schedule_wedding_id' => $schedule->id,
-                'price' => (int)($request->price[$key]),
+                'price' => (int) ($request->price[$key]),
                 'note' => $request->task_note[$key]
             ];
 
